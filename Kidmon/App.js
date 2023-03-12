@@ -1,5 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { I18nManager, StyleSheet, Text, View } from 'react-native';
+
+I18nManager.allowRTL(true)
+I18nManager.forceRTL()
+
 
 export default function App() {
   return (

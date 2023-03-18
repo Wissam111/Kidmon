@@ -1,4 +1,4 @@
-const { ValidationError } = require("../error/Validation-Error");
+const { ValidationError } = require("../utils/errors");
 
 const USER_ROLES = Object.freeze({
     parent: 'parent',
@@ -16,8 +16,6 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
         lastName, // required
         phone, // required
         image = null,
-        familyMembers = [],
-        credits = 0,
         role, // required
         createdAt = new Date(),
         updatedAt = new Date()
@@ -75,15 +73,6 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
         }
 
 
-        if (credits < 0) {
-            throw new ValidationError('credits must be positive number')
-        }
-
-        familyMembers.forEach((member) => {
-            if (!ID.isValid(member)) {
-                throw new ValidationError('family members must have valid id\'s')
-            }
-        })
 
 
         // check enums
@@ -91,6 +80,7 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
             throw new ValidationError('role must be either parent, family-memeber or an admin')
         }
 
+      
 
 
         return Object.freeze({
@@ -99,8 +89,6 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
             lastName,
             phone,
             image,
-            familyMembers,
-            credits,
             role,
             updatedAt,
             createdAt
@@ -112,8 +100,21 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
 
 module.exports = Object.freeze({
     buildMakeUser,
-    USER_ROLES_ENUM
+    USER_ROLES_ENUM,
+    USER_ROLES
 })
 
 
+/**
+ * 
+ *  family member 
+ *          credits , purchaseCardId
+ * 
+ * 
+ *  parent 
+ *      credits , family member    
+ *  
+ * 
+ * 
+ */
 

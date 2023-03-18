@@ -40,7 +40,7 @@ module.exports = class UserRepository {
 
 
 
-    delete({ id: _id }, transaction) {
+    delete({ id: _id, transaction }) {
         throw new Error('Method not implemented.');
     }
 

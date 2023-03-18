@@ -23,8 +23,19 @@ class AlreadyExistsError extends Error{
 }
 
 
+
+class InsufesientFunds extends Error{
+    
+    constructor(message){
+        super(message)
+    }
+}
+
+
+
 module.exports = {
     ValidationError,
     NotFoundError,
     AlreadyExistsError,
+    InsufesientFunds
 }

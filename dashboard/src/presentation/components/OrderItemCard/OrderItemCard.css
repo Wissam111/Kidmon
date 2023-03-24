@@ -1,0 +1,30 @@
+.orderItem-card-container {
+  width: 260px;
+  height: 51px;
+
+  background: #ffffff;
+  box-shadow: 2px 2px 40px rgba(0, 0, 0, 0.07), 9px 9px 30px rgba(0, 0, 0, 0.04);
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.orderItem-card-container img {
+  width: 20%;
+}
+.orderItem-card-container .text-order {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000000;
+}
+
+.orderItem-card-container .total-order,
+.amount-order {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.44);
+}

@@ -1,8 +1,15 @@
 import React from "react";
-import "CategoryCard.css";
+import "./CategoryCard.css";
 
-const CategoryCard = () => {
-  return <div>CategoryCard</div>;
+const CategoryCard = ({ text, categoryImg }) => {
+  return (
+    <div className="category-container">
+      <div className="category-img-wrapper">
+        <img src={categoryImg} alt="category-img" />
+      </div>
+      <span>{text}</span>
+    </div>
+  );
 };
 
 export default CategoryCard;

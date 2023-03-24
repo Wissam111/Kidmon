@@ -23,7 +23,10 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  position: absolute;
+  top: 120px;
+  /* justify-content: flex-start;
+   */
   align-items: center;
   padding: 9px 10px 0 0;
   gap: 2em;

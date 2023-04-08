@@ -13,10 +13,10 @@ const makeCreateToken = (time, inValue) => {
         throw new Error('In value must be d or m')
 
 
-    return (_id) => {
+    return (id) => {
         const date = moment().add(time, inValue)
         return {
-            token: jwt.sign({ _id }, configs.jwtSecret, { expiresIn: `${time}${inValue}` }),
+            token: jwt.sign({ id: id }, configs.jwtSecret, { expiresIn: `${time}${inValue}` }),
             expireDate: date
         }
     }
@@ -25,9 +25,8 @@ const makeCreateToken = (time, inValue) => {
 
 
 const verifyAndExtractIdToken = async (token) => {
-    console.log(token);
-    const { _id } = await jwt.verify(token, configs.jwtSecret)
-    return _id
+    const { id } = await jwt.verify(token, configs.jwtSecret)
+    return id
 }
 
 

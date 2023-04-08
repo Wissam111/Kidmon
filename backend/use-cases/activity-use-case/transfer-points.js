@@ -52,7 +52,6 @@ const buildTransferPointsUserUseCase = ({ userDb, activityDb }) => {
                 updatedAt: undefined
             })
             await userDb.update({ ...updatedSender, transaction: transaction })
-            console.log(updatedSender);
 
             // update receiver
             const updatedReceiver = makeFamilyMemberUser({

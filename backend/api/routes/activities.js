@@ -1,6 +1,9 @@
 const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
 const { activityController } = require('../../controllers')
+const { makeCheckAuthorization, makeRoleAuthorization } = require('../middleware/requireAuthorization')
+const { USER_ROLES } = require('../../entities/user')
+const { requireAuthentication } = require('../middleware/requireAuthentication')
 
 
 const router = Router()
@@ -16,6 +19,8 @@ router.get('/user-activities',
             sort: Joi.string(),
         })
     }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
     activityController.getUserActivities)
 
 
@@ -28,6 +33,9 @@ router.post('/points-transfer',
             amount: Joi.number().required(),
         })
     }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
+    makeCheckAuthorization({ reqfieldName: 'senderUserId', reqDataField: 'body', userFieldName: 'id' }),
     activityController.transferPoints)
 
 
@@ -42,6 +50,9 @@ router.post('/purchase',
             })).required()
         })
     }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeCheckAuthorization({ reqfieldName: 'userId', reqDataField: 'body', userFieldName: 'id' }),
     activityController.purchase)
 
 

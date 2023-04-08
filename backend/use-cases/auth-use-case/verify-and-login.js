@@ -20,7 +20,7 @@ const buildVerifyAndLoginUseCase = ({ userDb, verifyDb, generateAccessToken, gen
 
 
         //create token
-        const { token, expireDate } = generateAccessToken(user._id)
+        const { token, expireDate } = generateAccessToken(user.id)
         const { token: refresh_token, expireDate: expireDateRefreshToken } = generateRefreshToken(user._id)
 
 

@@ -8,50 +8,49 @@ module.exports = () => {
 
   const router = Router()
 
-  
-  router.post('/parent', userController.createParentUser)
-  router.post('/family-member', userController.createFamilyMemberUser)
-  router.post('/admin', userController.createAdminUser)
 
-  router.get('/:userId', userController.getUser)
-
-
-  // router.post('/signup-parent',
-  //   celebrate({
-  //     [Segments.BODY]: Joi.object().keys({
-  //       name: Joi.string().required()
-  //     })
-  //   })
-  //   , (req, res) => {
-
-  //     console.log(req.body);
+  router.post('/parent',
+    celebrate({
+      [Segments.QUERY]: Joi.object().keys({
+        phone: Joi.string().required(),
+        firstName: Joi.string().required(),
+        lastName: Joi.string().required(),
+      })
+    }),
+    userController.createParentUser)
 
 
-  //     res.status(200).json({
-  //       message: 'hello world'
-  //     })
-  //   })
+  router.post('/family-member',
+    celebrate({
+      [Segments.QUERY]: Joi.object().keys({
+        phone: Joi.string().required(),
+        firstName: Joi.string().required(),
+        lastName: Joi.string().required(),
+        braceletId: Joi.string().required(),
+        parentId: Joi.string().required(),
+        allergies: Joi.array().items(Joi.string()),
+      })
+    }),
+    userController.createFamilyMemberUser)
 
 
+  router.post('/admin',
+    celebrate({
+      [Segments.QUERY]: Joi.object().keys({
+        phone: Joi.string().required(),
+        firstName: Joi.string().required(),
+        lastName: Joi.string().required(),
+      })
+    }),
+    userController.createAdminUser)
 
-
-  // router.post('/signup-family-member',
-  //   celebrate({
-  //     [Segments.BODY]: Joi.object().keys({
-  //       name: Joi.string().required()
-  //     })
-  //   })
-  //   , (req, res) => {
-
-  //     console.log(req.body);
-
-
-  //     res.status(200).json({
-  //       message: 'hello world'
-  //     })
-  //   })
-
-
+  router.get('/:userId',
+    celebrate({
+      [Segments.PARAMS]: Joi.object().keys({
+        userId: Joi.string().required()
+      })
+    }),
+    userController.getUser)
 
 
   return router

@@ -20,6 +20,7 @@ module.exports = {
                 schema: {
                     type: "string"
                 },
+                description: "the product category , [Drinks , Snaks , Food]",
             },
 
             {

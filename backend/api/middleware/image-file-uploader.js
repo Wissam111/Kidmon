@@ -1,24 +1,21 @@
 const path = require('path')
 const multer = require('multer')
+const { createId } = require('@paralleldrive/cuid2')
 
 
 const FILE_TYPES = ['image/jpeg', 'image/png', 'image/jpg']
 
 
-module.exports.makeMulterStorage = ({ dest }) => {
+const makeMulterStorage = ({ dest }) => {
 
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, dest)
         },
         filename: (req, file, cb) => {
-            if (!req.user) {
-                return cb(new Error('User must be provided'), null)
-            }
-            file.rawFileName = `${req.user._id}-${new Date().getTime()}`
+            file.rawFileName = `${createId()}-${new Date().getTime()}`
             file.extname = path.extname(file.originalname)
             cb(null, `${file.rawFileName}${path.extname(file.originalname)}`)
-            cb(null, 'aa')
         },
 
     })
@@ -43,4 +40,12 @@ module.exports.makeMulterStorage = ({ dest }) => {
     })
 
     return (fieldName) => upload.single(fieldName)
+}
+
+const imageUpload = makeMulterStorage({ dest: path.join(__dirname, '..', '..', 'uploaded-files') })
+
+
+module.exports = {
+    makeMulterStorage,
+    imageUpload
 }

@@ -24,7 +24,6 @@ const makeDb = async () => {
 }
 
 
-
 const userDb = makeUserDb({ makeDb })
 const productDb = makeProductDb({ makeDb })
 const activityDb = makeActivityDb({ makeDb })

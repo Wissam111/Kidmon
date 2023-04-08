@@ -7,7 +7,7 @@ module.exports = {
         parameters: [
             {
                 name: "phone",
-                in: "body",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
@@ -16,7 +16,7 @@ module.exports = {
             },
             {
                 name: "firstName",
-                in: "body",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
@@ -25,13 +25,22 @@ module.exports = {
             },
             {
                 name: "lastName",
-                in: "body",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
                 description: "Last Name",
                 required: true
-            }
+            },
+            {
+                name: "image", // name of param
+                in: "multipart/formdata", // location of param
+                schema: {
+                    type: "file"
+                },
+                description: "this family member parent id", // short desc.
+                required: true
+            },
 
         ],
 

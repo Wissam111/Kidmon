@@ -7,7 +7,7 @@ module.exports = {
         parameters: [
             {
                 name: "phone", // name of param
-                in: "body", // location of param
+                in: "multipart/formdata", // location of param
                 schema: {
                     type: "string"
                 },
@@ -16,7 +16,7 @@ module.exports = {
             },
             {
                 name: "firstName", // name of param
-                in: "body", // location of param
+                in: "multipart/formdata", // location of param
                 schema: {
                     type: "string"
                 },
@@ -25,7 +25,7 @@ module.exports = {
             },
             {
                 name: "lastName", // name of param
-                in: "body", // location of param
+                in: "multipart/formdata", // location of param
                 schema: {
                     type: "string"
                 },
@@ -34,7 +34,7 @@ module.exports = {
             },
             {
                 name: "braceletId", // name of param
-                in: "body", // location of param
+                in: "multipart/formdata", // location of param
                 schema: {
                     type: "string"
                 },
@@ -44,7 +44,7 @@ module.exports = {
 
             {
                 name: "allergies", // name of param
-                in: "body", // location of param
+                in: "multipart/formdata", // location of param
                 schema: {
                     type: "array"
                 },
@@ -53,7 +53,7 @@ module.exports = {
 
             {
                 name: "parentId", // name of param
-                in: "body", // location of param
+                in: "multipart/formdata", // location of param
                 schema: {
                     type: "string"
                 },
@@ -61,7 +61,15 @@ module.exports = {
                 required: true
             },
 
-
+            {
+                name: "image", // name of param
+                in: "multipart/formdata", // location of param
+                schema: {
+                    type: "file"
+                },
+                description: "this family member parent id", // short desc.
+                required: true
+            },
         ], // expected params.
     
     },

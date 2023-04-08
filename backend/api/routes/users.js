@@ -1,14 +1,15 @@
 const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
 const { userController } = require('../../controllers')
-
-
+const { imageUpload } = require('../middleware/image-file-uploader')
+const path = require('path')
 
 
 const router = Router()
 
 
 router.post('/parent',
+  imageUpload('image'),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       phone: Joi.string().required(),
@@ -21,6 +22,7 @@ router.post('/parent',
 
 
 router.post('/family-member',
+  imageUpload('image'),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       phone: Joi.string().required(),
@@ -36,6 +38,7 @@ router.post('/family-member',
 
 
 router.post('/admin',
+  imageUpload('image'),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       phone: Joi.string().required(),

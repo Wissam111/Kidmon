@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
     category: { type: String },
     allergicIngredients: { type: [String] },
     title: { type: String },
-    price: { type: String },
+    price: { type: Number },
     image: { type: String },
     createdAt: { type: Date },
     updatedAt: { type: Date }

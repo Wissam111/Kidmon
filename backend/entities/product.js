@@ -2,9 +2,10 @@ const { ValidationError } = require("../utils/errors");
 const { AllergicIngredients } = require("./family-member-user");
 
 const CATEGORIES = Object.freeze({
-    drinks: 'Drinks',
-    food: 'Food',
-    snaks: 'Snaks',
+    snack: 'Snack',
+    cold: 'Cold',
+    hot: 'Hot',
+    food: 'Food'
 })
 
 const CATEGORIES_ENUM = Object.values(CATEGORIES)

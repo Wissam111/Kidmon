@@ -40,7 +40,7 @@ module.exports = {
         schema: {
           type: "string",
         },
-        description: "the product category , [Drinks , Snaks , Food]",
+        description: "the product category , [Snack, Cold, Hot, Food]",
         example: "Food",
         required: true
       },

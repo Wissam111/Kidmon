@@ -60,11 +60,11 @@ const getProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
     try {
-        const { search, sort } = req.query
+        const { search, sort, category } = req.query
         const page = + req.query.page
         const pageSize = + req.query.pageSize
 
-        const products = await productService.getProducts({ page: page, pageSize: pageSize, search, sort })
+        const products = await productService.getProducts({ page, pageSize, search, sort, category })
         res.status(200).json({
             message: 'fetching products successfully',
             products

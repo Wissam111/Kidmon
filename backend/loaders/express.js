@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const routes = require('../api/routes')
+const configs = require('../configs')
 
 
 module.exports = async ({ app }) => {
@@ -14,7 +15,7 @@ module.exports = async ({ app }) => {
   const htmlPath = path.join(__dirname, '..', 'public')
 
   //routes
-  app.use('/api/v1/', routes())
+  app.use(`/api/${configs.apiVersion}/`, routes())
 
 
   //handling errors

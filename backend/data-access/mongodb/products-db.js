@@ -25,7 +25,7 @@ exports.makeProductDb = ({ makeDb }) => {
         return idMap(createdProduct)
     }
 
-    async function update({ id: _id, populate = true, transaction, ...productInfo }) {
+    async function update({ id: _id, transaction, ...productInfo }) {
         await makeDb()
         const product = await Product.findOneAndUpdate({ _id }, productInfo, { session: transaction?.getSession() })
             .lean()
@@ -44,7 +44,7 @@ exports.makeProductDb = ({ makeDb }) => {
 
 
 
-    async function findById({ id: _id, populate = true, transaction }) {
+    async function findById({ id: _id, transaction }) {
         await makeDb()
         const product = await Product.findOne({ _id }, {}, { session: transaction?.getSession() }).lean()
 
@@ -55,9 +55,23 @@ exports.makeProductDb = ({ makeDb }) => {
     }
 
 
-    async function find({ page, pageSize = 10, sort = 'desc', transaction }) {
+    async function find({ search, page, pageSize, sort = 'desc', filters, transaction }) {
         await makeDb()
-        const products = await Product.find({}, {}, { sort: sort, limit: pageSize, skip: (page - 1) * pageSize, session: transaction?.getSession() }).lean()
+        const query = Product.find(filters, {}, { sort: { createdAt: sort }, limit: pageSize, skip: (page - 1) * pageSize, session: transaction?.getSession() })
+
+        if (search) {
+            query.find({
+                "$expr": {
+                    "$regexMatch": {
+                        "input": '$title',
+                        "regex": search,
+                        "options": "i"
+                    }
+                }
+            })
+        }
+
+        const products = await query.lean()
         return idsMap(products)
     }
 

@@ -1,0 +1,35 @@
+.menuItemCard-container {
+  width: 136px;
+  height: 140px;
+
+  background: #ffffff;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.04);
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuItemCard-container img {
+  width: 60%;
+  height: 50%;
+}
+
+.menuItemCard-container span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+
+  color: rgba(0, 0, 0, 0.44);
+}
+
+.menuItemCard-container h4 {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  /* identical to box height */
+  color: #000000;
+  margin: 0;
+}

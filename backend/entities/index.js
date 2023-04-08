@@ -23,7 +23,7 @@ const makeParentUser = buildMakeParentUser(IdGenerator, makeUser)
 const makeFamilyMemberUser = buildMakeFamilyMemberUser(IdGenerator, makeUser)
 
 
-const makeActivity = buildMakeActivity()
+const makeActivity = buildMakeActivity(IdGenerator)
 const makeTransactionActivity = buildMakeTransactionActivity(makeActivity)
 const makePurchaseActivity = buildMakePurchaseActivity(makeActivity)
 

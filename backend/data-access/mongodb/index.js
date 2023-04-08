@@ -2,6 +2,7 @@ const { connect, disconnect, default: mongoose } = require("mongoose")
 const configs = require("../../configs")
 const { makeUserDb } = require("./users-db")
 const { makeProductDb } = require("./products-db")
+const { makeActivityDb } = require("./activity-db")
 
 
 
@@ -18,9 +19,10 @@ const makeDb = async () => {
 
 const userDb = makeUserDb({ makeDb })
 const productDb = makeProductDb({ makeDb })
-
+const activityDb = makeActivityDb({ makeDb })
 
 module.exports = {
     userDb,
-    productDb
+    productDb,
+    activityDb
 }

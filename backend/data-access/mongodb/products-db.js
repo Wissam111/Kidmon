@@ -1,6 +1,5 @@
 'use strict'
 
-const User = require('./schema/user')
 const MongodbTransaction = require("./mongodb-transaction")
 const { idMap, idsMap } = require('./utils')
 const Product = require('./schema/product')
@@ -76,7 +75,7 @@ exports.makeProductDb = ({ makeDb }) => {
     }
 
     async function makeTransaction() {
-        return new MongodbTransaction(await User.startSession())
+        return new MongodbTransaction(await Product.startSession())
     }
 
 }

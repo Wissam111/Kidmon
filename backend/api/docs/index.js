@@ -4,7 +4,8 @@ const components = require('./components');
 const tags = require('./tags');
 const appointments = require('./products');
 const users = require('./users')
-const auth = require('./auth')
+const auth = require('./auth');
+const activities = require('./activities');
 
 module.exports = {
     ...basicInfo,
@@ -14,6 +15,7 @@ module.exports = {
     paths: {
         ...appointments,
         ...users,
+        ...activities
         // ...auth,
     }
 };

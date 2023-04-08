@@ -1,17 +1,22 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 
 const activitySchema = new mongoose.Schema({
     _id: { type: String },
     tpye: { type: String },
-    from: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
-    to: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
-    products: { type: [mongoose.Schema.Types.ObjectId], ref: "user" },
+
+    from: { type: String, ref: "user" },
+    to: { type: String, ref: "user" },
+    amount: { type: Number },
+
+    user: { type: String, ref: "user" },
+    items: { type: [{ _id: String, amount: Number }], ref: "prodcut", default: undefined },
     price: { type: Number },
+
     createdAt: { type: Date },
     updatedAt: { type: Date }
 })
 
 
-
-export default mongoose.model('activites', activitySchema)
+const Activity = mongoose.model('activity', activitySchema)
+module.exports = Activity 

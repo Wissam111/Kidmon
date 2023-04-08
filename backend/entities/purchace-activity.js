@@ -1,4 +1,4 @@
-const { ValidationError } = require("../utils/errors");
+const { ActivityTypes } = require("./activity")
 
 
 
@@ -6,16 +6,15 @@ const buildMakePurchaseActivity = (makeActivity) => {
 
     return function makeParentUser({
         id,
-        type,
-        user,
-        items,
-        price,
+        user, // required
+        items, // required 
+        price, // required
         createdAt,
         updatedAt
     }) {
 
 
-        const activity = makeActivity({ id, type, createdAt, updatedAt })
+        const activity = makeActivity({ id, type: ActivityTypes.purchase, createdAt, updatedAt })
 
         return Object.freeze({
             ...activity,

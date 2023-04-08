@@ -1,4 +1,4 @@
-const { makeFamilyMemberUser } = require("../../entities")
+const { makeFamilyMemberUser, makeParentUser } = require("../../entities")
 const { AlreadyExistsError, NotFoundError } = require("../../utils/errors")
 
 
@@ -32,7 +32,8 @@ const buildCreateFamilyMemberUserUseCase = (userDb) => {
 
         // update parent family members
         parent.familyMembers.push(user.id)
-        await userDb.update({ ...parent, updatedAt: undefined })
+        const updatedParent = makeParentUser({ ...parent, updatedAt: null })
+        await userDb.update(updatedParent)
 
 
         return createdUser

@@ -1,7 +1,7 @@
 
 const userController = require('./users-controller')
-
 const productController = require('./products-controller')
+const activityController = require('./activity-controller')
 
 
 
@@ -11,5 +11,6 @@ const productController = require('./products-controller')
 
 module.exports = Object.freeze({
     userController,
-    productController
+    productController,
+    activityController
 })

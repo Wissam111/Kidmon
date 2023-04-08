@@ -68,7 +68,6 @@ const createAdminUser = async (req, res) => {
 
 
 
-
 module.exports = {
     createFamilyMemberUser,
     createParentUser,

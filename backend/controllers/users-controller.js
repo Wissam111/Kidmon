@@ -1,30 +1,80 @@
-
-const { makeUserUseCases } = require('../use-cases/user-use-case')
-
-
-module.exports = async () => {
-
-    const userUseCases = await makeUserUseCases()
+const { userService } = require("../use-cases");
 
 
-    const createUser = async (req, res) => {
-        try {
-            console.log('creating a user');
-            const user = await userUseCases.createUserUseCase({ firstName: 'tarik', lastName: 'husin', phone: '0525145565', role: 'admin' })
-            res.status(201).json(user)
 
-        } catch (e) {
-            console.log(e);
-        }
+
+
+const getUser = async (req, res) => {
+    try {
+        const { userId } = req.params
+        const user = await userService.getUserUseCase({ userId: userId })
+        res.status(200).json(user)
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'Error getting user'
+        })
     }
+}
 
 
 
-
-
-    return {
-        createUser
+const createParentUser = async (req, res) => {
+    try {
+        console.log("createParentUser");
+        const { firstName, lastName, phone } = req.body
+        const user = await userService.createParentUserUseCase({ firstName, lastName, phone })
+        res.status(201).json(user)
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'Error creating user'
+        })
     }
+}
+
+
+const createFamilyMemberUser = async (req, res) => {
+    try {
+        const { firstName, lastName, phone, parentId, braceletId, allergies } = req.body
+        const user = await userService.createFamilyMemberUserUseCase({ firstName, lastName, phone, parentId, braceletId, allergies })
+        res.status(201).json(user)
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'Error creating user'
+        })
+    }
+}
+
+
+
+
+const createAdminUser = async (req, res) => {
+    try {
+        const { firstName, lastName, phone } = req.body
+        const user = await userService.createAdminUserUseCase({ firstName, lastName, phone })
+        res.status(201).json(user)
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: 'Error creating user'
+        })
+    }
+}
+
+
+
+
+
+
+
+module.exports = {
+    createFamilyMemberUser,
+    createParentUser,
+    createAdminUser,
+
+    getUser
 }
 
 

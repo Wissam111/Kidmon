@@ -1,21 +1,9 @@
-const { makeRepositories } = require("../data-access/mongodb")
-const { makeUserUseCases } = require("./user-use-case")
+const userService = require("./user-use-case")
+const productService = require("./product-use-case")
 
-
-
-const useCases = async () => {
-
-    const { userRepository } = await makeRepositories()
-    const userUseCases = await makeUserUseCases(userRepository)
-
-
-    
-    return {
-        userUseCases: { ...userUseCases }
-    }
-}
 
 
 module.exports = {
-    useCases
+    userService,
+    productService
 }

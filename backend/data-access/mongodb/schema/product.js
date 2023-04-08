@@ -1,9 +1,10 @@
-import mongoose from 'mongoose'
+const mongoose = require('mongoose')
 
 
 const productSchema = new mongoose.Schema({
     _id: { type: String },
     category: { type: String },
+    allergicIngredients: { type: [String] },
     title: { type: String },
     price: { type: String },
     image: { type: String },
@@ -12,5 +13,7 @@ const productSchema = new mongoose.Schema({
 })
 
 
+productSchema.index({ title: 1, category: 1 }, { unique: true });
 
-export default mongoose.model('product', productSchema)
+const Product = mongoose.model('product', productSchema)
+module.exports = Product

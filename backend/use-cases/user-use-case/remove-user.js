@@ -1,7 +1,7 @@
 const { NotFoundError } = require("../../utils/errors")
 
 
-const buildDeleteUserUseCase = (userRepository) => {
+const buildRemoveUserUseCase = (userRepository) => {
 
 
     // no need for transaction because phone is primary key in the database
@@ -12,11 +12,11 @@ const buildDeleteUserUseCase = (userRepository) => {
             new NotFoundError(`User with id ${userId} was not found`)
         }
 
-        return await userRepository.delete({ id: userId })
+        return await userRepository.remove({ id: userId })
     }
 
 }
 
 
 
-module.exports = { buildDeleteUserUseCase }
+module.exports = { buildRemoveUserUseCase }

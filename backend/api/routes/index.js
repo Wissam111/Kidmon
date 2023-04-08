@@ -1,14 +1,15 @@
-const usersRoute = require('./users')
+const usersRoutes = require('./users')
+const productRoutes = require('./products')
 const { Router } = require('express')
 const { errors } = require('celebrate')
 
 
-module.exports = async () => {
+module.exports = () => {
     const router = Router()
 
-    router.use('/users', await usersRoute())
+    router.use('/users', usersRoutes())
+    router.use('/products', productRoutes)
+
     router.use(errors())
-
-
     return router
 }

@@ -1,9 +1,6 @@
-const { makeActivity } = require(".");
-const { ValidationError } = require("../utils/errors");
 
 
-
-const buildMakeTransactionActivity = () => {
+const buildMakeTransactionActivity = (makeActivity) => {
 
     return function makeParentUser({
         id,

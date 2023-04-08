@@ -105,16 +105,3 @@ module.exports = Object.freeze({
 })
 
 
-/**
- * 
- *  family member 
- *          credits , purchaseCardId
- * 
- * 
- *  parent 
- *      credits , family member    
- *  
- * 
- * 
- */
-

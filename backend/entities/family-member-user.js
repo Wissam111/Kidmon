@@ -1,4 +1,3 @@
-const { makeUser } = require(".");
 const { ValidationError } = require("../utils/errors");
 const { USER_ROLES } = require("./user");
 
@@ -6,20 +5,21 @@ const { USER_ROLES } = require("./user");
 const Allergies = ['Milk', 'Eggs', 'Mustard', 'Peanuts', 'Soy', 'Fish']
 
 
-const buildMakeFamilyMemberUser = () => {
+const buildMakeFamilyMemberUser = (Id, makeUser) => {
 
-    return function makeParentUser({
+    return ({
         id,
+        parent, // required
+        braceletId, // required
         firstName, // required
         lastName, // required
         phone, // required
         image = null,
-        purchaseCardId,
         allergies = [],
         credits = 0,
         createdAt,
         updatedAt
-    }) {
+    }) => {
 
 
         const user = makeUser({
@@ -33,8 +33,12 @@ const buildMakeFamilyMemberUser = () => {
             updatedAt
         })
 
-        if (!purchaseCardId) {
-            throw new ValidationError('Family member user must have purchase card id')
+        if (!braceletId) {
+            throw new ValidationError('Family member user must have braceletId id')
+        }
+
+        if (!parent) {
+            throw new ValidationError('Family member user must have a parent id')
         }
 
         if (credits < 0) {
@@ -48,13 +52,18 @@ const buildMakeFamilyMemberUser = () => {
             }
         })
 
+        if (!Id.isValid(parent)) {
+            throw new ValidationError(`parent must be a valid id`)
+        }
+
 
 
         return Object.freeze({
             ...user,
-            purchaseCardId,
+            braceletId,
             credits,
             allergies,
+            parent
         })
     }
 }

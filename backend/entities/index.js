@@ -1,12 +1,12 @@
 const { ValidateCharsOnly } = require('../validators/ValidateCharsOnly')
 const { ValidateNumbersOnly } = require('../validators/ValidateNumbersOnly')
-const { buildMakeActivity } = require('./activity')
+const { buildMakeUser } = require('./user')
 const { buildMakeFamilyMemberUser } = require('./family-member-user')
 const { buildMakeParentUser } = require('./parent-user')
+const { buildMakeActivity } = require('./activity')
 const { buildMakeProduct } = require('./product')
 const { buildMakePurchaseActivity } = require('./purchace-activity')
 const { buildMakeTransactionActivity } = require('./transaction-activity')
-const { buildMakeUser } = require('./user')
 const { createId, isCuid } = require('@paralleldrive/cuid2')
 
 
@@ -17,15 +17,15 @@ const IdGenerator = {
 }
 
 
-
+// users builders 
 const makeUser = buildMakeUser(IdGenerator, ValidateCharsOnly, ValidateNumbersOnly)
-const makeParentUser = buildMakeParentUser(IdGenerator)
-const makeFamilyMemberUser = buildMakeFamilyMemberUser()
+const makeParentUser = buildMakeParentUser(IdGenerator, makeUser)
+const makeFamilyMemberUser = buildMakeFamilyMemberUser(IdGenerator, makeUser)
 
 
 const makeActivity = buildMakeActivity()
-const makeTransactionActivity = buildMakeTransactionActivity()
-const makePurchaseActivity = buildMakePurchaseActivity()
+const makeTransactionActivity = buildMakeTransactionActivity(makeActivity)
+const makePurchaseActivity = buildMakePurchaseActivity(makeActivity)
 
 const makeProduct = buildMakeProduct(IdGenerator)
 

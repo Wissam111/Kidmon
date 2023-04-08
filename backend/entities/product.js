@@ -9,6 +9,7 @@ const buildMakeProduct = (ID) => {
         id = ID.makeId(),
         title,
         price,
+        category,
         allergicIngredients,
         createdAt = new Date(),
         updatedAt = new Date()
@@ -22,12 +23,13 @@ const buildMakeProduct = (ID) => {
             })
 
 
-
+        //TODO: MORE LOGIC HERE
 
         return Object.freeze({
             id,
             title,
             price,
+            category,
             allergicIngredients,
             createdAt,
             updatedAt

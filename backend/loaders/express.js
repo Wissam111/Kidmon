@@ -14,7 +14,7 @@ module.exports = async ({ app }) => {
   const htmlPath = path.join(__dirname, '..', 'public')
 
   //routes
-  app.use('/api/v1/', await routes())
+  app.use('/api/v1/', routes())
 
 
   //handling errors

@@ -1,49 +1,53 @@
 const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
-const usersController = require('../../controllers/users-controller')
+const { userController } = require('../../controllers')
 
-module.exports =  async () => {
-  const controller = await usersController()
+
+module.exports = () => {
+
 
   const router = Router()
+  router.post('/parent', userController.createParentUser)
+  router.post('/family-member', userController.createFamilyMemberUser)
+  router.post('/admin', userController.createAdminUser)
 
-  router.post('/', controller.createUser)
-
-
-  router.post('/signup-parent',
-    celebrate({
-      [Segments.BODY]: Joi.object().keys({
-        name: Joi.string().required()
-      })
-    })
-    , (req, res) => {
-
-      console.log(req.body);
+  router.get('/:userId', userController.getUser)
 
 
-      res.status(200).json({
-        message: 'hello world'
-      })
-    })
+  // router.post('/signup-parent',
+  //   celebrate({
+  //     [Segments.BODY]: Joi.object().keys({
+  //       name: Joi.string().required()
+  //     })
+  //   })
+  //   , (req, res) => {
+
+  //     console.log(req.body);
+
+
+  //     res.status(200).json({
+  //       message: 'hello world'
+  //     })
+  //   })
 
 
 
 
-  router.post('/signup-family-member',
-    celebrate({
-      [Segments.BODY]: Joi.object().keys({
-        name: Joi.string().required()
-      })
-    })
-    , (req, res) => {
+  // router.post('/signup-family-member',
+  //   celebrate({
+  //     [Segments.BODY]: Joi.object().keys({
+  //       name: Joi.string().required()
+  //     })
+  //   })
+  //   , (req, res) => {
 
-      console.log(req.body);
+  //     console.log(req.body);
 
 
-      res.status(200).json({
-        message: 'hello world'
-      })
-    })
+  //     res.status(200).json({
+  //       message: 'hello world'
+  //     })
+  //   })
 
 
 

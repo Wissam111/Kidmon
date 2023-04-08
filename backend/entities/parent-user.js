@@ -1,12 +1,11 @@
-const { makeUser } = require(".");
 const { ValidationError } = require("../utils/errors");
 const { USER_ROLES } = require("./user");
 
 
 
-const buildMakeParentUser = (ID) => {
+const buildMakeParentUser = (ID, makeUser) => {
 
-    return function makeParentUser({
+    return ({
         id,
         firstName, // required
         lastName, // required
@@ -16,7 +15,7 @@ const buildMakeParentUser = (ID) => {
         credits = 0,
         createdAt,
         updatedAt
-    }) {
+    }) => {
 
 
         const user = makeUser({
@@ -35,9 +34,6 @@ const buildMakeParentUser = (ID) => {
             throw new ValidationError('credits must be positive number')
         }
 
-        if (role !== USER_ROLES.parent) {
-            throw new ValidationError('only parent user can have family members')
-        }
 
         familyMembers.forEach((member) => {
             if (!ID.isValid(member)) {

@@ -1,4 +1,4 @@
-const { makeUser } = require(".");
+const { makeFamilyMemberUser } = require(".");
 
 
 
@@ -6,13 +6,13 @@ const { makeUser } = require(".");
 describe('making user', () => {
 
 
-    test('should make user', () => {
+    test('should make a family member user', () => {
 
-        const user = makeUser({
+        const user = makeFamilyMemberUser({
             firstName: 'tarik',
             lastName: 'husin',
             phone: '0525145565',
-            role: 'admin'
+            
         })
 
         expect(user).toBeDefined()

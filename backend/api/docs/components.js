@@ -81,7 +81,7 @@ module.exports = {
                         example: "['asxcvkspoekjvposdkv' , 'pfgojbpocvbpregf']",
                         description: "the parent family members, the ids whill be populated when query",
                         items: {
-                            type:'object',
+                            type: 'object',
                             $ref: '#/components/schemas/FamilyMemeberUser'
                         }
                     },
@@ -120,6 +120,15 @@ module.exports = {
                         example: "tarik",
                         description: "First Name"
                     },
+                    allergies: {
+                        type: "array",
+                        items: {
+                            type: 'string'
+                        },
+                        example: "['Milk' , 'Fish']",
+                        description: "allergies"
+                    },
+
                     firstName: {
                         type: "string",
                         required: true,
@@ -162,7 +171,7 @@ module.exports = {
                         type: "string",
                         example: "FDSGBERFDVMXCDFB.jpg",
                         description: "User Image"
-                    }
+                    },
                 }
             },
 

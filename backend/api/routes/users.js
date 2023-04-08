@@ -7,6 +7,8 @@ module.exports = () => {
 
 
   const router = Router()
+
+  
   router.post('/parent', userController.createParentUser)
   router.post('/family-member', userController.createFamilyMemberUser)
   router.post('/admin', userController.createAdminUser)

@@ -5,12 +5,12 @@ const createFamilyMemberUser = require('./create-family-member-user');
 
 
 module.exports = {
-    '/users': {
-        ...getUsers,
-    },
-    '/users/{id}': {
-        ...getUser,
-    },
+    // '/users': {
+    //     ...getUsers,
+    // },
+    // '/users/{id}': {
+    //     ...getUser,
+    // },
     '/users/parent': createParentUser,
     '/users/family-member': createFamilyMemberUser
 

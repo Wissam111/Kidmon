@@ -11,7 +11,7 @@ const { errors } = require('celebrate')
 module.exports = () => {
     const router = Router()
 
-    router.use('/users', usersRoutes())
+    router.use('/users', usersRoutes)
     router.use('/products', productRoutes)
     router.use('/activities', activitiesRoutes)
     router.use('/auth', authRoutes)

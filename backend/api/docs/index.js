@@ -15,7 +15,7 @@ module.exports = {
     paths: {
         ...appointments,
         ...users,
-        ...activities
-        // ...auth,
+        ...activities,
+        ...auth,
     }
 };

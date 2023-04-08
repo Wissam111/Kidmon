@@ -52,6 +52,7 @@ exports.makeActivityDb = ({ makeDb }) => {
     }
 
     async function makeTransaction() {
+        await makeDb()
         return new MongodbTransaction(await Activity.startSession())
     }
 

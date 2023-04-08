@@ -41,7 +41,24 @@ class UserRoleError extends Error {
 
 
 
+class TooManyTriesError extends Error {
+
+    constructor(message) {
+        super(message)
+    }
+}
+
+
+class CodeNotMatch extends Error {
+
+    constructor(message) {
+        super(message)
+    }
+}
+
 module.exports = {
+    CodeNotMatch,
+    TooManyTriesError,
     ValidationError,
     NotFoundError,
     AlreadyExistsError,

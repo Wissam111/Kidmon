@@ -1,4 +1,4 @@
-const { connect, disconnect, default: mongoose } = require("mongoose")
+const { connect, default: mongoose } = require("mongoose")
 const configs = require("../../configs")
 const { makeUserDb } = require("./users-db")
 const { makeProductDb } = require("./products-db")
@@ -6,14 +6,22 @@ const { makeActivityDb } = require("./activity-db")
 
 
 
+/**
+ *  0: disconnected
+    1: connected
+    2: connecting
+    3: disconnecting
+ */
+
 const makeDb = async () => {
     if (!configs.databaseURL) {
         throw new Error("databaseURL is required as an Environment variable")
     }
-    const connection = await connect(configs.databaseURL)
-    return connection.connection.db
+    if (mongoose.connection.readyState !== 1) {
+        console.log('connecting to database');
+        await connect(configs.databaseURL)
+    }
 }
-
 
 
 

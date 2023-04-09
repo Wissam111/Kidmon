@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
 const { productController } = require('../../controllers')
+const { imageUpload } = require('../middleware/image-file-uploader')
 
 
 const router = Router()
@@ -32,6 +33,7 @@ router.get('/',
 
 
 router.post('/',
+    imageUpload('image'),
     celebrate({
         [Segments.BODY]: Joi.object().keys({
             title: Joi.string().required(),

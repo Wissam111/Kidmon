@@ -10,7 +10,7 @@ module.exports = class MongodbTransaction {
     }
 
     async startTransaction() {
-        this.session.startTransaction()
+        await this.session.startTransaction()
     }
 
     async commitTransaction() {

@@ -1,3 +1,4 @@
+const { ActivityTypes } = require("./activity")
 
 
 const buildMakeTransactionActivity = (makeActivity) => {
@@ -13,7 +14,7 @@ const buildMakeTransactionActivity = (makeActivity) => {
     }) {
 
 
-        const activity = makeActivity({ id, type, createdAt, updatedAt })
+        const activity = makeActivity({ id, type: ActivityTypes.transaction, createdAt, updatedAt })
 
         return Object.freeze({
             ...activity,

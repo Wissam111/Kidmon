@@ -112,6 +112,7 @@ exports.makeUserDb = ({ makeDb }) => {
 
 
     async function makeTransaction() {
+        await makeDb()
         return new MongodbTransaction(await User.startSession())
     }
 

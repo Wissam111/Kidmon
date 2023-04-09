@@ -37,5 +37,9 @@ module.exports = {
 
     debug: process.env.debug ? true : false,
 
-    apiVersion: 'v1'
+    apiVersion: 'v1',
+
+    production: false,
+
+    jwtSecret: 'secret',
 };

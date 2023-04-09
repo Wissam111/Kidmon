@@ -10,7 +10,7 @@ module.exports = {
 
       {
         name: "title", // name of param
-        in: "body", // location of param
+        in: "multipart/formdata", // location of param
         schema: {
           type: "string"
         },
@@ -19,7 +19,7 @@ module.exports = {
       },
       {
         name: "price", // name of param
-        in: "body", // location of param
+        in: "multipart/formdata", // location of param
         schema: {
           type: "string"
         },
@@ -28,19 +28,19 @@ module.exports = {
       },
       {
         name: "image", // name of param
-        in: "body", // location of param
+        in: "multipart/formdata", // location of param
         schema: {
-          type: "string"
+          type: "file"
         },
         description: "start time for the appointment", // desc
       },
       {
         name: "category",
-        in: "body",
+        in: "multipart/formdata",
         schema: {
           type: "string",
         },
-        description: "the product category , [Drinks , Snaks , Food]",
+        description: "the product category , [Snack, Cold, Hot, Food]",
         example: "Food",
         required: true
       },
@@ -48,7 +48,7 @@ module.exports = {
 
       {
         name: "allergicIngredients",
-        in: "body",
+        in: "multipart/formdata",
         schema: {
           type: "array",
         },

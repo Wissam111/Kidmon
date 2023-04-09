@@ -3,11 +3,13 @@ const { productService } = require("../use-cases");
 const createProduct = async (req, res) => {
   try {
     const { title, price, category, allergicIngredients } = req.body;
+    const image = req.file?.filename;
     const product = await productService.createProduct({
       allergicIngredients,
       title,
       price,
       category,
+      image,
     });
     res.status(201).json({
       message: "Product created successfull",

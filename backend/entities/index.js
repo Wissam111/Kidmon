@@ -8,6 +8,7 @@ const { buildMakeProduct } = require('./product')
 const { buildMakePurchaseActivity } = require('./purchace-activity')
 const { buildMakeTransactionActivity } = require('./transaction-activity')
 const { createId, isCuid } = require('@paralleldrive/cuid2')
+const { buildMakeVerify } = require('./verify')
 
 
 
@@ -23,11 +24,14 @@ const makeParentUser = buildMakeParentUser(IdGenerator, makeUser)
 const makeFamilyMemberUser = buildMakeFamilyMemberUser(IdGenerator, makeUser)
 
 
-const makeActivity = buildMakeActivity()
+const makeActivity = buildMakeActivity(IdGenerator)
 const makeTransactionActivity = buildMakeTransactionActivity(makeActivity)
 const makePurchaseActivity = buildMakePurchaseActivity(makeActivity)
 
 const makeProduct = buildMakeProduct(IdGenerator)
+
+
+const makeVerify = buildMakeVerify(IdGenerator, ValidateNumbersOnly)
 
 module.exports = {
     makeUser,
@@ -36,6 +40,7 @@ module.exports = {
     makeActivity,
     makeTransactionActivity,
     makePurchaseActivity,
-    makeProduct
+    makeProduct,
+    makeVerify
 }
 

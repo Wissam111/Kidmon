@@ -1,0 +1,34 @@
+.product-bar-container {
+  width: 100%;
+  height: 40px;
+  padding: 30px 26px 24px 26px;
+  background: #ffffff;
+  box-shadow: 8px 8px 20px rgba(115, 113, 113, 0.1);
+  border-radius: 4px;
+  margin-top: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.select-category {
+  width: 120px;
+  height: 40px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.add-product-btn {
+  width: 118px;
+  height: 36px;
+  background: #8fa497;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}

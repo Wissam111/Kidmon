@@ -1,12 +1,18 @@
-import React from "react";
-
 import "./Home.css";
 // import { BsSearch } from "react-icons/bs";
-import CategoryCards from "../../components/CategoryCards/CategoryCards";
 import MenuItemCard from "../../components/MenuItemCard/MenuItemCard";
 import CartMenu from "../../components/CartMenu/CartMenu";
+import CategoryCard from "../../components/CategoryCard/CategoryCard";
+import Search from "../../components/Search/Search";
+import { BASE_URL } from "../../../context/ApiContext";
+import { ProdcutsTable } from "../../components/ProdcutsTable/ProdcutsTable";
+
+import HomeViewModel from "./HomeViewModel";
 
 const Home = () => {
+  const { products, categories, currentCategory, handleSelectCategory } =
+    HomeViewModel();
+
   return (
     <div className="page-container">
       <div className="home-container">
@@ -15,44 +21,30 @@ const Home = () => {
             <h1>
               Menu <span>Category</span>{" "}
             </h1>
-            <div className="search-menu-wrapper">
-              {/* <BsSearch size={12} color="gray" /> */}
-              <input placeholder="search for food" type={"search"} />
-            </div>
+            <Search />
           </div>
-          <CategoryCards />
+          <div className="category-cards-container">
+            {categories.map((category) => {
+              return (
+                <CategoryCard
+                  category={category}
+                  isActive={currentCategory.text === category.text}
+                  handleSelectCategory={handleSelectCategory}
+                />
+              );
+            })}
+          </div>
 
           <div className="menu-item-cards">
-            <MenuItemCard
-              cardImg={require("../../../assets/imgs/dor1.jpg")}
-              text="Green Doritos"
-              price={5.99}
-            />
-            <MenuItemCard
-              cardImg={require("../../../assets/imgs/bsli2.jpg")}
-              text="Beasley Falafel"
-              price={5.99}
-            />
-            <MenuItemCard
-              cardImg={require("../../../assets/imgs/dor1.jpg")}
-              text="Green Doritos"
-              price={5.99}
-            />
-            <MenuItemCard
-              cardImg={require("../../../assets/imgs/dor1.jpg")}
-              text="Green Doritos"
-              price={5.99}
-            />
-            <MenuItemCard
-              cardImg={require("../../../assets/imgs/dor1.jpg")}
-              text="Green Doritos"
-              price={5.99}
-            />
-            <MenuItemCard
-              cardImg={require("../../../assets/imgs/dor1.jpg")}
-              text="Green Doritos"
-              price={5.99}
-            />
+            {products.map((product) => {
+              return (
+                <MenuItemCard
+                  cardImg={product.image}
+                  text={product.title}
+                  price={product.price}
+                />
+              );
+            })}
           </div>
         </div>
         <CartMenu />

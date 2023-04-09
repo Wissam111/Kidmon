@@ -1,6 +1,6 @@
 import React from "react";
 import "./MenuItemCard.css";
-import { BASE_URL } from "../../../context/ApiContext";
+import { BASE_URL_1 } from "../../../context/ApiContext";
 const MenuItemCard = ({ cardImg, text, price }) => {
   // image
   return (
@@ -8,7 +8,7 @@ const MenuItemCard = ({ cardImg, text, price }) => {
       <img
         src={
           cardImg
-            ? BASE_URL + `imgs/${cardImg}`
+            ? BASE_URL_1 + `imgs/${cardImg}`
             : require("../../../assets/icons/file.png")
         }
         alt="menu-item"

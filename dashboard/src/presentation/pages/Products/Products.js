@@ -7,8 +7,15 @@ import ProdcutsTable from "../../components/ProdcutsTable/ProdcutsTable";
 import ProductsViewModel from "./ProductsViewModel";
 
 const Products = () => {
-  const { products, page, pageSize, handleChangePage, handleSelectCategory } =
-    ProductsViewModel();
+  const {
+    products,
+    page,
+    pageSize,
+    numofPages,
+    handleChangePage,
+    handleSelectCategory,
+    handleDeleteProduct,
+  } = ProductsViewModel();
   return (
     <div className="page-container">
       <div className="products-container">
@@ -18,7 +25,9 @@ const Products = () => {
           products={products}
           page={page}
           pageSize={pageSize}
+          numofPages={numofPages}
           handleChangePage={handleChangePage}
+          handleDeleteProduct={handleDeleteProduct}
         />
       </div>
     </div>

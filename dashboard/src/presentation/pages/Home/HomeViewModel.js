@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import ProductRepository from "../../../repository/ProductRepository";
 import { categories } from "../../../data/data";
+import { useLoadingContext } from "../../../hooks/useLoadingContext";
 
 const HomeViewModel = () => {
   const productRepos = ProductRepository();
   const [products, setProducts] = useState([]);
-
+  const { setLoading } = useLoadingContext();
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
 
   const getProductsByCategory = async () => {
@@ -24,7 +25,13 @@ const HomeViewModel = () => {
     setCurrentCategory(category);
   };
   useEffect(() => {
-    getProductsByCategory();
+    const HomePageInit = async () => {
+      setLoading(true);
+      await getProductsByCategory();
+      setLoading(false);
+    };
+
+    HomePageInit();
   }, [currentCategory]);
 
   return { products, categories, currentCategory, handleSelectCategory };

@@ -25,7 +25,10 @@ const ProductRepository = () => {
     });
     return data;
   };
-  const deleteProdcut = async () => {};
+  const deleteProdcut = async (productId) => {
+    const data = apiCall(`products/${productId}`, "DELETE");
+    return data;
+  };
   const updateProduct = async () => {};
   const getProduct = async () => {};
 

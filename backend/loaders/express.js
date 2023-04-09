@@ -11,10 +11,10 @@ module.exports = async ({ app }) => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json())
 
-  const imgsPath = path.join(__dirname, '..', 'imgs')
-  const htmlPath = path.join(__dirname, '..', 'public')
+  const imgsPath = path.join(__dirname, '..', 'uploaded-files')
 
   //routes
+  app.use('/api/imgs', express.static(imgsPath));
   app.use(`/api/${configs.apiVersion}/`, routes())
 
 

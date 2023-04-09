@@ -1,0 +1,15 @@
+.search-menu-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+}
+.search-menu-wrapper input {
+  width: 100%;
+  height: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  padding: 20px;
+}

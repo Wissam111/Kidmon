@@ -60,7 +60,7 @@ const getProducts = async (req, res) => {
     const page = +req.query.page;
     const pageSize = +req.query.pageSize;
 
-    const products = await productService.getProducts({
+    const data = await productService.getProducts({
       page,
       pageSize,
       search,
@@ -69,7 +69,7 @@ const getProducts = async (req, res) => {
     });
     res.status(200).json({
       message: "fetching products successfully",
-      products,
+      ...data,
     });
   } catch (e) {
     console.log(e);

@@ -69,9 +69,12 @@ exports.makeProductDb = ({ makeDb }) => {
                 }
             })
         }
-
+        const count = await Product.count(filters)
         const products = await query.lean()
-        return idsMap(products)
+        return {
+            products: idsMap(products),
+            count: count
+        }
     }
 
     async function makeTransaction() {

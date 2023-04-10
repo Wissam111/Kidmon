@@ -20,5 +20,8 @@
   display: flex;
   justify-content: end;
   padding: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   /* border: 2px solid red; */
 }

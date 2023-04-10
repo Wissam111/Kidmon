@@ -5,21 +5,33 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
+import { FaRegTrashAlt } from "react-icons/fa";
+
 import { tableMaincolumn } from "../../../data/data";
 import "./ProdcutsTable.css";
 
-const ProdcutsTable = ({ products, page, pageSize, handleChangePage }) => {
-  const PAGE_SIZE = 10;
-
+const ProdcutsTable = ({
+  products,
+  page,
+  numofPages,
+  handleChangePage,
+  handleDeleteProduct,
+}) => {
   function createData(img, name, category, price, sold, action) {
     return { img, name, category, price, sold, action };
   }
   return (
     <div className="products-table-container">
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper
+        sx={{
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -54,8 +66,14 @@ const ProdcutsTable = ({ products, page, pageSize, handleChangePage }) => {
                           {column.id === "img" ? (
                             <img src={value} />
                           ) : column.id === "action" ? (
-                            <img src={value} className="action-btn" />
+                            <FaRegTrashAlt
+                              size={20}
+                              cursor={"pointer"}
+                              color="#0000009c"
+                              onClick={() => handleDeleteProduct(product)}
+                            />
                           ) : (
+                            // <img src={value} className="action-btn" />
                             value
                           )}
                         </TableCell>
@@ -67,7 +85,6 @@ const ProdcutsTable = ({ products, page, pageSize, handleChangePage }) => {
             </TableBody>
           </Table>
         </TableContainer>
-
         <div className="pageination-container">
           <Pagination
             count={10}

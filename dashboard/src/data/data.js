@@ -53,4 +53,4 @@ export const tableMaincolumn = [
   { id: "action", numeric: true, disablePadding: false, label: "Action" },
 ];
 
-export const fileTypes = ["JPEG", "PNG"];
+export const fileTypes = ["JPEG", "PNG", "JPG"];

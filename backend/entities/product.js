@@ -1,14 +1,14 @@
 const { ValidationError } = require("../utils/errors");
-const { AllergicIngredients } = require("./family-member-user");
+const { Allergies_ENUM } = require("./family-member-user");
 
-const CATEGORIES = Object.freeze({
+const PRODUCT_CATEGORIES = Object.freeze({
     snack: 'Snack',
     cold: 'Cold',
     hot: 'Hot',
     food: 'Food'
 })
 
-const CATEGORIES_ENUM = Object.values(CATEGORIES)
+const PRODUCT_CATEGORIES_ENUM = Object.values(PRODUCT_CATEGORIES)
 
 
 const buildMakeProduct = (ID) => {
@@ -33,20 +33,20 @@ const buildMakeProduct = (ID) => {
         }
 
         if (!category) {
-            throw new ValidationError(`Product must have a category of ${CATEGORIES_ENUM}`)
+            throw new ValidationError(`Product must have a category of ${PRODUCT_CATEGORIES_ENUM}`)
         }
 
         //TODO: remove duplication in the array
         if (allergicIngredients)
             allergicIngredients.forEach((element) => {
-                if (!AllergicIngredients.includes(element)) {
+                if (!Allergies_ENUM.includes(element)) {
                     throw new ValidationError('allergic ingredient was not found')
                 }
             })
 
 
 
-        if (!CATEGORIES_ENUM.includes(category)) {
+        if (!PRODUCT_CATEGORIES_ENUM.includes(category)) {
             throw new ValidationError(`the category ${category} is invalid`)
         }
 
@@ -75,7 +75,9 @@ const buildMakeProduct = (ID) => {
 
 
 module.exports = Object.freeze({
-    buildMakeProduct
+    buildMakeProduct,
+    PRODUCT_CATEGORIES_ENUM,
+    PRODUCT_CATEGORIES
 })
 
 

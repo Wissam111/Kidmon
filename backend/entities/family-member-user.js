@@ -2,7 +2,16 @@ const { ValidationError } = require("../utils/errors");
 const { USER_ROLES } = require("./user");
 
 
-const Allergies = ['Milk', 'Eggs', 'Mustard', 'Peanuts', 'Soy', 'Fish']
+const Allergies = {
+    milk: 'Milk',
+    eggs: 'Eggs',
+    mustard: 'Mustard',
+    peanuts: 'Peanuts',
+    soy: 'Soy',
+    fish: 'Fish'
+}
+const Allergies_ENUM = Object.values(Allergies)
+
 
 // TODO: limits 
 const buildMakeFamilyMemberUser = (Id, makeUser) => {
@@ -48,7 +57,7 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
 
 
         allergies.forEach((allergy) => {
-            if (!Allergies.includes(allergy)) {
+            if (!Allergies_ENUM.includes(allergy)) {
                 throw new ValidationError(`Allergy must be one of the following: ${Allergies}`)
             }
         })
@@ -88,7 +97,8 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
 
 module.exports = Object.freeze({
     buildMakeFamilyMemberUser,
-    AllergicIngredients: Allergies
+    Allergies,
+    Allergies_ENUM
 })
 
 

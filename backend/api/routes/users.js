@@ -95,7 +95,7 @@ router.get('/',
 router.get('/bracelet/:barceletId',
   celebrate({
     [Segments.PARAMS]: Joi.object().keys({
-      userId: Joi.string().required()
+      barceletId: Joi.string().required()
     })
   }),
   userController.getUserByBraceletId)

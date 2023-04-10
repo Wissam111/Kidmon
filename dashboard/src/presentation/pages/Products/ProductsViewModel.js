@@ -14,6 +14,7 @@ const ProductsViewModel = () => {
   const getProducts = async () => {
     try {
       const data = await productRepo.getProducts(category, PAGE_SIZE, page);
+      console.log(data.count);
       setNumOfPages(Math.round(data.count / PAGE_SIZE));
       setProducts(data.products);
     } catch (error) {

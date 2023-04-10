@@ -13,6 +13,7 @@ const NavBar = () => {
   const [activeNav, setActiveNav] = useState(0);
   return (
     <div className="navbar-container">
+      <img src={require("../../../assets/imgs/family2.png")} />
       <ul className="nav-links">
         <li className={activeNav === 0 ? "active" : null}>
           <Link to="/" className="nav-link" onClick={() => setActiveNav(0)}>

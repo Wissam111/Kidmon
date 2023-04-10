@@ -10,6 +10,8 @@
   left: 15px;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 20px 0px 0px 20px;
+  position: relative;
+  align-items: center;
 }
 .navbar-container .userLogo {
   width: 51px;
@@ -54,4 +56,13 @@
 }
 .nav-links .active {
   background: #dcf6e6;
+}
+
+.navbar-container img {
+  /* position: absolute;
+  top: 10px;
+  left: 10px; */
+  width: 43px;
+  margin-top: 40px;
+  margin-right: 10px;
 }

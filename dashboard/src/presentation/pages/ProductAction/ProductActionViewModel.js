@@ -21,6 +21,9 @@ const ProductActionViewModel = () => {
     formData.append("title", title);
     formData.append("price", price);
     formData.append("category", category);
+    allergicList.forEach((allergic) => {
+      formData.append("allergicIngredients[]", allergic);
+    });
     // console.log(allergicList);
     // formData.append("allergicIngredients", JSON.stringify(allergicList));
 

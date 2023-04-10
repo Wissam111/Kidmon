@@ -3,6 +3,7 @@ const { buildCreateFamilyMemberUserUseCase } = require("./create-family-member-u
 const { buildCreateParentUserUseCase } = require("./create-parent-user")
 const { buildCreateAdminUserUseCase } = require("./create-user-admin")
 const { buildGetUserUseCase } = require("./get-user")
+const { buildGetUserByBraceletIdUseCase } = require("./get-user-by-braceletId")
 
 
 
@@ -13,11 +14,13 @@ const createFamilyMemberUserUseCase = buildCreateFamilyMemberUserUseCase(userDb)
 const createParentUserUseCase = buildCreateParentUserUseCase(userDb)
 
 const getUserUseCase = buildGetUserUseCase(userDb)
+const getUserByBraceletIdUseCase = buildGetUserByBraceletIdUseCase(userDb)
 
 
 module.exports = Object.freeze({
     createAdminUserUseCase,
     createFamilyMemberUserUseCase,
     createParentUserUseCase,
-    getUserUseCase
+    getUserUseCase,
+    getUserByBraceletIdUseCase
 })

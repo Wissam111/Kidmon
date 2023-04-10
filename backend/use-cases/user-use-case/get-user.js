@@ -11,7 +11,7 @@ const buildGetUserUseCase = (userDb) => {
         if (!user) {
             throw new NotFoundError(`User with id ${userId} was not found`)
         }
-
+        
         return user
     }
 

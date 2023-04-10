@@ -54,22 +54,23 @@ exports.makeProductDb = ({ makeDb }) => {
     }
 
 
-    async function find({ search, page, pageSize, sort = 'desc', filters, transaction }) {
+    async function find({ search = "", page, pageSize = 10, sort = 'desc', filters, transaction }) {
         await makeDb()
-        const query = Product.find(filters, {}, { sort: { createdAt: sort }, limit: pageSize, skip: (page - 1) * pageSize, session: transaction?.getSession() })
 
-        if (search) {
-            query.find({
-                "$expr": {
-                    "$regexMatch": {
-                        "input": '$title',
-                        "regex": search,
-                        "options": "i"
-                    }
+        const _filters = {
+            ...filters,
+            $expr: {
+                "$regexMatch": {
+                    "input": '$title',
+                    "regex": search,
+                    "options": "i"
                 }
-            })
+            }
         }
-        const count = await Product.count(filters)
+
+        const query = Product.find(_filters, {}, { sort: { createdAt: sort }, limit: pageSize, skip: (page - 1) * pageSize, session: transaction?.getSession() })
+        const count = await Product.count(_filters)
+
         const products = await query.lean()
         return {
             products: idsMap(products),

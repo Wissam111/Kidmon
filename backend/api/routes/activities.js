@@ -50,9 +50,9 @@ router.post('/purchase',
             })).required()
         })
     }),
-    requireAuthentication,
-    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
-    makeCheckAuthorization({ reqfieldName: 'userId', reqDataField: 'body', userFieldName: 'id' }),
+    // requireAuthentication,
+    // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    // makeCheckAuthorization({ reqfieldName: 'userId', reqDataField: 'body', userFieldName: 'id' }),
     activityController.purchase)
 
 

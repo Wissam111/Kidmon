@@ -31,6 +31,11 @@ router.post('/family-member',
       braceletId: Joi.string().required(),
       parentId: Joi.string().required(),
       allergies: Joi.array().items(Joi.string()),
+      limits: Joi.object().keys({
+        daily: Joi.number().required(),
+        weekly: Joi.number().required(),
+        monthly: Joi.number().required(),
+      }),
     })
   }),
   userController.createFamilyMemberUser)
@@ -57,6 +62,15 @@ router.get('/:userId',
     })
   }),
   userController.getUser)
+
+
+router.get('/bracelet/:barceletId',
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      userId: Joi.string().required()
+    })
+  }),
+  userController.getUserByBraceletId)
 
 
 module.exports = router

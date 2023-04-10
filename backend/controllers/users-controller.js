@@ -5,10 +5,22 @@ const { userService } = require("../use-cases");
 
 
 
-const getUser = async (req, res) => {
+const getUser = async (req, res, next) => {
     try {
         const { userId } = req.params
         const user = await userService.getUserUseCase({ userId: userId })
+        res.status(200).json(user)
+    } catch (e) {
+        console.log(e);
+        next(e)
+    }
+}
+
+
+const getUserByBraceletId = async (req, res, next) => {
+    try {
+        const { braceletId } = req.params
+        const user = await userService.getUserByBraceletIdUseCase({ braceletId: braceletId })
         res.status(200).json(user)
     } catch (e) {
         console.log(e);
@@ -32,11 +44,11 @@ const createParentUser = async (req, res, next) => {
 }
 
 
-const createFamilyMemberUser = async (req, res) => {
+const createFamilyMemberUser = async (req, res, next) => {
     try {
-        const { firstName, lastName, phone, parentId, braceletId, allergies } = req.body
+        const { firstName, lastName, phone, parentId, braceletId, allergies, limits } = req.body
         const image = req.file?.filename
-        const user = await userService.createFamilyMemberUserUseCase({ firstName, lastName, phone, parentId, braceletId, allergies, image })
+        const user = await userService.createFamilyMemberUserUseCase({ firstName, lastName, phone, parentId, braceletId, allergies, image, limits })
         res.status(201).json(user)
     } catch (e) {
         console.log(e);
@@ -47,7 +59,7 @@ const createFamilyMemberUser = async (req, res) => {
 
 
 
-const createAdminUser = async (req, res) => {
+const createAdminUser = async (req, res, next) => {
     try {
         const { firstName, lastName, phone } = req.body
         const image = req.file?.filename
@@ -68,7 +80,7 @@ module.exports = {
     createFamilyMemberUser,
     createParentUser,
     createAdminUser,
-
+    getUserByBraceletId,
     getUser
 }
 

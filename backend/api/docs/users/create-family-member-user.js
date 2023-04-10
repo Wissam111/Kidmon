@@ -6,71 +6,86 @@ module.exports = {
         operationId: "createFamilyMemberUser", // unique operation id.
         parameters: [
             {
-                name: "phone", // name of param
-                in: "multipart/formdata", // location of param
+                name: "phone",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
-                description: "phone number", // short desc.
+                description: "phone number",
                 required: true
             },
             {
-                name: "firstName", // name of param
-                in: "multipart/formdata", // location of param
+                name: "firstName",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
-                description: "First Name", // short desc.
+                description: "First Name",
                 required: true
             },
             {
-                name: "lastName", // name of param
-                in: "multipart/formdata", // location of param
+                name: "lastName",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
-                description: "Last Name", // short desc.
+                description: "Last Name",
                 required: true
             },
             {
-                name: "braceletId", // name of param
-                in: "multipart/formdata", // location of param
+                name: "braceletId",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
-                description: "bracelet uniqe id", // short desc.
+                description: "bracelet uniqe id",
                 required: true
             },
 
             {
-                name: "allergies", // name of param
-                in: "multipart/formdata", // location of param
+                name: "allergies",
+                in: "multipart/formdata",
                 schema: {
                     type: "array"
                 },
-                description: "An array of allergies, ['Milk', 'Eggs', 'Mustard', 'Peanuts', 'Soy', 'Fish']", // short desc.
+                description: "An array of allergies, ['Milk', 'Eggs', 'Mustard', 'Peanuts', 'Soy', 'Fish']",
             },
 
             {
-                name: "parentId", // name of param
-                in: "multipart/formdata", // location of param
+                name: "limits",
+                in: "multipart/formdata",
+
+                schema: {
+                    type: "object",
+                    properties: {
+                        daily: { type: 'number', required: true, example: 100 },
+                        weekly: { type: 'number', required: true, example: 200 },
+                        monthly: { type: 'number', required: true, example: 300 },
+                    }
+                },
+                description: "An object for the limits",
+            },
+
+            {
+                name: "parentId",
+                in: "multipart/formdata",
                 schema: {
                     type: "string"
                 },
-                description: "this family member parent id", // short desc.
+                description: "this family member parent id",
                 required: true
             },
 
             {
-                name: "image", // name of param
-                in: "multipart/formdata", // location of param
+                name: "image",
+                in: "multipart/formdata",
                 schema: {
                     type: "file"
                 },
-                description: "this family member parent id", // short desc.
+                description: "this family member parent id",
                 required: true
             },
         ], // expected params.
-    
+
     },
 };

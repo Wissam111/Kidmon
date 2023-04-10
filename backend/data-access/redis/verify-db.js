@@ -19,13 +19,12 @@ const makeVerifyDb = ({ makeDb }) => {
             .exec()
     }
 
-
     async function findById({ id }) {
         const client = await makeDb()
         return JSON.parse(await client.get(id))
     }
 
-
+    // counts number of verfies requrest for this phone number
     async function count({ phone }) {
         const client = await makeDb()
         return await client.get(phone) || 0

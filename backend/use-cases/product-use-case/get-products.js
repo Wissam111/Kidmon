@@ -8,8 +8,8 @@ const buildGetProductsUseCase = ({ productDb }) => {
         if (category) {
             filters.category = category
         }
-
-        return await productDb.find({ search, page, pageSize, sort, filters })
+        const { products, count } = await productDb.find({ search, page, pageSize, sort, filters })
+        return { products, count }
     }
 
 }

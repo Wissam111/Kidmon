@@ -17,6 +17,7 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
         image = null,
         allergies = [],
         credits = 0,
+        limits,
         createdAt,
         updatedAt
     }) => {
@@ -56,14 +57,29 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
             throw new ValidationError(`parent must be a valid id`)
         }
 
+        for (let k in limits) {
+            if (limits[k] < 0) {
+                throw new ValidationError(`A limit must be greater or equal than 0`)
+            }
+        }
 
+        // if (limits) {
+        //     if (limits.daily > limits.weekly) {
+        //         throw new ValidationError(`weekly limit must be greater or equal than daily limit`)
+        //     }
+
+        //     if (limits.weekly > limits.monthly) {
+        //         throw new ValidationError(`monthly limit must be greater or equal than weekly limit`)
+        //     }
+        // }
 
         return Object.freeze({
             ...user,
             braceletId,
             credits,
             allergies,
-            parent
+            parent,
+            limits
         })
     }
 }

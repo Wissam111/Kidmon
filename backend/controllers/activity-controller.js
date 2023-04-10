@@ -10,9 +10,7 @@ const transferPoints = async (req, res) => {
         })
     } catch (e) {
         console.log(e);
-        res.status(500).json({
-            message: 'error'
-        })
+        next(e)
     }
 }
 
@@ -20,7 +18,7 @@ const transferPoints = async (req, res) => {
 
 
 
-const purchase = async (req, res) => {
+const purchase = async (req, res, next) => {
     try {
         const { userId, items } = req.body
         await activityService.purchaseUseCase({ userId, items })
@@ -29,9 +27,7 @@ const purchase = async (req, res) => {
         })
     } catch (e) {
         console.log(e);
-        res.status(500).json({
-            message: 'error'
-        })
+        next(e)
     }
 }
 
@@ -50,9 +46,7 @@ const getUserActivities = async (req, res) => {
         })
     } catch (e) {
         console.log(e);
-        res.status(500).json({
-            message: 'error'
-        })
+        next(e)
     }
 }
 

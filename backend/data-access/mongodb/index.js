@@ -31,5 +31,6 @@ const activityDb = makeActivityDb({ makeDb })
 module.exports = {
     userDb,
     productDb,
-    activityDb
+    activityDb,
+    mongoDbMake: makeDb
 }

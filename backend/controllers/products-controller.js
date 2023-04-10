@@ -1,6 +1,6 @@
 const { productService } = require("../use-cases");
 
-const createProduct = async (req, res) => {
+const createProduct = async (req, res, next) => {
   try {
     const { title, price, category, allergicIngredients } = req.body;
     const image = req.file?.filename;
@@ -17,13 +17,11 @@ const createProduct = async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    res.status(500).json({
-      message: "error creating product",
-    });
+    next(e)
   }
 };
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res, next) => {
   try {
     const { productId } = req.params;
     await productService.deleteProduct({ productId: productId });
@@ -32,13 +30,11 @@ const deleteProduct = async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    res.status(500).json({
-      message: "error creating product",
-    });
+    next(e)
   }
 };
 
-const getProduct = async (req, res) => {
+const getProduct = async (req, res, next) => {
   try {
     const { productId } = req.params;
     const product = await productService.getProduct({ productId: productId });
@@ -48,13 +44,11 @@ const getProduct = async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    res.status(500).json({
-      message: "error fetching product",
-    });
+    next(e)
   }
 };
 
-const getProducts = async (req, res) => {
+const getProducts = async (req, res, next) => {
   try {
     const { search, sort, category } = req.query;
     const page = +req.query.page;
@@ -73,9 +67,7 @@ const getProducts = async (req, res) => {
     });
   } catch (e) {
     console.log(e);
-    res.status(500).json({
-      message: "error fetching products",
-    });
+    next(e)
   }
 };
 

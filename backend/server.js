@@ -13,7 +13,7 @@ const onListening = () => {
       ################################################
       🛡️  Server listening on port: ${port} 🛡️
               
-              http://localhost:${port}/api/
+              http://localhost:${port}/api/${configs.apiVersion}/
       ################################################
     `
     );

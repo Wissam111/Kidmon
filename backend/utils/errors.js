@@ -50,7 +50,14 @@ class TooManyTriesError extends Error {
 
 
 class CodeNotMatch extends Error {
+    constructor(message) {
+        super(message)
+    }
+}
 
+
+
+class CreditsLimitError extends Error {
     constructor(message) {
         super(message)
     }
@@ -63,5 +70,6 @@ module.exports = {
     NotFoundError,
     AlreadyExistsError,
     InsufesientFunds,
-    UserRoleError
+    UserRoleError,
+    CreditsLimitError
 }

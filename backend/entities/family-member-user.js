@@ -2,7 +2,16 @@ const { ValidationError } = require("../utils/errors");
 const { USER_ROLES } = require("./user");
 
 
-const Allergies = ['Milk', 'Eggs', 'Mustard', 'Peanuts', 'Soy', 'Fish']
+const Allergies = {
+    milk: 'Milk',
+    eggs: 'Eggs',
+    mustard: 'Mustard',
+    peanuts: 'Peanuts',
+    soy: 'Soy',
+    fish: 'Fish'
+}
+const Allergies_ENUM = Object.values(Allergies)
+
 
 // TODO: limits 
 const buildMakeFamilyMemberUser = (Id, makeUser) => {
@@ -17,6 +26,7 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
         image = null,
         allergies = [],
         credits = 0,
+        limits,
         createdAt,
         updatedAt
     }) => {
@@ -47,7 +57,7 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
 
 
         allergies.forEach((allergy) => {
-            if (!Allergies.includes(allergy)) {
+            if (!Allergies_ENUM.includes(allergy)) {
                 throw new ValidationError(`Allergy must be one of the following: ${Allergies}`)
             }
         })
@@ -56,14 +66,29 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
             throw new ValidationError(`parent must be a valid id`)
         }
 
+        for (let k in limits) {
+            if (limits[k] < 0) {
+                throw new ValidationError(`A limit must be greater or equal than 0`)
+            }
+        }
 
+        // if (limits) {
+        //     if (limits.daily > limits.weekly) {
+        //         throw new ValidationError(`weekly limit must be greater or equal than daily limit`)
+        //     }
+
+        //     if (limits.weekly > limits.monthly) {
+        //         throw new ValidationError(`monthly limit must be greater or equal than weekly limit`)
+        //     }
+        // }
 
         return Object.freeze({
             ...user,
             braceletId,
             credits,
             allergies,
-            parent
+            parent,
+            limits
         })
     }
 }
@@ -72,7 +97,8 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
 
 module.exports = Object.freeze({
     buildMakeFamilyMemberUser,
-    AllergicIngredients: Allergies
+    Allergies,
+    Allergies_ENUM
 })
 
 

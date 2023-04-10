@@ -1,96 +1,48 @@
 
 module.exports = {
-    // method of operation
     get: {
-        tags: ["Users"], // operation's tag.
-        description: "Get Users", // operation's desc.
-        operationId: "getUsers", // unique operation id.
+        tags: ["Users"], 
+        description: "Get Users", 
+        operationId: "getUsers", 
         parameters: [
             {
-                name: "search", // name of param
-                in: "query", // location of param
+                name: "search", 
+                in: "query", 
                 schema: {
                     type: "string"
                 },
-                description: "the search string, by name", // short desc.
+                description: "the search string, by name", 
             },
 
             {
-                name: "page", // name of param
-                in: "query", // location of param
+                name: "page", 
+                in: "query", 
                 schema: {
                     type: "number"
                 },
-                description: "the current page number", // short desc.
+                description: "the current page number", 
             },
 
             {
-                name: "pageSize", // name of param
-                in: "query", // location of param
+                name: "pageSize", 
+                in: "query", 
                 schema: {
                     type: "number"
                 },
-                description: "page size number", // short desc.
+                description: "page size number", 
             },
 
             {
-                name: "sort", // name of param
-                in: "param", // location of param
+                name: "sort", 
+                in: "param", 
                 schema: {
                     type: "string"
                 },
-                description: "sort the data , 'asc' or 'desc' by the creadedAt field", // short desc.
+                description: "sort the data , 'asc' or 'desc' by the creadedAt field", 
             },
 
-        ], // expected params.
-        // expected responses
-        responses: {
-            // response code
-            200: {
-                description: "Users fetch",
-                content: {
-                    // content-type
-                    "application/json": {
-                        "schema": {
-                            "type": "object",
-
-                            "properties": {
-                                "message": {
-                                    type: "string",
-                                    description: "message",
-                                    example: "fetch success",
-                                },
-                                "users": {
-                                    "type": "array",
-                                    "items": {
-                                        $ref: "#/components/schemas/User"
-                                    },
-                                },
-                            }
-                        }
-                    },
-                },
-            },
-
-
-            400: {
-                content: {
-                    "application/json": {
-                        schema: {
-                            "type": "object",
-                            "properties": {
-                                "message": {
-                                    type: "string",
-                                    description: "message",
-                                    example: "Bad request response",
-                                }
-                            },
-
-                        }
-                    }
-                }
-            }
-
-        },
+        ], 
+      
+       
     },
 };

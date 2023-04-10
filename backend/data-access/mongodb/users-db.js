@@ -16,7 +16,8 @@ exports.makeUserDb = ({ makeDb }) => {
         findById,
         findByPhone,
         makeTransaction,
-        findByBraceletId
+        findByBraceletId,
+        find
     })
 
 
@@ -107,6 +108,37 @@ exports.makeUserDb = ({ makeDb }) => {
             ...idMap(user),
             parent: populate ? idMap(user.parent) : user.parent,
             familyMembers: populate ? idsMap(user.familyMembers) : user.familyMembers
+        }
+    }
+
+
+    async function find({ search = "", page, pageSize = 10, sort = 'desc', filters, transaction }) {
+        await makeDb()
+
+        const _filters = {
+            ...filters,
+            $or: [
+                {
+                    "$expr": {
+                        "$regexMatch": {
+                            "input": { "$concat": ["$firstName", " ", "$lastName"] },
+                            "regex": search,  //Your text search here
+                            "options": "i"
+                        }
+                    }
+
+                },
+                { 'phone': { $regex: "^" + search } }
+            ]
+        }
+
+        const query = User.find(_filters, {}, { sort: { createdAt: sort }, limit: pageSize, skip: (page - 1) * pageSize, session: transaction?.getSession() })
+        const count = await User.count(_filters)
+
+        const users = await query.lean()
+        return {
+            users: idsMap(users),
+            count: count
         }
     }
 

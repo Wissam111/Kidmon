@@ -1,6 +1,6 @@
 const { makePurchaseActivity, makeFamilyMemberUser } = require("../../entities")
 const { ActivityTypes } = require("../../entities/activity")
-const { InsufesientFunds, NotFoundError } = require("../../utils/errors")
+const { InsufesientFunds, NotFoundError, CreditsLimitError } = require("../../utils/errors")
 
 /**
  *  items :[
@@ -42,6 +42,27 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
                 throw new NotFoundError('User not found')
             }
 
+            // subject to credits limit
+            if (user.limits && user.limits.daily < finalPrice) {
+                throw new CreditsLimitError('Daily limit reached')
+            }
+
+            if (user.limits && user.limits.weekly < finalPrice) {
+                throw new CreditsLimitError('Weekly limit reached')
+            }
+
+            if (user.limits && user.limits.monthly < finalPrice) {
+                throw new CreditsLimitError('Monthly limit reached')
+            }
+
+            // update limits
+            const limits = user.limits ? {
+                daily: user.limits.daily - finalPrice,
+                weekly: user.limits.weekly - finalPrice,
+                monthly: user.limits.monthly - finalPrice
+            } : undefined
+
+            // have sufficient credits
             if (user.credits < finalPrice) {
                 throw new InsufesientFunds('Insufesient user funds')
             }
@@ -51,7 +72,8 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
             const updatedUser = makeFamilyMemberUser({
                 ...user,
                 credits: user.credits - finalPrice,
-                updatedAt: undefined
+                updatedAt: undefined,
+                limits
             })
             await userDb.update({ ...updatedUser, transaction })
 

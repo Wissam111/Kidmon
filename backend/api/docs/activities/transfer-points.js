@@ -27,6 +27,7 @@ module.exports = {
                 schema: {
                     type: "number"
                 },
+                example: 23.00,
                 required: true
             },
            

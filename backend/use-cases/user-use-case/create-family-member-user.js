@@ -5,7 +5,7 @@ const { AlreadyExistsError, NotFoundError } = require("../../utils/errors")
 
 const buildCreateFamilyMemberUserUseCase = (userDb) => {
     // no need for transaction because phone is primary key in the database
-    return async ({ firstName, lastName, phone, image, braceletId, parentId, allergies }) => {
+    return async ({ firstName, lastName, phone, image, braceletId, parentId, allergies, limits }) => {
 
         // check if phone exsits
         const phoneExsits = await userDb.findByPhone({ phone: phone })
@@ -26,7 +26,7 @@ const buildCreateFamilyMemberUserUseCase = (userDb) => {
 
 
         // create family member user
-        user = makeFamilyMemberUser({ firstName, lastName, phone, image, braceletId, parent: parentId, allergies })
+        user = makeFamilyMemberUser({ firstName, lastName, phone, image, braceletId, parent: parentId, allergies, limits })
         const createdUser = await userDb.create(user)
 
 

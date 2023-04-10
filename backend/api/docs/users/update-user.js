@@ -1,10 +1,19 @@
 module.exports = {
     // method of operation
-    post: {
-        tags: ["Users"], // operation's tag.
-        description: "Create Family Member User", // operation's desc.
-        operationId: "createFamilyMemberUser", // unique operation id.
+    patch: {
+        tags: ["Users"],
+        description: "Update User",
+        operationId: "updateUser",
         parameters: [
+            {
+                name: "userId",
+                in: "param",
+                schema: {
+                    type: "string"
+                },
+                description: "user id to update",
+                required: true
+            },
             {
                 name: "phone",
                 in: "multipart/formdata",
@@ -12,7 +21,6 @@ module.exports = {
                     type: "string"
                 },
                 description: "phone number",
-                required: true
             },
             {
                 name: "firstName",
@@ -21,7 +29,6 @@ module.exports = {
                     type: "string"
                 },
                 description: "First Name",
-                required: true
             },
             {
                 name: "lastName",
@@ -30,18 +37,15 @@ module.exports = {
                     type: "string"
                 },
                 description: "Last Name",
-                required: true
             },
             {
-                name: "braceletId",
-                in: "multipart/formdata",
+                name: "image", // name of param
+                in: "multipart/formdata", // location of param
                 schema: {
-                    type: "string"
+                    type: "file"
                 },
-                description: "bracelet uniqe id",
-                required: true
+                description: "this family member parent id", // short desc.
             },
-
             {
                 name: "allergies",
                 in: "multipart/formdata",
@@ -65,27 +69,7 @@ module.exports = {
                 },
                 description: "An object for the limits",
             },
-
-            {
-                name: "parentId",
-                in: "multipart/formdata",
-                schema: {
-                    type: "string"
-                },
-                description: "this family member parent id",
-                required: true
-            },
-
-            {
-                name: "image",
-                in: "multipart/formdata",
-                schema: {
-                    type: "file"
-                },
-                description: "this family member parent id",
-                required: true
-            },
-        ], // expected params.
+        ],
 
     },
 };

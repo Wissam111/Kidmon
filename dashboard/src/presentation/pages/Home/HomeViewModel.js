@@ -14,7 +14,6 @@ const HomeViewModel = () => {
       const data = await productRepos.getProductsByCategory(
         currentCategory.text
       );
-      console.log(data);
       setProducts(data.products);
     } catch (e) {
       console.log(e);

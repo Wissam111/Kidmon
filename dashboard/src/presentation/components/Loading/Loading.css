@@ -3,7 +3,8 @@
   background-size: cover;
   background-position: center;
   position: absolute;
-  width: 1235px;
+  width: 1217px;
+  margin-left: 17px;
   height: 700px;
   border-radius: 8px;
   z-index: 999999;

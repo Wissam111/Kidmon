@@ -6,19 +6,27 @@ const ProductActionViewModel = () => {
   const [file, setFile] = useState(null);
   const { setLoading } = useLoadingContext();
   const productRepo = ProductRepository();
-  const handleChangeFile = (file) => {
-    setFile(file);
+  const handleChangeFile = (fileList) => {
+    console.log(fileList[0]);
+    setFile(fileList[0]);
   };
 
-  const hanldePublishProduct = async (title, price, category, allergicList) => {
+  const handlePublishProduct = async (title, price, category, allergicList) => {
     setLoading(true);
+    const formData = new FormData();
+    if (file) {
+      formData.append("image", file);
+    }
+
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("category", category);
+    // console.log(allergicList);
+    // formData.append("allergicIngredients", JSON.stringify(allergicList));
+
     try {
-      const data = await productRepo.createProduct(
-        title,
-        price,
-        category,
-        allergicList
-      );
+      const res = await productRepo.createProduct(formData);
+      const data = await res.data;
       console.log(data);
     } catch (error) {
       console.log(error);
@@ -26,7 +34,7 @@ const ProductActionViewModel = () => {
     setLoading(false);
   };
 
-  return { file, handleChangeFile, hanldePublishProduct };
+  return { file, handleChangeFile, handlePublishProduct };
 };
 
 export default ProductActionViewModel;

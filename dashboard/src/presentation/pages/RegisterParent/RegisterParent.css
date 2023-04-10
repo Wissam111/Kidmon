@@ -1,0 +1,39 @@
+.register-page-wrapper {
+  padding: 40px 30px 10px 50px;
+  position: relative;
+}
+
+.register-page-wrapper img {
+  width: 220px;
+  position: absolute;
+  top: 150px;
+  right: 200px;
+}
+.register-header-h1 {
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.61);
+}
+
+.register-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 50px;
+  position: relative;
+  padding: 20px 20px 60px 0;
+}
+
+.register-wrapper button {
+  width: 113px;
+  height: 31px;
+
+  background: #8fa497;
+  border: none;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  position: absolute;
+  left: 130px;
+  bottom: 0px;
+}

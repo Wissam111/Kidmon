@@ -6,6 +6,8 @@ import Home from "./presentation/pages/Home/Home";
 import Settings from "./presentation/pages/Settings/Settings";
 import Products from "./presentation/pages/Products/Products";
 import ProductAction from "./presentation/pages/ProductAction/ProductAction";
+import RegisterParent from "./presentation/pages/RegisterParent/RegisterParent";
+
 import Loading from "./presentation/components/Loading/Loading";
 import { useLoadingContext } from "./hooks/useLoadingContext";
 
@@ -19,8 +21,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/settings" element={<Settings />} />
           <Route path="/product-action" element={<ProductAction />} />
+          <Route path="/register-parent" element={<RegisterParent />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </div>
     </BrowserRouter>

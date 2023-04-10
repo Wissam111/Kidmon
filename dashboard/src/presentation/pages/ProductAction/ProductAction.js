@@ -5,7 +5,7 @@ import ProductActionBox from "../../components/ProductActionBox/ProductActionBox
 import ProductActionViewModel from "./ProductActionViewModel";
 
 const ProductAction = () => {
-  const { file, handleChangeFile, hanldePublishProduct } =
+  const { file, handleChangeFile, handlePublishProduct } =
     ProductActionViewModel();
 
   return (
@@ -22,10 +22,10 @@ const ProductAction = () => {
                 types={fileTypes}
               />
               <p>
-                {file ? `File name: ${file[0].name}` : "no files uploaded yet"}
+                {file ? `File name: ${file.name}` : "no files uploaded yet"}
               </p>
             </div>
-            <ProductActionBox hanldePublishProduct={hanldePublishProduct} />
+            <ProductActionBox handlePublishProduct={handlePublishProduct} />
           </div>
         </div>
       </div>

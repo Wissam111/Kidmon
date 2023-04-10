@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import { FaRegTrashAlt } from "react-icons/fa";
-
+import { BASE_URL_1 } from "../../../context/ApiContext";
 import { tableMaincolumn } from "../../../data/data";
 import "./ProdcutsTable.css";
 
@@ -50,7 +49,9 @@ const ProdcutsTable = ({
             <TableBody>
               {products.map((product) => {
                 let row = createData(
-                  require("../../../assets/icons/coffee-cup.png"),
+                  product.image
+                    ? BASE_URL_1 + `imgs/${product.image}`
+                    : require("../../../assets/icons/help.png"),
                   product.title,
                   product.category,
                   product.price,
@@ -73,7 +74,6 @@ const ProdcutsTable = ({
                               onClick={() => handleDeleteProduct(product)}
                             />
                           ) : (
-                            // <img src={value} className="action-btn" />
                             value
                           )}
                         </TableCell>
@@ -99,72 +99,3 @@ const ProdcutsTable = ({
   );
 };
 export default ProdcutsTable;
-// const tableMaincolumn = [
-//   { id: "img", numeric: true, disablePadding: false, label: "" },
-//   { id: "name", label: "Product Name", minWidth: 170 },
-//   { id: "category", label: "Category", minWidth: 100 },
-//   {
-//     id: "price",
-//     label: "Price",
-//     minWidth: 170,
-//     align: "right",
-//   },
-//   {
-//     id: "sold",
-//     label: "Sold",
-//     minWidth: 170,
-//     align: "right",
-//   },
-//   { id: "action", numeric: true, disablePadding: false, label: "Action" },
-// ];
-
-// const rows = [
-//   createData(
-//     require("../../../assets/icons/coffee-cup.png"),
-//     "Doritos",
-//     "Snack",
-//     12.99,
-//     20,
-//     require("../../../assets/icons/colon.png")
-//   ),
-//   createData(
-//     require("../../../assets/icons/coffee-cup.png"),
-//     "Doritos",
-//     "Snack",
-//     12.99,
-//     20,
-//     require("../../../assets/icons/colon.png")
-//   ),
-//   createData(
-//     require("../../../assets/icons/coffee-cup.png"),
-//     "Doritos",
-//     "Snack",
-//     12.99,
-//     20,
-//     require("../../../assets/icons/colon.png")
-//   ),
-//   createData(
-//     require("../../../assets/icons/coffee-cup.png"),
-//     "Doritos",
-//     "Snack",
-//     12.99,
-//     20,
-//     require("../../../assets/icons/colon.png")
-//   ),
-//   createData(
-//     require("../../../assets/icons/coffee-cup.png"),
-//     "Doritos",
-//     "Snack",
-//     12.99,
-//     20,
-//     require("../../../assets/icons/colon.png")
-//   ),
-//   createData(
-//     require("../../../assets/icons/coffee-cup.png"),
-//     "Doritos",
-//     "Snack",
-//     12.99,
-//     20,
-//     require("../../../assets/icons/colon.png")
-//   ),
-// ];

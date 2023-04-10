@@ -14,7 +14,7 @@ const MenuItemCard = ({ cardImg, text, price }) => {
         alt="menu-item"
       />
       <h4>{text}</h4>
-      <span>{price}</span>
+      <span>{price} P</span>
     </div>
   );
 };

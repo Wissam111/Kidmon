@@ -4,7 +4,7 @@ import { useLoadingContext } from "../../../hooks/useLoadingContext";
 const ProductsViewModel = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+
   const [category, setCategory] = useState("Snack");
   const [numofPages, setNumOfPages] = useState(1);
   const { setLoading } = useLoadingContext();
@@ -13,7 +13,7 @@ const ProductsViewModel = () => {
 
   const getProducts = async () => {
     try {
-      const data = await productRepo.getProducts(category, pageSize, page);
+      const data = await productRepo.getProducts(category, PAGE_SIZE, page);
       setNumOfPages(Math.round(data.count / PAGE_SIZE));
       setProducts(data.products);
     } catch (error) {
@@ -54,7 +54,6 @@ const ProductsViewModel = () => {
   return {
     products,
     page,
-    pageSize,
     numofPages,
     handleChangePage,
     handleSelectCategory,

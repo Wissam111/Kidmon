@@ -12,13 +12,25 @@ export const ApiContextProvider = ({ children }) => {
     contentType = "application/json"
   ) => {
     const customURL = BASE_URL + url;
+    let bbody;
+    if (body) {
+      if (contentType === "multipart/form-data") {
+        console.log("form");
+        bbody = body;
+      } else {
+        bbody = JSON.stringify(body);
+      }
+    } else {
+      bbody = null;
+    }
+
     const result = await fetch(customURL, {
       headers: {
         "Content-Type": contentType,
         Authorization: `Bearer ${authData?.token}`,
       },
       method: method,
-      body: JSON.stringify(body),
+      body: bbody,
     });
     const json = await result.json();
 

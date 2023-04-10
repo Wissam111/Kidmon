@@ -10,6 +10,8 @@
 }
 .products-table-container img {
   width: 30px;
+  height: 30px;
+  object-fit: cover;
 }
 
 .action-btn {

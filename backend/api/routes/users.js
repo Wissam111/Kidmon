@@ -2,7 +2,6 @@ const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
 const { userController } = require('../../controllers')
 const { imageUpload } = require('../middleware/image-file-uploader')
-const path = require('path')
 
 
 const router = Router()
@@ -55,6 +54,24 @@ router.post('/admin',
 
 
 
+router.patch('/',
+  imageUpload('image'),
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      phone: Joi.string().required(),
+      firstName: Joi.string().required(),
+      lastName: Joi.string().required(),
+      allergies: Joi.array().items(Joi.string()),
+      limits: Joi.object().keys({
+        daily: Joi.number().required(),
+        weekly: Joi.number().required(),
+        monthly: Joi.number().required(),
+      }),
+    })
+  }),
+  userController.updateUser)
+
+
 router.get('/:userId',
   celebrate({
     [Segments.PARAMS]: Joi.object().keys({
@@ -62,6 +79,17 @@ router.get('/:userId',
     })
   }),
   userController.getUser)
+
+
+router.get('/',
+  celebrate({
+    [Segments.QUERY]: Joi.object().keys({
+      search: Joi.string(),
+      page: Joi.number(),
+      pageSize: Joi.number(),
+      sort: Joi.string().valid('desc', 'asc'),
+    })
+  }), userController.getUsers)
 
 
 router.get('/bracelet/:barceletId',

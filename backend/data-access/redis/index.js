@@ -18,5 +18,6 @@ const makeDb = async () => {
 const verifyDb = makeVerifyDb({ makeDb })
 
 module.exports = {
-    verifyDb
+    verifyDb,
+    redisMake: makeDb
 }

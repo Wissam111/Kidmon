@@ -1,71 +1,20 @@
 module.exports = {
-    // method of operation
     get: {
-        tags: ["Users"], // operation's tag.
-        description: "Get User", // operation's desc.
-        operationId: "getUser", // unique operation id.
+        tags: ["Users"],
+        description: "Get User", 
+        operationId: "getUser", 
         parameters: [
-
             {
-                name: "userId", // name of param
-                in: "param", // location of param
+                name: "userId", 
+                in: "param", 
                 schema: {
                     type: "string"
                 },
-                description: "user Id", // short desc.
+                description: "user Id", 
                 required: true
             },
-        ], // expected params.
-        // expected responses
-        responses: {
-            // response code
-            200: {
-                description: "Fetch User",
-                content: {
-                    // content-type
-                    "application/json": {
-
-
-                        "schema": {
-                            "type": "object",
-
-                            "properties": {
-                                "message": {
-                                    type: "string",
-                                    description: "message",
-                                    example: "fetch success",
-                                },
-                                "user": {
-                                    $ref: "#/components/schemas/User"
-                                },
-                            }
-                        }
-                    },
-
-
-                },
-            },
-
-
-            404: {
-
-                content: {
-                    "application/json": {
-                        schema: {
-                            "type": "object",
-                            "properties": {
-                                "message": {
-                                    type: "string",
-                                    description: "message",
-                                    example: "User was not found",
-                                }
-                            },
-
-                        }
-                    }
-                }
-            }
-
-        },
+        ], 
+       
+        
     },
 };

@@ -10,6 +10,8 @@
   left: 15px;
   background: rgba(255, 255, 255, 0.85);
   border-radius: 20px 0px 0px 20px;
+  position: relative;
+  align-items: center;
 }
 .navbar-container .userLogo {
   width: 51px;
@@ -25,10 +27,11 @@
   flex-direction: column;
   position: absolute;
   top: 120px;
+  height: 80%;
   /* justify-content: flex-start;
    */
   align-items: center;
-  padding: 9px 10px 0 0;
+  padding: 50px 10px 0 0;
   gap: 2em;
   margin: 0;
 }
@@ -39,11 +42,6 @@
   margin-top: 2px;
 }
 
-.logout-wrapper {
-  position: absolute;
-  bottom: 37px;
-  padding-right: 10px;
-}
 .nav-links li {
   width: 49px;
   height: 55px;
@@ -54,4 +52,18 @@
 }
 .nav-links .active {
   background: #dcf6e6;
+}
+
+.navbar-container img {
+  /* position: absolute;
+  top: 10px;
+  left: 10px; */
+  width: 43px;
+  margin-top: 40px;
+  margin-right: 10px;
+}
+
+.logout-nav-btn {
+  position: absolute;
+  bottom: 0;
 }

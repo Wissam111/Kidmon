@@ -1,20 +1,27 @@
 import React from "react";
+import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
+
 import "./MenuItemCard.css";
 import { BASE_URL_1 } from "../../../context/ApiContext";
-const MenuItemCard = ({ cardImg, text, price }) => {
-  // image
+
+const MenuItemCard = ({ product }) => {
+  const { dispatch } = useCartItemsContext();
+
+  const handleAddtoCart = () => {
+    dispatch({ type: "ADDTOCART", payload: product });
+  };
   return (
-    <div className="menuItemCard-container">
+    <div className="menuItemCard-container" onClick={handleAddtoCart}>
       <img
         src={
-          cardImg
-            ? BASE_URL_1 + `imgs/${cardImg}`
-            : require("../../../assets/icons/file.png")
+          product.image
+            ? BASE_URL_1 + `imgs/${product.image}`
+            : require("../../../assets/icons/help.png")
         }
         alt="menu-item"
       />
-      <h4>{text}</h4>
-      <span>{price} P</span>
+      <h4>{product.title}</h4>
+      <span>{product.price} P</span>
     </div>
   );
 };

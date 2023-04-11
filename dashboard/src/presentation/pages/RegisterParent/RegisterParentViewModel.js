@@ -1,17 +1,21 @@
 import { useState } from "react";
 import ParentRepository from "../../../repository/ParentRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
+import { useAlertContext } from "../../../hooks/useAlertContext";
 
 const RegisterParentViewModel = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const { setLoading } = useLoadingContext();
-
+  const { invokeAlert } = useAlertContext();
   const parentRepository = ParentRepository();
 
   const createParent = async () => {
+    let isSuccess = false;
+    let messg = "";
     setLoading(true);
+
     try {
       const data = await parentRepository.createParent(
         firstName,
@@ -19,11 +23,14 @@ const RegisterParentViewModel = () => {
         phoneNumber
       );
       resetInputs();
+      isSuccess = true;
       console.log(data);
     } catch (error) {
       console.log(error);
+      messg = error?.message;
     }
     setLoading(false);
+    invokeAlert(isSuccess, messg, "Parent");
   };
 
   const resetInputs = () => {

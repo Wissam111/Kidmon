@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import ProductRepository from "../../../repository/ProductRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
+import { useAlertContext } from "../../../hooks/useAlertContext";
 const ProductsViewModel = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-
+  const { invokeAlert } = useAlertContext();
   const [category, setCategory] = useState("Snack");
+  const [refreshKey, setRefreshKey] = useState(0);
   const [numofPages, setNumOfPages] = useState(1);
   const { setLoading } = useLoadingContext();
   const PAGE_SIZE = 10;
@@ -22,15 +24,22 @@ const ProductsViewModel = () => {
   };
 
   const handleDeleteProduct = async (product) => {
+    if (!window.confirm("Are you sure you want to delete this product?")) {
+      return;
+    }
+    let isSuccess = false;
+    let messg = "";
     setLoading(true);
-
     try {
       const data = await productRepo.deleteProdcut(product.id);
-      console.log(data);
+      refresh();
+      isSuccess = true;
     } catch (error) {
-      console.log(error);
+      console.log(error?.error?.message);
+      messg = error?.error?.message;
     }
     setLoading(false);
+    invokeAlert(isSuccess, messg, "Product");
   };
 
   const handleChangePage = (event, newPage) => {
@@ -41,6 +50,9 @@ const ProductsViewModel = () => {
     setCategory(category);
   };
 
+  const refresh = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
   useEffect(() => {
     const ProudctsPageInit = async () => {
       setLoading(true);
@@ -49,7 +61,7 @@ const ProductsViewModel = () => {
     };
 
     ProudctsPageInit();
-  }, [page, category]);
+  }, [page, category, refreshKey]);
 
   return {
     products,

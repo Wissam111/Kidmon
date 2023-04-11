@@ -87,7 +87,7 @@ const ProdcutsTable = ({
         </TableContainer>
         <div className="pageination-container">
           <Pagination
-            count={10}
+            count={numofPages}
             variant="outlined"
             color="primary"
             onChange={handleChangePage}

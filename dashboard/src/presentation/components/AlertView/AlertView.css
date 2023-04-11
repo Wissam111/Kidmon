@@ -1,0 +1,18 @@
+.alert-view-container {
+  padding: 0;
+  min-width: 20em;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+}
+
+.close-alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 5px;
+  cursor: pointer;
+}

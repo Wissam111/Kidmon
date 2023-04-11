@@ -1,0 +1,21 @@
+.action-input-wrapper input {
+  box-sizing: border-box;
+
+  width: 367px;
+  height: 39px;
+
+  background: #ffffff;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 10px;
+  /* outline: none; */
+}
+.action-input-wrapper h4 {
+  margin: 0;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 20px;
+
+  color: rgba(0, 0, 0, 0.61);
+}

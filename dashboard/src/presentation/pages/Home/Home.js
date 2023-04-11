@@ -4,8 +4,6 @@ import MenuItemCard from "../../components/MenuItemCard/MenuItemCard";
 import CartMenu from "../../components/CartMenu/CartMenu";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Search from "../../components/Search/Search";
-import { BASE_URL } from "../../../context/ApiContext";
-import { ProdcutsTable } from "../../components/ProdcutsTable/ProdcutsTable";
 
 import HomeViewModel from "./HomeViewModel";
 
@@ -37,13 +35,7 @@ const Home = () => {
 
           <div className="menu-item-cards">
             {products.map((product) => {
-              return (
-                <MenuItemCard
-                  cardImg={product.image}
-                  text={product.title}
-                  price={product.price}
-                />
-              );
+              return <MenuItemCard product={product} />;
             })}
           </div>
         </div>

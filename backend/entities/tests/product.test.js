@@ -1,13 +1,13 @@
-const { makeProduct } = require(".");
-const { Allergies } = require("./family-member-user");
-const { PRODUCT_CATEGORIES } = require("./product");
+const { makeProduct } = require("../");
+const { Allergies } = require("../family-member-user");
+const { PRODUCT_CATEGORIES } = require("../product");
 
 
 
 
-describe('making product', () => {
+describe('product:', () => {
 
-    test('should make product', () => {
+    it('should make product', () => {
         const product = makeProduct({
             title: 'XL',
             price: 100,
@@ -27,7 +27,7 @@ describe('making product', () => {
 
 
 
-    test('should throw title is required', () => {
+    it('should throw title is required', () => {
         expect(
             () => {
                 makeProduct({
@@ -39,7 +39,7 @@ describe('making product', () => {
     })
 
 
-    test('should throw price error', () => {
+    it('should throw price error', () => {
         expect(
             () => {
                 makeProduct({
@@ -73,7 +73,7 @@ describe('making product', () => {
     })
 
 
-    test('should throw wrong category', () => {
+    it('should throw wrong category', () => {
         expect(
             () => {
                 makeProduct({
@@ -85,7 +85,7 @@ describe('making product', () => {
             }).toThrow('the category aaa is invalid')
     })
 
-    test('should throw wrong category', () => {
+    it('should throw wrong category', () => {
         expect(
             () => {
                 makeProduct({

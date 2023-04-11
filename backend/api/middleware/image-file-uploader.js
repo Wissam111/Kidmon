@@ -13,7 +13,7 @@ const makeMulterStorage = ({ dest }) => {
             cb(null, dest)
         },
         filename: (req, file, cb) => {
-            file.rawFileName = `${createId()}-${new Date().getTime()}`
+            file.rawFileName = `${createId()}-${new Date().toISOString().replace(/:/g, '-')}`
             file.extname = path.extname(file.originalname)
             cb(null, `${file.rawFileName}${path.extname(file.originalname)}`)
         },

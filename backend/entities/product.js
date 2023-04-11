@@ -65,7 +65,7 @@ const buildMakeProduct = (ID) => {
             price,
             image,
             category,
-            allergicIngredients,
+            allergicIngredients: [...new Set(allergicIngredients)],
             createdAt,
             updatedAt
         })

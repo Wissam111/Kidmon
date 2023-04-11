@@ -1,9 +1,9 @@
 import { FileUploader } from "react-drag-drop-files";
 import { fileTypes } from "../../../data/data";
-import "./ProductAction.css";
 import ProductActionBox from "../../components/ProductActionBox/ProductActionBox";
 import ProductActionViewModel from "./ProductActionViewModel";
 
+import "./ProductAction.css";
 const ProductAction = () => {
   const { file, handleChangeFile, handlePublishProduct } =
     ProductActionViewModel();

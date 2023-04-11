@@ -18,7 +18,6 @@ export const categories = [
   },
 ];
 export const categoriesOptions = [
-  { value: "", label: "Category" },
   { value: "Snack", label: "Snack" },
   { value: "Cold", label: "Cold" },
   { value: "Hot", label: "Hot" },

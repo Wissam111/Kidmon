@@ -31,6 +31,12 @@ const ProductActionBox = ({ handlePublishProduct }) => {
 
     setAllergiesList(tempList);
   };
+  const resetInputs = () => {
+    setProductName("");
+    setProductCategory("");
+    setProductPrice("");
+    setAllergiesList([]);
+  };
 
   return (
     <div className="product-action-cta">
@@ -43,8 +49,10 @@ const ProductActionBox = ({ handlePublishProduct }) => {
         <Select
           options={categoriesOptions}
           defaultValue={defaultOption}
+          value={productCategory}
           onChange={(option) => {
-            setProductCategory(option.value);
+            console.log(option);
+            setProductCategory(option);
           }}
           menuPortalTarget={document.body}
           styles={{ menuPortal: (base) => ({ ...base, zIndex: 9999 }) }}
@@ -72,8 +80,9 @@ const ProductActionBox = ({ handlePublishProduct }) => {
           handlePublishProduct(
             productName,
             productPrice,
-            productCategory,
-            allergiesList
+            productCategory.value,
+            allergiesList,
+            resetInputs
           )
         }
       >

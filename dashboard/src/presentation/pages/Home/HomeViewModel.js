@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import ProductRepository from "../../../repository/ProductRepository";
 import { categories } from "../../../data/data";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
+import { useAlertContext } from "../../../hooks/useAlertContext";
 
 const HomeViewModel = () => {
   const productRepos = ProductRepository();
   const [products, setProducts] = useState([]);
   const { setLoading } = useLoadingContext();
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
+  const { dispatch } = useAlertContext();
 
   const getProductsByCategory = async () => {
     try {

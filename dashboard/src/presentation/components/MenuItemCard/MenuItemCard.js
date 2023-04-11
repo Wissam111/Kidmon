@@ -16,7 +16,7 @@ const MenuItemCard = ({ product }) => {
         src={
           product.image
             ? BASE_URL_1 + `imgs/${product.image}`
-            : require("../../../assets/icons/file.png")
+            : require("../../../assets/icons/help.png")
         }
         alt="menu-item"
       />

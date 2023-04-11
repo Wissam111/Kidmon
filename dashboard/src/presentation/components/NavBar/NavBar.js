@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 import "./NavBar.css";
 
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
-import {
-  IoSettingsOutline,
-  IoBagRemoveOutline,
-  IoPersonAddOutline,
-} from "react-icons/io5";
+import { BiLogOut } from "react-icons/bi";
+import { IoBagRemoveOutline, IoPersonAddOutline } from "react-icons/io5";
 
 const NavBar = () => {
   const [activeNav, setActiveNav] = useState(0);
+
   return (
     <div className="navbar-container">
       <img src={require("../../../assets/imgs/family2.png")} />
@@ -38,13 +36,14 @@ const NavBar = () => {
             <IoPersonAddOutline size={27} color="gray" />
           </Link>
         </li>
-        <li className={activeNav === 3 ? "active" : null}>
+
+        <li className={"logout-nav-btn"}>
           <Link
-            to="/settings"
+            to="/logout"
             className="nav-link"
             onClick={() => setActiveNav(3)}
           >
-            <IoSettingsOutline size={27} color="gray" />
+            <BiLogOut size={27} color="gray" />
           </Link>
         </li>
       </ul>

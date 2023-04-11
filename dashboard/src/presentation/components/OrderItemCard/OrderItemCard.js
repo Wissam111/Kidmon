@@ -15,7 +15,7 @@ const OrderItemCard = ({ product, cardImg, total, amount, text }) => {
         src={
           cardImg
             ? BASE_URL_1 + `imgs/${cardImg}`
-            : require("../../../assets/icons/file.png")
+            : require("../../../assets/icons/help.png")
         }
         alt="order-item"
       />

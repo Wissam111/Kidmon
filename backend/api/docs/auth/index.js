@@ -5,7 +5,7 @@ const refreshToken = require('./refresh-token');
 
 
 module.exports = {
-    '/api/send-auth-verification': {
+    '/auth/send-auth-verification': {
         ...sendAuthVerification
     },
 
@@ -13,7 +13,7 @@ module.exports = {
     //     ...verifyAndSignup
     // },
 
-    '/api/login-verify-phone': {
+    '/auth/login-verify-phone': {
         ...verifyAndLogin
     },
 

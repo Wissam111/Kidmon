@@ -1,4 +1,4 @@
-const { makeVerify } = require(".")
+const { makeVerify } = require("../")
 
 
 describe('makeVerify',()=>{

@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import { I18nManager, StyleSheet, Text, View } from 'react-native';
+import { I18nManager, View } from 'react-native';
+import Navigation from './src/presentation/Navigation';
 
 I18nManager.allowRTL(true)
 I18nManager.forceRTL()
@@ -7,18 +8,10 @@ I18nManager.forceRTL()
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1 }}>
+      <StatusBar barStyle="light-content" />
+      <Navigation />
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

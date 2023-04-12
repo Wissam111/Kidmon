@@ -24,7 +24,7 @@ const makeVerifyDb = ({ makeDb }) => {
         return JSON.parse(await client.get(id))
     }
 
-    // counts number of verfies requrest for this phone number
+    // counts of verfies requested for this phone number
     async function count({ phone }) {
         const client = await makeDb()
         return await client.get(phone) || 0

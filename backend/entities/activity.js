@@ -16,9 +16,9 @@ const buildMakeActivity = (ID) => {
         updatedAt = new Date()
     }) {
 
-
-
-
+        if(!ActivityTypesEnum.includes(type)){
+            throw new ValidationError('activity type is not valid')
+        }
 
         return Object.freeze({
             id,

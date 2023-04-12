@@ -5,5 +5,6 @@ function RFIDReader() {
     </div>
   );
 }
+8;
 
 export default RFIDReader;

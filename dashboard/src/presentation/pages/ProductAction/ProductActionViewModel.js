@@ -6,7 +6,7 @@ const ProductActionViewModel = () => {
   const [file, setFile] = useState(null);
   const { setLoading } = useLoadingContext();
   const productRepo = ProductRepository();
-  const { dispatch, invokeAlert } = useAlertContext();
+  const { invokeAlert } = useAlertContext();
   const handleChangeFile = (fileList) => {
     setFile(fileList[0]);
   };
@@ -43,7 +43,7 @@ const ProductActionViewModel = () => {
     setLoading(false);
     resetInputs();
     setFile(null);
-    invokeAlert(isSuccess, messg, "Product");
+    invokeAlert(isSuccess, messg);
   };
 
   return {

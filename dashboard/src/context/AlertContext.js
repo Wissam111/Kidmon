@@ -18,19 +18,22 @@ export const AlertContextProvider = ({ children }) => {
     alertData: null,
   });
 
-  const invokeAlert = (isSuccess, messg, model) => {
+  const invokeAlert = (isSuccess, messg) => {
+    if (isSuccess == null) {
+      return;
+    }
+
     if (isSuccess) {
       dispatch({
         type: "SET_ALERT",
-        payload: { status: "success", text: `${model} Created Successfully!` },
+        payload: { status: "success", text: `Success!` },
       });
     } else {
       dispatch({
         type: "SET_ALERT",
         payload: {
           status: "error",
-          text:
-            `There is an error accord while creating this ${model} - ` + messg,
+          text: `There is an error accord - ` + messg,
         },
       });
     }

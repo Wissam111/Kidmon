@@ -30,7 +30,7 @@ const RegisterParentViewModel = () => {
       messg = error?.message;
     }
     setLoading(false);
-    invokeAlert(isSuccess, messg, "Parent");
+    invokeAlert(isSuccess, messg);
   };
 
   const resetInputs = () => {

@@ -6,7 +6,7 @@ import EntryViewModel from "./EntryViewModel";
 import "./Entry.css";
 
 const Entry = () => {
-  const { handleLogin, handleVerfication, handleShowOTP, showOTP } =
+  const { handleLogin, handleVerfication, handleShowOTP, showOTP, phone } =
     EntryViewModel();
   return (
     <div className="page-container">
@@ -18,6 +18,7 @@ const Entry = () => {
             <OTP
               handleVerfication={handleVerfication}
               handleShowOTP={handleShowOTP}
+              phone={phone}
             />
           )}
         </div>

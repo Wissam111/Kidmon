@@ -3,6 +3,7 @@ import AuthRepository from "../../../repository/AuthRepository";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
+import { useAlertContext } from "../../../hooks/useAlertContext";
 
 const EntryViewModel = () => {
   const authRepository = AuthRepository();
@@ -10,34 +11,45 @@ const EntryViewModel = () => {
   const [verify, setVerify] = useState({});
   const { dispatch } = useAuthContext();
   const { setLoading } = useLoadingContext();
+  const { invokeAlert } = useAlertContext();
+  const [phone, setPhone] = useState("");
 
   const navigate = useNavigate();
 
   const handleLogin = async (phone) => {
+    let isSuccess = null;
+    let messg = "";
     setLoading(true);
     try {
       const data = await authRepository.login(phone);
-      console.log(data);
-      setVerify({ verifyId: data.verifyId, phone, code: "" });
+      setVerify({ verifyId: data.verifyId, code: "" });
       setShowOTP(true);
+      setPhone(phone);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+      messg = error?.error.message;
+      isSuccess = false;
     }
     setLoading(false);
+    invokeAlert(isSuccess, messg);
   };
-  const handleVerfication = async (event, optCode) => {
+  const handleVerfication = async (optCode) => {
+    let isSuccess = null;
+    let messg = "";
     setLoading(true);
     verify.code = optCode;
     try {
       const data = await authRepository.verifyLogin(verify);
-      console.log(data);
-      localStorage.setItem("authData", JSON.stringify(data.authData));
-      dispatch({ type: "LOGIN", payload: data.authData });
-      navigate("/home", { replace: true });
+      localStorage.setItem("authData", JSON.stringify(data));
+      dispatch({ type: "LOGIN", payload: data });
+      navigate("/", { replace: true });
     } catch (error) {
       console.log(error);
+      messg = error?.error.message;
+      isSuccess = false;
     }
     setLoading(false);
+    invokeAlert(isSuccess, messg);
   };
 
   const handleShowOTP = () => {
@@ -51,7 +63,7 @@ const EntryViewModel = () => {
     }
   }, []);
 
-  return { handleLogin, handleVerfication, handleShowOTP, showOTP };
+  return { handleLogin, handleVerfication, handleShowOTP, showOTP, phone };
 };
 
 export default EntryViewModel;

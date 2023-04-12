@@ -39,7 +39,7 @@ const ProductsViewModel = () => {
       messg = error?.error?.message;
     }
     setLoading(false);
-    invokeAlert(isSuccess, messg, "Product");
+    invokeAlert(isSuccess, messg);
   };
 
   const handleChangePage = (event, newPage) => {

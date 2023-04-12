@@ -2,7 +2,7 @@ import { useState } from "react";
 import OTPInput from "react-otp-input";
 import "./OTP.css";
 
-const OTP = ({ handleVerfication, handleShowOTP }) => {
+const OTP = ({ handleVerfication, handleShowOTP, phone }) => {
   const [otp, setOtp] = useState("");
   return (
     <div className="entry-otp-container">
@@ -12,7 +12,7 @@ const OTP = ({ handleVerfication, handleShowOTP }) => {
       />
       <h2>Confirm OTP</h2>
       <p>
-        Enter the OTP send to <span>0547973441</span>
+        Enter the OTP send to <span>{phone}</span>
       </p>
       <div className="otp">
         <OTPInput

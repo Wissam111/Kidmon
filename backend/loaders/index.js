@@ -6,6 +6,6 @@ module.exports = async ({ expressApp }) => {
   console.log("express framework loaded");
 
   // connect to the databases
-  // await database()
+  await database();
   console.log("databases connected");
 };

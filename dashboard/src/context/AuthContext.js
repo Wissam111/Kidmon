@@ -5,7 +5,6 @@ export const AuthContext = createContext();
 export const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      console.log(action.payload);
       return { authData: action.payload };
     case "SIGNUP":
       return { authData: action.payload };
@@ -19,12 +18,12 @@ export const AuthContextProvider = ({ children }) => {
     authData: null,
   });
 
-  // useEffect(() => {
-  //   const authData = JSON.parse(localStorage.getItem("authData"));
-  //   if (authData) {
-  //     dispatch({ type: "LOGIN", payload: authData });
-  //   }
-  // }, []);
+  useEffect(() => {
+    const authData = JSON.parse(localStorage.getItem("authData"));
+    if (authData) {
+      dispatch({ type: "LOGIN", payload: authData });
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>

@@ -28,8 +28,8 @@ function App() {
         {loading && <Loading />}
         {authData && <NavBar />}
         <Routes>
-          <Route path="/" element={<Entry />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/entry" element={<Entry />} />
+          <Route path="/" element={<Home />} />
           <Route path="/products" element={<Products />} />
           <Route path="/product-action" element={<ProductAction />} />
           <Route path="/register-parent" element={<RegisterParent />} />

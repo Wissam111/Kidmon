@@ -9,6 +9,7 @@ import RegisterParent from "./presentation/pages/RegisterParent/RegisterParent";
 import Entry from "./presentation/pages/Entry/Entry";
 import Loading from "./presentation/components/Loading/Loading";
 import AlertView from "./presentation/components/AlertView/AlertView";
+import ProtectedRoute from "./presentation/components/ProtectedRoute";
 
 import { useLoadingContext } from "./hooks/useLoadingContext";
 import { useAlertContext } from "./hooks/useAlertContext";
@@ -18,7 +19,7 @@ function App() {
   const { loading } = useLoadingContext();
   const { alertData } = useAlertContext();
   const { authData } = useAuthContext();
-
+  console.log(authData);
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -28,11 +29,19 @@ function App() {
         {loading && <Loading />}
         {authData && <NavBar />}
         <Routes>
+          <Route exact path="/" element={<ProtectedRoute />}>
+            <Route exact path="/" element={<Home />} />
+          </Route>
+          <Route exact path="/products" element={<ProtectedRoute />}>
+            <Route exact path="/products" element={<Products />} />
+          </Route>
+          <Route exact path="/product-action" element={<ProtectedRoute />}>
+            <Route exact path="/product-action" element={<ProductAction />} />
+          </Route>
+          <Route exact path="/register-parent" element={<ProtectedRoute />}>
+            <Route exact path="/register-parent" element={<RegisterParent />} />
+          </Route>
           <Route path="/entry" element={<Entry />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/product-action" element={<ProductAction />} />
-          <Route path="/register-parent" element={<RegisterParent />} />
         </Routes>
       </div>
     </BrowserRouter>

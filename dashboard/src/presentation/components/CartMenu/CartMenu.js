@@ -3,11 +3,10 @@ import "./CartMenu.css";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 import OrderItemCard from "../OrderItemCard/OrderItemCard";
 
-const CartMenu = () => {
+const CartMenu = ({ handleShowScan }) => {
   const { cartItems, totalCartItems } = useCartItemsContext();
   const [groupedItems, setGroupedItems] = useState({});
   const cartTotal = totalCartItems();
-  // console.log(cartItems);
   useEffect(() => {
     var results = cartItems.reduce(function (results, item) {
       (results[item.id] = results[item.id] || []).push(item);
@@ -31,7 +30,8 @@ const CartMenu = () => {
           />
         ))}
       </div>
-      {cartItems.length > 0 && <button>Charge {cartTotal} P</button>}
+      <button onClick={handleShowScan}>Scan</button>
+      {/* {cartItems.length > 0 && <button>Charge {cartTotal} P</button>} */}
     </div>
   );
 };

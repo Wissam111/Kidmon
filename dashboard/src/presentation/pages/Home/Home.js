@@ -1,14 +1,21 @@
 import "./Home.css";
-// import { BsSearch } from "react-icons/bs";
 import MenuItemCard from "../../components/MenuItemCard/MenuItemCard";
 import CartMenu from "../../components/CartMenu/CartMenu";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Search from "../../components/Search/Search";
+import ScanCard from "../../components/ScanCard/ScanCard";
+
 import HomeViewModel from "./HomeViewModel";
 
 const Home = () => {
-  const { products, categories, currentCategory, handleSelectCategory } =
-    HomeViewModel();
+  const {
+    products,
+    categories,
+    currentCategory,
+    handleSelectCategory,
+    showScan,
+    handleShowScan,
+  } = HomeViewModel();
 
   return (
     <div className="page-container">
@@ -18,7 +25,6 @@ const Home = () => {
             <h1>
               Menu <span>Category</span>{" "}
             </h1>
-
             <Search />
           </div>
           <div className="category-cards-container">
@@ -32,14 +38,14 @@ const Home = () => {
               );
             })}
           </div>
-
           <div className="menu-item-cards">
             {products.map((product) => {
               return <MenuItemCard product={product} />;
             })}
           </div>
         </div>
-        <CartMenu />
+        <CartMenu handleShowScan={handleShowScan} />
+        {showScan && <ScanCard handleCloseScan={handleShowScan} />}
       </div>
     </div>
   );

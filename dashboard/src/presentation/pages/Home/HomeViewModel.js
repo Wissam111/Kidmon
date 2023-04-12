@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ProductRepository from "../../../repository/ProductRepository";
 import { categories } from "../../../data/data";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
-import { useAlertContext } from "../../../hooks/useAlertContext";
 
 const HomeViewModel = () => {
   const productRepos = ProductRepository();
   const [products, setProducts] = useState([]);
   const { setLoading } = useLoadingContext();
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
-  const { dispatch } = useAlertContext();
+  const [showScan, setShowScan] = useState(false);
 
   const getProductsByCategory = async () => {
     try {
@@ -20,6 +19,10 @@ const HomeViewModel = () => {
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const handleShowScan = () => {
+    setShowScan(!showScan);
   };
 
   const handleSelectCategory = (category) => {
@@ -35,7 +38,14 @@ const HomeViewModel = () => {
     HomePageInit();
   }, [currentCategory]);
 
-  return { products, categories, currentCategory, handleSelectCategory };
+  return {
+    products,
+    categories,
+    currentCategory,
+    handleSelectCategory,
+    showScan,
+    handleShowScan,
+  };
 };
 
 export default HomeViewModel;

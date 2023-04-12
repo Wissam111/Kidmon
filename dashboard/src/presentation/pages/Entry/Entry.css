@@ -1,0 +1,17 @@
+.entry-wrapper {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+}
+
+.entry-img-background {
+  width: 55%;
+  height: 100%;
+
+  border-radius: 0px 20px 20px 0px;
+  background-image: url("../../../assets/imgs/entry2.jpg");
+  background-size: cover;
+  background-position: center;
+}

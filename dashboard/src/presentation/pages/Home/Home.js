@@ -4,7 +4,6 @@ import MenuItemCard from "../../components/MenuItemCard/MenuItemCard";
 import CartMenu from "../../components/CartMenu/CartMenu";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Search from "../../components/Search/Search";
-
 import HomeViewModel from "./HomeViewModel";
 
 const Home = () => {
@@ -19,6 +18,7 @@ const Home = () => {
             <h1>
               Menu <span>Category</span>{" "}
             </h1>
+
             <Search />
           </div>
           <div className="category-cards-container">

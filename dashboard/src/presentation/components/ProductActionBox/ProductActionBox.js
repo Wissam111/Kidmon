@@ -80,7 +80,7 @@ const ProductActionBox = ({ handlePublishProduct }) => {
           handlePublishProduct(
             productName,
             productPrice,
-            productCategory.value,
+            productCategory?.value,
             allergiesList,
             resetInputs
           )
@@ -91,19 +91,5 @@ const ProductActionBox = ({ handlePublishProduct }) => {
     </div>
   );
 };
-
-// const ActionInput = ({ text, type, value, handleChange }) => {
-//   return (
-//     <div className="action-input-wrapper">
-//       <h4>{text}</h4>
-//       <input
-//         type="text"
-//         value={value}
-//         pattern={type == "numbers" ? `[0-9]*` : ""}
-//         onChange={handleChange}
-//       />
-//     </div>
-//   );
-// };
 
 export default ProductActionBox;

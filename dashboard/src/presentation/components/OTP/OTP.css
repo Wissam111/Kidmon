@@ -1,0 +1,70 @@
+.entry-otp-container {
+  width: 381px;
+  height: 347px;
+  background: #ffffff;
+  box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px 15px 15px;
+  align-items: center;
+  gap: 5px;
+  margin: 50px;
+  position: relative;
+}
+.otp {
+  margin-top: 32px;
+}
+
+.otp-user-img {
+  width: 52px;
+  height: 52.45px;
+}
+.entry-otp-container h2 {
+  margin: 0;
+
+  font-style: normal;
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 48px;
+}
+.entry-otp-container p {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.42);
+}
+.entry-otp-container p span {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  /* identical to box height */
+  color: #000000;
+}
+
+.send-verf-btn {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transform: rotate(-180deg);
+  margin-top: 40px;
+}
+
+.resend-btn {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 21px;
+  /* identical to box height */
+  position: absolute;
+  color: rgba(59, 82, 70, 0.6);
+  right: 10px;
+  bottom: 30px;
+  border-bottom: 1px solid gray;
+  cursor: pointer;
+}
+
+.resend-btn:hover {
+  color: black;
+}

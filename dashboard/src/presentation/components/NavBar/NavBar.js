@@ -14,7 +14,7 @@ const NavBar = () => {
       <img src={require("../../../assets/imgs/family2.png")} />
       <ul className="nav-links">
         <li className={activeNav === 0 ? "active" : null}>
-          <Link to="/" className="nav-link" onClick={() => setActiveNav(0)}>
+          <Link to="/home" className="nav-link" onClick={() => setActiveNav(0)}>
             <HiOutlineBuildingStorefront size={27} color="gray" />
           </Link>
         </li>
@@ -38,11 +38,7 @@ const NavBar = () => {
         </li>
 
         <li className={"logout-nav-btn"}>
-          <Link
-            to="/logout"
-            className="nav-link"
-            onClick={() => setActiveNav(3)}
-          >
+          <Link to="/" className="nav-link" onClick={() => setActiveNav(3)}>
             <BiLogOut size={27} color="gray" />
           </Link>
         </li>

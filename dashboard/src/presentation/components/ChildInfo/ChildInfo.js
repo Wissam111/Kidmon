@@ -7,7 +7,7 @@ import AlertTitle from "@mui/material/AlertTitle";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 import "./ChildInfo.css";
 
-const ChildInfo = ({ handleCloseChildInfo, child }) => {
+const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
   const { cartItems, productsTotal } = useCartItemsContext();
 
   const [allegicProducts, setAllegicProducts] = useState({});
@@ -89,7 +89,10 @@ const ChildInfo = ({ handleCloseChildInfo, child }) => {
           ))}
         </div>
       </div>
-      <button className="confirm-btn">
+      <button
+        className="confirm-btn"
+        onClick={() => makePurchase(noneAllegicProducts)}
+      >
         Charge {productsTotal(noneAllegicProducts)} P
       </button>
     </div>

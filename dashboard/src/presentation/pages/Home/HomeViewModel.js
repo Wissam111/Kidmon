@@ -12,7 +12,6 @@ const HomeViewModel = () => {
   const { setLoading } = useLoadingContext();
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [showScan, setShowScan] = useState(false);
-  const [showChildInfo, setShowChildInfo] = useState(false);
   const [currentChild, setCurrentChild] = useState(null);
   const { invokeAlert } = useAlertContext();
   const productRepos = ProductRepository();
@@ -29,6 +28,22 @@ const HomeViewModel = () => {
       console.log(e);
     }
   };
+  const makePurchase = async (noneAllegicProducts) => {
+    let products = groupProducts(noneAllegicProducts);
+    let isSuccess = false;
+    let messg = "Purchase was successful";
+    setLoading(true);
+    try {
+      const data = await userRepository.makePurchase(currentChild.id, products);
+      isSuccess = true;
+    } catch (error) {
+      console.log(error);
+      messg = error?.error.message;
+    }
+    setLoading(false);
+    invokeAlert(isSuccess, messg);
+    handleCloseChildInfo();
+  };
 
   const scanChild = async (rfid) => {
     let isSuccess = null;
@@ -37,8 +52,6 @@ const HomeViewModel = () => {
     try {
       const data = await userRepository.getUserByRFID(rfid);
       setCurrentChild(data.user);
-
-      console.log(data);
     } catch (error) {
       console.log(error);
       messg = error?.error.message;
@@ -49,12 +62,24 @@ const HomeViewModel = () => {
     invokeAlert(isSuccess, messg);
   };
 
+  const groupProducts = (products) => {
+    const result = products.reduce((acc, product) => {
+      const existingProduct = acc.find((p) => p.id === product.id);
+      if (existingProduct) {
+        existingProduct.amount += 1;
+      } else {
+        acc.push({ id: product.id, amount: 1 });
+      }
+      return acc;
+    }, []);
+    return result;
+  };
+
   const handleShowScan = () => {
     setShowScan(!showScan);
   };
   const handleCloseChildInfo = () => {
     setCurrentChild(null);
-    setShowChildInfo(!showChildInfo);
   };
 
   const handleSelectCategory = (category) => {
@@ -76,11 +101,11 @@ const HomeViewModel = () => {
     currentCategory,
     handleSelectCategory,
     showScan,
-    showChildInfo,
     handleShowScan,
     handleCloseChildInfo,
     scanChild,
     currentChild,
+    makePurchase,
   };
 };
 

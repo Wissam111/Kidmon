@@ -14,11 +14,11 @@ const Home = () => {
     currentCategory,
     handleSelectCategory,
     showScan,
-    showChildInfo,
     handleShowScan,
     handleCloseChildInfo,
     scanChild,
     currentChild,
+    makePurchase,
   } = HomeViewModel();
 
   return (
@@ -53,6 +53,7 @@ const Home = () => {
           <ChildInfo
             handleCloseChildInfo={handleCloseChildInfo}
             child={currentChild}
+            makePurchase={makePurchase}
           />
         )}
         {showScan && (

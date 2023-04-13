@@ -9,8 +9,15 @@ const UserRepository = () => {
     const data = await apiCall(`users/bracelet/${braceletId}`);
     return data;
   };
+  const makePurchase = async (userId, items) => {
+    const data = await apiCall(`activities/purchase`, "POST", {
+      userId,
+      items,
+    });
+    return data;
+  };
 
-  return { getUserByRFID };
+  return { getUserByRFID, makePurchase };
 };
 
 export default UserRepository;

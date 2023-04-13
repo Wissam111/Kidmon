@@ -1,0 +1,98 @@
+.child-info-container {
+  position: absolute;
+  z-index: 99999;
+  width: 90%;
+  height: 90%;
+  background: #ffffff;
+  box-shadow: 7px 7px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  top: 50%;
+  left: 47%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 30px 25px 10px 25px;
+}
+
+.child-info-col1 .child-col1-row1 img {
+  width: 121px;
+  height: 121px;
+
+  border-radius: 50%;
+}
+.child-info-col1 .child-col1-row1 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 3px;
+}
+.child-info-col1 .child-col1-row1 h4 {
+  font-weight: 500;
+  font-size: 21px;
+  color: #000000;
+  padding: 0;
+  margin: 0;
+}
+.child-info-col1 .child-col1-row1 p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.child-info-col1 .child-col1-row1 p span {
+  font-weight: 500;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.child-info-col1 .child-col1-row2 h5 {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+}
+.child-info-col1 .child-col1-row2 {
+  width: 90%;
+}
+
+.child-allergies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.child-order-col2 {
+  padding: 4px;
+}
+.child-order-col2 .child-order-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 60%;
+}
+.child-order-col2 h4 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.child-alert-container {
+  margin: 20px 0 10px 0;
+}
+
+.child-info-container button {
+  right: 50px;
+  bottom: 20px;
+  font-size: 17px;
+}
+
+.child-order-container h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.82);
+}

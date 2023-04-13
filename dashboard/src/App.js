@@ -19,7 +19,6 @@ function App() {
   const { loading } = useLoadingContext();
   const { alertData } = useAlertContext();
   const { authData } = useAuthContext();
-  console.log(authData);
   return (
     <BrowserRouter>
       <div className="app-wrapper">

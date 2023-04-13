@@ -31,3 +31,21 @@
   line-height: 18px;
   color: rgba(0, 0, 0, 0.44);
 }
+
+.orderItem-allergic:before {
+  content: "";
+  background: black;
+  background-size: cover;
+  position: absolute;
+  opacity: 0.4;
+  inset: 0;
+  border-radius: 6px;
+  z-index: 99999;
+}
+
+.order-alert-container {
+  position: absolute;
+  z-index: 99999;
+  width: 400px;
+  left: 0;
+}

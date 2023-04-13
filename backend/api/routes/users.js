@@ -1,27 +1,26 @@
-const { Router } = require('express')
-const { celebrate, Joi, Segments } = require('celebrate')
-const { userController } = require('../../controllers')
-const { imageUpload } = require('../middleware/image-file-uploader')
+const { Router } = require("express");
+const { celebrate, Joi, Segments } = require("celebrate");
+const { userController } = require("../../controllers");
+const { imageUpload } = require("../middleware/image-file-uploader");
 
+const router = Router();
 
-const router = Router()
-
-
-router.post('/parent',
-  imageUpload('image'),
+router.post(
+  "/parent",
+  imageUpload("image"),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       phone: Joi.string().required(),
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
-    })
+    }),
   }),
-  userController.createParentUser)
+  userController.createParentUser
+);
 
-
-
-router.post('/family-member',
-  imageUpload('image'),
+router.post(
+  "/family-member",
+  imageUpload("image"),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       phone: Joi.string().required(),
@@ -35,27 +34,27 @@ router.post('/family-member',
         weekly: Joi.number().required(),
         monthly: Joi.number().required(),
       }),
-    })
+    }),
   }),
-  userController.createFamilyMemberUser)
+  userController.createFamilyMemberUser
+);
 
-
-
-router.post('/admin',
-  imageUpload('image'),
+router.post(
+  "/admin",
+  imageUpload("image"),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       phone: Joi.string().required(),
       firstName: Joi.string().required(),
       lastName: Joi.string().required(),
-    })
+    }),
   }),
-  userController.createAdminUser)
+  userController.createAdminUser
+);
 
-
-
-router.patch('/',
-  imageUpload('image'),
+router.patch(
+  "/",
+  imageUpload("image"),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
       phone: Joi.string().required(),
@@ -67,38 +66,42 @@ router.patch('/',
         weekly: Joi.number().required(),
         monthly: Joi.number().required(),
       }),
-    })
+    }),
   }),
-  userController.updateUser)
+  userController.updateUser
+);
 
-
-router.get('/:userId',
+router.get(
+  "/:userId",
   celebrate({
     [Segments.PARAMS]: Joi.object().keys({
-      userId: Joi.string().required()
-    })
+      userId: Joi.string().required(),
+    }),
   }),
-  userController.getUser)
+  userController.getUser
+);
 
-
-router.get('/',
+router.get(
+  "/",
   celebrate({
     [Segments.QUERY]: Joi.object().keys({
       search: Joi.string(),
       page: Joi.number(),
       pageSize: Joi.number(),
-      sort: Joi.string().valid('desc', 'asc'),
-    })
-  }), userController.getUsers)
+      sort: Joi.string().valid("desc", "asc"),
+    }),
+  }),
+  userController.getUsers
+);
 
-
-router.get('/bracelet/:barceletId',
+router.get(
+  "/bracelet/:braceletId",
   celebrate({
     [Segments.PARAMS]: Joi.object().keys({
-      barceletId: Joi.string().required()
-    })
+      braceletId: Joi.string().required(),
+    }),
   }),
-  userController.getUserByBraceletId)
+  userController.getUserByBraceletId
+);
 
-
-module.exports = router
+module.exports = router;

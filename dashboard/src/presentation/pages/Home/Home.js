@@ -3,8 +3,8 @@ import MenuItemCard from "../../components/MenuItemCard/MenuItemCard";
 import CartMenu from "../../components/CartMenu/CartMenu";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
 import Search from "../../components/Search/Search";
-import ScanCard from "../../components/ScanCard/ScanCard";
-
+import RFIDReader from "../../components/RFIDReader/RFIDReader";
+import ChildInfo from "../../components/ChildInfo/ChildInfo";
 import HomeViewModel from "./HomeViewModel";
 
 const Home = () => {
@@ -14,7 +14,11 @@ const Home = () => {
     currentCategory,
     handleSelectCategory,
     showScan,
+    showChildInfo,
     handleShowScan,
+    handleCloseChildInfo,
+    scanChild,
+    currentChild,
   } = HomeViewModel();
 
   return (
@@ -45,7 +49,15 @@ const Home = () => {
           </div>
         </div>
         <CartMenu handleShowScan={handleShowScan} />
-        {showScan && <ScanCard handleCloseScan={handleShowScan} />}
+        {currentChild && (
+          <ChildInfo
+            handleCloseChildInfo={handleCloseChildInfo}
+            child={currentChild}
+          />
+        )}
+        {showScan && (
+          <RFIDReader handleCloseScan={handleShowScan} scanChild={scanChild} />
+        )}
       </div>
     </div>
   );

@@ -24,14 +24,17 @@ const CartMenu = ({ handleShowScan }) => {
           <OrderItemCard
             product={items[0]}
             cardImg={items[0].image}
-            text={items[0].text}
+            text={items[0].title}
             amount={items.length}
             total={items.length * items[0].price}
           />
         ))}
       </div>
-      <button onClick={handleShowScan}>Scan</button>
-      {/* {cartItems.length > 0 && <button>Charge {cartTotal} P</button>} */}
+      {cartItems.length > 0 && (
+        <button className="confirm-btn" onClick={handleShowScan}>
+          Scan
+        </button>
+      )}
     </div>
   );
 };

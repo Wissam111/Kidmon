@@ -38,10 +38,23 @@ export const CartItemsContextProvider = ({ children }) => {
     }, 0);
     return total;
   };
+  const productsTotal = (products) => {
+    console.log(products);
+    const total = products.reduce((accumulator, product) => {
+      return accumulator + product.price;
+    }, 0);
+    return total;
+  };
 
   return (
     <CatItemsContext.Provider
-      value={{ ...state, dispatch, selectCartItemsById, totalCartItems }}
+      value={{
+        ...state,
+        dispatch,
+        selectCartItemsById,
+        totalCartItems,
+        productsTotal,
+      }}
     >
       {children}
     </CatItemsContext.Provider>

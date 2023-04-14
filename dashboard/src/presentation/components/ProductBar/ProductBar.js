@@ -4,16 +4,16 @@ import "./ProductBar.css";
 import Select from "react-select";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { categoriesOptions } from "../../../data/data";
+import { categoriesOptionsV2 } from "../../../data/data";
 const ProductBar = ({ handleSelectCategory }) => {
   const navigate = useNavigate();
 
-  const defaultOption = categoriesOptions[0];
+  const defaultOption = categoriesOptionsV2[0];
   return (
     <div className="product-bar-container">
       <div className="select-category">
         <Select
-          options={categoriesOptions}
+          options={categoriesOptionsV2}
           defaultValue={defaultOption}
           onChange={(option) => handleSelectCategory(option.value)}
           menuPortalTarget={document.body}

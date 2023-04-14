@@ -23,6 +23,13 @@ export const categoriesOptions = [
   { value: "Hot", label: "Hot" },
   { value: "Food", label: "Food" },
 ];
+export const categoriesOptionsV2 = [
+  { value: "All", label: "All" },
+  { value: "Snack", label: "Snack" },
+  { value: "Cold", label: "Cold" },
+  { value: "Hot", label: "Hot" },
+  { value: "Food", label: "Food" },
+];
 
 export const allergicIngredients = [
   "Milk",

@@ -5,7 +5,13 @@ const ProductRepository = () => {
   const { apiCall } = useApiContext();
 
   const getProducts = async (category, pageSize, page) => {
-    let url = `products?category=${category}&page=${page}&pageSize=${pageSize}&sort=${"desc"}`;
+    let url;
+    if (category === "All") {
+      url = `products?page=${page}&pageSize=${pageSize}&sort=${"desc"}`;
+    } else {
+      url = `products?category=${category}&page=${page}&pageSize=${pageSize}&sort=${"desc"}`;
+    }
+
     const data = apiCall(url);
     return data;
   };

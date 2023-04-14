@@ -32,8 +32,7 @@ const ProductActionViewModel = () => {
       formData.append("allergicIngredients[]", allergic);
     });
     try {
-      const res = await productRepo.createProduct(formData);
-      const data = await res.data;
+      await productRepo.createProduct(formData);
       isSuccess = true;
     } catch (error) {
       console.log(error?.response.data);

@@ -40,16 +40,19 @@ const EntryViewModel = () => {
     verify.code = optCode;
     try {
       const data = await authRepository.verifyLogin(verify);
-      localStorage.setItem("authData", JSON.stringify(data));
-      dispatch({ type: "LOGIN", payload: data });
-      navigate("/", { replace: true });
+      handleAuthData(data);
     } catch (error) {
-      console.log(error);
       messg = error?.error.message;
       isSuccess = false;
     }
     setLoading(false);
     invokeAlert(isSuccess, messg);
+  };
+
+  const handleAuthData = (data) => {
+    localStorage.setItem("authData", JSON.stringify(data));
+    dispatch({ type: "LOGIN", payload: data });
+    navigate("/", { replace: true });
   };
 
   const handleShowOTP = () => {

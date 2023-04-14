@@ -4,9 +4,8 @@ import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 import OrderItemCard from "../OrderItemCard/OrderItemCard";
 
 const CartMenu = ({ handleShowScan }) => {
-  const { cartItems, totalCartItems } = useCartItemsContext();
+  const { cartItems } = useCartItemsContext();
   const [groupedItems, setGroupedItems] = useState({});
-  const cartTotal = totalCartItems();
   useEffect(() => {
     var results = cartItems.reduce(function (results, item) {
       (results[item.id] = results[item.id] || []).push(item);
@@ -22,6 +21,7 @@ const CartMenu = ({ handleShowScan }) => {
       <div className="orders-wrapper">
         {Object.entries(groupedItems).map(([key, items]) => (
           <OrderItemCard
+            key={items[0].id}
             product={items[0]}
             cardImg={items[0].image}
             text={items[0].title}

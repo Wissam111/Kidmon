@@ -6,7 +6,7 @@ const ProductsViewModel = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
   const { invokeAlert } = useAlertContext();
-  const [category, setCategory] = useState("Snack");
+  const [category, setCategory] = useState("All");
   const [refreshKey, setRefreshKey] = useState(0);
   const [numofPages, setNumOfPages] = useState(1);
   const { setLoading } = useLoadingContext();
@@ -31,7 +31,7 @@ const ProductsViewModel = () => {
     let messg = "";
     setLoading(true);
     try {
-      const data = await productRepo.deleteProdcut(product.id);
+      await productRepo.deleteProdcut(product.id);
       refresh();
       isSuccess = true;
     } catch (error) {

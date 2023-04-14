@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import { useSpring } from "react-spring";
+
 import { categories } from "../../../data/data";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import { useAlertContext } from "../../../hooks/useAlertContext";
@@ -16,6 +18,10 @@ const HomeViewModel = () => {
   const { invokeAlert } = useAlertContext();
   const productRepos = ProductRepository();
   const userRepository = UserRepository();
+  const [childViewAnimation, setChildViewAnimation] = useSpring(() => ({
+    opacity: 0,
+    config: { duration: 300 },
+  }));
 
   const getProductsByCategory = async () => {
     try {
@@ -35,6 +41,7 @@ const HomeViewModel = () => {
     setLoading(true);
     try {
       const data = await userRepository.makePurchase(currentChild.id, products);
+      console.log(data);
       isSuccess = true;
     } catch (error) {
       console.log(error);
@@ -85,6 +92,16 @@ const HomeViewModel = () => {
   const handleSelectCategory = (category) => {
     setCurrentCategory(category);
   };
+
+  useEffect(() => {
+    if (currentChild) {
+      requestAnimationFrame(() => {
+        setChildViewAnimation({ opacity: 1 });
+      });
+    } else {
+      setChildViewAnimation({ opacity: 0 });
+    }
+  }, [currentChild]);
   useEffect(() => {
     const HomePageInit = async () => {
       setLoading(true);
@@ -106,6 +123,7 @@ const HomeViewModel = () => {
     scanChild,
     currentChild,
     makePurchase,
+    childViewAnimation,
   };
 };
 

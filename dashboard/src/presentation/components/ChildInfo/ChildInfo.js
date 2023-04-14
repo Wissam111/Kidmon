@@ -3,6 +3,7 @@ import IngerdientCard from "../IngerdientCard/IngerdientCard";
 import OrderItemCard from "../OrderItemCard/OrderItemCard";
 import { IoClose } from "react-icons/io5";
 import Alert from "@mui/material/Alert";
+import { BASE_URL_1 } from "../../../context/ApiContext";
 import AlertTitle from "@mui/material/AlertTitle";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 import "./ChildInfo.css";
@@ -50,7 +51,14 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
       />
       <div className="child-info-col1">
         <div className="child-col1-row1">
-          <img src={require("../../../assets/imgs/child.jpg")} />
+          <img
+            alt="child"
+            src={
+              child.image
+                ? BASE_URL_1 + `imgs/${child.image}`
+                : require("../../../assets/icons/help.png")
+            }
+          />
           <div>
             <h4>{child.firstName + " " + child.lastName}</h4>
             <p>

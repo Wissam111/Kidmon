@@ -51,7 +51,6 @@ const ProductActionBox = ({ handlePublishProduct }) => {
           defaultValue={defaultOption}
           value={productCategory}
           onChange={(option) => {
-            console.log(option);
             setProductCategory(option);
           }}
           menuPortalTarget={document.body}

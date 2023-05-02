@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeParent from "./screens/home-parent/HomeParent";
 import Profile from "./screens/profile/Profile";
 import Transfer from "./screens/transfer/Transfer";
+import FamilyMemberHome from "./screens/home-family-member/FamilyMemberHome";
 
 const HomeParentStack = createNativeStackNavigator();
 
@@ -19,8 +20,9 @@ const HomeParentNavigation = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Profile />
+      {/* <Profile /> */}
       {/* <HomeParentNavigation /> */}
+      <FamilyMemberHome />
     </NavigationContainer>
   );
 };

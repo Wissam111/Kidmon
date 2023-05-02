@@ -26,6 +26,7 @@ const FamilyMembersList = ({ familyMembers }) => {
             <FamilyMemberCard
               style={{ padding: 8 }}
               text={`${element.firstName} ${element.lastName}`}
+              onPress={() => navigation.navigate("FamilyMemberHome")}
             />
             <Spacer space={4} />
           </View>

@@ -13,6 +13,11 @@ const HomeParentNavigation = () => {
     <HomeParentStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeParentStack.Screen name="HomeParent" component={HomeParent} />
       <HomeParentStack.Screen name="Transfer" component={Transfer} />
+      <HomeParentStack.Screen
+        name="FamilyMemberHome"
+        component={FamilyMemberHome}
+      />
+      <HomeParentStack.Screen name="Profile" component={Profile} />
     </HomeParentStack.Navigator>
   );
 };
@@ -21,8 +26,8 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       {/* <Profile /> */}
-      {/* <HomeParentNavigation /> */}
-      <FamilyMemberHome />
+      <HomeParentNavigation />
+      {/* <FamilyMemberHome /> */}
     </NavigationContainer>
   );
 };

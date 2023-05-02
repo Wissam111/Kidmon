@@ -3,7 +3,7 @@ import React from "react";
 import Header from "./components/Header";
 import Spacer from "../../components/Spacer";
 import { SafeAreaView } from "react-native-safe-area-context";
-
+import NavBar from "../../components/NavBar";
 import ActivityList from "../../components/ActivityList";
 const activities = [
   {
@@ -28,7 +28,7 @@ const activities = [
 ];
 const Profile = () => {
   return (
-    <View className="flex-1">
+    <View className="flex-1 relative">
       <Header />
       <Spacer space={10} />
       <ActivityList
@@ -37,6 +37,7 @@ const Profile = () => {
         snap1={"60%"}
         snap2={"95%"}
       />
+      <NavBar />
     </View>
   );
 };

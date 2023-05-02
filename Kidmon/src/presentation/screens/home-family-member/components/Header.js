@@ -8,7 +8,9 @@ import {
 import React from "react";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Spacer from "../../../components/Spacer";
+import { useNavigation } from "@react-navigation/native";
 const Header = () => {
+  const navigation = useNavigation();
   return (
     <View>
       <SafeAreaView />
@@ -34,7 +36,10 @@ const Header = () => {
             </View>
           </View>
         </View>
-        <TouchableOpacity className="w-12 h-12 items-center justify-center border-2 border-solid border-[#c2c2c299] rounded-full">
+        <TouchableOpacity
+          className="w-12 h-12 items-center justify-center border-2 border-solid border-[#c2c2c299] rounded-full"
+          //onPress={() => navigation.navigate("")}
+        >
           <Ionicons name="ios-settings-sharp" size={28} />
         </TouchableOpacity>
       </View>

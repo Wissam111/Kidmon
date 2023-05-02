@@ -1,12 +1,14 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 const FamilyMemberCard = ({ image, text, style }) => {
+  const navigation = useNavigation();
   return (
-    <View
+    <TouchableOpacity
       style={{
         ...styles,
         ...style,
       }}
+      onPress={() => navigation.navigate("FamilyMemberHome")}
     >
       <Image
         className="w-16 h-16 rounded-full"
@@ -16,7 +18,7 @@ const FamilyMemberCard = ({ image, text, style }) => {
       <Text className="text-base color-[#000000b5] font-medium mt-2">
         {text}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

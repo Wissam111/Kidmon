@@ -11,18 +11,23 @@ const ActivityCard = ({ type, image, text, datetime, onPress }) => {
         ...styles,
       }}
     >
-      <Image source={require("../../../assets/imgs/sun.png")} />
+      <Image
+        className="w-7 h-7"
+        source={require("../../../assets/imgs/school.png")}
+      />
 
       <Spacer space={8} />
-
       <View style={{ flexGrow: 1 }}>
-        <Text>{text}</Text>
+        <Text className="font-medium">{text}</Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Ionicons name="time-outline" size={18} />
-          <Spacer space={4} />
-          <Text>{moment(datetime).format("HH:mm")}</Text>
+          <Ionicons name="time-outline" size={18} color={"#00000075"} />
+          <Spacer space={3} />
+          <Text className="color-[#00000075] text-sm">
+            {moment(datetime).format("HH:mm")}
+          </Text>
         </View>
       </View>
+      <Text className="font-medium pr-2">-10 P</Text>
     </View>
   );
 };

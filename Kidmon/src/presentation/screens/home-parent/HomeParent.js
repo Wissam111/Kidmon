@@ -1,6 +1,6 @@
 import Spacer from "../../components/Spacer";
 import FamilyMembersList from "./components/FamilyMembersList";
-import ActivityList from "./components/ActivityList";
+import ActivityList from "../../components/ActivityList";
 import Balance from "./components/Balance";
 import Header from "./components/Header";
 import { View } from "react-native";
@@ -40,13 +40,20 @@ const HomeParent = () => {
       <Header />
 
       <Spacer space={20} />
-      <Balance amount={1200} />
+      <View className="w-full items-center">
+        <Balance amount={1200} />
+      </View>
 
-      <Spacer space={20} />
+      <Spacer space={13} />
       <FamilyMembersList familyMembers={familyMembers} />
 
       <Spacer space={20} />
-      <ActivityList style={{ flex: 1 }} activities={activities} />
+      <ActivityList
+        style={{ flex: 1 }}
+        activities={activities}
+        snap1={"37%"}
+        snap2={"95%"}
+      />
     </View>
   );
 };

@@ -5,6 +5,7 @@ import { useSpring } from "react-spring";
 import { categories } from "../../../data/data";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import { useAlertContext } from "../../../hooks/useAlertContext";
+import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 
 import ProductRepository from "../../../repository/ProductRepository";
 import UserRepository from "../../../repository/UserRepository";
@@ -15,6 +16,8 @@ const HomeViewModel = () => {
   const [currentCategory, setCurrentCategory] = useState(categories[0]);
   const [showScan, setShowScan] = useState(false);
   const [currentChild, setCurrentChild] = useState(null);
+  const { dispatch } = useCartItemsContext();
+
   const { invokeAlert } = useAlertContext();
   const productRepos = ProductRepository();
   const userRepository = UserRepository();
@@ -87,6 +90,7 @@ const HomeViewModel = () => {
   };
   const handleCloseChildInfo = () => {
     setCurrentChild(null);
+    dispatch({ type: "DELETECART" });
   };
 
   const handleSelectCategory = (category) => {

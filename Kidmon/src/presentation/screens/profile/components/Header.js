@@ -24,17 +24,14 @@ const Header = () => {
         </SafeAreaView>
       </View>
 
-      <View
-        className="items-center mt-5"
-        style={{ borderWidth: 2, borderColor: "red" }}
-      >
+      <View className="items-center mt-5">
         <Text className="color-[#757575] font-medium text-base">
           Total balance
         </Text>
         <Text className="color-[#333333] text-3xl font-semibold ">
           12,698 P
         </Text>
-        <DefualtButton text={"Buy"} tailWindStyle="mt-10" />
+        <DefualtButton text={"Buy"} tailWindStyle="mt-10 w-11/12 h-12" />
       </View>
     </View>
   );

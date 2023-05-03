@@ -24,7 +24,11 @@ const SpendingLimits = () => {
             Spending Limits
           </Text>
         </View>
-        <Switch onValueChange={toggleSwitch} value={switchValue} />
+        <Switch
+          onValueChange={toggleSwitch}
+          value={switchValue}
+          trackColor={{ false: "#767577", true: "#5FD5E5" }}
+        />
       </View>
       <View className="items-center">
         <LimitSwitch />

@@ -16,7 +16,11 @@ const LimitSwitch = () => {
     <View className={`w-80  h-28`} style={{ backgroundColor: primaryColor }}>
       <View className="flex-row justify-between p-4">
         <Text className="text-lg font-medium">Daily</Text>
-        <Switch onValueChange={toggleSwitch} value={switchValue} />
+        <Switch
+          onValueChange={toggleSwitch}
+          value={switchValue}
+          trackColor={{ false: "#767577", true: "#5FD5E5" }}
+        />
       </View>
       <View className="flex-row items-center justify-between pr-2 pl-2">
         <Text className="text-base font-medium color-[#0000005e]">{value}</Text>
@@ -31,7 +35,6 @@ const LimitSwitch = () => {
           thumbStyle={styles.thumb}
           trackStyle={styles.track}
         />
-        {/* <Slider minimumValue={minValue} maximumValue={maxValue} /> */}
         <Text className="text-base font-medium color-[#0000005e]">
           {maxValue}
         </Text>

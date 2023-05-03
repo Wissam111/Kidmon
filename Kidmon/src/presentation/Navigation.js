@@ -5,7 +5,7 @@ import HomeParent from "./screens/home-parent/HomeParent";
 import Profile from "./screens/profile/Profile";
 import Transfer from "./screens/transfer/Transfer";
 import FamilyMemberHome from "./screens/home-family-member/FamilyMemberHome";
-
+import FamilyMemberSettings from "./screens/settings-family-member/FamilyMemberSettings";
 const HomeParentStack = createNativeStackNavigator();
 
 const HomeParentNavigation = () => {
@@ -16,6 +16,10 @@ const HomeParentNavigation = () => {
       <HomeParentStack.Screen
         name="FamilyMemberHome"
         component={FamilyMemberHome}
+      />
+      <HomeParentStack.Screen
+        name="FamilyMemberSettings"
+        component={FamilyMemberSettings}
       />
       <HomeParentStack.Screen name="Profile" component={Profile} />
     </HomeParentStack.Navigator>

@@ -20,9 +20,9 @@ const ActivityCard = ({ type, image, text, datetime, onPress }) => {
       <View style={{ flexGrow: 1 }}>
         <Text className="font-medium">{text}</Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Ionicons name="time-outline" size={18} color={"#00000075"} />
-          <Spacer space={3} />
-          <Text className="color-[#00000075] text-sm">
+          <Ionicons name="time-outline" size={14} color={"#00000075"} />
+          <Spacer space={1} />
+          <Text className="color-[#00000075] text-xs">
             {moment(datetime).format("HH:mm")}
           </Text>
         </View>
@@ -36,7 +36,8 @@ export default ActivityCard;
 
 const styles = StyleSheet.create({
   padding: 12,
-  borderRadius: 100,
+  borderRadius: 23,
+  height: 65,
   backgroundColor: white,
   justifyContent: "center",
   alignItems: "center",

@@ -14,7 +14,7 @@ const NavBar = () => {
           <Feather name="user" size={32} />
         </TouchableOpacity>
         <TouchableOpacity
-        //onPress={() => navigation.navigate("")}
+          onPress={() => navigation.navigate("FamilyMemberSettings")}
         >
           <Image source={require("../../../assets/imgs/setting.png")} />
         </TouchableOpacity>

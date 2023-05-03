@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import { Feather, AntDesign } from "@expo/vector-icons";
+import { Feather, AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 const NavBar = () => {
   const navigation = useNavigation();
@@ -12,6 +12,11 @@ const NavBar = () => {
         </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
           <Feather name="user" size={32} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("FamilyMemberHome")}
+        >
+          <MaterialCommunityIcons name="view-dashboard-outline" size={32} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("FamilyMemberSettings")}

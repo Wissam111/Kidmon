@@ -10,10 +10,10 @@ const SpendingLimits = () => {
   };
   return (
     <View
-      className="bg-white shadow-md rounded-md"
-      style={{ width: "94%", height: "58%" }}
+      className="bg-white shadow-md rounded-md flex-grow-0 pb-5"
+      style={{ width: "94%", Height: "50%" }}
     >
-      <View className="flex-row justify-between  p-6">
+      <View className="flex-row justify-between p-6">
         <View className="flex-row items-center">
           <Image
             className="w-7 h-7"

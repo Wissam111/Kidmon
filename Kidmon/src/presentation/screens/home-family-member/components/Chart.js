@@ -40,13 +40,14 @@ const Chart = () => {
 const styles = StyleSheet.create({
   style: {
     width: "92%",
-    height: 400,
+    height: 380,
     backgroundColor: "white",
     shadowColor: "#BFD1C6",
     shadowOffset: {
       width: 5,
       height: 5,
     },
+    padding: 10,
     shadowOpacity: 0.53,
     shadowRadius: 30,
     borderRadius: 6,

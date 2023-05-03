@@ -14,10 +14,10 @@ const Header = () => {
   return (
     <View>
       <SafeAreaView />
-      <TouchableOpacity className="p-2 pl-5 pt-2">
+      {/* <TouchableOpacity className="p-2 pl-5 pt-2">
         <AntDesign name="arrowleft" size={30} />
-      </TouchableOpacity>
-      <View className="flex-row justify-between items-center p-5 pb-1">
+      </TouchableOpacity> */}
+      <View className="flex-row justify-between items-center p-5 pb-1 mt-5 ">
         <View className="flex-row items-center p-2">
           <Image
             className="w-24 h-24 rounded-full"

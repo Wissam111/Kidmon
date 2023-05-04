@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import { Feather, AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 const NavBar = () => {
   const navigation = useNavigation();
@@ -21,7 +21,10 @@ const NavBar = () => {
         <TouchableOpacity
           onPress={() => navigation.navigate("FamilyMemberSettings")}
         >
-          <Image source={require("../../../assets/imgs/setting.png")} />
+          <Image
+            className="w-7 h-7 mr-1"
+            source={require("../../../assets/imgs/settings.png")}
+          />
         </TouchableOpacity>
       </View>
     </View>

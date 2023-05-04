@@ -19,8 +19,8 @@ const Allergens = () => {
             Allergens
           </Text>
           <Text className="text-sm color-[#7979797d]">
-            by adding allergens, this family member{"\n"} will not able to buy
-            items that contains {"\n"} that allergens
+            by adding allergens, this family member{"\n"}will not able to buy
+            items that contains {"\n"}that allergens
           </Text>
         </View>
       </View>

@@ -10,10 +10,10 @@ const SpendingLimits = () => {
   };
   return (
     <View
-      className="bg-white shadow-md rounded-md flex-grow-0 pb-5"
-      style={{ width: "94%", Height: "50%" }}
+      className="bg-white shadow-md rounded-md flex-grow-0  relative"
+      style={{ width: "94%", height: "50%" }}
     >
-      <View className="flex-row justify-between p-6">
+      <View className="flex-row justify-between p-6 z-50">
         <View className="flex-row items-center">
           <Image
             className="w-7 h-7"
@@ -31,12 +31,15 @@ const SpendingLimits = () => {
         />
       </View>
       <View className="items-center">
-        <LimitSwitch />
+        <LimitSwitch text="Daily" />
         <Spacer space={6} />
-        <LimitSwitch />
+        <LimitSwitch text="Weakly" />
         <Spacer space={6} />
-        <LimitSwitch />
+        <LimitSwitch text="Monthly" />
       </View>
+      {!switchValue && (
+        <View className="w-full h-full bg-gray-700 absolute opacity-50 bottom-0 rounded-md"></View>
+      )}
     </View>
   );
 };

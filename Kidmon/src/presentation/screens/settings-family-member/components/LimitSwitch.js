@@ -3,7 +3,7 @@ import { useState } from "react";
 import { primaryColor } from "../../../styles";
 import { Slider } from "@miblanchard/react-native-slider";
 
-const LimitSwitch = () => {
+const LimitSwitch = ({ text }) => {
   const minValue = 0;
   const maxValue = 100;
   const [value, setValue] = useState(0);
@@ -14,8 +14,8 @@ const LimitSwitch = () => {
   };
   return (
     <View className={`w-80  h-28`} style={{ backgroundColor: primaryColor }}>
-      <View className="flex-row justify-between p-4">
-        <Text className="text-lg font-medium">Daily</Text>
+      <View className="flex-row justify-between p-4 z-50">
+        <Text className="text-lg font-medium">{text}</Text>
         <Switch
           onValueChange={toggleSwitch}
           value={switchValue}
@@ -39,6 +39,9 @@ const LimitSwitch = () => {
           {maxValue}
         </Text>
       </View>
+      {!switchValue && (
+        <View className="w-full h-full bg-gray-700 absolute opacity-50 bottom-0"></View>
+      )}
     </View>
   );
 };

@@ -30,7 +30,9 @@
     "react-native-size-matters": "^0.4.0",
     "react-native-svg": "13.4.0",
     "react-native-tailwindcss": "^1.1.11",
-    "tailwindcss-react-native": "^1.7.10"
+    "tailwindcss-react-native": "^1.7.10",
+    "react-native-web": "~0.18.10",
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -19,7 +19,7 @@ const Entry = () => {
       <View className="flex-1 items-center">
         <Image
           className="w-full h-2/5 opacity-80"
-          source={require("../../../../assets/imgs/family-background.jpg")}
+          source={require("../../../../assets/imgs/family.jpg")}
         />
         {showLogin ? (
           <Login handleLogin={handleLogin} />

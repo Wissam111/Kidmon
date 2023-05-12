@@ -15,7 +15,7 @@ const Confirm = ({ handleVerfication }) => {
   return (
     <View
       style={{ width: "91%" }}
-      className="absolute h-80 bg-white z-50 top-56 rounded-xl p-6 items-center shadow-md"
+      className="absolute h-80 bg-white z-50 top-60 rounded-xl p-6 items-center shadow-md"
     >
       <Text className="text-3xl font-semibold mt-3">Confirm OTP</Text>
       <Spacer space={10} />

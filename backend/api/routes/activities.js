@@ -24,6 +24,31 @@ router.get('/user-activities',
     activityController.getUserActivities)
 
 
+router.get('/user-spendings',
+    celebrate({
+        [Segments.QUERY]: Joi.object().keys({
+            userId: Joi.string().required(),
+            startDate: Joi.string().required(),
+            endDate: Joi.string().required()
+        })
+    }),
+    // requireAuthentication,
+    // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    activityController.getUserSpendings)
+
+
+
+router.get('/user-spending',
+    celebrate({
+        [Segments.QUERY]: Joi.object().keys({
+            userId: Joi.string().required(),
+            date: Joi.string().required()
+        })
+    }),
+    // requireAuthentication,
+    // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    activityController.getUserSpendingAtDate)
+
 
 router.post('/points-transfer',
     celebrate({

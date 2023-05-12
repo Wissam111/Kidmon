@@ -19,7 +19,8 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
     return async ({ userId, items }) => {
         let finalPrice = 0
         // calculate final purchase price
-        items.forEach(async item => {
+
+        for (const item of items) {
             // find item
             // add its price * amount  
             const p = await productDb.findById({ id: item.id })
@@ -27,7 +28,7 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
                 throw new NotFoundError('Item not found')
             }
             finalPrice += p.price * item.amount
-        })
+        }
 
 
         const transaction = await userDb.makeTransaction()
@@ -41,6 +42,7 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
             if (!user) {
                 throw new NotFoundError('User not found')
             }
+
 
             // subject to credits limit
             if (user.limits && user.limits.daily < finalPrice) {
@@ -72,11 +74,10 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
             const updatedUser = makeFamilyMemberUser({
                 ...user,
                 credits: user.credits - finalPrice,
-                updatedAt: undefined,
-                limits
+                limits,
+                updatedAt: undefined
             })
             await userDb.update({ ...updatedUser, transaction })
-
 
 
             const activity = makePurchaseActivity({

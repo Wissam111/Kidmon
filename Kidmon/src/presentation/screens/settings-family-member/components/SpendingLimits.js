@@ -38,7 +38,7 @@ const SpendingLimits = () => {
         <LimitSwitch text="Monthly" />
       </View>
       {!switchValue && (
-        <View className="w-full h-full bg-gray-700 absolute opacity-50 bottom-0 rounded-md"></View>
+        <View className="w-full h-full bg-gray-700 absolute opacity-70 bottom-0 rounded-md"></View>
       )}
     </View>
   );

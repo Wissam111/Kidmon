@@ -50,7 +50,6 @@ const EntryViewModel = () => {
   };
 
   const handleAuthData = (data) => {
-    localStorage.setItem("authData", JSON.stringify(data));
     dispatch({ type: "LOGIN", payload: data });
     navigate("/", { replace: true });
   };

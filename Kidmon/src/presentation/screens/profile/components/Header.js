@@ -1,7 +1,7 @@
 import { Image, SafeAreaView, View, StyleSheet } from "react-native";
 import { primaryColor } from "../../../styles";
 import { Text } from "react-native";
-import DefualtButton from "../../../components/DefualtButton";
+import DefaultButton from "../../../components/DefaultButton";
 const Header = () => {
   return (
     <View className="p-4 h-2/5" style={{ backgroundColor: primaryColor }}>
@@ -31,7 +31,7 @@ const Header = () => {
         <Text className="color-[#333333] text-3xl font-semibold ">
           12,698 P
         </Text>
-        <DefualtButton text={"Buy"} tailWindStyle="mt-10 w-11/12 h-12" />
+        <DefaultButton text={"Buy"} tailWindStyle="mt-10 w-11/12 h-12" />
       </View>
     </View>
   );

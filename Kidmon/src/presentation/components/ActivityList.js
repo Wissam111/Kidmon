@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useRef } from "react";
 import ActivityCard from "./ActivityCard";
 import Spacer from "./Spacer";
 import { Text } from "react-native";
-import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
 const ActivityList = ({ activities, style, snap1, snap2 }) => {
   const bottomSheetRef = useRef(null);
 
@@ -30,7 +30,7 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
           <Text>Today</Text>
         </View>
 
-        <FlatList
+        <BottomSheetFlatList // change to
           data={activities}
           style={{ flex: 1 }}
           contentContainerStyle={{ padding: 8 }}

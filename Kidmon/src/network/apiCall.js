@@ -1,14 +1,14 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import getString from "../localization";
-import showAlert from "../presentation/components/ShowAlert";
+// import getString from "../localization";
+// import showAlert from "../presentation/components/ShowAlert";
 
-export const URL = 'http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/'
-export const BASE_URL = "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/api/";
-export const BASE_URL_DEV = "http://192.168.1.46:4000/api/";
-// export const IMAGE_BASE_URL = "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/imgs/";
-export const IMAGE_BASE_URL = "http://192.168.1.46:4000/imgs/";
+// export const URL =
+//   "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/";
 
-
+export const BASE_URL = "http://192.168.68.115:4000/api/v1/"; //use you pc ip address
+// export const BASE_URL_DEV = "http://192.168.1.46:4000/api/";
+// // export const IMAGE_BASE_URL = "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/imgs/";
+// export const IMAGE_BASE_URL = "http://192.168.1.46:4000/imgs/";
 
 /* 
 
@@ -32,9 +32,7 @@ const serialize = function (obj) {
   return "?" + str.join("&");
 };
 
-
-
-// gets the access token from the cache 
+// gets the access token from the cache
 const getToken = async () => {
   try {
     const token = await AsyncStorage.getItem("token");
@@ -57,27 +55,28 @@ export const getUserId = async () => {
   }
 };
 
-
-
 const refreshAccessToken = async () => {
-  const refreshToken = await AsyncStorage.getItem('refreshToken')
-  const data = await apiCall('refresh-token', 'POST', { refreshToken: refreshToken })
-  await AsyncStorage.setItem('token', data.token)
-  await AsyncStorage.setItem('refreshToken', data.refresh_token)
-  await AsyncStorage.setItem('expireDate', data.expireDate)
-  await AsyncStorage.setItem('expireDateRefreshToken', data.expireDateRefreshToken)
-}
-
-
+  const refreshToken = await AsyncStorage.getItem("refreshToken");
+  const data = await apiCall("refresh-token", "POST", {
+    refreshToken: refreshToken,
+  });
+  await AsyncStorage.setItem("token", data.token);
+  await AsyncStorage.setItem("refreshToken", data.refresh_token);
+  await AsyncStorage.setItem("expireDate", data.expireDate);
+  await AsyncStorage.setItem(
+    "expireDateRefreshToken",
+    data.expireDateRefreshToken
+  );
+};
 
 /**
- *  this is a global HTTP api call 
- * 
- * @param {*} url 
- * @param {*} method  GET / POST / DELETE / PATCH 
- * @param {*} body 
- * @param {*} queryParams 
- * @param {*} contentType 
+ *  this is a global HTTP api call
+ *
+ * @param {*} url
+ * @param {*} method  GET / POST / DELETE / PATCH
+ * @param {*} body
+ * @param {*} queryParams
+ * @param {*} contentType
  * @returns the server response as json
  */
 export const apiCall = async (
@@ -89,9 +88,11 @@ export const apiCall = async (
   tries = 1
 ) => {
   // console.log('apiCall' , url);
-  const customURL = queryParams
-    ? BASE_URL_DEV + url + serialize(queryParams)
-    : BASE_URL_DEV + url;
+  // const customURL = queryParams
+  //   ? BASE_URL_DEV + url + serialize(queryParams)
+  //   : BASE_URL_DEV + url;
+  const customURL = BASE_URL + url;
+
   let bbody;
   if (body) {
     if (contentType === "multipart/form-data") {
@@ -106,35 +107,41 @@ export const apiCall = async (
   const result = await fetch(customURL, {
     headers: {
       "Content-Type": contentType,
-      Authorization: `Bearer ${await getToken()}`,
+      Authorization: `Bearer`,
+      // Authorization: `Bearer ${await getToken()}`,
     },
     method: method,
     body: bbody,
   });
 
   const json = await result.json();
-  if (!result.ok) {
-    // try to refresh token
-    if (result.status === 401 && tries < 3) {
-      try {
-        await refreshAccessToken()
-        return await apiCall(url, method, body, queryParams, contentType, tries + 1)
-      } catch (e) {
-        console.log(e);
-        // go to login
-        throw { status: 401 }
-      }
-    }
+  // if (!result.ok) {
+  //   // try to refresh token
+  //   if (result.status === 401 && tries < 3) {
+  //     try {
+  //       await refreshAccessToken();
+  //       return await apiCall(
+  //         url,
+  //         method,
+  //         body,
+  //         queryParams,
+  //         contentType,
+  //         tries + 1
+  //       );
+  //     } catch (e) {
+  //       console.log(e);
+  //       // go to login
+  //       throw { status: 401 };
+  //     }
+  //   }
 
-    throw {
-      status: result.status,
-      ...json,
-    }
-  }
+  //   throw {
+  //     status: result.status,
+  //     ...json,
+  //   };
+  // }
   return json;
-}
-
-
+};
 
 // export const useApiCall = () => {
 //   const { dispatch } = useAuthContext()
@@ -154,7 +161,6 @@ export const apiCall = async (
 //   //   }
 //   //   return json;
 //   // }, [])
-
 
 //   // return { call }
 // }

@@ -28,7 +28,7 @@ const FamilyMembersList = ({ familyMembers }) => {
               text={`${element.firstName} ${element.lastName}`}
               onPress={() => navigation.navigate("FamilyMemberHome")}
             />
-            <Spacer space={4} />
+            <Spacer space={8} />
           </View>
         ))}
       </ScrollView>

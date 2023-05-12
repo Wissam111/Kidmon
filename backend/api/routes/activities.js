@@ -32,7 +32,7 @@ router.get('/user-spendings',
             endDate: Joi.string().required()
         })
     }),
-    // requireAuthentication,
+    requireAuthentication,
     // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
     activityController.getUserSpendings)
 
@@ -45,7 +45,7 @@ router.get('/user-spending',
             date: Joi.string().required()
         })
     }),
-    // requireAuthentication,
+    requireAuthentication,
     // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
     activityController.getUserSpendingAtDate)
 

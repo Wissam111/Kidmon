@@ -5,7 +5,7 @@ const { ActivityTypes } = require("./activity")
 
 const buildMakePurchaseActivity = (makeActivity) => {
 
-    return function makeParentUser({
+    return function makePurchaseActivity({
         id,
         user, // required
         items, // required 

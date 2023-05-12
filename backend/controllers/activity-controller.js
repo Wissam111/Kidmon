@@ -52,8 +52,44 @@ const getUserActivities = async (req, res) => {
 
 
 
+const getUserSpendings = async (req, res, next) => {
+
+    try {
+        const { userId, startDate, endDate } = req.query
+        const spendings = await activityService.listUserSpendings({ userId: userId, startDate, endDate })
+        res.status(200).json({
+            message: 'fetched user spendings successfull',
+            spendings
+        })
+    } catch (e) {
+        console.log(e);
+        next(e)
+    }
+}
+
+
+const getUserSpendingAtDate = async (req, res, next) => {
+
+    try {
+        const { userId, timezone, date } = req.query
+        const data = await activityService.getUserSpendingAtDate({ userId: userId, timezone, date })
+        res.status(200).json({
+            message: 'fetched user spending successfull',
+            data: data
+        })
+    } catch (e) {
+        console.log(e);
+        next(e)
+    }
+}
+
+
+
+
 module.exports = {
     getUserActivities,
     purchase,
-    transferPoints
+    transferPoints,
+    getUserSpendings,
+    getUserSpendingAtDate
 }

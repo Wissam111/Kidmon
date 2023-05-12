@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const activitySchema = new mongoose.Schema({
     _id: { type: String },
-    tpye: { type: String },
+    type: { type: String },
 
     from: { type: String, ref: "user" },
     to: { type: String, ref: "user" },

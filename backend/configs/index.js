@@ -35,7 +35,7 @@ module.exports = {
         prefix: '/api',
     },
 
-    debug: process.env.debug ? true : false,
+    debug: process.env.DEBUG ? true : false,
 
     apiVersion: 'v1',
 

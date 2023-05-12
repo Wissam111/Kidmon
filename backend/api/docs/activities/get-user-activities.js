@@ -6,7 +6,7 @@ module.exports = {
         parameters: [
             {
                 name: "userId", 
-                in: "body", 
+                in: "query", 
                 schema: {
                     type: "string"
                 },
@@ -32,7 +32,7 @@ module.exports = {
 
             {
                 name: "sort", // name of param
-                in: "param", // location of param
+                in: "query", // location of param
                 schema: {
                     type: "string"
                 },

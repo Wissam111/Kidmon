@@ -1,18 +1,38 @@
-import { Image, SafeAreaView, View, StyleSheet } from "react-native";
+import {
+  Image,
+  SafeAreaView,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { primaryColor } from "../../../styles";
 import { Text } from "react-native";
-
-const Header = () => {
+import { MaterialIcons } from "@expo/vector-icons";
+import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { useNavigation } from "@react-navigation/native";
+const Header = ({ firstName }) => {
+  const { dispatch } = useAuthContext();
+  const navigation = useNavigation();
+  const handleLogout = () => {
+    dispatch({ type: "LOGOUT" });
+    navigation.navigate("Entry");
+  };
   return (
     <View
       className="p-4  h-44 justify-between items-center flex-row relative"
       style={{ backgroundColor: primaryColor }}
     >
       <SafeAreaView className="justify-between items-center flex-row relative h-full w-full">
-        <View className="m-4">
+        <TouchableOpacity
+          className="absolute top-10 right-0"
+          onPress={() => handleLogout()}
+        >
+          <MaterialIcons name="logout" size={30} />
+        </TouchableOpacity>
+        <View className="m-4 mt-12">
           <Text className="text-xl font-medium">Good Morning,</Text>
           <Text className="text-base  font-medium color-[#0000005c]">
-            Tarik
+            {firstName.charAt(0).toUpperCase() + firstName.slice(1)}
           </Text>
         </View>
 

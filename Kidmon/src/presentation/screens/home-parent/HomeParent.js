@@ -3,8 +3,10 @@ import FamilyMembersList from "./components/FamilyMembersList";
 import ActivityList from "../../components/ActivityList";
 import Balance from "./components/Balance";
 import Header from "./components/Header";
+import HomeParentViewModel from "./HomeParentViewModel";
 import { View } from "react-native";
 import { white } from "../../styles";
+import { cos } from "react-native-reanimated";
 
 const familyMembers = [
   { id: 1, firstName: "John", lastName: "Gb" },
@@ -35,17 +37,19 @@ const activities = [
 ];
 
 const HomeParent = () => {
+  const { user } = HomeParentViewModel();
+  console.log(user?.familyMembers);
   return (
     <View style={{ flex: 1, backgroundColor: white }}>
-      <Header />
+      <Header firstName={user?.firstName} />
 
       <Spacer space={20} />
       <View className="w-full items-center">
-        <Balance amount={1200} />
+        <Balance amount={user?.credits} />
       </View>
 
       <Spacer space={13} />
-      <FamilyMembersList familyMembers={familyMembers} />
+      <FamilyMembersList familyMembers={user?.familyMembers} />
 
       <Spacer space={20} />
       <ActivityList

@@ -10,9 +10,9 @@ import React, { useEffect } from "react";
 import Login from "./components/Login";
 import Confirm from "./components/Confirm";
 import EntryViewModel from "./EntryViewModel";
-
 const Entry = () => {
-  const { handleLogin, handleVerfication, showLogin } = EntryViewModel();
+  const { handleLogin, handleVerfication, showOTP, handleShowOTP } =
+    EntryViewModel();
 
   return (
     <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
@@ -21,10 +21,13 @@ const Entry = () => {
           className="w-full h-2/5 opacity-80"
           source={require("../../../../assets/imgs/family.jpg")}
         />
-        {showLogin ? (
+        {showOTP ? (
           <Login handleLogin={handleLogin} />
         ) : (
-          <Confirm handleVerfication={handleVerfication} />
+          <Confirm
+            handleVerfication={handleVerfication}
+            handleShowOTP={handleShowOTP}
+          />
         )}
       </View>
     </TouchableWithoutFeedback>

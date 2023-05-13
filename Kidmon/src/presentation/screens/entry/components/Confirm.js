@@ -5,18 +5,39 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Spacer from "../../../components/Spacer";
 import EntryButton from "./EntryButton";
 import OTPInputView from "@twotalltotems/react-native-otp-input";
-const Confirm = ({ handleVerfication }) => {
+import { AntDesign } from "@expo/vector-icons";
+const Confirm = ({ handleVerfication, handleShowOTP }) => {
   const [OTP, setOTP] = useState("");
+  const [time, setTime] = useState(60);
+  useEffect(() => {
+    if (time === 0) return;
+
+    const interval = setInterval(() => {
+      setTime((prevTime) => prevTime - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [time]);
+
+  const handleResend = () => {
+    setTime(60);
+  };
 
   return (
     <View
       style={{ width: "91%" }}
       className="absolute h-80 bg-white z-50 top-60 rounded-xl p-6 items-center shadow-md"
     >
+      <TouchableOpacity
+        className="absolute left-4 top-5"
+        onPress={handleShowOTP}
+      >
+        <AntDesign name="left" size={25} />
+      </TouchableOpacity>
       <Text className="text-3xl font-semibold mt-3">Confirm OTP</Text>
       <Spacer space={10} />
       <Text className="text-sm color-[#00000061] bg-yellow  pl-2">
@@ -27,7 +48,6 @@ const Confirm = ({ handleVerfication }) => {
       <OTPInputView
         style={{ width: "100%", height: 90 }}
         pinCount={4}
-        // code={this.state.code} //You can supply this prop or not. The component will be used as a controlled / uncontrolled component respectively.
         onCodeChanged={(code) => {
           setOTP(code);
         }}
@@ -40,8 +60,11 @@ const Confirm = ({ handleVerfication }) => {
       />
       <Spacer space={2} />
       <View className="w-full flex-row justify-between">
-        <Text className="color-gray-400">Time remaining 2:00s</Text>
-        <TouchableOpacity className="border-b-2 border-[#5FD5E5]">
+        <Text className="color-gray-400">Time remaining: {time}</Text>
+        <TouchableOpacity
+          className="border-b-2 border-[#5FD5E5]"
+          onPress={handleResend}
+        >
           <Text className="color-gray-500">Resend</Text>
         </TouchableOpacity>
       </View>

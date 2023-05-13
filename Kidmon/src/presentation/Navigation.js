@@ -1,5 +1,6 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { AuthContextProvider } from "../context/AuthContext";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeParent from "./screens/home-parent/HomeParent";
 import Profile from "./screens/profile/Profile";
@@ -30,7 +31,9 @@ const HomeParentNavigation = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <HomeParentNavigation />
+      <AuthContextProvider>
+        <HomeParentNavigation />
+      </AuthContextProvider>
     </NavigationContainer>
   );
 };

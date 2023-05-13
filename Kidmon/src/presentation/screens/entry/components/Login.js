@@ -13,14 +13,14 @@ const Login = ({ handleLogin }) => {
       <Text className="text-3xl font-semibold mt-3">Login</Text>
       <Spacer space={10} />
       <TextInput
-        className="h-12 w-full border border-solid border-gray-400 border-opacity-35 rounded-lg p-2"
+        className="h-12 w-full border border-solid border-gray-400 border-opacity-35 rounded-lg p-2 text-base tracking-widest"
         keyboardType="phone-pad"
         value={phone}
         placeholder="Enter your phone number"
         onChangeText={(value) => setPhone(value)}
       />
       <Spacer space={17} />
-      <Text className="text-sm color-[#00000061]">
+      <Text className="text-sm color-[#00000061] font-medium">
         We will send you one time password
       </Text>
       <EntryButton onPress={() => handleLogin(phone)} />

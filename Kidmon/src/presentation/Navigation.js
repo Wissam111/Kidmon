@@ -6,11 +6,12 @@ import Profile from "./screens/profile/Profile";
 import Transfer from "./screens/transfer/Transfer";
 import FamilyMemberHome from "./screens/home-family-member/FamilyMemberHome";
 import FamilyMemberSettings from "./screens/settings-family-member/FamilyMemberSettings";
+import Entry from "./screens/entry/Entry";
 const HomeParentStack = createNativeStackNavigator();
-
 const HomeParentNavigation = () => {
   return (
     <HomeParentStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeParentStack.Screen name="Entry" component={Entry} />
       <HomeParentStack.Screen name="HomeParent" component={HomeParent} />
       <HomeParentStack.Screen name="Transfer" component={Transfer} />
       <HomeParentStack.Screen
@@ -29,9 +30,7 @@ const HomeParentNavigation = () => {
 const Navigation = () => {
   return (
     <NavigationContainer>
-      {/* <Profile /> */}
       <HomeParentNavigation />
-      {/* <FamilyMemberHome /> */}
     </NavigationContainer>
   );
 };

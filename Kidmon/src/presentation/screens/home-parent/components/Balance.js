@@ -3,7 +3,7 @@ import { primaryColor } from "../../../styles";
 const Balance = ({ amount }) => {
   return (
     <View
-      className="w-4/5 h-16 rounded-lg"
+      className="w-4/5 h-16 rounded-lg shadow-md"
       style={{
         justifyContent: "center",
         alignItems: "center",

@@ -24,7 +24,7 @@ const Allergens = () => {
           </Text>
         </View>
       </View>
-      <View className="flex-row flex-wrap p-3 pl-5">
+      <View className="flex-row flex-wrap p-3 pl-5 justify-center">
         {allergicIngredients.map((inger, index) => (
           <Ingredient key={index} text={inger.text} image={inger.image} />
         ))}

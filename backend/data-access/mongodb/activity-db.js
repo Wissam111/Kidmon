@@ -123,7 +123,7 @@ exports.makeActivityDb = ({ makeDb }) => {
                     $match: {
                         type: ActivityTypes.purchase,
                         user: _id,
-                        createdAt: { $gte: new Date('2023-05-12'), $lte: new Date('2023-05-13') },
+                        createdAt: { $gte: new Date(start_date), $lte: new Date(end_date) },
                     }
                 },
 

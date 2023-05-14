@@ -1,8 +1,9 @@
 import FamilyMemberCard from "../../../components/FamilyMemberCard";
 import Spacer from "../../../components/Spacer";
 import { View, ScrollView, Text } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 const FamilyMembersList = ({ familyMembers }) => {
+  const navigation = useNavigation();
   return (
     <View>
       <Text
@@ -21,12 +22,13 @@ const FamilyMembersList = ({ familyMembers }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
       >
-        {familyMembers.map((element) => (
-          <View key={element.id} style={{ flexDirection: "row" }}>
+        {familyMembers.map((user) => (
+          <View key={user.id} style={{ flexDirection: "row" }}>
             <FamilyMemberCard
               style={{ padding: 8 }}
-              text={`${element.firstName} ${element.lastName}`}
-              onPress={() => navigation.navigate("FamilyMemberHome")}
+              text={`${user.firstName} ${user.lastName}`}
+              image={user.image}
+              onPress={() => navigation.navigate("FamilyMemberHome", { user })}
             />
             <Spacer space={8} />
           </View>

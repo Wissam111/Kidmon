@@ -5,6 +5,8 @@ import Spacer from "../../components/Spacer";
 import { SafeAreaView } from "react-native-safe-area-context";
 import NavBar from "../../components/NavBar";
 import ActivityList from "../../components/ActivityList";
+import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
+
 const activities = [
   {
     id: 1,
@@ -27,9 +29,10 @@ const activities = [
   { id: 3, type: "purchase", user: "123", items: [{ title: "DD", amout: 4 }] },
 ];
 const Profile = () => {
+  const { familyMember } = useFamilyMemberContext();
   return (
     <View className="flex-1 relative">
-      <Header />
+      <Header name={familyMember?.firstName} balance={familyMember?.credits} />
       <Spacer space={10} />
       <ActivityList
         style={{ flex: 1 }}

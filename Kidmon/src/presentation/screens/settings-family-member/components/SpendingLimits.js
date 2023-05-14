@@ -3,7 +3,7 @@ import { useState } from "react";
 import Spacer from "../../../components/Spacer";
 import LimitSwitch from "./LimitSwitch";
 const SpendingLimits = () => {
-  const [switchValue, setSwitchValue] = useState(false);
+  const [switchValue, setSwitchValue] = useState(true);
 
   const toggleSwitch = (value) => {
     setSwitchValue(value);

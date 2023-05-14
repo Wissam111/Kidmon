@@ -4,7 +4,9 @@ import NavBar from "../../components/NavBar";
 import SpendingLimits from "./components/SpendingLimits";
 import Allergens from "./components/Allergens";
 import Spacer from "../../components/Spacer";
+import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
 const FamilyMemberSettings = () => {
+  const { familyMember } = useFamilyMemberContext();
   return (
     <View className="flex-1">
       <ScrollView
@@ -12,10 +14,12 @@ const FamilyMemberSettings = () => {
         contentContainerStyle={{ alignItems: "center", paddingBottom: 150 }}
       >
         <SafeAreaView />
-        <Text className="text-2xl font-medium p-4 mb-5">Feras Settings</Text>
+        <Text className="text-2xl font-medium p-4 mb-5">
+          {familyMember?.firstName} Settings
+        </Text>
         <SpendingLimits />
         <Spacer space={10} />
-        <Allergens />
+        <Allergens allergies={familyMember?.allergies} />
       </ScrollView>
       <NavBar />
     </View>

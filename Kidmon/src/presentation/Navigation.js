@@ -9,6 +9,9 @@ import Transfer from "./screens/transfer/Transfer";
 import FamilyMemberHome from "./screens/home-family-member/FamilyMemberHome";
 import FamilyMemberSettings from "./screens/settings-family-member/FamilyMemberSettings";
 import Entry from "./screens/entry/Entry";
+import Loading from "./components/Loading";
+import { useLoadingContext } from "../hooks/useLoadingContext";
+
 const HomeParentStack = createNativeStackNavigator();
 const HomeParentNavigation = () => {
   return (
@@ -30,10 +33,12 @@ const HomeParentNavigation = () => {
 };
 
 const Navigation = () => {
+  const { loading } = useLoadingContext();
   return (
     <NavigationContainer>
       <AuthContextProvider>
         <FamilyMemberContextProvider>
+          {loading && <Loading />}
           <HomeParentNavigation />
         </FamilyMemberContextProvider>
       </AuthContextProvider>

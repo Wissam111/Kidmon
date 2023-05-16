@@ -3,7 +3,6 @@ import { useNavigation } from "@react-navigation/native";
 import { IMG_URL } from "../../network/apiCall";
 
 const FamilyMemberCard = ({ image, text, style, onPress }) => {
-  const navigation = useNavigation();
   return (
     <TouchableOpacity
       style={{

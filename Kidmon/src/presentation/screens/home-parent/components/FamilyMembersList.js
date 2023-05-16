@@ -2,8 +2,14 @@ import FamilyMemberCard from "../../../components/FamilyMemberCard";
 import Spacer from "../../../components/Spacer";
 import { View, ScrollView, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useFamilyMemberContext } from "../../../../hooks/useFamilyMemberContext";
 const FamilyMembersList = ({ familyMembers }) => {
   const navigation = useNavigation();
+  const { setFamilyMember } = useFamilyMemberContext();
+  const handleSelectChild = (user) => {
+    navigation.navigate("FamilyMemberHome");
+    setFamilyMember(user);
+  };
   return (
     <View>
       <Text
@@ -28,7 +34,7 @@ const FamilyMembersList = ({ familyMembers }) => {
               style={{ padding: 8 }}
               text={`${user.firstName} ${user.lastName}`}
               image={user.image}
-              onPress={() => navigation.navigate("FamilyMemberHome", { user })}
+              onPress={() => handleSelectChild(user)}
             />
             <Spacer space={8} />
           </View>

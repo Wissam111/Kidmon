@@ -1,4 +1,5 @@
 import { TailwindProvider } from "tailwindcss-react-native";
+import { LoadingContextProvider } from "./src/context/LoadingContext";
 
 import { StatusBar } from "expo-status-bar";
 import { I18nManager, View } from "react-native";
@@ -10,10 +11,12 @@ I18nManager.forceRTL();
 export default function App() {
   return (
     <TailwindProvider>
-      <View style={{ flex: 1, position: "relative" }}>
-        <StatusBar barStyle="light-content" />
-        <Navigation />
-      </View>
+      <LoadingContextProvider>
+        <View style={{ flex: 1, position: "relative" }}>
+          <StatusBar barStyle="light-content" />
+          <Navigation />
+        </View>
+      </LoadingContextProvider>
     </TailwindProvider>
   );
 }

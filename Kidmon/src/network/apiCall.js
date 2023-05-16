@@ -5,8 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // export const URL =
 //   "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/";
 
-export const BASE_URL = "http://192.168.68.115:4000/api/v1/"; //use you pc ip address
-export const IMG_URL = "http://192.168.68.115:4000/api/imgs/";
+export const BASE_URL = "http://192.168.68.117:4000/api/v1/"; //use you pc ip address
+export const IMG_URL = "http://192.168.68.117:4000/api/imgs/";
 
 // export const BASE_URL_DEV = "http://192.168.1.46:4000/api/";
 // // export const IMAGE_BASE_URL = "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/imgs/";
@@ -34,12 +34,21 @@ const serialize = function (obj) {
   return "?" + str.join("&");
 };
 
+const getData = async () => {
+  try {
+    const jsonValue = await AsyncStorage.getItem("authData");
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // gets the access token from the cache
 const getToken = async () => {
   try {
-    const token = await AsyncStorage.getItem("token");
-    if (token == null) return null;
-    return token;
+    const authData = await getData();
+    if (authData.token == null) return null;
+    return authData.token;
   } catch (e) {
     console.log("getToken:", e);
   }
@@ -93,6 +102,7 @@ export const apiCall = async (
   // const customURL = queryParams
   //   ? BASE_URL_DEV + url + serialize(queryParams)
   //   : BASE_URL_DEV + url;
+
   const customURL = BASE_URL + url;
 
   let bbody;
@@ -105,12 +115,10 @@ export const apiCall = async (
   } else {
     bbody = null;
   }
-
   const result = await fetch(customURL, {
     headers: {
       "Content-Type": contentType,
-      Authorization: `Bearer`,
-      // Authorization: `Bearer ${await getToken()}`,
+      Authorization: `Bearer ${await getToken()}`,
     },
     method: method,
     body: bbody,

@@ -11,29 +11,30 @@ import "./ChildInfo.css";
 const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
   const { cartItems, productsTotal } = useCartItemsContext();
 
-  const [allegicProducts, setAllegicProducts] = useState({});
-  const [noneAllegicProducts, setNoneAllegicProducts] = useState([]);
+  const [noneAllergicProducts, setNoneAllergicProducts] = useState([]);
+  const [groupedProducts, setGroupedProducts] = useState({});
 
   useEffect(() => {
-    const allrgic = [];
+    const allergicProducts = [];
     const noneAllergic = [];
-    cartItems.forEach((product) => {
+    const childProducts = cartItems.map((product) => {
       const isAllergy = product.allergicIngredients.some((item) =>
         child.allergies.includes(item)
       );
       if (isAllergy) {
-        allrgic.push(product);
+        allergicProducts.push(product);
       } else {
         noneAllergic.push(product);
       }
+      return { ...product, isAllergy };
     });
-    var results1 = allrgic.reduce(function (results, item) {
-      (results[item.id] = results[item.id] || []).push(item);
-      return results;
+
+    const updatedGroupedProducts = childProducts.reduce((results, item) => {
+      return { ...results, [item.id]: [...(results[item.id] || []), item] };
     }, {});
 
-    setAllegicProducts(results1);
-    setNoneAllegicProducts(noneAllergic);
+    setGroupedProducts(updatedGroupedProducts);
+    setNoneAllergicProducts(noneAllergic);
   }, []);
   return (
     <div className="child-info-container">
@@ -62,7 +63,7 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
           <div>
             <h4>{child.firstName + " " + child.lastName}</h4>
             <p>
-              Balance <span>{child.credits}</span>
+              Balance <span>{parseFloat(child.credits.toFixed(2))}</span>
             </p>
           </div>
         </div>
@@ -79,29 +80,29 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
         <div className="child-alert-container">
           <Alert severity={"warning"}>
             <AlertTitle>Warning</AlertTitle>
-            {`This products has ingredients that are allergic to ${child.firstName},`}
+            {`This products may have ingredients that are allergic to ${child.firstName},`}
             <br />
             {"they will not receive a charge or be given."}
           </Alert>
         </div>
         <div className="child-order-container">
-          {Object.entries(allegicProducts).map(([key, items]) => (
+          {Object.entries(groupedProducts).map(([key, items]) => (
             <OrderItemCard
               product={items[0]}
               cardImg={items[0].image}
               text={items[0].title}
               amount={items.length}
               total={items.length * items[0].price}
-              isAllergic={true}
+              isAllergic={items[0].isAllergy}
             />
           ))}
         </div>
       </div>
       <button
         className="confirm-btn"
-        onClick={() => makePurchase(noneAllegicProducts)}
+        onClick={() => makePurchase(noneAllergicProducts)}
       >
-        Charge {productsTotal(noneAllegicProducts)} P
+        Charge {parseFloat(productsTotal(noneAllergicProducts).toFixed(2))} P
       </button>
     </div>
   );

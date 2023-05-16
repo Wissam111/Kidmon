@@ -5,18 +5,10 @@ import Spacer from "../../components/Spacer";
 import Chart from "./components/Chart";
 import Limits from "./components/Limits";
 import NavBar from "../../components/NavBar";
-import { useRoute } from "@react-navigation/native";
-import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
+import FamilyMemberHomeViewModel from "./FamilyMemberHomeViewModel";
 
 const FamilyMemberHome = () => {
-  const { params } = useRoute();
-  const { familyMember, setFamilyMember } = useFamilyMemberContext();
-  useEffect(() => {
-    const { user } = params;
-    if (user) {
-      setFamilyMember(user);
-    }
-  }, []);
+  const { familyMember, spendings } = FamilyMemberHomeViewModel();
   return (
     <View className="flex-1 relative">
       <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
@@ -27,7 +19,7 @@ const FamilyMemberHome = () => {
         />
         <Spacer space={5} />
         <View className="items-center w-full">
-          <Chart />
+          <Chart spendings={spendings} />
         </View>
         <Spacer space={10} />
         <View className="items-center w-full">

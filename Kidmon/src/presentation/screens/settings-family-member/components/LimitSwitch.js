@@ -8,7 +8,7 @@ const LimitSwitch = ({ text }) => {
   const maxValue = 100;
   const [value, setValue] = useState(0);
 
-  const [switchValue, setSwitchValue] = useState(false);
+  const [switchValue, setSwitchValue] = useState(true);
   const toggleSwitch = (value) => {
     setSwitchValue(value);
   };

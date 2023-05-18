@@ -5,7 +5,7 @@ export const useLoadingContext = () => {
   const context = useContext(LoadingContext);
 
   if (!context) {
-    throw Error("useLoadingContext must be used inside an AuthLoadingProvider");
+    throw Error("useLoadingContext must be used inside an LoadingProvider");
   }
 
   return context;

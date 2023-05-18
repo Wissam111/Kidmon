@@ -45,7 +45,7 @@ const OrderItemCard = ({
       />
       <span className="text-order">{text}</span>
       <span className="amount-order">x{amount}</span>
-      <span className="total-order">{total} P</span>
+      <span className="total-order">{parseFloat(total.toFixed(2))} P</span>
       <AiOutlineMinusCircle
         cursor={"pointer"}
         color="gray"

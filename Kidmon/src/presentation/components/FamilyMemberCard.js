@@ -1,19 +1,26 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-const FamilyMemberCard = ({ image, text, style }) => {
-  const navigation = useNavigation();
+import { IMG_URL } from "../../network/apiCall";
+
+const FamilyMemberCard = ({ image, customImage, text, style, onPress }) => {
   return (
     <TouchableOpacity
       style={{
         ...styles,
         ...style,
       }}
-      onPress={() => navigation.navigate("FamilyMemberHome")}
+      onPress={onPress}
     >
       <Image
         className="w-16 h-16 rounded-full"
         style={{}}
-        source={require("../../../assets/imgs/kid.jpg")}
+        source={
+          image
+            ? { uri: IMG_URL + `${image}` }
+            : customImage
+            ? customImage
+            : require("../../../assets/imgs/user2.png")
+        }
       />
       <Text className="text-base color-[#000000b5] font-medium mt-2">
         {text}

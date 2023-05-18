@@ -5,13 +5,21 @@ export const AuthContext = createContext();
 export const authReducer = (state, action) => {
   switch (action.type) {
     case "LOGIN":
-      localStorage.setItem("authData", JSON.stringify(data));
+      storeData(action.payload);
       return { authData: action.payload };
     case "SIGNUP":
       return { authData: action.payload };
     case "LOGOUT":
+      cleanData();
       return { authData: null };
   }
+};
+
+const storeData = (data) => {
+  localStorage.setItem("authData", JSON.stringify(data));
+};
+const cleanData = () => {
+  localStorage.setItem("authData", null);
 };
 
 export const AuthContextProvider = ({ children }) => {

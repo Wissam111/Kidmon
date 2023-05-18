@@ -9,25 +9,33 @@ import React from "react";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import Spacer from "../../../components/Spacer";
 import { useNavigation } from "@react-navigation/native";
-const Header = () => {
+import { IMG_URL } from "../../../../network/apiCall";
+
+const Header = ({ name, status, image }) => {
   const navigation = useNavigation();
+
+  const handlePressSettings = () => {
+    navigation.navigate("ChildProfileForm", { isEditMode: true });
+  };
+
   return (
     <View>
       <SafeAreaView />
-      {/* <TouchableOpacity className="p-2 pl-5 pt-2">
-        <AntDesign name="arrowleft" size={30} />
-      </TouchableOpacity> */}
       <View className="flex-row justify-between items-center p-5 pb-1 mt-5 ">
         <View className="flex-row items-center p-2">
           <Image
             className="w-24 h-24 rounded-full"
-            source={require("../../../../../assets/imgs/kid.jpg")}
+            source={
+              image
+                ? { uri: IMG_URL + `${image}` }
+                : require("../../../../../assets/imgs/user2.png")
+            }
           />
           <Spacer space={5} />
           <View>
-            <Text className="text-2xl font-medium">Feras</Text>
+            <Text className="text-2xl font-medium">{name}</Text>
             <View className="flex-row items-end">
-              <Text className="text-sm color-[#00000075]">At School</Text>
+              <Text className="text-sm color-[#00000075]">{status}</Text>
               <Spacer space={2} />
               <Image
                 className="w-6 h-6"
@@ -38,7 +46,7 @@ const Header = () => {
         </View>
         <TouchableOpacity
           className="w-12 h-12 items-center justify-center border-2 border-solid border-[#c2c2c299] rounded-full"
-          onPress={() => navigation.navigate("FamilyMemberSettings")}
+          onPress={handlePressSettings}
         >
           <Ionicons name="ios-settings-sharp" size={28} />
         </TouchableOpacity>

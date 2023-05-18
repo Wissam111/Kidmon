@@ -3,14 +3,10 @@ import FamilyMembersList from "./components/FamilyMembersList";
 import ActivityList from "../../components/ActivityList";
 import Balance from "./components/Balance";
 import Header from "./components/Header";
+import HomeParentViewModel from "./HomeParentViewModel";
 import { View } from "react-native";
 import { white } from "../../styles";
-
-const familyMembers = [
-  { id: 1, firstName: "John", lastName: "Gb" },
-  { id: 2, firstName: "Tarik", lastName: "Husin" },
-  { id: 3, firstName: "Wissam", lastName: "Kabaha" },
-];
+import { cos } from "react-native-reanimated";
 
 const activities = [
   {
@@ -21,6 +17,7 @@ const activities = [
       { title: "DD", amout: 4 },
       { title: "BB", amount: 1 },
     ],
+    price: 20,
   },
   {
     id: 2,
@@ -30,23 +27,31 @@ const activities = [
       { title: "RD", amout: 1 },
       { title: "VF", amount: 1 },
     ],
+    price: 20,
   },
-  { id: 3, type: "purchase", user: "123", items: [{ title: "DD", amout: 4 }] },
+  {
+    id: 3,
+    type: "purchase",
+    user: "123",
+    items: [{ title: "DD", amout: 4 }],
+    price: 20,
+  },
 ];
 
 const HomeParent = () => {
+  const { user } = HomeParentViewModel();
+
   return (
     <View style={{ flex: 1, backgroundColor: white }}>
-      <Header />
+      <Header firstName={user?.firstName} />
 
       <Spacer space={20} />
       <View className="w-full items-center">
-        <Balance amount={1200} />
+        <Balance amount={user?.credits} />
       </View>
 
       <Spacer space={13} />
-      <FamilyMembersList familyMembers={familyMembers} />
-
+      <FamilyMembersList familyMembers={user?.familyMembers} />
       <Spacer space={20} />
       <ActivityList
         style={{ flex: 1 }}

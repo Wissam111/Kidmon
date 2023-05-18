@@ -1,17 +1,33 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BarChart } from "react-native-gifted-charts";
 import { primaryColor } from "../../../styles";
-const Chart = () => {
-  const barData = [
-    { value: 10, label: "Su" },
-    { value: 40, label: "Mo", frontColor: "#5FD5E5" },
-    { value: 12, label: "Tu", frontColor: "#5FD5E5" },
-    { value: 15, label: "We" },
-    { value: 40, label: "Th", frontColor: "#5FD5E5" },
-    { value: 20, label: "Fr" },
-    { value: 5, label: "Sa" },
-  ];
+const Chart = ({ spendings }) => {
+  const [chartData, setChartData] = useState([
+    { value: 0, label: "Su" },
+    { value: 0, label: "Mo", frontColor: "#5FD5E5" },
+    { value: 0, label: "Tu", frontColor: "#5FD5E5" },
+    { value: 0, label: "We" },
+    { value: 0, label: "Th", frontColor: "#5FD5E5" },
+    { value: 0, label: "Fr" },
+    { value: 0, label: "Sa" },
+  ]);
+  const today = new Date().getDay();
+  useEffect(() => {
+    const updateChart = () => {
+      const tempData = [...chartData];
+      spendings.forEach((spending) => {
+        const day = spending.day;
+        if (day >= today) {
+          const index = day % 7; // Adding 1 and taking modulo 7 to match the chartData index
+          tempData[index].value = spending.totalSpendings;
+        }
+      });
+      setChartData(tempData);
+    };
+    updateChart();
+  }, [spendings]);
+
   return (
     <View style={styles.style}>
       <View className="flex-row justify-between p-4">
@@ -20,7 +36,9 @@ const Chart = () => {
           <Text className="text-sm color-[#00000075]">This Week</Text>
         </View>
         <View>
-          <Text className="text-lg font-medium">13.34 P</Text>
+          <Text className="text-lg font-medium">
+            {parseFloat(chartData[today].value.toFixed(2))} P
+          </Text>
           <Text className="text-sm color-[#00000075]">Spent today</Text>
         </View>
       </View>
@@ -29,7 +47,7 @@ const Chart = () => {
         noOfSections={3}
         barBorderRadius={8}
         frontColor="lightgray"
-        data={barData}
+        data={chartData}
         yAxisThickness={0}
         xAxisThickness={0}
       />

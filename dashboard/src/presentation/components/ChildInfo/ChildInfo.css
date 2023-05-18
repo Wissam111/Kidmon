@@ -71,6 +71,7 @@
   flex-direction: column;
   gap: 12px;
   height: 60%;
+  overflow-y: auto;
 }
 .child-order-col2 h4 {
   font-weight: 500;

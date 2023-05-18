@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { IMG_URL } from "../../network/apiCall";
 
-const FamilyMemberCard = ({ image, text, style, onPress }) => {
+const FamilyMemberCard = ({ image, customImage, text, style, onPress }) => {
   return (
     <TouchableOpacity
       style={{
@@ -17,6 +17,8 @@ const FamilyMemberCard = ({ image, text, style, onPress }) => {
         source={
           image
             ? { uri: IMG_URL + `${image}` }
+            : customImage
+            ? customImage
             : require("../../../assets/imgs/user2.png")
         }
       />

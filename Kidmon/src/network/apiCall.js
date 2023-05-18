@@ -115,6 +115,7 @@ export const apiCall = async (
   } else {
     bbody = null;
   }
+
   const result = await fetch(customURL, {
     headers: {
       "Content-Type": contentType,

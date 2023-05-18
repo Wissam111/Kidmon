@@ -44,7 +44,7 @@ const Header = ({ name, status, image }) => {
         </View>
         <TouchableOpacity
           className="w-12 h-12 items-center justify-center border-2 border-solid border-[#c2c2c299] rounded-full"
-          onPress={() => navigation.navigate("FamilyMemberSettings")}
+          onPress={() => navigation.navigate("Edit")}
         >
           <Ionicons name="ios-settings-sharp" size={28} />
         </TouchableOpacity>

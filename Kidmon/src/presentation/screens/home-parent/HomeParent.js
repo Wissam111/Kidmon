@@ -23,6 +23,7 @@ const activities = [
       { title: "DD", amout: 4 },
       { title: "BB", amount: 1 },
     ],
+    price: 20,
   },
   {
     id: 2,
@@ -32,13 +33,19 @@ const activities = [
       { title: "RD", amout: 1 },
       { title: "VF", amount: 1 },
     ],
+    price: 20,
   },
-  { id: 3, type: "purchase", user: "123", items: [{ title: "DD", amout: 4 }] },
+  {
+    id: 3,
+    type: "purchase",
+    user: "123",
+    items: [{ title: "DD", amout: 4 }],
+    price: 20,
+  },
 ];
 
 const HomeParent = () => {
   const { user } = HomeParentViewModel();
-  console.log(user?.familyMembers);
   return (
     <View style={{ flex: 1, backgroundColor: white }}>
       <Header firstName={user?.firstName} />
@@ -50,7 +57,6 @@ const HomeParent = () => {
 
       <Spacer space={13} />
       <FamilyMembersList familyMembers={user?.familyMembers} />
-
       <Spacer space={20} />
       <ActivityList
         style={{ flex: 1 }}

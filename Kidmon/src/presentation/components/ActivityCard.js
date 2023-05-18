@@ -4,7 +4,7 @@ import moment from "moment";
 import Spacer from "./Spacer";
 import { white } from "../styles";
 
-const ActivityCard = ({ type, image, text, datetime, onPress }) => {
+const ActivityCard = ({ image, text, datetime, onPress, totalPrice }) => {
   return (
     <View
       style={{
@@ -12,13 +12,15 @@ const ActivityCard = ({ type, image, text, datetime, onPress }) => {
       }}
     >
       <Image
-        className="w-7 h-7"
+        className="w-8 h-8"
         source={require("../../../assets/imgs/school.png")}
       />
 
       <Spacer space={8} />
       <View style={{ flexGrow: 1 }}>
-        <Text className="font-medium">{text}</Text>
+        <Text className="font-medium">
+          {text.charAt(0).toUpperCase() + text.slice(1)}
+        </Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Ionicons name="time-outline" size={14} color={"#00000075"} />
           <Spacer space={1} />
@@ -27,7 +29,9 @@ const ActivityCard = ({ type, image, text, datetime, onPress }) => {
           </Text>
         </View>
       </View>
-      <Text className="font-medium pr-2">-10 P</Text>
+      <Text className="font-medium pr-2">
+        - {parseFloat(totalPrice?.toFixed(2))} P
+      </Text>
     </View>
   );
 };

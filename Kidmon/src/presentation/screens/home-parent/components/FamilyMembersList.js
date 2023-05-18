@@ -28,6 +28,13 @@ const FamilyMembersList = ({ familyMembers }) => {
         horizontal
         showsHorizontalScrollIndicator={false}
       >
+        <FamilyMemberCard
+          style={{ paddingTop: 20 }}
+          customImage={require("../../../../../assets/imgs/plus2.png")}
+          // onPress={() => console.log("")}
+        />
+        <Spacer space={8} />
+
         {familyMembers.map((user) => (
           <View key={user.id} style={{ flexDirection: "row" }}>
             <FamilyMemberCard

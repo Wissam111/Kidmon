@@ -31,7 +31,7 @@ const Header = ({ name, balance }) => {
         <Text className="color-[#333333] text-3xl font-semibold ">
           {parseFloat(balance.toFixed(2))} P
         </Text>
-        <DefaultButton text={"Buy"} tailWindStyle="mt-10 w-11/12 h-12" />
+        <DefaultButton text={"Charge"} tailWindStyle="mt-10 w-11/12 h-12" />
       </View>
     </View>
   );

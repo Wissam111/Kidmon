@@ -33,11 +33,15 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
         <BottomSheetFlatList // change to
           data={activities}
           style={{ flex: 1 }}
-          contentContainerStyle={{ padding: 8 }}
+          contentContainerStyle={{ padding: 8, paddingBottom: 100 }}
           ItemSeparatorComponent={<Spacer space={4} />}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <ActivityCard type={item.type} text={"Enter-In"} />
+            <ActivityCard
+              text={item.type}
+              totalPrice={item.price}
+              datetime={item.createdAt}
+            />
           )}
         />
       </View>

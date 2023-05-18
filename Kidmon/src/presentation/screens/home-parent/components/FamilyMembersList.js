@@ -6,10 +6,15 @@ import { useFamilyMemberContext } from "../../../../hooks/useFamilyMemberContext
 const FamilyMembersList = ({ familyMembers }) => {
   const navigation = useNavigation();
   const { setFamilyMember } = useFamilyMemberContext();
+
   const handleSelectChild = (user) => {
     navigation.navigate("FamilyMemberHome");
     setFamilyMember(user);
   };
+  const handleSelectAddButton = () => {
+    navigation.navigate("ChildProfileForm", { isEditMode: false });
+  };
+
   return (
     <View>
       <Text
@@ -31,7 +36,7 @@ const FamilyMembersList = ({ familyMembers }) => {
         <FamilyMemberCard
           style={{ paddingTop: 20 }}
           customImage={require("../../../../../assets/imgs/plus2.png")}
-          // onPress={() => console.log("")}
+          onPress={handleSelectAddButton}
         />
         <Spacer space={8} />
 

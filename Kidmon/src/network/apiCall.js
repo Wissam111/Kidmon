@@ -47,7 +47,7 @@ const getData = async () => {
 const getToken = async () => {
   try {
     const authData = await getData();
-    if (authData.token == null) return null;
+    if (authData?.token == null) return null;
     return authData.token;
   } catch (e) {
     console.log("getToken:", e);

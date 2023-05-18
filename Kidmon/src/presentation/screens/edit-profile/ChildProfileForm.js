@@ -12,12 +12,15 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import { TextInput } from "@react-native-material/core";
-import EditProfileViewModel from "./EditProfileViewModel";
+import ChildProfileFormViewModel from "./ChildProfileFormViewModel";
 import DefaultButton from "../../components/DefaultButton";
 import Spacer from "../../components/Spacer";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const EditProfile = () => {
+const ChildProfileForm = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const { isEditMode } = route.params;
   const {
     firstName,
     lastName,
@@ -26,9 +29,10 @@ const EditProfile = () => {
     handleFormDataChange,
     selectImage,
     image,
-    onSaveChanges,
-  } = EditProfileViewModel();
-  const navigation = useNavigation();
+    handleSubmit,
+  } = ChildProfileFormViewModel(isEditMode);
+
+  const title = isEditMode ? "Edit Profile" : "Add Child";
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <KeyboardAvoidingView
@@ -48,7 +52,7 @@ const EditProfile = () => {
             <AntDesign name="left" size={25} />
           </TouchableOpacity>
 
-          <Text className="text-2xl font-medium p-4 mb-5">Edit Profile</Text>
+          <Text className="text-2xl font-medium p-4 mb-5">{title}</Text>
           <Spacer space={5} />
 
           <View className="relative w-full items-center">
@@ -117,9 +121,9 @@ const EditProfile = () => {
           </View>
           <Spacer space={7} />
           <DefaultButton
-            text={"Save Changes"}
+            text={isEditMode ? "Save Changes" : "Add Child"}
             style={{ width: "50%", height: 45 }}
-            onPress={onSaveChanges}
+            onPress={handleSubmit}
           />
         </ScrollView>
       </KeyboardAvoidingView>
@@ -148,4 +152,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EditProfile;
+export default ChildProfileForm;

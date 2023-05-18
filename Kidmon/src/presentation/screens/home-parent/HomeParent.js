@@ -8,12 +8,6 @@ import { View } from "react-native";
 import { white } from "../../styles";
 import { cos } from "react-native-reanimated";
 
-const familyMembers = [
-  { id: 1, firstName: "John", lastName: "Gb" },
-  { id: 2, firstName: "Tarik", lastName: "Husin" },
-  { id: 3, firstName: "Wissam", lastName: "Kabaha" },
-];
-
 const activities = [
   {
     id: 1,
@@ -46,6 +40,7 @@ const activities = [
 
 const HomeParent = () => {
   const { user } = HomeParentViewModel();
+
   return (
     <View style={{ flex: 1, backgroundColor: white }}>
       <Header firstName={user?.firstName} />

@@ -13,12 +13,14 @@ import { IMG_URL } from "../../../../network/apiCall";
 
 const Header = ({ name, status, image }) => {
   const navigation = useNavigation();
+
+  const handlePressSettings = () => {
+    navigation.navigate("ChildProfileForm", { isEditMode: true });
+  };
+
   return (
     <View>
       <SafeAreaView />
-      {/* <TouchableOpacity className="p-2 pl-5 pt-2">
-        <AntDesign name="arrowleft" size={30} />
-      </TouchableOpacity> */}
       <View className="flex-row justify-between items-center p-5 pb-1 mt-5 ">
         <View className="flex-row items-center p-2">
           <Image
@@ -44,7 +46,7 @@ const Header = ({ name, status, image }) => {
         </View>
         <TouchableOpacity
           className="w-12 h-12 items-center justify-center border-2 border-solid border-[#c2c2c299] rounded-full"
-          onPress={() => navigation.navigate("Edit")}
+          onPress={handlePressSettings}
         >
           <Ionicons name="ios-settings-sharp" size={28} />
         </TouchableOpacity>

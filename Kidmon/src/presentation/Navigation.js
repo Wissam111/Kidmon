@@ -10,7 +10,7 @@ import Transfer from "./screens/transfer/Transfer";
 import FamilyMemberHome from "./screens/home-family-member/FamilyMemberHome";
 import FamilyMemberSettings from "./screens/settings-family-member/FamilyMemberSettings";
 import Entry from "./screens/entry/Entry";
-import EditProfile from "./screens/edit-profile/EditProfile";
+import ChildProfileForm from "./screens/edit-profile/ChildProfileForm";
 
 import Loading from "./components/Loading";
 import { useLoadingContext } from "../hooks/useLoadingContext";
@@ -30,7 +30,10 @@ const HomeParentNavigation = () => {
         name="FamilyMemberSettings"
         component={FamilyMemberSettings}
       />
-      <HomeParentStack.Screen name="Edit" component={EditProfile} />
+      <HomeParentStack.Screen
+        name="ChildProfileForm"
+        component={ChildProfileForm}
+      />
       <HomeParentStack.Screen name="Profile" component={Profile} />
     </HomeParentStack.Navigator>
   );

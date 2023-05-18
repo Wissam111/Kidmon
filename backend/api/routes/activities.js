@@ -20,7 +20,7 @@ router.get('/user-activities',
         })
     }),
     requireAuthentication,
-    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember, USER_ROLES.parent] }),
     activityController.getUserActivities)
 
 

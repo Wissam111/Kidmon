@@ -1,6 +1,5 @@
 .category-container {
-  width: 61px;
-  height: 101px;
+  padding: 8px;
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
@@ -27,5 +26,5 @@
 }
 
 .active-category {
-  background: #eefbf3;
+  background: #b9f1ce;
 }

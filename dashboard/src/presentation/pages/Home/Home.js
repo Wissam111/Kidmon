@@ -29,21 +29,22 @@ const Home = () => {
         <div className="home-orders-main">
           <div className="home-main-bar">
             <h1>
-              Menu <span>Category</span>{" "}
+              Menu <span>Category</span>
             </h1>
+            <div className="space"></div>
             <Search />
           </div>
           <div className="category-cards-container">
-            {categories.map((category, index) => {
-              return (
-                <CategoryCard
-                  key={index}
-                  category={category}
-                  isActive={currentCategory.text === category.text}
-                  handleSelectCategory={handleSelectCategory}
-                />
-              );
-            })}
+              {categories.map((category, index) => {
+                return (
+                  <CategoryCard
+                    key={index}
+                    category={category}
+                    isActive={currentCategory.text === category.text}
+                    handleSelectCategory={handleSelectCategory}
+                  />
+                );
+              })}
           </div>
           <div className="menu-item-cards">
             {products.map((product) => {

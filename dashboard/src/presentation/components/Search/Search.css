@@ -2,8 +2,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 250px;
+  flex: 1;
+  border-radius: 10px;
+  border: 1px solid #cecece;
+  min-width: 300px;
 }
+
 .search-menu-wrapper input {
   width: 100%;
   height: 30px;

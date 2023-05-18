@@ -18,7 +18,7 @@ const NavBar = () => {
   return (
     <div className="navbar-container">
       <img src={require("../../../assets/imgs/family2.png")} />
-      <ul className="nav-links">
+      <div className="nav-links">
         <li className={pathName === "/" ? "active" : null}>
           <Link to="/" className="nav-link">
             <HiOutlineBuildingStorefront size={27} color="gray" />
@@ -34,13 +34,15 @@ const NavBar = () => {
             <IoPersonAddOutline size={27} color="gray" />
           </Link>
         </li>
+        
+        <div className="space"></div>
 
         <li className={"logout-nav-btn"}>
           <Link to="/entry" className="nav-link" onClick={handleLogout}>
             <BiLogOut size={27} color="gray" />
           </Link>
         </li>
-      </ul>
+      </div>
     </div>
   );
 };

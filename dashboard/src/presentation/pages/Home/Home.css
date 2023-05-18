@@ -3,7 +3,6 @@
   height: 100%;
   display: flex;
   position: relative;
-  overflow: hidden;
 }
 
 .home-orders-main {
@@ -19,7 +18,7 @@
 }
 
 .home-main-bar h1 {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   margin-left: 20px;
   margin: 0;
@@ -36,8 +35,13 @@
   gap: 20px;
 }
 
+
 .category-cards-container {
+  margin-top: 20px;
+  /* border: 1px solid #cecece; */
+  border-radius: 8px;
+  background: #f9f9f9;
+  padding: 12px 6px;
   display: flex;
   gap: 25px;
-  margin-top: 20px;
 }

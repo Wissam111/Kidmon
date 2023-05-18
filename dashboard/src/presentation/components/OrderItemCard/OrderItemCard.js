@@ -12,17 +12,22 @@ const OrderItemCard = ({
   amount,
   text,
   isAllergic,
+  index
 }) => {
   const { dispatch } = useCartItemsContext();
   const [showAllergyInfo, setShowAllergyInfo] = useState(false);
   const handleRemoveFromCart = () => {
     dispatch({ type: "REMOVEFROMCART", payload: product });
   };
+
+  console.log(index);
+  const colors = ['#96d3d9', '#a7e677', '#b396d9']
+
   return (
     <div
-      className={`orderItem-card-container ${
-        isAllergic ? "orderItem-allergic" : ""
-      }`}
+      style={{ border: `1px solid ${colors[index % colors.length]}` }}
+      className={`orderItem-card-container ${isAllergic ? "orderItem-allergic" : ""
+        }`}
       onMouseEnter={() => setShowAllergyInfo(true)}
       onMouseLeave={() => setShowAllergyInfo(false)}
     >

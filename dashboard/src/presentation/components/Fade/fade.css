@@ -1,0 +1,13 @@
+.render {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.transition {
+    transition: all 0.3s ease;
+}

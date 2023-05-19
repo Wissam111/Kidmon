@@ -33,7 +33,7 @@ router.get('/user-spendings',
         })
     }),
     requireAuthentication,
-    // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
     activityController.getUserSpendings)
 
 
@@ -46,7 +46,7 @@ router.get('/user-spending',
         })
     }),
     requireAuthentication,
-    // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
     activityController.getUserSpendingAtDate)
 
 
@@ -75,9 +75,9 @@ router.post('/purchase',
             })).required()
         })
     }),
-    // requireAuthentication,
-    // makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
-    // makeCheckAuthorization({ reqfieldName: 'userId', reqDataField: 'body', userFieldName: 'id' }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeCheckAuthorization({ reqfieldName: 'userId', reqDataField: 'body', userFieldName: 'id' }),
     activityController.purchase)
 
 

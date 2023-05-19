@@ -2,9 +2,10 @@ const { deleteFile } = require("../api/middleware/file-functions");
 const { userService } = require("../use-cases");
 
 const updateUser = async (req, res, next) => {
+  // #swagger.tags = ['Users']
   try {
-    const { userId } = req.params;
-    const user = await userService.getUserUseCase({ userId: userId });
+    const { userId, firstName, lastName, phone, parentId, braceletId, allergies, limits } = req.body;
+    const user = await userService.editUserUseCase({ userId, firstName, lastName, phone, parentId, braceletId, allergies, limits });
     res.status(200).json({
       message: "user updated successfully",
       user,
@@ -16,6 +17,7 @@ const updateUser = async (req, res, next) => {
 };
 
 const getUser = async (req, res, next) => {
+  // #swagger.tags = ['Users']
   try {
     const { userId } = req.params;
     const user = await userService.getUserUseCase({ userId: userId });
@@ -30,16 +32,12 @@ const getUser = async (req, res, next) => {
 };
 
 const getUsers = async (req, res, next) => {
+  // #swagger.tags = ['Users']
   try {
     const { search, sort } = req.query;
     const page = +req.query.page;
     const pageSize = +req.query.pageSize;
-    const users = await userService.getUsersUseCase({
-      search,
-      page,
-      pageSize,
-      sort,
-    });
+    const users = await userService.getUsersUseCase({ search, page, pageSize, sort, });
     res.status(200).json({
       message: "users fetched successfully",
       users,
@@ -51,6 +49,7 @@ const getUsers = async (req, res, next) => {
 };
 
 const getUserByBraceletId = async (req, res, next) => {
+  // #swagger.tags = ['Users']
   try {
     const { braceletId } = req.params;
     console.log(req.params);
@@ -69,6 +68,7 @@ const getUserByBraceletId = async (req, res, next) => {
 };
 
 const createParentUser = async (req, res, next) => {
+  // #swagger.tags = ['Users']
   try {
     console.log("createParentUser");
     const { firstName, lastName, phone } = req.body;
@@ -78,7 +78,7 @@ const createParentUser = async (req, res, next) => {
       lastName,
       phone,
       image,
-    });
+    })
     res.status(201).json({
       message: "created user successfully",
       user,
@@ -90,27 +90,11 @@ const createParentUser = async (req, res, next) => {
 };
 
 const createFamilyMemberUser = async (req, res, next) => {
+  // #swagger.tags = ['Users']
   try {
-    const {
-      firstName,
-      lastName,
-      phone,
-      parentId,
-      braceletId,
-      allergies,
-      limits,
-    } = req.body;
+    const { firstName, lastName, phone, parentId, braceletId, allergies, limits } = req.body;
     const image = req.file?.filename;
-    const user = await userService.createFamilyMemberUserUseCase({
-      firstName,
-      lastName,
-      phone,
-      parentId,
-      braceletId,
-      allergies,
-      image,
-      limits,
-    });
+    const user = await userService.createFamilyMemberUserUseCase({ firstName, lastName, phone, parentId, braceletId, allergies, image, limits });
     res.status(201).json({
       message: "created user successfully",
       user,
@@ -122,15 +106,11 @@ const createFamilyMemberUser = async (req, res, next) => {
 };
 
 const createAdminUser = async (req, res, next) => {
+  // #swagger.tags = ['Users']
   try {
     const { firstName, lastName, phone } = req.body;
     const image = req.file?.filename;
-    const user = await userService.createAdminUserUseCase({
-      firstName,
-      lastName,
-      phone,
-      image,
-    });
+    const user = await userService.createAdminUserUseCase({ firstName, lastName, phone, image, });
     res.status(201).json({
       message: "created user successfully",
       user,

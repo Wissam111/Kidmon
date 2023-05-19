@@ -45,15 +45,15 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
 
 
             // subject to credits limit
-            if (user.limits && user.limits.daily < finalPrice) {
+            if (user.limits && user.limits.daily.isActivie && user.limits.daily.value < finalPrice) {
                 throw new CreditsLimitError('Daily limit reached')
             }
 
-            if (user.limits && user.limits.weekly < finalPrice) {
+            if (user.limits && user.limits.weekly.isActive && user.limits.weekly.value < finalPrice) {
                 throw new CreditsLimitError('Weekly limit reached')
             }
 
-            if (user.limits && user.limits.monthly < finalPrice) {
+            if (user.limits && user.limits.monthly.isActive && user.limits.monthly.value < finalPrice) {
                 throw new CreditsLimitError('Monthly limit reached')
             }
 

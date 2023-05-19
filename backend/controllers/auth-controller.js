@@ -5,6 +5,7 @@ const { authService } = require("../use-cases");
 
 
 exports.sendAuthVerification = async (req, res, next) => {
+    // #swagger.tags = ['Auth']
     const { phone } = req.body
 
     try {
@@ -23,6 +24,7 @@ exports.sendAuthVerification = async (req, res, next) => {
 
 
 exports.verifyAndLogin = async (req, res, next) => {
+    // #swagger.tags = ['Auth']
     const { phone, verifyId, code } = req.body
 
     try {

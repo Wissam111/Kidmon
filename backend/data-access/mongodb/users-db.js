@@ -39,10 +39,11 @@ exports.makeUserDb = ({ makeDb }) => {
       session: transaction?.getSession(),
       populate: populate
         ? [
-            { path: "parent", select: "id firstName lastName phone credits" },
-            { path: "familyMembers" },
-          ]
+          { path: "parent", select: "id firstName lastName phone credits" },
+          { path: "familyMembers" },
+        ]
         : null,
+      new: true
     }).lean();
 
     if (!user) return null;
@@ -68,9 +69,9 @@ exports.makeUserDb = ({ makeDb }) => {
         session: transaction?.getSession(),
         populate: populate
           ? [
-              { path: "parent", select: "id firstName lastName phone credits" },
-              { path: "familyMembers" },
-            ]
+            { path: "parent", select: "id firstName lastName phone credits" },
+            { path: "familyMembers" },
+          ]
           : null,
       }
     ).lean();
@@ -93,9 +94,9 @@ exports.makeUserDb = ({ makeDb }) => {
         session: transaction?.getSession(),
         populate: populate
           ? [
-              { path: "parent", select: "id firstName lastName phone credits" },
-              { path: "familyMembers" },
-            ]
+            { path: "parent", select: "id firstName lastName phone credits" },
+            { path: "familyMembers" },
+          ]
           : null,
       }
     ).lean();
@@ -123,9 +124,9 @@ exports.makeUserDb = ({ makeDb }) => {
         session: transaction?.getSession(),
         populate: populate
           ? [
-              { path: "parent", select: "id firstName lastName phone credits" },
-              { path: "familyMembers" },
-            ]
+            { path: "parent", select: "id firstName lastName phone credits" },
+            { path: "familyMembers" },
+          ]
           : null,
       }
     ).lean();

@@ -2,9 +2,15 @@ const mongoose = require('mongoose')
 
 
 const limitSchema = new mongoose.Schema({
-    daily: { type: Number },
-    weekly: { type: Number },
-    monthly: { type: Number }
+    value: { type: Number },
+    isActive: { type: Boolean },
+}, { _id: false })
+
+
+const limitsSchema = new mongoose.Schema({
+    daily: { type: limitSchema },
+    weekly: { type: limitSchema },
+    monthly: { type: limitSchema }
 }, { _id: false })
 
 
@@ -18,7 +24,7 @@ const userSchema = new mongoose.Schema({
     image: { type: String },
     credits: { type: Number },
     allergies: { type: [String], default: undefined },
-    limits: { type: limitSchema },
+    limits: { type: limitsSchema },
     familyMembers: { type: [String], ref: 'user', default: undefined },
     role: { type: String },
     createdAt: { type: Date },

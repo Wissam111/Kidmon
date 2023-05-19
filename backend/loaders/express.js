@@ -15,7 +15,7 @@ module.exports = async ({ app }) => {
 
   //routes
   app.use('/api/imgs', express.static(imgsPath));
-  app.use(`/api/${configs.apiVersion}/`, routes())
+  app.use(`/api/${configs.apiVersion}/`, await routes())
 
 
   //handling errors

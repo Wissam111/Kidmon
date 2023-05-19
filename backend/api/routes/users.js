@@ -2,8 +2,12 @@ const { Router } = require("express");
 const { celebrate, Joi, Segments } = require("celebrate");
 const { userController } = require("../../controllers");
 const { imageUpload } = require("../middleware/image-file-uploader");
+const { requireAuthentication } = require("../middleware/requireAuthentication");
+const { makeFieldAuthorization, makeRoleAuthorization } = require("../middleware/requireAuthorization");
+const { USER_ROLES } = require("../../entities/user");
 
 const router = Router();
+
 
 router.post(
   "/parent",
@@ -15,6 +19,8 @@ router.post(
       lastName: Joi.string().required(),
     }),
   }),
+  requireAuthentication,
+  makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
   userController.createParentUser
 );
 
@@ -30,12 +36,24 @@ router.post(
       parentId: Joi.string().required(),
       allergies: Joi.array().items(Joi.string()),
       limits: Joi.object().keys({
-        daily: Joi.number().required(),
-        weekly: Joi.number().required(),
-        monthly: Joi.number().required(),
+        daily: Joi.object().keys({
+          value: Joi.number().required(),
+          isActive: Joi.bool().required()
+        }),
+        weekly: Joi.object().keys({
+          value: Joi.number().required(),
+          isActive: Joi.bool().required()
+        }),
+        monthly: Joi.object().keys({
+          value: Joi.number().required(),
+          isActive: Joi.bool().required()
+        }),
       }),
     }),
   }),
+  requireAuthentication,
+  makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
+  makeFieldAuthorization({ reqData: { in: 'body', field: 'parentId' }, userField: 'id' }),
   userController.createFamilyMemberUser
 );
 
@@ -49,6 +67,8 @@ router.post(
       lastName: Joi.string().required(),
     }),
   }),
+  requireAuthentication,
+  makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
   userController.createAdminUser
 );
 
@@ -57,17 +77,31 @@ router.patch(
   imageUpload("image"),
   celebrate({
     [Segments.BODY]: Joi.object().keys({
-      phone: Joi.string().required(),
-      firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
+      userId: Joi.string(),
+      phone: Joi.string(),
+      firstName: Joi.string(),
+      lastName: Joi.string(),
       allergies: Joi.array().items(Joi.string()),
+      parentId: Joi.string(),
+      braceletId: Joi.string(),
       limits: Joi.object().keys({
-        daily: Joi.number().required(),
-        weekly: Joi.number().required(),
-        monthly: Joi.number().required(),
-      }),
+        daily: Joi.object().keys({
+          value: Joi.number().required(),
+          isActive: Joi.bool().required()
+        }),
+        weekly: Joi.object().keys({
+          value: Joi.number().required(),
+          isActive: Joi.bool().required()
+        }),
+        monthly: Joi.object().keys({
+          value: Joi.number().required(),
+          isActive: Joi.bool().required()
+        }),
+      }).allow(null),
     }),
   }),
+  requireAuthentication,
+  makeFieldAuthorization({ reqData: { in: 'body', field: 'userId' }, userField: 'id' }),
   userController.updateUser
 );
 
@@ -78,6 +112,8 @@ router.get(
       userId: Joi.string().required(),
     }),
   }),
+  requireAuthentication,
+  makeFieldAuthorization({ reqData: { in: 'params', field: 'userId' }, userField: 'id' }),
   userController.getUser
 );
 
@@ -91,6 +127,8 @@ router.get(
       sort: Joi.string().valid("desc", "asc"),
     }),
   }),
+  requireAuthentication,
+  makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
   userController.getUsers
 );
 
@@ -101,6 +139,8 @@ router.get(
       braceletId: Joi.string().required(),
     }),
   }),
+  requireAuthentication,
+  makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
   userController.getUserByBraceletId
 );
 

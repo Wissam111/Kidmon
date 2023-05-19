@@ -1,6 +1,7 @@
 const { productService } = require("../use-cases");
 
 const createProduct = async (req, res, next) => {
+  // #swagger.tags = ['Products']
   try {
     const { title, price, category, allergicIngredients } = req.body;
     const image = req.file?.filename;
@@ -22,6 +23,7 @@ const createProduct = async (req, res, next) => {
 };
 
 const deleteProduct = async (req, res, next) => {
+  // #swagger.tags = ['Products']
   try {
     const { productId } = req.params;
     await productService.deleteProduct({ productId: productId });
@@ -35,6 +37,7 @@ const deleteProduct = async (req, res, next) => {
 };
 
 const getProduct = async (req, res, next) => {
+  // #swagger.tags = ['Products']
   try {
     const { productId } = req.params;
     const product = await productService.getProduct({ productId: productId });
@@ -49,6 +52,7 @@ const getProduct = async (req, res, next) => {
 };
 
 const getProducts = async (req, res, next) => {
+  // #swagger.tags = ['Products']
   try {
     const { search, sort, category } = req.query;
     const page = +req.query.page;

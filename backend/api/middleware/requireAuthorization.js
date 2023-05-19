@@ -5,9 +5,9 @@ const { USER_ROLES_ENUM } = require("../../entities/user")
 exports.makeRoleAuthorization = ({ userRoles = USER_ROLES_ENUM }) => {
     
     return (req, res, next) => {
-        // if(configs.debug){
-        //     return next()
-        // }
+        if(configs.debug){
+            return next()
+        }
 
         if (!req.user) {
             throw new Error('user cannot be null');
@@ -26,9 +26,9 @@ exports.makeRoleAuthorization = ({ userRoles = USER_ROLES_ENUM }) => {
 // Define middleware to check user authorization
 exports.makeCheckAuthorization = ({ reqfieldName, userFieldName, reqDataField }) => {
     return (req, res, next) => {
-        // if(configs.debug){
-        //     return next()
-        // }
+        if(configs.debug){
+            return next()
+        }
         
         if (!req.user) {
             throw new Error('user cannot be null')

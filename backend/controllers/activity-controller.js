@@ -2,6 +2,7 @@ const { activityService } = require("../use-cases");
 
 
 const transferPoints = async (req, res) => {
+    // #swagger.tags = ['Acitvities']
     try {
         const { senderUserId, receiverUserId, amount } = req.body
         await activityService.transferPointsUserCase({ senderUserId, receiverUserId, amount })
@@ -19,6 +20,7 @@ const transferPoints = async (req, res) => {
 
 
 const purchase = async (req, res, next) => {
+    // #swagger.tags = ['Acitvities']
     try {
         const { userId, items } = req.body
         await activityService.purchaseUseCase({ userId, items })
@@ -34,6 +36,7 @@ const purchase = async (req, res, next) => {
 
 
 const getUserActivities = async (req, res) => {
+    // #swagger.tags = ['Acitvities']
     try {
         const { userId, sort } = req.query
         const page = + req.query.page
@@ -53,7 +56,7 @@ const getUserActivities = async (req, res) => {
 
 
 const getUserSpendings = async (req, res, next) => {
-
+    // #swagger.tags = ['Acitvities']
     try {
         const { userId, startDate, endDate } = req.query
         const spendings = await activityService.listUserSpendings({ userId: userId, startDate, endDate })
@@ -69,6 +72,7 @@ const getUserSpendings = async (req, res, next) => {
 
 
 const getUserSpendingAtDate = async (req, res, next) => {
+    // #swagger.tags = ['Acitvities']
 
     try {
         const { userId, timezone, date } = req.query

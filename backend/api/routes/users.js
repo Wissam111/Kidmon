@@ -5,6 +5,7 @@ const { imageUpload } = require("../middleware/image-file-uploader");
 
 const router = Router();
 
+
 router.post(
   "/parent",
   imageUpload("image"),

@@ -5,14 +5,16 @@ const configs = require('./configs')
 
 const port = configs.port
 
-
+const mode = () => `${configs.debug ? 'Debug' : 'Production'}`
 
 const onListening = () => {
     console.log(
         `
       ################################################
       🛡️  Server listening on port: ${port} 🛡️
-              
+                
+              Mode: ${mode()}
+
               http://localhost:${port}/api/${configs.apiVersion}/
       ################################################
     `
@@ -22,7 +24,7 @@ const onListening = () => {
 
 
 const start = async () => {
-    console.log('server is starting');
+    console.log('server is starting', `in ${mode()} mode`);
 
     const app = express()
     await loaders({ expressApp: app })

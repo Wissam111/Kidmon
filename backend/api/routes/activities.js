@@ -16,7 +16,7 @@ router.get('/user-activities',
             userId: Joi.string().required(),
             page: Joi.number(),
             pageSize: Joi.number(),
-            sort: Joi.string(),
+            sort: Joi.string().valid("desc", "asc"),
         })
     }),
     requireAuthentication,
@@ -29,7 +29,7 @@ router.get('/user-spendings',
         [Segments.QUERY]: Joi.object().keys({
             userId: Joi.string().required(),
             startDate: Joi.string().required(),
-            endDate: Joi.string().required()
+            endDate: Joi.string().required() /* #swagger.parameters['endDate'].required = true */
         })
     }),
     requireAuthentication,

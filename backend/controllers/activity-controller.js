@@ -57,7 +57,6 @@ const getUserActivities = async (req, res) => {
 
 const getUserSpendings = async (req, res, next) => {
     // #swagger.tags = ['Acitvities']
-
     try {
         const { userId, startDate, endDate } = req.query
         const spendings = await activityService.listUserSpendings({ userId: userId, startDate, endDate })
@@ -74,7 +73,7 @@ const getUserSpendings = async (req, res, next) => {
 
 const getUserSpendingAtDate = async (req, res, next) => {
     // #swagger.tags = ['Acitvities']
-    
+
     try {
         const { userId, timezone, date } = req.query
         const data = await activityService.getUserSpendingAtDate({ userId: userId, timezone, date })

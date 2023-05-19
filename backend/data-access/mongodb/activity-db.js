@@ -14,7 +14,8 @@ exports.makeActivityDb = ({ makeDb }) => {
         findByUserId,
         makeTransaction,
         findUserSpendings,
-        findSpendingAtDate
+        findSpendingAtDate,
+        findByFamilyMembers
     })
 
 
@@ -43,7 +44,22 @@ exports.makeActivityDb = ({ makeDb }) => {
     async function findByUserId({ id: _id, page, pageSize, sort = 'desc', filters, transaction }) {
         await makeDb()
         const activites = await Activity
-            .find(filters, {}, {
+            .find({ $or: [{ user: _id }, { to: _id }] }, {}, {
+                sort: { createdAt: sort },
+                limit: pageSize,
+                skip: (page - 1) * pageSize,
+                session: transaction?.getSession()
+            })
+            .lean()
+
+        return idsMap(activites)
+    }
+
+
+    async function findByFamilyMembers({ familyMembers = [], page, pageSize, sort = 'desc', transaction }) {
+        await makeDb()
+        const activites = await Activity
+            .find({ $or: [{ user: { $in: familyMembers } }, { to: { $in: familyMembers } }] }, {}, {
                 sort: { createdAt: sort },
                 limit: pageSize,
                 skip: (page - 1) * pageSize,

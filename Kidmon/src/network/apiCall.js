@@ -5,8 +5,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // export const URL =
 //   "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/";
 
-export const BASE_URL = "http://192.168.68.117:4000/api/v1/"; //use you pc ip address
-export const IMG_URL = "http://192.168.68.117:4000/api/imgs/";
+export const BASE_URL = "http://192.168.1.46:4000/api/v1/"; //use you pc ip address
+export const IMG_URL = "http://192.168.1.46:4000/api/imgs/";
 
 // export const BASE_URL_DEV = "http://192.168.1.46:4000/api/";
 // // export const IMAGE_BASE_URL = "http://ec2-13-231-177-94.ap-northeast-1.compute.amazonaws.com/imgs/";

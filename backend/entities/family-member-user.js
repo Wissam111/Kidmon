@@ -66,13 +66,21 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
             throw new ValidationError(`parent must have a valid id`)
         }
 
+
+        /**
+         *  limits: {
+         *     weekly:{isActive: false}
+         *     monthly:{isActive: true}
+         *     yearly:{isActive: false}
+         *  }
+         */
         for (let k in limits) {
-            if (limits[k] < 0) {
+            if (limits[k].value < 0) {
                 throw new ValidationError(`A limit must be greater or equal than 0`)
             }
         }
 
-      
+
 
         return Object.freeze({
             ...user,

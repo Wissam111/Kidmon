@@ -1,5 +1,6 @@
 const { makeFamilyMemberUser, makeParentUser } = require("../../entities");
-const { AlreadyExistsError, NotFoundError } = require("../../utils/errors");
+const { USER_ROLES } = require("../../entities/user");
+const { AlreadyExistsError, NotFoundError, UserRoleError } = require("../../utils/errors");
 
 const buildCreateFamilyMemberUserUseCase = (userDb) => {
   // no need for transaction because phone is primary key in the database
@@ -26,6 +27,7 @@ const buildCreateFamilyMemberUserUseCase = (userDb) => {
     // check if parent exists
     const parent = await userDb.findById({ id: parentId, populate: false });
     if (!parent) throw new NotFoundError("Parent does not exist");
+    if (parent.role !== USER_ROLES.parent) throw new UserRoleError('The user with this parent id does not have a parent role')
 
     // create family member user
     user = makeFamilyMemberUser({

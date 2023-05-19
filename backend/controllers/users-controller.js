@@ -4,8 +4,8 @@ const { userService } = require("../use-cases");
 const updateUser = async (req, res, next) => {
   // #swagger.tags = ['Users']
   try {
-    const { userId } = req.params;
-    const user = await userService.getUserUseCase({ userId: userId });
+    const { userId, firstName, lastName, phone, parentId, braceletId, allergies, limits } = req.body;
+    const user = await userService.editUserUseCase({ userId, firstName, lastName, phone, parentId, braceletId, allergies, limits });
     res.status(200).json({
       message: "user updated successfully",
       user,
@@ -92,7 +92,7 @@ const createParentUser = async (req, res, next) => {
 const createFamilyMemberUser = async (req, res, next) => {
   // #swagger.tags = ['Users']
   try {
-    const { firstName, lastName, phone, parentId, braceletId, allergies, limits, } = req.body;
+    const { firstName, lastName, phone, parentId, braceletId, allergies, limits } = req.body;
     const image = req.file?.filename;
     const user = await userService.createFamilyMemberUserUseCase({ firstName, lastName, phone, parentId, braceletId, allergies, image, limits });
     res.status(201).json({

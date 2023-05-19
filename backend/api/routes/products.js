@@ -2,6 +2,9 @@ const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
 const { productController } = require('../../controllers')
 const { imageUpload } = require('../middleware/image-file-uploader')
+const { requireAuthentication } = require('../middleware/requireAuthentication')
+const { makeRoleAuthorization, makeFieldAuthorization } = require('../middleware/requireAuthorization')
+const { USER_ROLES } = require('../../entities/user')
 
 
 const router = Router()
@@ -14,6 +17,8 @@ router.get('/:productId',
             productId: Joi.string().required(),
         })
     }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
     productController.getProduct)
 
 
@@ -28,6 +33,8 @@ router.get('/',
             category: Joi.string(),
         })
     }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
     productController.getProducts)
 
 
@@ -42,6 +49,8 @@ router.post('/',
             allergicIngredients: Joi.array().items(Joi.string()),
         })
     }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
     productController.createProduct)
 
 
@@ -52,6 +61,8 @@ router.delete('/:productId',
             productId: Joi.string().required(),
         })
     }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
     productController.deleteProduct)
 
 

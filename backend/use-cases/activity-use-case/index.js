@@ -1,5 +1,6 @@
 const { activityDb, userDb, productDb } = require("../../data-access/mongodb");
 const { buildGetUserSpendingAtDateUseCase } = require("./get-user-spending");
+const { buildListFamilyMembersActivitiesUseCase } = require("./list-family-members-activities");
 const { buildListUserActivitiesUseCase } = require("./list-user-activities");
 const { buildListUserSpendingsUseCase } = require("./list-user-spendings");
 const { buildPurchaseUseCase } = require("./purchase");
@@ -11,6 +12,7 @@ const transferPointsUserCase = buildTransferPointsUserUseCase({ userDb, activity
 const purchaseUseCase = buildPurchaseUseCase({ userDb, activityDb, productDb })
 const listUserSpendings = buildListUserSpendingsUseCase({ activityDb, userDb })
 const getUserSpendingAtDate = buildGetUserSpendingAtDateUseCase({ activityDb, userDb })
+const listFamilyMembersActivities = buildListFamilyMembersActivitiesUseCase({ activityDb, userDb })
 
 
 module.exports = {
@@ -18,5 +20,6 @@ module.exports = {
     transferPointsUserCase,
     purchaseUseCase,
     listUserSpendings,
-    getUserSpendingAtDate
+    getUserSpendingAtDate,
+    listFamilyMembersActivities
 }

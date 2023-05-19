@@ -55,6 +55,29 @@ const getUserActivities = async (req, res) => {
 
 
 
+const getFamilyMembersActivities = async (req, res) => {
+    // #swagger.tags = ['Acitvities']
+
+
+    try {
+        const { userId, sort } = req.query
+        const page = + req.query.page
+        const pageSize = + req.query.pageSize
+
+        const activities = await activityService.listFamilyMembersActivities({ userId, page, pageSize, sort })
+        res.status(200).json({
+            message: 'fetch family members activities successfull',
+            activities
+        })
+    } catch (e) {
+        console.log(e);
+        next(e)
+    }
+
+}
+
+
+
 const getUserSpendings = async (req, res, next) => {
     // #swagger.tags = ['Acitvities']
     try {
@@ -95,5 +118,6 @@ module.exports = {
     purchase,
     transferPoints,
     getUserSpendings,
-    getUserSpendingAtDate
+    getUserSpendingAtDate,
+    getFamilyMembersActivities
 }

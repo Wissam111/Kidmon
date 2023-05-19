@@ -1,12 +1,27 @@
 const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
 const { activityController } = require('../../controllers')
-const { makeCheckAuthorization, makeRoleAuthorization } = require('../middleware/requireAuthorization')
+const { makeFieldAuthorization, makeRoleAuthorization } = require('../middleware/requireAuthorization')
 const { USER_ROLES } = require('../../entities/user')
 const { requireAuthentication } = require('../middleware/requireAuthentication')
 
 
 const router = Router()
+
+
+router.get('/family-members-activities',
+    celebrate({
+        [Segments.QUERY]: Joi.object().keys({
+            userId: Joi.string().required(),
+            page: Joi.number(),
+            pageSize: Joi.number(),
+            sort: Joi.string().valid("desc", "asc"),
+        })
+    }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
+    makeFieldAuthorization({ reqData: { in: 'query', field: 'userId' }, userField: 'id' }),
+    activityController.getFamilyMembersActivities)
 
 
 
@@ -20,7 +35,8 @@ router.get('/user-activities',
         })
     }),
     requireAuthentication,
-    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember, USER_ROLES.parent] }),
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeFieldAuthorization({ reqData: { in: 'query', field: 'userId' }, userField: 'id' }),
     activityController.getUserActivities)
 
 
@@ -29,11 +45,12 @@ router.get('/user-spendings',
         [Segments.QUERY]: Joi.object().keys({
             userId: Joi.string().required(),
             startDate: Joi.string().required(),
-            endDate: Joi.string().required() /* #swagger.parameters['endDate'].required = true */
+            endDate: Joi.string().required()
         })
     }),
     requireAuthentication,
     makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeFieldAuthorization({ reqData: { in: 'query', field: 'userId' }, userField: 'id' }),
     activityController.getUserSpendings)
 
 
@@ -47,6 +64,7 @@ router.get('/user-spending',
     }),
     requireAuthentication,
     makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
+    makeFieldAuthorization({ reqData: { in: 'query', field: 'userId' }, userField: 'id' }),
     activityController.getUserSpendingAtDate)
 
 
@@ -60,7 +78,7 @@ router.post('/points-transfer',
     }),
     requireAuthentication,
     makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
-    makeCheckAuthorization({ reqfieldName: 'senderUserId', reqDataField: 'body', userFieldName: 'id' }),
+    makeFieldAuthorization({ reqData: { in: 'body', field: 'senderUserId' }, userField: 'id' }),
     activityController.transferPoints)
 
 
@@ -77,7 +95,7 @@ router.post('/purchase',
     }),
     requireAuthentication,
     makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
-    makeCheckAuthorization({ reqfieldName: 'userId', reqDataField: 'body', userFieldName: 'id' }),
+    makeFieldAuthorization({ reqData: { in: 'body', field: 'userId' }, userField: 'id' }),
     activityController.purchase)
 
 

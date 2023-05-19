@@ -26,7 +26,7 @@ exports.makeProductDb = ({ makeDb }) => {
 
     async function update({ id: _id, transaction, ...productInfo }) {
         await makeDb()
-        const product = await Product.findOneAndUpdate({ _id }, productInfo, { session: transaction?.getSession() })
+        const product = await Product.findOneAndUpdate({ _id }, productInfo, { session: transaction?.getSession(), new: true })
             .lean()
 
         if (!product)

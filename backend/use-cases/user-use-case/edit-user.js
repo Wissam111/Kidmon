@@ -13,26 +13,33 @@ exports.buildEditUserUseCase = ({ userDb }) => {
             throw new NotFoundError('User not found');
         }
 
+        const onlyDefiendInfos = {}
+        for (const info in updateInfo) {
+            if (updateInfo[info] !== undefined) {
+                onlyDefiendInfos[info] = updateInfo[info]
+            }
+        }
+
         let updatedUser
         // upadte the user
         if (user.role === USER_ROLES.admin) {
             updatedUser = makeUser({
                 ...user,
-                ...updateInfo,
+                ...onlyDefiendInfos,
                 updatedAt: undefined
             })
         }
         else if (user.role === USER_ROLES.parent) {
             updatedUser = makeParentUser({
                 ...user,
-                ...updateInfo,
+                ...onlyDefiendInfos,
                 updatedAt: undefined
             })
         }
         else if (user.role === USER_ROLES.familyMember) {
             updatedUser = makeFamilyMemberUser({
                 ...user,
-                ...updateInfo,
+                ...onlyDefiendInfos,
                 updatedAt: undefined
             })
         }

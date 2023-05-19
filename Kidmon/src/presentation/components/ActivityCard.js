@@ -5,6 +5,7 @@ import Spacer from "./Spacer";
 import { white } from "../styles";
 
 const ActivityCard = ({ image, text, datetime, onPress, totalPrice }) => {
+
   return (
     <View
       style={{

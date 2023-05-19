@@ -13,9 +13,9 @@ router.get('/family-members-activities',
     celebrate({
         [Segments.QUERY]: Joi.object().keys({
             userId: Joi.string().required(),
-            page: Joi.number(),
-            pageSize: Joi.number(),
-            sort: Joi.string().valid("desc", "asc"),
+            page: Joi.number().allow(null),
+            pageSize: Joi.number().allow(null),
+            sort: Joi.string().valid("desc", "asc").allow(null),
         })
     }),
     requireAuthentication,

@@ -12,7 +12,21 @@ const ActivityRepository = () => {
     const data = await apiCall(url);
     return data;
   };
-  return { getActivities, getSpendings };
+
+  const getUserActivites = async ({ userId, page, pageSize, sort = 'desc' }) => {
+    let url = `activities/user-activities?userId=${userId}&page=${page}&pageSize=${pageSize}&sort=${sort}`;
+    const data = await apiCall(url);
+    return data;
+  };
+
+  const getFamilyMembersActivites = async ({ userId, page, pageSize, sort = 'desc' }) => {
+    let url = `activities/family-members-activities?userId=${userId}`;
+    const data = (await apiCall(url)).activities;
+    return data;
+  };
+
+
+  return { getActivities, getSpendings, getUserActivites, getFamilyMembersActivites };
 };
 
 export default ActivityRepository;

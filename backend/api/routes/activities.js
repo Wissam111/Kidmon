@@ -1,8 +1,8 @@
 const { Router } = require('express')
 const { celebrate, Joi, Segments } = require('celebrate')
 const { activityController } = require('../../controllers')
-const { makeFieldAuthorization, makeRoleAuthorization } = require('../middleware/requireAuthorization')
 const { USER_ROLES } = require('../../entities/user')
+const { makeFieldAuthorization, makeRoleAuthorization, makeParentAuthorization } = require('../middleware/requireAuthorization')
 const { requireAuthentication } = require('../middleware/requireAuthentication')
 
 
@@ -24,7 +24,6 @@ router.get('/family-members-activities',
     activityController.getFamilyMembersActivities)
 
 
-
 router.get('/user-activities',
     celebrate({
         [Segments.QUERY]: Joi.object().keys({
@@ -35,8 +34,8 @@ router.get('/user-activities',
         })
     }),
     requireAuthentication,
-    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
-    makeFieldAuthorization({ reqData: { in: 'query', field: 'userId' }, userField: 'id' }),
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember, USER_ROLES.parent] }),
+    makeParentAuthorization({ reqData: { in: 'query', field: 'userId' }, onlyParent: false }),
     activityController.getUserActivities)
 
 
@@ -49,8 +48,8 @@ router.get('/user-spendings',
         })
     }),
     requireAuthentication,
-    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
-    makeFieldAuthorization({ reqData: { in: 'query', field: 'userId' }, userField: 'id' }),
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember, USER_ROLES.parent] }),
+    makeParentAuthorization({ reqData: { in: 'query', field: 'userId' }, onlyParent: false }),
     activityController.getUserSpendings)
 
 
@@ -63,8 +62,8 @@ router.get('/user-spending',
         })
     }),
     requireAuthentication,
-    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember] }),
-    makeFieldAuthorization({ reqData: { in: 'query', field: 'userId' }, userField: 'id' }),
+    makeRoleAuthorization({ userRoles: [USER_ROLES.familyMember, USER_ROLES.parent] }),
+    makeParentAuthorization({ reqData: { in: 'query', field: 'userId' }, onlyParent: false }),
     activityController.getUserSpendingAtDate)
 
 
@@ -79,6 +78,7 @@ router.post('/points-transfer',
     requireAuthentication,
     makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
     makeFieldAuthorization({ reqData: { in: 'body', field: 'senderUserId' }, userField: 'id' }),
+    makeParentAuthorization({ reqData: { in: 'body', field: 'receiverUserId' } }),
     activityController.transferPoints)
 
 

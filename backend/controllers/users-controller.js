@@ -121,6 +121,20 @@ const createAdminUser = async (req, res, next) => {
   }
 };
 
+const removeFamilyMember = async (req, res, next) => {
+  // #swagger.tags = ['Users']
+  try {
+    const { familyMemberId } = req.params;
+    await userService.removeFamilyMember({ familyMemberId });
+    res.status(201).json({
+      message: "removed family member user successfully"
+    });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
 module.exports = {
   createFamilyMemberUser,
   createParentUser,
@@ -129,4 +143,5 @@ module.exports = {
   getUser,
   updateUser,
   getUsers,
+  removeFamilyMember
 };

@@ -17,6 +17,7 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
         phone, // required
         image = null,
         role, // required
+        isActive = true,
         createdAt = new Date(),
         updatedAt = new Date()
     }) {
@@ -80,7 +81,7 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
             throw new ValidationError('role must be either parent, family-memeber or an admin')
         }
 
-      
+
 
 
         return Object.freeze({
@@ -88,6 +89,7 @@ const buildMakeUser = (ID, ValidateCharsOnly, ValidateNumbersOnly) => {
             firstName,
             lastName,
             phone,
+            isActive,
             image,
             role,
             updatedAt,

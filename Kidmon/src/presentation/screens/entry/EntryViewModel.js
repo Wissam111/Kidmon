@@ -19,6 +19,7 @@ const EntryViewModel = () => {
       const data = await authRepository.login(phone);
       setVerify({ verifyId: data.verifyId, code: "" });
       setShowOTP(false);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

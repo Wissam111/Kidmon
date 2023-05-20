@@ -1,14 +1,20 @@
+.inner-page {
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+}
+
 .register-page-wrapper {
   padding: 40px 30px 10px 50px;
   position: relative;
 }
 
-.register-page-wrapper img {
-  width: 220px;
-  position: absolute;
-  top: 150px;
-  right: 200px;
+.inner-page img {
+  width: 300px;
+  height: 300px;
+  align-self: center;
 }
+
 .register-header-h1 {
   font-size: 24px;
   color: rgba(0, 0, 0, 0.61);
@@ -24,9 +30,7 @@
 }
 
 .register-wrapper button {
-  width: 113px;
-  height: 31px;
-
+  padding: 12px 40px;
   background: #8fa497;
   border: none;
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1);

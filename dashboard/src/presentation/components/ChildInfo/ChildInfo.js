@@ -108,7 +108,7 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
 
       {
         child.credits < totalPrice &&
-        <p>No suffecint balance</p>
+        <p className="noselect">No suffecint balance</p>
       }
 
       {

@@ -51,6 +51,7 @@ const OrderItemCard = ({
         )}
 
         <img
+          className="noselect"
           src={
             cardImg
               ? BASE_URL_1 + `imgs/${cardImg}`
@@ -58,9 +59,9 @@ const OrderItemCard = ({
           }
           alt="order-item"
         />
-        <span className="text-order">{text}</span>
-        <span className="amount-order">x{amount}</span>
-        <span className="total-order">{parseFloat(total.toFixed(2))} P</span>
+        <span className="text-order noselect">{text}</span>
+        <span className="amount-order noselect">x{amount}</span>
+        <span className="total-order noselect">{parseFloat(total.toFixed(2))} P</span>
         <AiOutlineDelete
           style={{ zIndex: 10 }}
           cursor={"pointer"}

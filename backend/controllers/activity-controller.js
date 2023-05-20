@@ -42,10 +42,11 @@ const getActivites = async (req, res) => {
         const page = + req.query.page
         const pageSize = + req.query.pageSize
 
-        const activities = await activityService.listActivities({ filters: { type }, page, pageSize, sort })
+        const result = await activityService.listActivities({ filters: { type }, page, pageSize, sort })
         res.status(200).json({
             message: 'fetch activities successfull',
-            activities
+            activities: result.activities,
+            count: result.count
         })
     } catch (e) {
         console.log(e);

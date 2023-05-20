@@ -83,7 +83,7 @@ exports.makeActivityDb = ({ makeDb }) => {
                 skip: (page - 1) * pageSize,
                 session: transaction?.getSession(),
             }
-        );
+        ).populate('items._id')
         const count = await Activity.count(filters);
 
         const activities = await query.lean();

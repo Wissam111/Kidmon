@@ -2,16 +2,7 @@ import { View, Text, Image } from "react-native";
 import Spacer from "../../../components/Spacer";
 import Ingredient from "./Ingredient";
 import { allergicIngredients } from "../../../../data/data";
-import { useEffect, useState } from "react";
-const Allergens = ({ allergies }) => {
-  const [childAllergies, setChildAllergies] = useState(allergies);
-
-  const handleAllergies = (ingredient) => {
-    const updatedAllergies = childAllergies.includes(ingredient)
-      ? childAllergies.filter((a) => a !== ingredient)
-      : [...childAllergies, ingredient];
-    setChildAllergies(updatedAllergies);
-  };
+const Allergens = ({ childAllergies, handleAllergies }) => {
   return (
     <View
       className="bg-white shadow-md rounded-md"

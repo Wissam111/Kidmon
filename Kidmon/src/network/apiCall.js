@@ -1,7 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const BASE_URL = "http://192.168.1.46:4000/api/v1/"; //use you pc ip address
-export const IMG_URL = "http://192.168.1.46:4000/api/imgs/";
+// export const BASE_URL = "http://192.168.1.46:4000/api/v1/"; //use you pc ip address
+// export const IMG_URL = "http://192.168.1.46:4000/api/imgs/";
+export const BASE_URL = "http://192.168.68.117:4000/api/v1/"; //use you pc ip address
+export const IMG_URL = "http://192.168.68.117:4000/api/imgs/";
 
 const serialize = function (obj) {
   var str = [];

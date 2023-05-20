@@ -20,10 +20,7 @@ const RFIDReader = ({ handleCloseScan, scanChild }) => {
       <IoClose
         size={25}
         style={{
-          position: "absolute",
-          top: 0,
-          right: 0,
-          margin: 10,
+          alignSelf:'flex-end',
           cursor: "pointer",
         }}
         onClick={handleCloseScan}

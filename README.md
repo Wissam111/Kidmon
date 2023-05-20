@@ -2,16 +2,15 @@
 
 ## Project Overview
 
-This project aims at schools payments, Now a day kids are more vernuable to being exposed to serveral dangrus stuff like smoke and drugs,
-preventing this from happening in a small age is important as kids tend to try stuff without understanding the risks,
-Furthermore kids with severe allergies must be careful to the food there buying, but sometimes kids trys new stuff without know there ingredients resulting
-in a dangerous situation.
-So our KidMon system is focusing on these core issues, we are targeting school caffeterias payments with parents awarnes and limiting,
-A parent can transfer points to his child, limit there spending , preventing them from buying products with there allergies
+This project aims to address the issue of school payments. Nowadays, children are more vulnerable to being exposed to several dangerous things such as smoke and drugs. It is crucial to prevent this exposure at a young age, as children often try things without fully understanding the risks involved. Additionally, children with severe allergies must be cautious about the food they purchase. However, sometimes children try new things without knowing the ingredients, which can result in dangerous situations. Therefore, our KidMon system focuses on these core issues. We specifically target school cafeteria payments, aiming to raise parents' awareness and implement limitations. With our system, parents can transfer points to their child and set spending limits to prevent them from purchasing products that could trigger their allergies.
 
 </br>
 
-## Cafeteria Dashboard
+## Cafeteria (Admin) Dashboard
+
+## Parent Mobile App
+
+## Family Member Mobile App
 
 ## Frameworks & Databases
 

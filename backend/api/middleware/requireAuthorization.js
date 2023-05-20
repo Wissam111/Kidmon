@@ -14,7 +14,7 @@ exports.makeRoleAuthorization = ({ userRoles = USER_ROLES_ENUM }) => {
             throw new Error('user cannot be null');
         }
         if (!userRoles.includes(req.user.role)) {
-            return res.status(403).json({ message: 'You\'re not a authorized to access this route' })
+            return res.status(403).json({ message: 'You\'re not authorized to access this route' })
         }
 
         next()

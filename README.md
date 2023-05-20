@@ -22,6 +22,7 @@ This project aims to address the issue of school payments. Nowadays, children ar
 
 ## Features
 
+- User Roles: Parent, Family Member, Admin
 - Parent: overview of family members activities
 - Parent: limits a family member spending
 - Parent: create a new family member
@@ -33,8 +34,37 @@ This project aims to address the issue of school payments. Nowadays, children ar
 - Admin: make a purchase
 - Admin: view user details (name, allergies, parents etc...)
 
-
 </br>
+
+## Our Software 
+
+### Baack-End
+
+- Nodejs & Express
+- Jest for testing
+- Clean Architecture
+- Dependecy Injection
+- JS freeze objects
+- JS clasuer functions
+- Authentication middleware
+- Authorization middleware
+- File upload middleware
+- Modulized file structure
+- Validations
+- JWT
+- Routes DTO valodation
+- Auto generated swagger API documentation
+- use cases transaction aware
+
+### Frontend
+
+- MVVM
+- UI/UX friendly design
+- Modulized file structure
+- Reusable components
+- Repository pattern
+
+
 
 ## Authors
 

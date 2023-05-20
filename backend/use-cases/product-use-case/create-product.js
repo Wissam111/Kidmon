@@ -13,7 +13,6 @@ const buildCreateProductUseCase = ({ productDb }) => {
             category,
             allergicIngredients
         })
-
         return await productDb.create(product)
     }
 

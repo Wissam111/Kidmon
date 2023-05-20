@@ -20,7 +20,7 @@ exports.makeProductDb = () => {
             ...productInfo
         }
         products.push(product)
-        return { ...user };
+        return { ...product };
     }
 
     async function update({ id: _id, populate = true, transaction, ...productInfo }) {

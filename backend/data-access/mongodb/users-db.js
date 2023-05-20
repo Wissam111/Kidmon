@@ -57,7 +57,7 @@ exports.makeUserDb = ({ makeDb }) => {
 
   async function remove({ id: _id, transaction }) {
     await makeDb();
-    throw new Error("Method not implemented.");
+    await User.deleteOne({ _id }, { session: transaction?.getSession() })
   }
 
   async function findById({ id: _id, populate = true, transaction }) {

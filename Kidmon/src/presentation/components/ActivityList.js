@@ -1,23 +1,23 @@
-import { View, FlatList, SafeAreaView } from "react-native";
+import { View, FlatList, SafeAreaView, StyleSheet } from "react-native";
 import React, { useCallback, useMemo, useRef } from "react";
 import ActivityCard from "./ActivityCard";
 import Spacer from "./Spacer";
 import { Text } from "react-native";
-import BottomSheet, { BottomSheetFlatList } from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetFlatList, BottomSheetView } from "@gorhom/bottom-sheet";
+
+
 const ActivityList = ({ activities, style, snap1, snap2 }) => {
   const bottomSheetRef = useRef(null);
 
   const snapPoints = useMemo(() => [snap1, snap2], []);
   return (
-    <BottomSheet ref={bottomSheetRef} index={0} snapPoints={snapPoints}>
-      <View style={{ ...style }}>
+    <BottomSheet
+      style={styles.sheet}
+      ref={bottomSheetRef} index={0} snapPoints={snapPoints}>
+      <BottomSheetView style={{ ...style }}>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            paddingHorizontal: 12,
-            paddingBottom: 12,
-            alignItems: "center",
+
           }}
         >
           <View>
@@ -44,9 +44,26 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
             />
           )}
         />
-      </View>
+      </BottomSheetView>
     </BottomSheet>
   );
 };
 
 export default ActivityList;
+
+
+const styles = StyleSheet.create({
+
+  sheet: {
+    padding: 16,
+    paddingTop: 26,
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 4,
+    // },
+    // shadowOpacity: 0.32,
+    // shadowRadius: 5.46,
+    // elevation: 9,
+  }
+})

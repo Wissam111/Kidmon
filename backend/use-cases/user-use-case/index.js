@@ -6,6 +6,7 @@ const { buildEditUserUseCase } = require("./edit-user")
 const { buildGetUserUseCase } = require("./get-user")
 const { buildGetUserByBraceletIdUseCase } = require("./get-user-by-braceletId")
 const { buildGetUsersUseCase } = require("./get-users")
+const { buildRemoveFamilyMemberUseCase } = require("./remove-family-member")
 
 
 
@@ -20,6 +21,7 @@ const getUsersUseCase = buildGetUsersUseCase(userDb)
 const getUserByBraceletIdUseCase = buildGetUserByBraceletIdUseCase(userDb)
 
 const editUserUseCase = buildEditUserUseCase({ userDb })
+const removeFamilyMember = buildRemoveFamilyMemberUseCase({ userDb })
 
 module.exports = Object.freeze({
     createAdminUserUseCase,
@@ -28,5 +30,6 @@ module.exports = Object.freeze({
     getUserUseCase,
     getUserByBraceletIdUseCase,
     editUserUseCase,
-    getUsersUseCase
+    getUsersUseCase,
+    removeFamilyMember
 })

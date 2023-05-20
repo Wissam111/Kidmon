@@ -6,7 +6,8 @@ import Header from "./components/Header";
 import HomeParentViewModel from "./HomeParentViewModel";
 import { View } from "react-native";
 import { white } from "../../styles";
-import { cos } from "react-native-reanimated";
+import { cos, log } from "react-native-reanimated";
+import { useEffect } from "react";
 
 const activities = [
   {
@@ -39,7 +40,11 @@ const activities = [
 ];
 
 const HomeParent = () => {
-  const { user } = HomeParentViewModel();
+  const { user, activities, getActivities } = HomeParentViewModel();
+
+  useEffect(() => {
+    getActivities()
+  },[])
 
   return (
     <View style={{ flex: 1, backgroundColor: white }}>

@@ -12,12 +12,12 @@ exports.requireAuthentication = async (req, res, next) => {
     try {
         const token = authorization.split(' ')[1]
         const id = await verifyAndExtractIdToken(token)
-        const user = await getUserUseCase({ userId: id })
+        const user = await getUserUseCase({ userId: id, populate: false })
         if (!user) {
             return res.status(401).json({ message: 'user was not found, you might be blocked or deleted' })
         }
 
-        
+
         req.user = user
         next()
     }

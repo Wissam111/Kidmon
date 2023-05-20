@@ -28,10 +28,8 @@ exports.makeUserDb = () => {
     async function update({ id: _id, populate = true, transaction, ...userInfo }) {
         const user = users.find(user => user.id === _id)
         if (!user) return
-
-        for (const info in userInfo) {
+        for (const info in userInfo) 
             user[info] = userInfo[info]
-        }
         return { ...user }
     }
 

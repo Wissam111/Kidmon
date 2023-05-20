@@ -3,7 +3,7 @@ const { celebrate, Joi, Segments } = require("celebrate");
 const { userController } = require("../../controllers");
 const { imageUpload } = require("../middleware/image-file-uploader");
 const { requireAuthentication } = require("../middleware/requireAuthentication");
-const { makeFieldAuthorization, makeRoleAuthorization } = require("../middleware/requireAuthorization");
+const { makeFieldAuthorization, makeRoleAuthorization, makeParentAuthorization } = require("../middleware/requireAuthorization");
 const { USER_ROLES } = require("../../entities/user");
 
 const router = Router();
@@ -143,5 +143,20 @@ router.get(
   makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
   userController.getUserByBraceletId
 );
+
+
+
+router.delete("/familyMember/:familyMemberId",
+  celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      familyMemberId: Joi.string().required(),
+    }),
+  }),
+  requireAuthentication,
+  makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
+  makeParentAuthorization({ reqData: { in: 'params', field: 'familyMemberId' } }),
+  userController.removeFamilyMember
+);
+
 
 module.exports = router;

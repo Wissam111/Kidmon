@@ -85,9 +85,18 @@ describe('family member user', () => {
                 allergies: [Allergies.eggs, Allergies.fish, Allergies.fish],
                 credits: 1,
                 limits: {
-                    daily: -1,
-                    weeky: 5,
-                    monthly: 1
+                    daily: {
+                        value: -1,
+                        isActive: true
+                    },
+                    weeky: {
+                        value: 5,
+                        isActive: true
+                    },
+                    monthly: {
+                        value: 1,
+                        isActive: true
+                    }
                 }
             })
         }).toThrow()

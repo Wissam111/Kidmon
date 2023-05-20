@@ -30,6 +30,9 @@ const CartMenu = ({ handleShowScan }) => {
           />
         ))}
       </div>
+      
+      <div className="space"></div>
+          
       {cartItems.length > 0 && (
         <button className="confirm-btn" onClick={handleShowScan}>
           Scan

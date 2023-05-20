@@ -33,7 +33,7 @@ describe('Delete Users Use Cases', () => {
         expect(user.role).toEqual(USER_ROLES.admin)
 
         user = await removeUserUseCase({ userId: user.id })
-        expect(user).not.toBeDefined()
+        expect(user.isActive).toBeFalsy()
     })
 })
 

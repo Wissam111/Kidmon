@@ -27,6 +27,7 @@ const userSchema = new mongoose.Schema({
     limits: { type: limitsSchema },
     familyMembers: { type: [String], ref: 'user', default: undefined },
     role: { type: String },
+    isActive: { type: Boolean },
     createdAt: { type: Date },
     updatedAt: { type: Date }
 })

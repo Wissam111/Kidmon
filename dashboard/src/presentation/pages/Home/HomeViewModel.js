@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { useSpring } from "react-spring";
 
@@ -37,12 +37,16 @@ const HomeViewModel = () => {
       console.log(e);
     }
   };
-  const makePurchase = async (noneAllegicProducts) => {
-    let products = groupProducts(noneAllegicProducts);
+  const makePurchase = useCallback(async (noneAllegicProducts) => {
+    console.log(noneAllegicProducts);
+    const products = noneAllegicProducts.map(p => { return { id: p.id, amount: p.amount } })
+    console.log(products);
+    
     let isSuccess = false;
     let messg = "Purchase was successful";
     setLoading(true);
     try {
+      console.log('making purchase', currentChild.id, products);
       const data = await userRepository.makePurchase(currentChild.id, products);
       console.log(data);
       isSuccess = true;
@@ -53,7 +57,8 @@ const HomeViewModel = () => {
     setLoading(false);
     invokeAlert(isSuccess, messg);
     handleCloseChildInfo();
-  };
+
+  }, [currentChild, userRepository, invokeAlert, setLoading])
 
   const scanChild = async (rfid) => {
     let isSuccess = null;
@@ -62,35 +67,23 @@ const HomeViewModel = () => {
     try {
       const data = await userRepository.getUserByRFID(rfid);
       setCurrentChild(data.user);
+      handleShowScan();
     } catch (error) {
       console.log(error);
       messg = error?.error.message;
       isSuccess = false;
     }
     setLoading(false);
-    handleShowScan();
     invokeAlert(isSuccess, messg);
   };
 
-  const groupProducts = (products) => {
-    const result = products.reduce((acc, product) => {
-      const existingProduct = acc.find((p) => p.id === product.id);
-      if (existingProduct) {
-        existingProduct.amount += 1;
-      } else {
-        acc.push({ id: product.id, amount: 1 });
-      }
-      return acc;
-    }, []);
-    return result;
-  };
 
   const handleShowScan = () => {
     setShowScan(!showScan);
   };
   const handleCloseChildInfo = () => {
     setCurrentChild(null);
-    dispatch({ type: "DELETECART" });
+    dispatch({ type: "CLEAR" });
   };
 
   const handleSelectCategory = (category) => {

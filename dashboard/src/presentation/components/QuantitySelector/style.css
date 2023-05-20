@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container > button {
+  cursor: pointer;
+}
+
+.container > p {
+  padding: 0 12px;
+  margin: 0;
+}
+
+.container > .button {
+    cursor: pointer;
+}
+

@@ -8,7 +8,7 @@ import { CartItemsContextProvider } from "./context/CartItemsContext";
 import { AlertContextProvider } from "./context/AlertContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <AuthContextProvider>
       <ApiContextProvider>
         <CartItemsContextProvider>
@@ -20,5 +20,5 @@ root.render(
         </CartItemsContextProvider>
       </ApiContextProvider>
     </AuthContextProvider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

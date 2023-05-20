@@ -1,6 +1,7 @@
 import "./Loading.css";
 
-function Loading() {
+function Loading({ isLoading }) {
+  if (!isLoading) return
   return <div className="loading-screen-wrapper page-container"></div>;
 }
 

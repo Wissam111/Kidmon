@@ -9,6 +9,22 @@ const { requireAuthentication } = require('../middleware/requireAuthentication')
 const router = Router()
 
 
+
+router.get('/',
+    celebrate({
+        [Segments.QUERY]: Joi.object().keys({
+            type: Joi.string().allow(null),
+            page: Joi.number().allow(null),
+            pageSize: Joi.number().allow(null),
+            sort: Joi.string().valid("desc", "asc").allow(null),
+        }).allow(null)
+    }),
+    requireAuthentication,
+    makeRoleAuthorization({ userRoles: [USER_ROLES.admin] }),
+    activityController.getActivites)
+
+
+
 router.get('/family-members-activities',
     celebrate({
         [Segments.QUERY]: Joi.object().keys({

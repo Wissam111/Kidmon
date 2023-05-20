@@ -25,7 +25,7 @@ function App() {
         {alertData && (
           <AlertView status={alertData.status} text={alertData.text} />
         )}
-        {loading && <Loading />}
+        <Loading isLoading={loading} />
         {authData && <NavBar />}
         <Routes>
           <Route exact path="/" element={<ProtectedRoute />}>

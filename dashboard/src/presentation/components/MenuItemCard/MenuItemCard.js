@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 
 import "./MenuItemCard.css";
@@ -8,7 +8,7 @@ const MenuItemCard = ({ product }) => {
   const { dispatch } = useCartItemsContext();
 
   const handleAddtoCart = () => {
-    dispatch({ type: "ADDTOCART", payload: product });
+    dispatch({ type: "ADD_ITEM", payload: product });
   };
   return (
     <div className="menuItemCard-container" onClick={handleAddtoCart}>

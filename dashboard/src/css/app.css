@@ -18,17 +18,21 @@ body {
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   padding: 20px;
   padding-top: 30px;
-  min-width: 1450px;
+  /* min-width: 1450px; */
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
 }
 
 .page-container {
-  width: 1150px;
-  height: 700px;
-  overflow: hidden;
+  width: 100%;
+  /* width: 1150px; */
+  /* height: 700px; */
+  /* overflow: hidden; */
   position: relative;
   background: #f3f3f3;
   box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
@@ -65,4 +69,14 @@ body {
 
 .space {
   flex: 1
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }

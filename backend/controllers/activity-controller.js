@@ -34,6 +34,25 @@ const purchase = async (req, res, next) => {
 }
 
 
+const getActivites = async (req, res) => {
+    // #swagger.tags = ['Acitvities']
+
+    try {
+        const { type, sort } = req.query
+        const page = + req.query.page
+        const pageSize = + req.query.pageSize
+
+        const activities = await activityService.listActivities({ filters: { type }, page, pageSize, sort })
+        res.status(200).json({
+            message: 'fetch activities successfull',
+            activities
+        })
+    } catch (e) {
+        console.log(e);
+        next(e)
+    }
+}
+
 
 const getUserActivities = async (req, res) => {
     // #swagger.tags = ['Acitvities']
@@ -119,5 +138,6 @@ module.exports = {
     transferPoints,
     getUserSpendings,
     getUserSpendingAtDate,
-    getFamilyMembersActivities
+    getFamilyMembersActivities,
+    getActivites
 }

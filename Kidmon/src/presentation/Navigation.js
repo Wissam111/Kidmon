@@ -2,6 +2,8 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthContextProvider } from "../context/AuthContext";
 import { FamilyMemberContextProvider } from "../context/FamilyMemberContext";
+import { LimitsContextProvider } from "../context/LimitsContext";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeParent from "./screens/home-parent/HomeParent";
@@ -11,8 +13,8 @@ import FamilyMemberHome from "./screens/home-family-member/FamilyMemberHome";
 import FamilyMemberSettings from "./screens/settings-family-member/FamilyMemberSettings";
 import Entry from "./screens/entry/Entry";
 import ChildProfileForm from "./screens/edit-profile/ChildProfileForm";
-
 import Loading from "./components/Loading";
+
 import { useLoadingContext } from "../hooks/useLoadingContext";
 
 const HomeParentStack = createNativeStackNavigator();
@@ -45,8 +47,10 @@ const Navigation = () => {
     <NavigationContainer>
       <AuthContextProvider>
         <FamilyMemberContextProvider>
-          {loading && <Loading />}
-          <HomeParentNavigation />
+          <LimitsContextProvider>
+            {loading && <Loading />}
+            <HomeParentNavigation />
+          </LimitsContextProvider>
         </FamilyMemberContextProvider>
       </AuthContextProvider>
     </NavigationContainer>

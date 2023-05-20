@@ -2,7 +2,7 @@ import { View, Text, Switch, Image } from "react-native";
 import { useState } from "react";
 import Spacer from "../../../components/Spacer";
 import LimitSwitch from "./LimitSwitch";
-const SpendingLimits = () => {
+const SpendingLimits = ({}) => {
   const [switchValue, setSwitchValue] = useState(true);
 
   const toggleSwitch = (value) => {
@@ -31,11 +31,11 @@ const SpendingLimits = () => {
         />
       </View>
       <View className="items-center">
-        <LimitSwitch text="Daily" />
+        <LimitSwitch text="Daily" minValue={0} maxValue={50} />
         <Spacer space={6} />
-        <LimitSwitch text="Weakly" />
+        <LimitSwitch text="Weekly" minValue={0} maxValue={300} />
         <Spacer space={6} />
-        <LimitSwitch text="Monthly" />
+        <LimitSwitch text="Monthly" minValue={0} maxValue={1200} />
       </View>
       {!switchValue && (
         <View className="w-full h-full bg-gray-700 absolute opacity-70 bottom-0 rounded-md"></View>

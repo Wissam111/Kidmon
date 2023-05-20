@@ -2,35 +2,43 @@ import { View, Text, Switch, StyleSheet } from "react-native";
 import { useState } from "react";
 import { primaryColor } from "../../../styles";
 import { Slider } from "@miblanchard/react-native-slider";
+import { useLimitsContext } from "../../../../hooks/useLimitsContext";
 
-const LimitSwitch = ({ text }) => {
-  const minValue = 0;
-  const maxValue = 100;
-  const [value, setValue] = useState(0);
+const LimitSwitch = ({ text, minValue, maxValue }) => {
+  const { limits, handleLimitSwitchChange, handleSliderValueChange } =
+    useLimitsContext();
 
-  const [switchValue, setSwitchValue] = useState(true);
-  const toggleSwitch = (value) => {
-    setSwitchValue(value);
+  const limit = limits[text.toLowerCase()];
+
+  const toggleSwitch = (isActive) => {
+    handleLimitSwitchChange(text.toLowerCase(), isActive);
   };
+
+  const handleSlider = (value) => {
+    handleSliderValueChange(text.toLowerCase(), Math.round(value));
+  };
+
   return (
     <View className={`w-80  h-28`} style={{ backgroundColor: primaryColor }}>
       <View className="flex-row justify-between p-4 z-50">
         <Text className="text-lg font-medium">{text}</Text>
         <Switch
           onValueChange={toggleSwitch}
-          value={switchValue}
+          value={limit.isActive}
           trackColor={{ false: "#767577", true: "#5FD5E5" }}
         />
       </View>
       <View className="flex-row items-center justify-between pr-2 pl-2">
-        <Text className="text-base font-medium color-[#0000005e]">{value}</Text>
+        <Text className="text-base font-medium color-[#0000005e]">
+          {limit.value}
+        </Text>
         <Slider
           animateTransitions
           minimumTrackTintColor="#5FD5E5"
           width="80%"
           minimumValue={minValue}
-          value={value}
-          onValueChange={(value) => setValue(Math.round(value))}
+          value={limit.value}
+          onValueChange={handleSlider}
           maximumValue={maxValue}
           thumbStyle={styles.thumb}
           trackStyle={styles.track}
@@ -39,7 +47,7 @@ const LimitSwitch = ({ text }) => {
           {maxValue}
         </Text>
       </View>
-      {!switchValue && (
+      {!limit.isActive && (
         <View className="w-full h-full bg-gray-700 absolute opacity-50 bottom-0"></View>
       )}
     </View>

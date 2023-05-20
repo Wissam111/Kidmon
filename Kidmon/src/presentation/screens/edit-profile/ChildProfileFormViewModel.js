@@ -21,6 +21,7 @@ const ChildProfileFormViewModel = (isEditMode) => {
     isEditMode && familyMember.image ? IMG_URL + familyMember.image : null
   );
 
+  console.log(familyMember);
   const userRepository = UserRepository();
 
   const SaveChanges = async () => {

@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
     const authData = JSON.parse(localStorage.getItem("authData"));
     if (authData) {
       dispatch({ type: "LOGIN", payload: authData });
-    }
+    } 
   }, []);
 
   return (

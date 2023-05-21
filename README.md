@@ -6,6 +6,11 @@ This project aims to address the issue of school payments. Nowadays, children ar
 
 </br>
 
+## System Structure
+
+![system-structure](https://github.com/Wissam111/Final-Project/assets/10331972/4d744e74-f4e2-412c-bf0c-7579b02cf6f9)
+
+
 ## Cafeteria (Admin) Dashboard
 
 ## Parent Mobile App

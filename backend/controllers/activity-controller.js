@@ -1,7 +1,7 @@
 const { activityService } = require("../use-cases");
 
 
-const transferPoints = async (req, res) => {
+const transferPoints = async (req, res, next) => {
     // #swagger.tags = ['Acitvities']
     try {
         const { senderUserId, receiverUserId, amount } = req.body
@@ -34,7 +34,7 @@ const purchase = async (req, res, next) => {
 }
 
 
-const getActivites = async (req, res) => {
+const getActivites = async (req, res , next) => {
     // #swagger.tags = ['Acitvities']
 
     try {
@@ -55,7 +55,7 @@ const getActivites = async (req, res) => {
 }
 
 
-const getUserActivities = async (req, res) => {
+const getUserActivities = async (req, res , next) => {
     // #swagger.tags = ['Acitvities']
     try {
         const { userId, sort } = req.query
@@ -75,7 +75,7 @@ const getUserActivities = async (req, res) => {
 
 
 
-const getFamilyMembersActivities = async (req, res) => {
+const getFamilyMembersActivities = async (req, res , next) => {
     // #swagger.tags = ['Acitvities']
 
 

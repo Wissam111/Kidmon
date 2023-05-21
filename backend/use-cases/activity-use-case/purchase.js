@@ -87,7 +87,7 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
                 updatedAt: undefined
             })
 
-            console.log(updatedUser);
+            
             await userDb.update({ ...updatedUser, transaction })
 
 

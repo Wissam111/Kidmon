@@ -1,7 +1,5 @@
 import redis
 import pymongo
-from kafka import KafkaConsumer
-import json
 
 
 # mongodb database
@@ -16,26 +14,52 @@ activitiesCollection = db['activities']
 redisClient = redis.Redis()
 
 
-# update products sold count counter
-def update_sold_product_counter(update):
-    pass
+# update product sold count counter
+def update_sold_product_counter(doc):
+    for item in doc["items"]:
+        redisClient.hincrby('PRODUCTS_SOLD_COUNTERS',
+                            item["_id"], item["amount"])
 
 
-def update_top_products_sold(update):
-    pass
+# top products sold
+def update_top_products_sold(doc):
+    for item in doc["items"]:
+        redisClient.zincrby('TOP_SOLD_PRODUCTS', item["amount"], item["_id"])
 
 
-def recent_product_sold(update):
-    pass
+# recent products sold
+def recent_product_sold(doc):
+    for item in doc["items"]:
+        redisClient.lpush('RECENT_SOLD_PRODUCTS', item["_id"])
 
 
+# update products sold count
+def update_products_sold_count(doc):
+    for item in doc["items"]:
+        redisClient.incrby('SOLD_PRODUCTS_COUNT', item["amount"])
 
-# update users count
-def update_user_counter(update):
-    pass
+
+# update products overall count
+# def update_products_count():
+#     redisClient.incr('PRODUCTS_COUNT')
+
+
+# # update users count
+# def update_user_counter(update):
+#     redisClient.incr('USER_COUNT')
 
 
 # watch for changes
-stream = activitiesCollection.watch()
+stream = activitiesCollection.watch([{'$match': {'fullDocument.type': 'purchase'}}])
+print('started watching activites collection in mongodb database')
+
+
 for change in stream:
-    print(change)
+    if (change["operationType"] == 'insert'):
+        doc = change["fullDocument"]
+        print('new document', doc)
+        if doc["type"] == 'purchase':
+            update_sold_product_counter(doc)
+            update_top_products_sold(doc)
+            recent_product_sold(doc)
+            update_products_sold_count(doc)

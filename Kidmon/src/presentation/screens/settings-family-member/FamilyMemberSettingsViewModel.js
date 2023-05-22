@@ -1,18 +1,23 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
 
+import { useNavigation } from "@react-navigation/native";
 import UserRepository from "../../../repository/UserRepository";
-import { useLimitsContext } from "../../../hooks/useLimitsContext";
 const FamilyMemberSettingsViewModel = () => {
   const { familyMember } = useFamilyMemberContext();
-
+  const [childLimits, setChildLimits] = useState({});
+  const navigation = useNavigation();
   const userRepository = UserRepository();
   const [childAllergies, setChildAllergies] = useState(familyMember?.allergies);
-  const { limits } = useLimitsContext();
   const updateUser = async () => {
     try {
-      const data = await userRepository.updateUser({ limits });
+      const data = await userRepository.updateUser({
+        userId: familyMember.id,
+        limits: childLimits,
+        allergies: childAllergies,
+      });
+      NavigateHome();
       console.log("updated", data);
     } catch (error) {
       console.log(error);
@@ -26,11 +31,55 @@ const FamilyMemberSettingsViewModel = () => {
     setChildAllergies(updatedAllergies);
   };
 
+  useEffect(() => {
+    let limits = {
+      daily: {
+        value: familyMember.limits?.daily?.value,
+        isActive: familyMember.limits?.daily?.isActive,
+      },
+      weekly: {
+        value: familyMember.limits?.weekly?.value,
+        isActive: familyMember.limits?.weekly?.isActive,
+      },
+      monthly: {
+        value: familyMember.limits?.monthly?.value,
+        isActive: familyMember.limits?.monthly?.isActive,
+      },
+    };
+    setChildLimits(limits);
+  }, [familyMember]);
+
+  const handleLimitSwitchChange = (type, isActive) => {
+    setChildLimits((prevLimits) => ({
+      ...prevLimits,
+      [type]: {
+        ...prevLimits[type],
+        isActive: isActive,
+      },
+    }));
+  };
+
+  const handleSliderValueChange = (type, value) => {
+    setChildLimits((prevLimits) => ({
+      ...prevLimits,
+      [type]: {
+        ...prevLimits[type],
+        value: value,
+      },
+    }));
+  };
+  const NavigateHome = () => {
+    navigation.navigate("HomeParent");
+  };
+
   return {
     familyMember,
     childAllergies,
     handleAllergies,
+    childLimits,
     updateUser,
+    handleLimitSwitchChange,
+    handleSliderValueChange,
   };
 };
 

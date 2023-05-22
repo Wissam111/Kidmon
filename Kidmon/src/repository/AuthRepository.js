@@ -10,7 +10,6 @@ const AuthRepository = () => {
   };
 
   const verifyLogin = async (verfObj) => {
-    console.log(verfObj);
     const data = apiCall("auth/login-verify-phone", "POST", verfObj);
     return data;
   };

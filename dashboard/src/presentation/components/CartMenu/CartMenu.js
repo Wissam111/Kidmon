@@ -8,8 +8,8 @@ const CartMenu = ({ handleShowScan }) => {
   const { cartItems, dispatch } = useCartItemsContext();
 
   const onClearCart = useCallback(() => {
-    dispatch({ type: 'CLEAR' })
-  }, [dispatch])
+    dispatch({ type: "CLEAR" });
+  }, [dispatch]);
 
   return (
     <div className="cart-menu-container">
@@ -17,22 +17,26 @@ const CartMenu = ({ handleShowScan }) => {
         Order <span>Menu</span>
       </h3>
 
-      {Object.keys(cartItems).length > 0 &&
-        <AiOutlinePlus size={22} color="#cf4444" style={{ rotate: '45deg', cursor: 'pointer', alignSelf: 'flex-end' }} onClick={onClearCart}></AiOutlinePlus>
+      {
+        Object.keys(cartItems).length > 0 && (
+          <button className="clear-cart-btn" onClick={onClearCart}>
+            Clear Cart
+          </button>
+        )
+        // <AiOutlinePlus size={22} color="#cf4444" style={{ rotate: '45deg', cursor: 'pointer', alignSelf: 'flex-end' }} onClick={onClearCart}></AiOutlinePlus>
       }
-      
+
       <div className="orders-wrapper">
-        {
-          Object.values(cartItems).map((item) => (
-            <OrderItemCard
-              key={item.id}
-              product={item}
-              cardImg={item.image}
-              text={item.title}
-              amount={item.amount}
-              total={item.amount * item.price}
-            />
-          ))}
+        {Object.values(cartItems).map((item) => (
+          <OrderItemCard
+            key={item.id}
+            product={item}
+            cardImg={item.image}
+            text={item.title}
+            amount={item.amount}
+            total={item.amount * item.price}
+          />
+        ))}
       </div>
 
       <div className="space"></div>

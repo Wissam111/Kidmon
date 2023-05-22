@@ -75,4 +75,4 @@ This project aims to address the issue of school payments. Nowadays, children ar
 
 **Tarik Husin** - linkedin -> https://www.linkedin.com/in/tarik-husin-706754184/
 
-**Wissam Kabaha**
+**Wissam Kabaha** - linkedin ->https://www.linkedin.com/in/wissamkabha/

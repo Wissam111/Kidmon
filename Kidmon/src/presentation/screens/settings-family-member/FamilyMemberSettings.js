@@ -8,8 +8,15 @@ import DefaultButton from "../../components/DefaultButton";
 import FamilyMemberSettingsViewModel from "./FamilyMemberSettingsViewModel";
 
 const FamilyMemberSettings = () => {
-  const { familyMember, childAllergies, handleAllergies, updateUser } =
-    FamilyMemberSettingsViewModel();
+  const {
+    familyMember,
+    childAllergies,
+    handleAllergies,
+    childLimits,
+    updateUser,
+    handleLimitSwitchChange,
+    handleSliderValueChange,
+  } = FamilyMemberSettingsViewModel();
 
   return (
     <View className="flex-1">
@@ -21,7 +28,11 @@ const FamilyMemberSettings = () => {
         <Text className="text-2xl font-medium p-4 mb-5">
           {familyMember?.firstName} Settings
         </Text>
-        <SpendingLimits />
+        <SpendingLimits
+          limits={childLimits}
+          handleLimitSwitchChange={handleLimitSwitchChange}
+          handleSliderValueChange={handleSliderValueChange}
+        />
         <Spacer space={10} />
         <Allergens
           childAllergies={childAllergies}

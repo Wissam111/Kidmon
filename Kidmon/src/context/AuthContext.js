@@ -4,30 +4,24 @@ import { useNavigation } from "@react-navigation/native";
 export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
+  const authData = action.payload;
   switch (action.type) {
     case "LOGIN":
-      storeData(action.payload);
-      return { authData: action.payload };
+      return { user: authData.user, token: authData.token };
     case "SIGNUP":
-      return { authData: action.payload };
+      return { user: authData.user, token: authData.token };
     case "LOGOUT":
       handleLogout();
-      return { authData: null };
-  }
-};
-
-const storeData = async (data) => {
-  try {
-    await AsyncStorage.setItem("authData", JSON.stringify(data));
-  } catch (e) {
-    console.log("Error storing data:", e);
+      return { user: null, token: null };
+    case "UPDATE_USER":
+      return { user: authData };
   }
 };
 
 const handleLogout = async () => {
   try {
-    await AsyncStorage.removeItem("authData");
-    storeData(null);
+    await AsyncStorage.removeItem("user");
+    await AsyncStorage.removeItem("token");
   } catch (e) {
     console.log("Error removing data:", e);
   }
@@ -35,14 +29,19 @@ const handleLogout = async () => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
-    authData: null,
+    user: null,
+    token: null,
   });
   const navigation = useNavigation();
 
   const getData = async () => {
     try {
-      const jsonValue = await AsyncStorage.getItem("authData");
-      return jsonValue != null ? JSON.parse(jsonValue) : null;
+      const userJson = await AsyncStorage.getItem("user");
+      const tokenJson = await AsyncStorage.getItem("token");
+      return {
+        user: userJson ? JSON.parse(userJson) : null,
+        token: tokenJson ? JSON.parse(tokenJson) : null,
+      };
     } catch (e) {
       console.log(e);
     }

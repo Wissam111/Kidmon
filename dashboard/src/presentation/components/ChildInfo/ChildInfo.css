@@ -3,6 +3,7 @@
   z-index: 99999;
   min-height: 70%;
   max-height: 90%;
+  min-width: 60%;
   background: #ffffff;
   box-shadow: 7px 7px 40px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -16,7 +17,7 @@
   flex-direction: column;
 }
 
-.child-info-container>.rows {
+.child-info-container > .rows {
   display: flex;
   justify-content: space-between;
   flex: 1;
@@ -73,7 +74,6 @@
   gap: 10px;
 }
 
-
 .child-order-col2 {
   padding: 4px;
   display: flex;
@@ -99,7 +99,8 @@
   margin: 20px 0 10px 0;
 }
 
-.child-info-container button {}
+.child-info-container button {
+}
 
 .child-order-container h2 {
   margin: 0;

@@ -3,8 +3,10 @@ import React, { useCallback, useMemo, useRef } from "react";
 import ActivityCard from "./ActivityCard";
 import Spacer from "./Spacer";
 import { Text } from "react-native";
-import BottomSheet, { BottomSheetFlatList, BottomSheetView } from "@gorhom/bottom-sheet";
-
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
 
 const ActivityList = ({ activities, style, snap1, snap2 }) => {
   const bottomSheetRef = useRef(null);
@@ -13,13 +15,12 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
   return (
     <BottomSheet
       style={styles.sheet}
-      ref={bottomSheetRef} index={0} snapPoints={snapPoints}>
+      ref={bottomSheetRef}
+      index={0}
+      snapPoints={snapPoints}
+    >
       <BottomSheetView style={{ ...style }}>
-        <View
-          style={{
-
-          }}
-        >
+        <View style={{}}>
           <View>
             <Text className="text-lg font-medium">Activity</Text>
             <Text className="text-xs color-[#00000075]">
@@ -29,8 +30,7 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
 
           <Text>Today</Text>
         </View>
-
-        <BottomSheetFlatList // change to
+        <FlatList // change to
           data={activities}
           style={{ flex: 1 }}
           contentContainerStyle={{ padding: 8, paddingBottom: 100 }}
@@ -51,9 +51,7 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
 
 export default ActivityList;
 
-
 const styles = StyleSheet.create({
-
   sheet: {
     padding: 16,
     paddingTop: 26,
@@ -65,5 +63,5 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.32,
     // shadowRadius: 5.46,
     // elevation: 9,
-  }
-})
+  },
+});

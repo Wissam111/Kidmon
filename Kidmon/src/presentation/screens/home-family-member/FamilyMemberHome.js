@@ -8,7 +8,7 @@ import NavBar from "../../components/NavBar";
 import FamilyMemberHomeViewModel from "./FamilyMemberHomeViewModel";
 
 const FamilyMemberHome = () => {
-  const { familyMember, spendings } = FamilyMemberHomeViewModel();
+  const { familyMember, weekSpendings } = FamilyMemberHomeViewModel();
   return (
     <View className="flex-1 relative">
       <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
@@ -19,7 +19,7 @@ const FamilyMemberHome = () => {
         />
         <Spacer space={5} />
         <View className="items-center w-full">
-          <Chart spendings={spendings} />
+          <Chart spendings={weekSpendings} />
         </View>
         <Spacer space={10} />
         <View className="items-center w-full">

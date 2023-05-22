@@ -14,21 +14,12 @@ const serialize = function (obj) {
   return "?" + str.join("&");
 };
 
-const getData = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem("authData");
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    console.log(e);
-  }
-};
-
 // gets the access token from the cache
 const getToken = async () => {
   try {
-    const authData = await getData();
-    if (authData?.token == null) return null;
-    return authData.token;
+    const token = await AsyncStorage.getItem("token");
+    if (token == null) return null;
+    return JSON.parse(token);
   } catch (e) {
     console.log("getToken:", e);
   }

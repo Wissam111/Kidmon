@@ -7,6 +7,11 @@
 .register-page-wrapper {
   padding: 40px 30px 10px 50px;
   position: relative;
+
+}
+
+.inner-page {
+  width: 100%;
 }
 
 .inner-page img {

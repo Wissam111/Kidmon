@@ -28,10 +28,10 @@ body {
   position: relative;
 }
 
-.outter-page-container{
+.outter-page-container {
   display: flex;
   flex: 1;
-  background: #f3f3f3;
+  background: #f9f9f9;
   box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
   border-radius: 0 12px 12px 0;
 }
@@ -40,7 +40,6 @@ body {
   flex: 1;
   position: relative;
   display: flex;
-  flex-direction: column;
   border-radius: 0 8px 8px 0;
 }
 

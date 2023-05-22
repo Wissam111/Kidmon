@@ -1,7 +1,7 @@
 const { activityService } = require("../use-cases");
 
 
-const transferPoints = async (req, res) => {
+const transferPoints = async (req, res, next) => {
     // #swagger.tags = ['Acitvities']
     try {
         const { senderUserId, receiverUserId, amount } = req.body
@@ -34,8 +34,28 @@ const purchase = async (req, res, next) => {
 }
 
 
+const getActivites = async (req, res , next) => {
+    // #swagger.tags = ['Acitvities']
 
-const getUserActivities = async (req, res) => {
+    try {
+        const { type, sort } = req.query
+        const page = + req.query.page
+        const pageSize = + req.query.pageSize
+
+        const result = await activityService.listActivities({ filters: { type }, page, pageSize, sort })
+        res.status(200).json({
+            message: 'fetch activities successfull',
+            activities: result.activities,
+            count: result.count
+        })
+    } catch (e) {
+        console.log(e);
+        next(e)
+    }
+}
+
+
+const getUserActivities = async (req, res , next) => {
     // #swagger.tags = ['Acitvities']
     try {
         const { userId, sort } = req.query
@@ -55,7 +75,7 @@ const getUserActivities = async (req, res) => {
 
 
 
-const getFamilyMembersActivities = async (req, res) => {
+const getFamilyMembersActivities = async (req, res , next) => {
     // #swagger.tags = ['Acitvities']
 
 
@@ -119,5 +139,6 @@ module.exports = {
     transferPoints,
     getUserSpendings,
     getUserSpendingAtDate,
-    getFamilyMembersActivities
+    getFamilyMembersActivities,
+    getActivites
 }

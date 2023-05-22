@@ -24,15 +24,15 @@ const ProductRepository = () => {
   //CRUD
 
   const createProduct = async (productFormData) => {
-    const data = await axios.post(BASE_URL + "products", productFormData);
+    const data = await apiCall('products', 'POST', productFormData, "multipart/form-data")
     return data;
   };
   const deleteProdcut = async (productId) => {
     const data = apiCall(`products/${productId}`, "DELETE");
     return data;
   };
-  const updateProduct = async () => {};
-  const getProduct = async () => {};
+  const updateProduct = async () => { };
+  const getProduct = async () => { };
 
   return {
     getProducts,

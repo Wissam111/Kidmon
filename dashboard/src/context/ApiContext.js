@@ -3,16 +3,21 @@ import { useAuthContext } from "../hooks/useAuthContext";
 export const ApiContext = createContext();
 export const BASE_URL = "http://localhost:4000/api/v1/";
 export const BASE_URL_1 = "http://localhost:4000/api/";
+
+
 export const ApiContextProvider = ({ children }) => {
   const { authData } = useAuthContext();
+  
   const apiCall = async (
     url,
     method = "GET",
     body,
     contentType = "application/json"
   ) => {
+   
     const customURL = BASE_URL + url;
     let bbody;
+    
     if (body) {
       if (contentType === "multipart/form-data") {
         console.log("form");

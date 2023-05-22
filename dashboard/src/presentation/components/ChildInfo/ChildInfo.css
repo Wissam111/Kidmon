@@ -1,8 +1,8 @@
 .child-info-container {
   position: absolute;
   z-index: 99999;
-  width: 90%;
-  height: 90%;
+  min-height: 70%;
+  max-height: 90%;
   background: #ffffff;
   box-shadow: 7px 7px 40px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -11,24 +11,31 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
   z-index: 99999;
+  padding: 20px 30px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+}
+
+.child-info-container>.rows {
+  display: flex;
   justify-content: space-between;
-  padding: 30px 25px 10px 25px;
+  flex: 1;
+  padding-bottom: 20px;
 }
 
 .child-info-col1 .child-col1-row1 img {
   width: 121px;
   height: 121px;
-
   border-radius: 50%;
 }
+
 .child-info-col1 .child-col1-row1 {
   display: flex;
   align-items: center;
   gap: 20px;
   padding: 3px;
 }
+
 .child-info-col1 .child-col1-row1 h4 {
   font-weight: 500;
   font-size: 21px;
@@ -36,16 +43,18 @@
   padding: 0;
   margin: 0;
 }
+
 .child-info-col1 .child-col1-row1 p {
-  font-weight: 500;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 16px;
   line-height: 17px;
   color: rgba(0, 0, 0, 0.8);
 }
+
 .child-info-col1 .child-col1-row1 p span {
-  font-weight: 500;
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.6);
+  font-weight: 800;
+  font-size: 14px;
+  color: rgba(187, 71, 71, 0.6);
 }
 
 .child-info-col1 .child-col1-row2 h5 {
@@ -53,6 +62,7 @@
   font-size: 16px;
   line-height: 24px;
 }
+
 .child-info-col1 .child-col1-row2 {
   width: 90%;
 }
@@ -63,21 +73,25 @@
   gap: 10px;
 }
 
+
 .child-order-col2 {
   padding: 4px;
+  display: flex;
+  flex-direction: column;
 }
+
 .child-order-col2 .child-order-container {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  height: 60%;
   overflow-y: auto;
+  flex: 1;
 }
+
 .child-order-col2 h4 {
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;
-
   color: rgba(0, 0, 0, 0.62);
 }
 
@@ -85,11 +99,7 @@
   margin: 20px 0 10px 0;
 }
 
-.child-info-container button {
-  right: 50px;
-  bottom: 20px;
-  font-size: 17px;
-}
+.child-info-container button {}
 
 .child-order-container h2 {
   margin: 0;

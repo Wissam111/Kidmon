@@ -27,11 +27,10 @@ const ProdcutsTable = ({
         sx={{
           width: "100%",
           height: "100%",
-          overflow: "hidden",
-          position: "relative",
-        }}
-      >
-        <TableContainer sx={{ maxHeight: 440 }}>
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
+        <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -85,6 +84,9 @@ const ProdcutsTable = ({
             </TableBody>
           </Table>
         </TableContainer>
+
+        <div className="space"></div>
+
         <div className="pageination-container">
           <Pagination
             count={numofPages}

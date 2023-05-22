@@ -52,8 +52,6 @@ const getUserByBraceletId = async (req, res, next) => {
   // #swagger.tags = ['Users']
   try {
     const { braceletId } = req.params;
-    console.log(req.params);
-    console.log(braceletId);
     const user = await userService.getUserByBraceletIdUseCase({
       braceletId: braceletId,
     });

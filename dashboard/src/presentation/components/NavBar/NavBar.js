@@ -5,7 +5,8 @@ import { useLocation } from "react-router-dom";
 import "./NavBar.css";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { BiLogOut } from "react-icons/bi";
-import { IoBagRemoveOutline, IoPersonAddOutline } from "react-icons/io5";
+import { IoBagRemoveOutline, IoPersonAddOutline , IoHomeOutline } from "react-icons/io5";
+import Spacer from "../Spacer";
 
 const NavBar = () => {
   const { dispatch } = useAuthContext();
@@ -18,12 +19,22 @@ const NavBar = () => {
   return (
     <div className="navbar-container">
       <img src={require("../../../assets/imgs/family2.png")} />
+
+      <Spacer space={16} />
+
       <ul className="nav-links">
         <li className={pathName === "/" ? "active" : null}>
           <Link to="/" className="nav-link">
+            <IoHomeOutline size={27} color="gray" />
+          </Link>
+        </li>
+
+        <li className={pathName === "/store" ? "active" : null}>
+          <Link to="/store" className="nav-link">
             <HiOutlineBuildingStorefront size={27} color="gray" />
           </Link>
         </li>
+
         <li className={pathName === "/products" ? "active" : null}>
           <Link to="/products" className="nav-link">
             <IoBagRemoveOutline size={27} color="gray" />
@@ -34,6 +45,8 @@ const NavBar = () => {
             <IoPersonAddOutline size={27} color="gray" />
           </Link>
         </li>
+
+        <div className="space"></div>
 
         <li className={"logout-nav-btn"}>
           <Link to="/entry" className="nav-link" onClick={handleLogout}>

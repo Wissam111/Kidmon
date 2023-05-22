@@ -1,15 +1,14 @@
 .scan-card-container {
   position: absolute;
-  width: 334px;
-  height: 253px;
+  min-height: 253px;
+  min-width: 30%;
+  padding: 20px;
   box-shadow: 7px 7px 40px rgba(0, 0, 0, 0.25);
-  border-radius: 4px;
+  border-radius: 8px;
   background: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
   top: 50%;
   left: 45%;
   margin-right: -50%;
@@ -29,7 +28,7 @@
 }
 .scan-card-container img {
   width: 60px;
-  height: 30px;
+  height: 40px;
   z-index: 99999;
 }
 .scan-card-container input {
@@ -38,7 +37,7 @@
   padding: 10px;
   background: #ffffff;
   box-shadow: 7px 7px 40px rgba(0, 0, 0, 0.27);
-  border-radius: 3px;
+  border-radius: 4px;
   outline: none;
   border: none;
 }

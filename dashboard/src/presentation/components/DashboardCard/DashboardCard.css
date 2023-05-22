@@ -1,0 +1,18 @@
+.dashboardcard-container {
+    flex: 1;
+    padding: 20px 60px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
+}
+
+
+.dashboardcard-container>h4 {
+    margin: 0;
+}
+
+.dashboardcard-container>p {
+    font-size: 2rem;
+    padding: 0;
+    margin: 0;
+}

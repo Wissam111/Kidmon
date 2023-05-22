@@ -3,21 +3,46 @@ export const CatItemsContext = createContext();
 
 export const CartReducer = (state, action) => {
   switch (action.type) {
-    case "ADDTOCART":
-      return { cartItems: [...state.cartItems, action.payload] };
-    case "REMOVEFROMCART":
-      const index = state.cartItems.findIndex(
-        (item) => item.id == action.payload.id
-      ); //find first one with same id
-      let newItemsCart = [...state.cartItems];
-      if (index >= 0) {
-        newItemsCart.splice(index, 1); //2nd arg mean remv only one item
-      } else {
-        console.log("this item doesnt exists in cart");
+
+    case "ADD_ITEM": {
+      let newCartItems
+      if (state.cartItems[action.payload.id]) {
+        state.cartItems[action.payload.id].amount++
       }
-      return { cartItems: newItemsCart };
-    case "DELETECART":
-      return { cartItems: [] };
+      else {
+        state.cartItems[action.payload.id] = {
+          ...action.payload,
+          amount: 1
+        }
+      }
+      newCartItems = {
+        ...state.cartItems
+      }
+      return { ...state, cartItems: newCartItems };
+    }
+    case "REMOVE_ITEM":
+      delete state.cartItems[action.payload.id]
+      return { ...state, cartItems: { ...state.cartItems } };
+
+    case 'UPDATE_AMOUNT':
+      let newCartItems
+
+      const changedItem = action.payload
+
+      if (changedItem.amount === 0) {
+        delete state.cartItems[action.payload.id]
+      }
+      else {
+        state.cartItems[action.payload.id].amount = action.payload.amount
+      }
+
+      newCartItems = {
+        ...state.cartItems
+      }
+      return { ...state, cartItems: newCartItems }
+
+    case "CLEAR":
+      return { ...state, cartItems: {} };
 
     default:
       return state;
@@ -26,7 +51,7 @@ export const CartReducer = (state, action) => {
 
 export const CartItemsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(CartReducer, {
-    cartItems: [],
+    cartItems: {},
   });
 
   const selectCartItemsById = (id) => {
@@ -39,9 +64,8 @@ export const CartItemsContextProvider = ({ children }) => {
     return total;
   };
   const productsTotal = (products) => {
-    console.log(products);
     const total = products.reduce((accumulator, product) => {
-      return accumulator + product.price;
+      return accumulator + product.price * product.amount;
     }, 0);
     return total;
   };

@@ -8,7 +8,7 @@ import ChildInfo from "../../components/ChildInfo/ChildInfo";
 import { animated } from "react-spring";
 import HomeViewModel from "./HomeViewModel";
 
-const Home = () => {
+const Home = (props) => {
   const {
     products,
     categories,
@@ -22,7 +22,7 @@ const Home = () => {
     makePurchase,
     childViewAnimation,
   } = HomeViewModel();
-
+  
   return (
     <div className="page-container">
       <div className="home-container">

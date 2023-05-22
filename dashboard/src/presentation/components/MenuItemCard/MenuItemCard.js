@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 
 import "./MenuItemCard.css";
 import { BASE_URL_1 } from "../../../context/ApiContext";
+import Spacer from "../Spacer";
 
 const MenuItemCard = ({ product }) => {
   const { dispatch } = useCartItemsContext();
 
   const handleAddtoCart = () => {
-    dispatch({ type: "ADDTOCART", payload: product });
+    dispatch({ type: "ADD_ITEM", payload: product });
   };
   return (
     <div className="menuItemCard-container" onClick={handleAddtoCart}>
       <img
+        className="noselect"
         src={
           product.image
             ? BASE_URL_1 + `imgs/${product.image}`
@@ -20,8 +22,9 @@ const MenuItemCard = ({ product }) => {
         }
         alt="menu-item"
       />
-      <h4>{product.title}</h4>
-      <span>{product.price} P</span>
+      <Spacer space={4} />
+      <h4 className="noselect">{product.title}</h4>
+      <span className="noselect">{product.price} P</span>
     </div>
   );
 };

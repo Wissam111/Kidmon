@@ -15,7 +15,8 @@ exports.makeActivityDb = ({ makeDb }) => {
         makeTransaction,
         findUserSpendings,
         findSpendingAtDate,
-        findByFamilyMembers
+        findByFamilyMembers,
+        find
     })
 
 
@@ -69,6 +70,29 @@ exports.makeActivityDb = ({ makeDb }) => {
 
         return idsMap(activites)
     }
+
+    async function find({ search = "", page, pageSize = 10, sort = "desc", filters, transaction }) {
+        await makeDb();
+
+        const query = Activity.find(
+            filters,
+            {},
+            {
+                sort: { createdAt: sort },
+                limit: pageSize,
+                skip: (page - 1) * pageSize,
+                session: transaction?.getSession(),
+            }
+        ).populate('items._id')
+        const count = await Activity.count(filters);
+
+        const activities = await query.lean();
+        return {
+            activities: idsMap(activities),
+            count: count,
+        };
+    }
+
 
 
     async function findSpendingAtDate({ id: _id, date, timezone }) {

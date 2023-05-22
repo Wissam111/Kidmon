@@ -8,7 +8,6 @@ import AlertTitle from "@mui/material/AlertTitle";
 import QuantitySelector from "../QuantitySelector/QuantitySelector";
 import { useCallback } from "react";
 
-
 const OrderItemCard = ({
   product,
   cardImg,
@@ -24,23 +23,28 @@ const OrderItemCard = ({
     dispatch({ type: "REMOVE_ITEM", payload: product });
   };
 
-  const onAmountChange = useCallback((value) => {
-    dispatch({
-      type: 'UPDATE_AMOUNT', payload: {
-        id: product.id,
-        amount: value
-      }
-    })
-  }, [dispatch])
+  const onAmountChange = useCallback(
+    (value) => {
+      dispatch({
+        type: "UPDATE_AMOUNT",
+        payload: {
+          id: product.id,
+          amount: value,
+        },
+      });
+    },
+    [dispatch]
+  );
 
   return (
     <div className="outter">
       <div
-        className={`orderItem-card-container ${isAllergic ? "orderItem-allergic" : ""
-          }`}
+        className={`orderItem-card-container ${
+          isAllergic ? "orderItem-allergic" : ""
+        }`}
         onMouseEnter={() => setShowAllergyInfo(true)}
-        onMouseLeave={() => setShowAllergyInfo(false)}>
-
+        onMouseLeave={() => setShowAllergyInfo(false)}
+      >
         {showAllergyInfo && isAllergic && (
           <div className="order-alert-container">
             <Alert severity={"info"}>
@@ -60,17 +64,19 @@ const OrderItemCard = ({
           alt="order-item"
         />
         <span className="text-order noselect">{text}</span>
-        <span className="amount-order noselect">x{amount}</span>
-        <span className="total-order noselect">{parseFloat(total.toFixed(2))} P</span>
+        <QuantitySelector min={0} value={amount} onChange={onAmountChange} />
+
+        {/* <span className="amount-order noselect">x{amount}</span> */}
+        <span className="total-order noselect">
+          {parseFloat(total.toFixed(2))} P
+        </span>
         <AiOutlineDelete
           style={{ zIndex: 10 }}
           cursor={"pointer"}
           color="gray"
           onClick={handleRemoveFromCart}
         />
-
       </div>
-      <QuantitySelector min={0} value={amount} onChange={onAmountChange} />
     </div>
   );
 };

@@ -26,6 +26,18 @@
   /* overflow-y: scroll; */
 }
 
-.cart-menu-container button {
- 
+.clear-cart-btn {
+  cursor: pointer;
+  justify-self: "flex-end";
+  font-size: 12px;
+  font-weight: 500;
+  width: 80px;
+  background: none;
+  outline: none;
+  border: none;
+  color: rgb(125, 124, 124);
+  margin-bottom: 10px;
+}
+.clear-cart-btn:hover {
+  color: black;
 }

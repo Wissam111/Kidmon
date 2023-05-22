@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import increase from "./increase";
 import decrease from "./decrease";
-import './style.css'
+import "./style.css";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 
 const QuantitySelector = ({ value = 0, max, min, onChange }) => {
@@ -16,19 +16,32 @@ const QuantitySelector = ({ value = 0, max, min, onChange }) => {
   }, []);
 
   useEffect(() => {
-    setQuantity(value)
-  }, [value])
+    setQuantity(value);
+  }, [value]);
 
   useEffect(() => {
-    if (onChange)
-      onChange(quantity)
-  }, [quantity])
+    if (onChange) onChange(quantity);
+  }, [quantity]);
 
   return (
     <div className="container">
-      <AiOutlineMinusCircle size={14} className="button" onClick={onDecrease}>dec</AiOutlineMinusCircle>
+      <AiOutlineMinusCircle
+        size={13}
+        className="button"
+        onClick={onDecrease}
+        color="gray"
+      >
+        dec
+      </AiOutlineMinusCircle>
       <p className="noselect">{quantity}</p>
-      <AiOutlinePlusCircle size={14} className="button" onClick={onIncrease}>inc</AiOutlinePlusCircle>
+      <AiOutlinePlusCircle
+        size={13}
+        className="button"
+        onClick={onIncrease}
+        color="gray"
+      >
+        inc
+      </AiOutlinePlusCircle>
     </div>
   );
 };

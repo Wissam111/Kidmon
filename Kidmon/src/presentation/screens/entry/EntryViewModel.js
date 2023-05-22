@@ -3,6 +3,7 @@ import AuthRepository from "../../../repository/AuthRepository";
 import { useNavigation } from "@react-navigation/native";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EntryViewModel = () => {
   const [showOTP, setShowOTP] = useState(true);
@@ -49,7 +50,16 @@ const EntryViewModel = () => {
     }
     dispatch({ type: "LOGIN", payload: data });
     navigation.navigate("HomeParent");
+    storeData(data);
     setShowOTP(true);
+  };
+  const storeData = async (authData) => {
+    try {
+      await AsyncStorage.setItem("user", JSON.stringify(authData.user));
+      await AsyncStorage.setItem("token", JSON.stringify(authData.token));
+    } catch (e) {
+      console.log("Error storing data:", e);
+    }
   };
 
   return { handleLogin, handleVerfication, showOTP, handleShowOTP };

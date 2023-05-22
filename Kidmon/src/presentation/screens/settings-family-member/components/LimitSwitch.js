@@ -1,15 +1,20 @@
 import { View, Text, Switch, StyleSheet } from "react-native";
-import { useState } from "react";
+import { useState, memo, useEffect } from "react";
 import { primaryColor } from "../../../styles";
 import { Slider } from "@miblanchard/react-native-slider";
-import { useLimitsContext } from "../../../../hooks/useLimitsContext";
+import { useFamilyMemberContext } from "../../../../hooks/useFamilyMemberContext";
 
-const LimitSwitch = ({ text, minValue, maxValue }) => {
-  const { limits, handleLimitSwitchChange, handleSliderValueChange } =
-    useLimitsContext();
-
-  const limit = limits[text.toLowerCase()];
-
+const LimitSwitch = ({
+  text,
+  minValue,
+  maxValue,
+  limit,
+  handleLimitSwitchChange,
+  handleSliderValueChange,
+}) => {
+  // const currentValue = limit?.value ? limit.value : 0;
+  const [previewValue, setPreviewValue] = useState(0);
+  const { familyMember } = useFamilyMemberContext();
   const toggleSwitch = (isActive) => {
     handleLimitSwitchChange(text.toLowerCase(), isActive);
   };
@@ -17,28 +22,32 @@ const LimitSwitch = ({ text, minValue, maxValue }) => {
   const handleSlider = (value) => {
     handleSliderValueChange(text.toLowerCase(), Math.round(value));
   };
-
+  useEffect(() => {
+    const currentValue = limit?.value ? limit.value : 0;
+    setPreviewValue(Math.round(currentValue));
+  }, [limit]);
   return (
     <View className={`w-80  h-28`} style={{ backgroundColor: primaryColor }}>
       <View className="flex-row justify-between p-4 z-50">
         <Text className="text-lg font-medium">{text}</Text>
         <Switch
           onValueChange={toggleSwitch}
-          value={limit.isActive}
+          value={limit?.isActive}
           trackColor={{ false: "#767577", true: "#5FD5E5" }}
         />
       </View>
       <View className="flex-row items-center justify-between pr-2 pl-2">
         <Text className="text-base font-medium color-[#0000005e]">
-          {limit.value}
+          {previewValue}
         </Text>
         <Slider
           animateTransitions
           minimumTrackTintColor="#5FD5E5"
           width="80%"
           minimumValue={minValue}
-          value={limit.value}
-          onValueChange={handleSlider}
+          value={previewValue}
+          onSlidingComplete={handleSlider}
+          onValueChange={(val) => setPreviewValue(Math.round(val))}
           maximumValue={maxValue}
           thumbStyle={styles.thumb}
           trackStyle={styles.track}
@@ -47,7 +56,7 @@ const LimitSwitch = ({ text, minValue, maxValue }) => {
           {maxValue}
         </Text>
       </View>
-      {!limit.isActive && (
+      {!limit?.isActive && (
         <View className="w-full h-full bg-gray-700 absolute opacity-50 bottom-0"></View>
       )}
     </View>

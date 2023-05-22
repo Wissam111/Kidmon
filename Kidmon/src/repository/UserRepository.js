@@ -3,8 +3,13 @@ import axios from "axios";
 import { BASE_URL } from "../network/apiCall";
 
 const UserRepository = () => {
+  const getUser = async (userId) => {
+    const data = await apiCall(`users/${userId}`);
+    return data;
+  };
+
   const getUserByRFID = async (braceletId) => {
-    const data = await apiCall(`users/bracelet/${"0007136159"}`);
+    const data = await apiCall(`users/bracelet/${braceletId}`);
     return data;
   };
 
@@ -20,11 +25,12 @@ const UserRepository = () => {
   };
 
   const updateUser = async (updatedUserObj) => {
+    console.log(updatedUserObj);
     const data = await apiCall("users/", "PATCH", updatedUserObj);
     return data;
   };
 
-  return { getUserByRFID, createFamilyMember, updateUser };
+  return { getUser, getUserByRFID, createFamilyMember, updateUser };
 };
 
 export default UserRepository;

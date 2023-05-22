@@ -2,7 +2,6 @@ import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { AuthContextProvider } from "../context/AuthContext";
 import { FamilyMemberContextProvider } from "../context/FamilyMemberContext";
-import { LimitsContextProvider } from "../context/LimitsContext";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -47,10 +46,8 @@ const Navigation = () => {
     <NavigationContainer>
       <AuthContextProvider>
         <FamilyMemberContextProvider>
-          <LimitsContextProvider>
-            {loading && <Loading />}
-            <HomeParentNavigation />
-          </LimitsContextProvider>
+          {loading && <Loading />}
+          <HomeParentNavigation />
         </FamilyMemberContextProvider>
       </AuthContextProvider>
     </NavigationContainer>

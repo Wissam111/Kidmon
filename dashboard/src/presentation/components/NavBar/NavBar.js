@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import "./NavBar.css";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { BiLogOut } from "react-icons/bi";
-import { IoBagRemoveOutline, IoPersonAddOutline } from "react-icons/io5";
+import { IoBagRemoveOutline, IoPersonAddOutline , IoHomeOutline } from "react-icons/io5";
 import Spacer from "../Spacer";
 
 const NavBar = () => {
@@ -25,9 +25,16 @@ const NavBar = () => {
       <ul className="nav-links">
         <li className={pathName === "/" ? "active" : null}>
           <Link to="/" className="nav-link">
+            <IoHomeOutline size={27} color="gray" />
+          </Link>
+        </li>
+
+        <li className={pathName === "/store" ? "active" : null}>
+          <Link to="/store" className="nav-link">
             <HiOutlineBuildingStorefront size={27} color="gray" />
           </Link>
         </li>
+
         <li className={pathName === "/products" ? "active" : null}>
           <Link to="/products" className="nav-link">
             <IoBagRemoveOutline size={27} color="gray" />

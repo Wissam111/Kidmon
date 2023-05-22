@@ -6,6 +6,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  border-radius: 0 12px 12px 0;
 }
 .cart-menu-container h3 {
   font-weight: 500;

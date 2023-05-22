@@ -61,7 +61,7 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
             <div>
               <h4>{child.firstName + " " + child.lastName}</h4>
               <p>
-                Balance <span>{parseFloat(child.credits.toFixed(2))}</span>
+                Balance: <span>{parseFloat(child.credits.toFixed(2))}</span>
               </p>
             </div>
           </div>

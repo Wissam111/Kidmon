@@ -116,7 +116,6 @@ exports.makeUserDb = ({ makeDb }) => {
     transaction,
   }) {
     await makeDb();
-    console.log(braceletId);
     const user = await User.findOne(
       { braceletId: braceletId },
       {},

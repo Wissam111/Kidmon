@@ -1,6 +1,7 @@
 .category-container {
-  width: 61px;
-  height: 101px;
+  /* width: 61px; */
+  /* height: 101px; */
+  padding: 8px;
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
@@ -14,9 +15,11 @@
   gap: 5px;
   cursor: pointer;
 }
+
 .category-img-wrapper img {
   width: 30px;
 }
+
 .category-img-wrapper {
   border: 0.5px solid rgba(0, 0, 0, 0.24);
   border-radius: 8px;

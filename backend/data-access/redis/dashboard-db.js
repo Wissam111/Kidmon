@@ -22,6 +22,10 @@ exports.makeDashboardDb = ({ makeDb }) => {
         const recentSoldProducts = await redisClient.lRange(REDIES_KEYS.recentSoldProducts, 0, -1)
         const productsSoldCounters = await redisClient.hGetAll(REDIES_KEYS.productsSoldCounters)
         const topSoldProducts = await redisClient.zRange(REDIES_KEYS.topSoldProducts, 0, 5)
+        // users count 
+        // avg purchases per day
+        // products count 
+        
 
         console.log(productsSoldCounters);
 

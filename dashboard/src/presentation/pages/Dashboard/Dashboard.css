@@ -1,35 +1,72 @@
 .dashboard-container {
-    align-self: center;
-    flex: 1;
-    width: 80%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 12px;
+}
+
+.inner-container>header {
+    padding: 6px;
+    border-bottom: 1px solid #cecece;
+}
+
+
+.dashboard-container>.inner-container {
+    width: 95%;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    padding: 20px;
-    padding-top: 40px;
     gap: 20px;
 }
 
 
-
-.dashboard-container > .counters{
+.inner-container>.counters {
     display: flex;
     flex-wrap: wrap;
-    /* justify-content: stretch; */
     gap: 12px;
-    /* border: 1px solid red; */
 }
 
 
-.dashboard-container > .stats {
+.inner-container>.stats {
     display: flex;
-    gap: 50px
+    align-items: stretch;
+    gap: 12px;
 }
 
 
-.dashboard-container > .stats > .recent-sold-products{
-    background: white;
+
+
+
+.charts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.charts-container>.counters-charts {
+    display: flex;
+    gap: 12px;
+}
+
+
+.top-sold-products {
+    border-radius: 6px;
+    box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
+}
+
+.recent-sold-products {
     flex: 1;
+    background: white;
+    box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
+    border-radius: 6px;
+    padding: 8px;
 }
 
 
+
+.time-container{
+    background: white;
+    box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
+    padding: 0 8px;
+    border-radius: 8px;
+}

@@ -2,16 +2,28 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import LimitProgress from "../../../components/LimitProgress";
 import Spacer from "../../../components/Spacer";
-const Limits = () => {
+const Limits = ({ spendingsLimits }) => {
   return (
     <View style={styles.style}>
       <Text className="text-xl font-medium">Limits</Text>
       <Spacer space={10} />
-      <LimitProgress text={"Daily"} percentage={20} />
+      <LimitProgress
+        text={"Daily"}
+        percentage={spendingsLimits.daily.percentage}
+        remainin={spendingsLimits.daily.remainin}
+      />
       <Spacer space={10} />
-      <LimitProgress text={"Weakly"} percentage={40} />
+      <LimitProgress
+        text={"Weakly"}
+        percentage={spendingsLimits.weekly.percentage}
+        remainin={spendingsLimits.weekly.remainin}
+      />
       <Spacer space={10} />
-      <LimitProgress text={"Monthly"} percentage={92} />
+      <LimitProgress
+        text={"Monthly"}
+        percentage={spendingsLimits.monthly.percentage}
+        remainin={spendingsLimits.monthly.remainin}
+      />
     </View>
   );
 };

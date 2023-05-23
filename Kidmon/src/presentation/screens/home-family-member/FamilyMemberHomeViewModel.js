@@ -9,10 +9,19 @@ const FamilyMemberHomeViewModel = () => {
   const { familyMember } = useFamilyMemberContext();
   const [weekSpendings, setWeekSpendings] = useState([]);
   const { setLoading } = useLoadingContext();
-  const [spendings, setSpendings] = useState({
-    daily: 0,
-    weekly: 0,
-    monthly: 0,
+  const [spendingsLimits, setSpendingsLimits] = useState({
+    daily: {
+      percentage: 0,
+      remainin: 0,
+    },
+    weekly: {
+      percentage: 0,
+      remainin: 0,
+    },
+    monthly: {
+      percentage: 0,
+      remainin: 0,
+    },
   });
 
   const currentDate = new Date();
@@ -64,13 +73,24 @@ const FamilyMemberHomeViewModel = () => {
       (total, spending) => total + spending.totalSpendings,
       0
     );
-    console.log(dailySpendings);
-    console.log(weeklySpendings);
-    console.log(monthlySpendings);
-    setSpendings({
-      daily: dailySpendings,
-      weekly: weeklySpendings,
-      monthly: monthlySpendings,
+    const dailyLimitVal = familyMember.limits?.daily?.value;
+    const weeklyLimitVal = familyMember.limits?.weekly?.value;
+    const monthlyLimitVal = familyMember.limits?.monthly?.value;
+
+    setSpendingsLimits({
+      daily: {
+        percentage: Math.round((dailySpendings / dailyLimitVal) * 100),
+        remainin: Math.round(dailyLimitVal - dailySpendings),
+      },
+
+      weekly: {
+        percentage: Math.round((weeklySpendings / weeklyLimitVal) * 100),
+        remainin: Math.round(weeklyLimitVal - weekSpendings),
+      },
+      monthly: {
+        percentage: Math.round((monthlySpendings / monthlyLimitVal) * 100),
+        remainin: Math.round(monthlyLimitVal - monthlySpendings),
+      },
     });
   };
 
@@ -90,7 +110,7 @@ const FamilyMemberHomeViewModel = () => {
     FamilyMemberHomeInit();
   }, [familyMember]);
 
-  return { familyMember, weekSpendings };
+  return { familyMember, weekSpendings, spendingsLimits };
 };
 
 export default FamilyMemberHomeViewModel;

@@ -1,7 +1,7 @@
 import { View, Text } from "react-native";
 import Spacer from "./Spacer";
 import { useState, useEffect } from "react";
-const LimitProgress = ({ text, percentage }) => {
+const LimitProgress = ({ text, percentage, remainin }) => {
   const lowLimit = 30;
   const midLimit = 70;
 
@@ -30,7 +30,7 @@ const LimitProgress = ({ text, percentage }) => {
           ></View>
         </View>
         <Spacer space={4} />
-        <Text className="text-sm color-[#adadadde]">20 remainin</Text>
+        <Text className="text-sm color-[#adadadde]">{remainin} remainin</Text>
       </View>
     </View>
   );

@@ -30,7 +30,9 @@ const LimitProgress = ({ text, percentage, remainin }) => {
           ></View>
         </View>
         <Spacer space={4} />
-        <Text className="text-sm color-[#adadadde]">{remainin} remainin</Text>
+        <Text className="text-sm color-[#adadadde]">
+          {remainin ? remainin + " remainin" : "unlimited"}
+        </Text>
       </View>
     </View>
   );

@@ -50,7 +50,8 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       const authData = await getData();
-      if (authData) {
+      console.log(authData);
+      if (authData?.user && authData?.token) {
         dispatch({ type: "LOGIN", payload: authData });
         navigation.navigate("HomeParent");
       }

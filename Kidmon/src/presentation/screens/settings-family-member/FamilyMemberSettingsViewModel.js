@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 
 import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
-
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import UserRepository from "../../../repository/UserRepository";
 const FamilyMemberSettingsViewModel = () => {
@@ -17,10 +17,14 @@ const FamilyMemberSettingsViewModel = () => {
         limits: childLimits,
         allergies: childAllergies,
       });
+      handleAlert("success", "allergies and limits updated successfully");
       NavigateHome();
-      console.log("updated", data);
     } catch (error) {
       console.log(error);
+      handleAlert(
+        "error",
+        "error updating allergies and limits " + error.message
+      );
     }
   };
 
@@ -57,6 +61,11 @@ const FamilyMemberSettingsViewModel = () => {
         isActive: isActive,
       },
     }));
+  };
+  const handleAlert = (type, message) => {
+    const alertTitle = type === "success" ? "Success" : "Error";
+    const alertButton = { text: "OK", onPress: () => {} };
+    Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
   };
 
   const handleSliderValueChange = (type, value) => {

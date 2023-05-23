@@ -1,15 +1,16 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
 import * as ImagePicker from "expo-image-picker";
 import { IMG_URL } from "../../../network/apiCall";
 import UserRepository from "../../../repository/UserRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import { useAuthContext } from "../../../hooks/useAuthContext";
+import { Alert } from "react-native";
 
 const ChildProfileFormViewModel = (isEditMode) => {
   const { familyMember } = useFamilyMemberContext();
   const { setLoading } = useLoadingContext();
-  const { authData } = useAuthContext();
+  const { user } = useAuthContext();
 
   const [formData, setFormData] = useState({
     firstName: isEditMode ? familyMember.firstName : "",
@@ -21,9 +22,7 @@ const ChildProfileFormViewModel = (isEditMode) => {
     isEditMode && familyMember.image ? IMG_URL + familyMember.image : null
   );
 
-  console.log(familyMember);
   const userRepository = UserRepository();
-
   const SaveChanges = async () => {
     try {
       console.log("saved");
@@ -42,16 +41,17 @@ const ChildProfileFormViewModel = (isEditMode) => {
         type: `image/${fileType}`,
       });
     }
+    console.log(user);
     childFormData.append("firstName", formData.firstName);
     childFormData.append("lastName", formData.lastName);
     childFormData.append("phone", formData.phone);
     childFormData.append("braceletId", formData.braceletId);
-    childFormData.append("parentId", authData.user.id);
+    childFormData.append("parentId", user.id);
     try {
       const data = await userRepository.createFamilyMember(childFormData);
-      console.log(data);
+      handleAlert("success", "Child Created Successfully");
     } catch (error) {
-      console.log("-------", error);
+      handleAlert("error", "Error Creating Child " + error.message);
     }
 
     setLoading(false);
@@ -83,6 +83,11 @@ const ChildProfileFormViewModel = (isEditMode) => {
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
+  };
+  const handleAlert = (type, message) => {
+    const alertTitle = type === "success" ? "Success" : "Error";
+    const alertButton = { text: "OK", onPress: () => {} };
+    Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
   };
 
   return {

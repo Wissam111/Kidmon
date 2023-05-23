@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Alert } from "react-native";
 import AuthRepository from "../../../repository/AuthRepository";
 import { useNavigation } from "@react-navigation/native";
 import { useAuthContext } from "../../../hooks/useAuthContext";
@@ -23,6 +24,7 @@ const EntryViewModel = () => {
       console.log(data);
     } catch (error) {
       console.log(error);
+      handleAlert("error", "Error in login: " + error.error.message);
     }
     setLoading(false);
   };
@@ -32,9 +34,11 @@ const EntryViewModel = () => {
     verify.code = optCode;
     try {
       const data = await authRepository.verifyLogin(verify);
+      handleAlert("success", "Verification successful ");
       handleAuthData(data);
     } catch (error) {
       console.log(error);
+      handleAlert("error", "Error with OTP: " + error.error.message);
     }
     setLoading(false);
   };
@@ -52,6 +56,11 @@ const EntryViewModel = () => {
     navigation.navigate("HomeParent");
     storeData(data);
     setShowOTP(true);
+  };
+  const handleAlert = (type, message) => {
+    const alertTitle = type === "success" ? "Success" : "Error";
+    const alertButton = { text: "OK", onPress: () => {} };
+    Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
   };
   const storeData = async (authData) => {
     try {

@@ -3,7 +3,7 @@ import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
 import { startOfWeek, endOfWeek, format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
-
+import { Alert } from "react-native";
 const FamilyMemberHomeViewModel = () => {
   const activityRepository = ActivityRepository();
   const { familyMember } = useFamilyMemberContext();
@@ -12,15 +12,15 @@ const FamilyMemberHomeViewModel = () => {
   const [spendingsLimits, setSpendingsLimits] = useState({
     daily: {
       percentage: 0,
-      remainin: 0,
+      remainin: null,
     },
     weekly: {
       percentage: 0,
-      remainin: 0,
+      remainin: null,
     },
     monthly: {
       percentage: 0,
-      remainin: 0,
+      remainin: null,
     },
   });
 
@@ -47,6 +47,7 @@ const FamilyMemberHomeViewModel = () => {
       return data;
     } catch (error) {
       console.log(error);
+      handleAlert("error", "Error getting spendings: " + error.message);
     }
   };
 
@@ -73,25 +74,31 @@ const FamilyMemberHomeViewModel = () => {
       (total, spending) => total + spending.totalSpendings,
       0
     );
-    const dailyLimitVal = familyMember.limits?.daily?.value;
-    const weeklyLimitVal = familyMember.limits?.weekly?.value;
-    const monthlyLimitVal = familyMember.limits?.monthly?.value;
-
-    setSpendingsLimits({
+    const dailyLimit = familyMember.limits?.daily;
+    const weeklyLimit = familyMember.limits?.weekly;
+    const monthlyLimit = familyMember.limits?.monthly;
+    const spendingsLimits = {
       daily: {
-        percentage: Math.round((dailySpendings / dailyLimitVal) * 100),
-        remainin: Math.round(dailyLimitVal - dailySpendings),
+        percentage: Math.round((dailySpendings / dailyLimit?.value) * 100),
+        remainin: dailyLimit?.isActive
+          ? Math.round(dailyLimit.value - dailySpendings)
+          : null,
       },
 
       weekly: {
-        percentage: Math.round((weeklySpendings / weeklyLimitVal) * 100),
-        remainin: Math.round(weeklyLimitVal - weekSpendings),
+        percentage: Math.round((weeklySpendings / weeklyLimit?.value) * 100),
+        remainin: weeklyLimit?.isActive
+          ? Math.round(weeklyLimit?.value - weekSpendings)
+          : null,
       },
       monthly: {
-        percentage: Math.round((monthlySpendings / monthlyLimitVal) * 100),
-        remainin: Math.round(monthlyLimitVal - monthlySpendings),
+        percentage: Math.round((monthlySpendings / monthlyLimit?.value) * 100),
+        remainin: monthlyLimit?.isActive
+          ? Math.round(monthlyLimit?.value - monthlySpendings)
+          : null,
       },
-    });
+    };
+    setSpendingsLimits(spendingsLimits);
   };
 
   const UpdateChart = async (startDate, endDate) => {
@@ -99,6 +106,11 @@ const FamilyMemberHomeViewModel = () => {
     setWeekSpendings(data.spendings);
   };
 
+  const handleAlert = (type, message) => {
+    const alertTitle = type === "success" ? "Success" : "Error";
+    const alertButton = { text: "OK", onPress: () => {} };
+    Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
+  };
   useEffect(() => {
     const FamilyMemberHomeInit = async () => {
       setLoading(true);

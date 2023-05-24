@@ -6,6 +6,8 @@ const configs = require('./configs')
 const port = configs.port
 
 const mode = () => `${configs.debug ? 'Debug' : 'Production'}`
+const auth_mode = () => `${configs.auth_mode ? 'On' : 'off'}`
+
 
 const onListening = () => {
     console.log(
@@ -14,7 +16,8 @@ const onListening = () => {
       🛡️  Server listening on port: ${port} 🛡️
                 
               Mode: ${mode()}
-
+              Authorization Mode: ${auth_mode()}
+              
               http://localhost:${port}/api/${configs.apiVersion}/
       ################################################
     `

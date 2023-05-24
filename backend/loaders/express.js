@@ -3,6 +3,7 @@ const cors = require('cors')
 const path = require('path')
 const routes = require('../api/routes')
 const configs = require('../configs')
+const morgan = require('morgan')
 
 
 module.exports = async ({ app }) => {
@@ -10,6 +11,8 @@ module.exports = async ({ app }) => {
   app.use(cors())
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json())
+  app.use(morgan(':method :url :response-time'))
+
 
   const imgsPath = path.join(__dirname, '..', 'uploaded-files')
 

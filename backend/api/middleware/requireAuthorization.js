@@ -6,7 +6,7 @@ const { USER_ROLES_ENUM, USER_ROLES } = require("../../entities/user")
 exports.makeRoleAuthorization = ({ userRoles = USER_ROLES_ENUM }) => {
 
     return (req, res, next) => {
-        if (configs.debug || req.user.role === USER_ROLES.admin) {
+        if (!configs.auth_mode || req.user.role === USER_ROLES.admin) {
             return next()
         }
 
@@ -27,7 +27,7 @@ exports.makeRoleAuthorization = ({ userRoles = USER_ROLES_ENUM }) => {
 // Define middleware to check user authorization
 exports.makeFieldAuthorization = ({ reqData, userField }) => {
     return (req, res, next) => {
-        if (configs.debug || req.user.role === USER_ROLES.admin) {
+        if (!configs.auth_mode || req.user.role === USER_ROLES.admin) {
             return next()
         }
 
@@ -50,7 +50,7 @@ exports.makeFieldAuthorization = ({ reqData, userField }) => {
  */
 exports.makeParentAuthorization = ({ reqData, onlyParent = true }) => {
     return (req, res, next) => {
-        if (configs.debug || req.user.role === USER_ROLES.admin) {
+        if (!configs.auth_mode || req.user.role === USER_ROLES.admin) {
             return next()
         }
 

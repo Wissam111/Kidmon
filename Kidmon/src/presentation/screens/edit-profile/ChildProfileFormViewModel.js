@@ -6,12 +6,14 @@ import UserRepository from "../../../repository/UserRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const ChildProfileFormViewModel = (isEditMode) => {
   const { familyMember } = useFamilyMemberContext();
   const { setLoading } = useLoadingContext();
   const { user } = useAuthContext();
 
+  const navigation = useNavigation();
   const [formData, setFormData] = useState({
     firstName: isEditMode ? familyMember.firstName : "",
     lastName: isEditMode ? familyMember.lastName : "",
@@ -24,32 +26,31 @@ const ChildProfileFormViewModel = (isEditMode) => {
 
   const userRepository = UserRepository();
   const SaveChanges = async () => {
+    setLoading(true);
     try {
-      console.log("saved");
-    } catch (error) {}
+      const data = await userRepository.updateUser({
+        userId: familyMember.id,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        phone: formData.phone,
+        braceletId: formData.braceletId,
+      });
+      console.log(data);
+      handleAlert("success", "Child saved successfully");
+      NavigateHome();
+    } catch (error) {
+      handleAlert("error", "Error saving" + error.message);
+    }
+    setLoading(false);
   };
 
   const CreateChild = async () => {
     setLoading(true);
-    const childFormData = new FormData();
-    if (image) {
-      const fileUriParts = image.split(".");
-      const fileType = fileUriParts[fileUriParts.length - 1];
-      childFormData.append("image", {
-        uri: image,
-        name: `child_image.${fileType}`,
-        type: `image/${fileType}`,
-      });
-    }
-    console.log(user);
-    childFormData.append("firstName", formData.firstName);
-    childFormData.append("lastName", formData.lastName);
-    childFormData.append("phone", formData.phone);
-    childFormData.append("braceletId", formData.braceletId);
-    childFormData.append("parentId", user.id);
+    const childFormData = createChildFormData();
     try {
       const data = await userRepository.createFamilyMember(childFormData);
-      handleAlert("success", "Child Created Successfully");
+      handleAlert("success", "Child created successfully");
+      NavigateHome();
     } catch (error) {
       handleAlert("error", "Error Creating Child " + error.message);
     }
@@ -63,6 +64,25 @@ const ChildProfileFormViewModel = (isEditMode) => {
     } else {
       CreateChild();
     }
+  };
+
+  const createChildFormData = () => {
+    const childFormData = new FormData();
+    if (image) {
+      const fileUriParts = image.split(".");
+      const fileType = fileUriParts[fileUriParts.length - 1];
+      childFormData.append("image", {
+        uri: image,
+        name: `child_image.${fileType}`,
+        type: `image/${fileType}`,
+      });
+    }
+    childFormData.append("firstName", formData.firstName);
+    childFormData.append("lastName", formData.lastName);
+    childFormData.append("phone", formData.phone);
+    childFormData.append("braceletId", formData.braceletId);
+    childFormData.append("parentId", user.id);
+    return childFormData;
   };
 
   const handleFormDataChange = (field, value) => {
@@ -89,7 +109,9 @@ const ChildProfileFormViewModel = (isEditMode) => {
     const alertButton = { text: "OK", onPress: () => {} };
     Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
   };
-
+  const NavigateHome = () => {
+    navigation.navigate("HomeParent");
+  };
   return {
     ...formData,
     handleFormDataChange,

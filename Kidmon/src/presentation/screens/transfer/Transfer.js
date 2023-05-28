@@ -13,24 +13,29 @@ import Header from "./components/Header";
 import { TextInput } from "react-native-gesture-handler";
 import DefaultButton from "../../components/DefaultButton";
 import TransferViewModel from "./TransferViewModel";
+import { IMG_URL } from "../../../network/apiCall";
 
 const Transfer = ({ navigation }) => {
-  const { points, hanldeChangePoints, handleTransferPoints } =
+  const { points, hanldeChangePoints, handleTransferPoints, familyMember } =
     TransferViewModel();
-
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View className="flex-1">
         <SafeAreaView />
         <Header navigation={navigation} />
-        <View className="flex-1 items-center mt-6 ">
+        <View className="flex-1 items-center mt-6 relative">
+          <Image
+            className="w-24 h-24 absolute rotate-45 top-64 left-2"
+            source={require("../../../../assets/imgs/handprint3.png")}
+          />
+
           <View className="items-center">
             <Text className="text-3xl font-light tracking-wide">
               Charging money
             </Text>
             <Spacer space={3} />
             <Text className="text-3xl font-light tracking-wide">
-              to Wissam kabha
+              to {familyMember?.firstName + " " + familyMember?.lastName}
             </Text>
           </View>
           <Spacer space={17} />
@@ -53,7 +58,11 @@ const Transfer = ({ navigation }) => {
             <View className="border-4 p-4 rounded-full mt-4 border-[#f8e7c7] border-dotted z-50 -mb-11">
               <Image
                 className="w-24 h-24 rounded-full "
-                source={require("../../../../assets/imgs/kid.jpg")}
+                source={
+                  familyMember?.image
+                    ? { uri: IMG_URL + `${familyMember.image}` }
+                    : require("../../../../assets/imgs/kid.jpg")
+                }
               />
             </View>
             <View className="bg-[#EEFBF3] w-full flex-1  justify-center items-center relative">
@@ -63,7 +72,7 @@ const Transfer = ({ navigation }) => {
                   width: 174,
                   height: 65,
                   borderBottomLeftRadius: 100,
-                  borderBottomRightRadius: 100,
+                  borderBottomRightRadius: 200,
                   overflow: "hidden",
                 }}
               />

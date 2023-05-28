@@ -55,7 +55,7 @@ const TransferViewModel = () => {
   const NavigateHome = () => {
     navigation.navigate("HomeParent");
   };
-  return { points, hanldeChangePoints, handleTransferPoints };
+  return { points, hanldeChangePoints, handleTransferPoints, familyMember };
 };
 
 export default TransferViewModel;

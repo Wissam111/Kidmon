@@ -34,7 +34,6 @@ const EntryViewModel = () => {
     verify.code = optCode;
     try {
       const data = await authRepository.verifyLogin(verify);
-      handleAlert("success", "Verification successful ");
       handleAuthData(data);
     } catch (error) {
       console.log(error);

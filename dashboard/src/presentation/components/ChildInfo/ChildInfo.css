@@ -82,6 +82,8 @@
 
 .child-order-col2 .child-order-container {
   display: flex;
+  /* border: 2px solid red; */
+  padding: 5px 22px 20px 20px;
   flex-direction: column;
   gap: 12px;
   overflow-y: auto;
@@ -99,12 +101,16 @@
   margin: 20px 0 10px 0;
 }
 
-.child-info-container button {
-}
-
 .child-order-container h2 {
   margin: 0;
   font-size: 15px;
   font-weight: 600;
   color: rgba(0, 0, 0, 0.82);
+}
+.child-info-btn-container {
+  display: flex;
+  justify-content: end;
+}
+.child-info-btn-container button {
+  width: 25%;
 }

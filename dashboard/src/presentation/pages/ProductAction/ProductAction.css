@@ -1,16 +1,20 @@
 .action-page-wrapper {
   padding: 50px 30px 10px 50px;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
 }
 
 .product-action-container {
-  width: 100%;
+  min-width: 70%;
   height: 593px;
-
   background: #ffffff;
 
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.1);
   border-radius: 6px;
   padding: 20px;
+  margin: 50px 20px 10px 10px;
 }
 
 .product-action-container h3 {
@@ -29,4 +33,5 @@ label {
 }
 .upload-img-wrapper {
   width: 431px;
+  margin-right: 20px;
 }

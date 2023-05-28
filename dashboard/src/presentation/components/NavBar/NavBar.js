@@ -23,9 +23,7 @@ const NavBar = () => {
   const pathName = location.pathname;
   return (
     <div className="navbar-container">
-      <img src={require("../../../assets/imgs/family2.png")} />
-
-      <Spacer space={16} />
+      <img src={require("../../../assets/imgs/kidmonlogo4.png")} />
       <ul className="nav-links">
         <li className={pathName === "/" ? "active" : null}>
           <Link to="/" className="nav-link">

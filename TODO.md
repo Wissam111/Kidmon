@@ -7,7 +7,6 @@ Project Description
 ### Todo
 
 - [ ] App fix navigation  
-- [ ] Dashboard css - w  
 - [ ] Parent charge balance -w  
 - [ ] Populate items in an activity  
 - [ ] User Acitivities Authorization erro  
@@ -22,6 +21,7 @@ Project Description
 
 ### Done ✓
 
+- [x] Dashboard css - w  
 - [x] Transfer page  
 - [x] User Save changes - w  
 

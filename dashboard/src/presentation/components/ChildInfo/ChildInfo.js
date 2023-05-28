@@ -15,31 +15,38 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
   const [noneAllergicProducts, setNoneAllergicProducts] = useState([]);
   const [items, setItems] = useState([]);
 
-  const [totalPrice, setTotalPrice] = useState(null)
+  const [totalPrice, setTotalPrice] = useState(null);
 
   useEffect(() => {
-    setNoneAllergicProducts(Object.values(cartItems).filter(item => {
-      const isAllergic = item.allergicIngredients.some((item) => child.allergies.includes(item))
-      return !isAllergic
-    }));
+    setNoneAllergicProducts(
+      Object.values(cartItems).filter((item) => {
+        const isAllergic = item.allergicIngredients.some((item) =>
+          child.allergies.includes(item)
+        );
+        return !isAllergic;
+      })
+    );
 
-    setItems(Object.values(cartItems).map(item => {
-      const isAllergic = item.allergicIngredients.some((item) => child.allergies.includes(item))
-      return { ...item, isAllergic }
-    }))
-
-  }, [cartItems])
+    setItems(
+      Object.values(cartItems).map((item) => {
+        const isAllergic = item.allergicIngredients.some((item) =>
+          child.allergies.includes(item)
+        );
+        return { ...item, isAllergic };
+      })
+    );
+  }, [cartItems]);
 
   useEffect(() => {
-    setTotalPrice(parseFloat(productsTotal(noneAllergicProducts).toFixed(2)))
-  }, [noneAllergicProducts])
+    setTotalPrice(parseFloat(productsTotal(noneAllergicProducts).toFixed(2)));
+  }, [noneAllergicProducts]);
 
   return (
     <div className="child-info-container">
       <IoClose
         size={25}
         style={{
-          alignSelf: 'flex-end',
+          alignSelf: "flex-end",
           cursor: "pointer",
         }}
         onClick={handleCloseChildInfo}
@@ -47,7 +54,6 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
       />
 
       <div className="rows">
-
         <div className="child-info-col1">
           <div className="child-col1-row1">
             <img
@@ -101,24 +107,22 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
             ))}
           </div>
         </div>
-
       </div>
 
-      
-
-      {
-        child.credits < totalPrice &&
+      {child.credits < totalPrice && (
         <p className="noselect">No suffecint balance</p>
-      }
+      )}
 
-      {
-        child.credits >= totalPrice && totalPrice != null && totalPrice > 0 &&
-        <button
-          className="confirm-btn"
-          onClick={() => makePurchase(noneAllergicProducts)}>
-          Charge {totalPrice} P
-        </button>
-      }
+      {child.credits >= totalPrice && totalPrice != null && totalPrice > 0 && (
+        <div className="child-info-btn-container">
+          <button
+            className="confirm-btn"
+            onClick={() => makePurchase(noneAllergicProducts)}
+          >
+            Charge {totalPrice} P
+          </button>
+        </div>
+      )}
     </div>
   );
 };

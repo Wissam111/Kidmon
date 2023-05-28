@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./OrderItemCard.css";
 import { AiOutlineDelete } from "react-icons/ai";
+import { FaRegTrashAlt } from "react-icons/fa";
 import { BASE_URL_1 } from "../../../context/ApiContext";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 import Alert from "@mui/material/Alert";
@@ -66,11 +67,10 @@ const OrderItemCard = ({
         <span className="text-order noselect">{text}</span>
         <QuantitySelector min={0} value={amount} onChange={onAmountChange} />
 
-        {/* <span className="amount-order noselect">x{amount}</span> */}
         <span className="total-order noselect">
           {parseFloat(total.toFixed(2))} P
         </span>
-        <AiOutlineDelete
+        <FaRegTrashAlt
           style={{ zIndex: 10 }}
           cursor={"pointer"}
           color="gray"

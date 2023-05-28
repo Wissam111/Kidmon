@@ -40,7 +40,8 @@ body {
   flex: 1;
   position: relative;
   display: flex;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px;
+  /* border-radius: 0 8px 8px 0; */
 }
 
 ::-webkit-scrollbar {
@@ -69,10 +70,12 @@ body {
   color: white;
   border: none;
   cursor: pointer;
+  width: 100%;
+  border: 2px solid rgb(224, 219, 219);
 }
 
 .space {
-  flex: 1
+  flex: 1;
 }
 
 .noselect {

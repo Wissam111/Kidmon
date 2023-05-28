@@ -2,7 +2,9 @@ import { Image, SafeAreaView, View, StyleSheet } from "react-native";
 import { primaryColor } from "../../../styles";
 import { Text } from "react-native";
 import DefaultButton from "../../../components/DefaultButton";
+import { useNavigation } from "@react-navigation/native";
 const Header = ({ name, balance }) => {
+  const navigation = useNavigation();
   return (
     <View className="p-4 h-2/5" style={{ backgroundColor: primaryColor }}>
       <View className="justify-between items-center flex-row relative">
@@ -31,7 +33,11 @@ const Header = ({ name, balance }) => {
         <Text className="color-[#333333] text-3xl font-semibold ">
           {parseFloat(balance.toFixed(2))} P
         </Text>
-        <DefaultButton text={"Charge"} tailWindStyle="mt-10 w-11/12 h-12" />
+        <DefaultButton
+          text={"Charge"}
+          tailWindStyle="mt-10 w-11/12 h-12"
+          onPress={() => navigation.navigate("Transfer")}
+        />
       </View>
     </View>
   );

@@ -22,6 +22,14 @@ const ActivityRepository = () => {
     const data = await apiCall(url);
     return data;
   };
+  const transferPoints = async (senderUserId, receiverUserId, amount) => {
+    const data = await apiCall("activities/points-transfer", "POST", {
+      senderUserId,
+      receiverUserId,
+      amount,
+    });
+    return data;
+  };
 
   const getFamilyMembersActivites = async ({
     userId,
@@ -39,6 +47,7 @@ const ActivityRepository = () => {
     getSpendings,
     getUserActivites,
     getFamilyMembersActivites,
+    transferPoints,
   };
 };
 

@@ -6,6 +6,10 @@ Project Description
 
 ### Todo
 
+- [ ] App fix navigation  
+- [ ] Dashboard css - w  
+- [ ] Parent charge balance -w  
+- [ ] User Save changes - w  
 - [ ] Populate items in an activity  
 - [ ] User Acitivities Authorization erro  
 - [ ] Product sold count  
@@ -16,6 +20,7 @@ Project Description
 ### In Progress
 
 - [ ] add purchase history  
+- [ ] Transfer page  
 
 ### Done ✓
 

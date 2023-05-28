@@ -109,7 +109,7 @@
 }
 .child-info-btn-container {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .child-info-btn-container button {
   width: 25%;

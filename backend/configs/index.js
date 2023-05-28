@@ -7,7 +7,6 @@ if (envFound.error) {
 }
 
 
-
 module.exports = {
     /**
      * Your favorite port
@@ -17,7 +16,7 @@ module.exports = {
     /**
      * That long string from mlab
      */
-    databaseURL: process.env.MONGODB_URI,
+    databaseURL: process.env.DEBUG === 'true' ? process.env.MONGODB_URI_TEST : process.env.MONGODB_URI,
 
     databaseURLTest: process.env.MONGODB_URI_TEST || 'mongodb://localhost:27017',
 
@@ -35,7 +34,9 @@ module.exports = {
         prefix: '/api',
     },
 
-    debug: process.env.DEBUG ? true : false,
+    debug: process.env.DEBUG === 'true' ? true : false,
+
+    auth_mode: process.env.AUTHORIZATION === 'true' ? true : false,
 
     apiVersion: 'v1',
 

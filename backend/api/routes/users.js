@@ -5,8 +5,19 @@ const { imageUpload } = require("../middleware/image-file-uploader");
 const { requireAuthentication } = require("../middleware/requireAuthentication");
 const { makeFieldAuthorization, makeRoleAuthorization, makeParentAuthorization } = require("../middleware/requireAuthorization");
 const { USER_ROLES } = require("../../entities/user");
+const { fileUploader } = require("../middleware/file-uploader");
 
 const router = Router();
+
+
+// router.post(
+//   "/upload-image",
+//   requireAuthentication,
+//   fileUploader({ fieldName: 'image', getFileName: (req) => req.body.customerId }),
+//   // reduce size
+//   // update database with: filename?lastupdated=Date.now()
+// );
+
 
 
 router.post(
@@ -74,6 +85,7 @@ router.post(
 
 router.patch(
   "/",
+  // fileUploader({ fieldName: 'image' }), // need to be tested
   imageUpload("image"),
   celebrate({
     [Segments.BODY]: Joi.object().keys({

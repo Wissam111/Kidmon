@@ -6,7 +6,8 @@ Project Description
 
 ### Todo
 
-- [ ] App fix navigation  
+- [ ] child change img - backend  
+- [ ] fix child dashboard - w  
 - [ ] Parent charge balance -w  
 - [ ] Populate items in an activity  
 - [ ] User Acitivities Authorization erro  
@@ -21,6 +22,7 @@ Project Description
 
 ### Done ✓
 
+- [x] App fix navigation  
 - [x] Dashboard css - w  
 - [x] Transfer page  
 - [x] User Save changes - w  

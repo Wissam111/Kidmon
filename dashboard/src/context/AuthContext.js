@@ -1,4 +1,5 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
@@ -26,12 +27,27 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     authData: null,
   });
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const NavigateCurrentRoute = () => {
+    const storedRoute = localStorage.getItem("currentRoute");
+    if (!storedRoute) {
+      return;
+    }
+    navigate(storedRoute, { replace: true });
+  };
+
+  useEffect(() => {
+    localStorage.setItem("currentRoute", location.pathname);
+  }, [location.pathname]);
 
   useEffect(() => {
     const authData = JSON.parse(localStorage.getItem("authData"));
     if (authData) {
       dispatch({ type: "LOGIN", payload: authData });
-    } 
+      NavigateCurrentRoute();
+    }
   }, []);
 
   return (

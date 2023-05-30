@@ -49,7 +49,7 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
           alignSelf: "flex-end",
           cursor: "pointer",
         }}
-        onClick={handleCloseChildInfo}
+        onClick={() => handleCloseChildInfo(false)}
         color="#00000070"
       />
 

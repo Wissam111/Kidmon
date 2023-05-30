@@ -27,9 +27,10 @@ const ProdcutsTable = ({
         sx={{
           width: "100%",
           height: "100%",
-          display: 'flex',
-          flexDirection: 'column'
-        }}>
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <TableContainer>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>

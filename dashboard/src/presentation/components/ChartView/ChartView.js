@@ -5,7 +5,6 @@ import "./ChartView.css";
 
 function ChartView(props) {
   const { chartType, chartData, title, width, height, options } = props;
-  console.log(chartData);
   return (
     <div className="chart-view-container">
       <h3>{title}</h3>

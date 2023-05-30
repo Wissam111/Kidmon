@@ -34,7 +34,7 @@ const SpendingLimits = ({
           trackColor={{ false: "#767577", true: "#5FD5E5" }}
         />
       </View>
-      <View className="items-center">
+      <View className="items-center p-4">
         <LimitSwitch
           text="Daily"
           minValue={0}

@@ -22,40 +22,34 @@ function App() {
   const { authData } = useAuthContext();
 
   return (
-    <BrowserRouter>
-      <div className="app-wrapper">
-        {alertData && (
-          <AlertView status={alertData.status} text={alertData.text} />
-        )}
-        <Loading isLoading={loading} />
-        {authData && <NavBar />}
-        <div className="outter-page-container">
-          <Routes>
-            <Route exact path="/" element={<ProtectedRoute />}>
-              <Route exact path="/" element={<Dashboard />} />
-            </Route>
+    <div className="app-wrapper">
+      {alertData && (
+        <AlertView status={alertData.status} text={alertData.text} />
+      )}
+      <Loading isLoading={loading} />
+      {authData && <NavBar />}
+      <div className="outter-page-container">
+        <Routes>
+          <Route exact path="/" element={<ProtectedRoute />}>
+            <Route exact path="/" element={<Dashboard />} />
+          </Route>
 
-            <Route exact path="/store" element={<ProtectedRoute />}>
-              <Route exact path="/store" element={<Home />} />
-            </Route>
-            <Route exact path="/products" element={<ProtectedRoute />}>
-              <Route exact path="/products" element={<Products />} />
-            </Route>
-            <Route exact path="/product-action" element={<ProtectedRoute />}>
-              <Route exact path="/product-action" element={<ProductAction />} />
-            </Route>
-            <Route exact path="/register-parent" element={<ProtectedRoute />}>
-              <Route
-                exact
-                path="/register-parent"
-                element={<RegisterParent />}
-              />
-            </Route>
-            <Route path="/entry" element={<Entry />} />
-          </Routes>
-        </div>
+          <Route exact path="/store" element={<ProtectedRoute />}>
+            <Route exact path="/store" element={<Home />} />
+          </Route>
+          <Route exact path="/products" element={<ProtectedRoute />}>
+            <Route exact path="/products" element={<Products />} />
+          </Route>
+          <Route exact path="/product-action" element={<ProtectedRoute />}>
+            <Route exact path="/product-action" element={<ProductAction />} />
+          </Route>
+          <Route exact path="/register-parent" element={<ProtectedRoute />}>
+            <Route exact path="/register-parent" element={<RegisterParent />} />
+          </Route>
+          <Route path="/entry" element={<Entry />} />
+        </Routes>
       </div>
-    </BrowserRouter>
+    </div>
   );
 }
 

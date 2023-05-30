@@ -54,13 +54,13 @@ const HomeViewModel = () => {
         );
         console.log(data);
         isSuccess = true;
+        handleCloseChildInfo(true);
       } catch (error) {
         console.log(error);
         messg = error?.error.message;
       }
       setLoading(false);
       invokeAlert(isSuccess, messg);
-      handleCloseChildInfo();
     },
     [currentChild, userRepository, invokeAlert, setLoading]
   );
@@ -85,9 +85,11 @@ const HomeViewModel = () => {
   const handleShowScan = () => {
     setShowScan(!showScan);
   };
-  const handleCloseChildInfo = () => {
+  const handleCloseChildInfo = (clearCart) => {
+    if (clearCart) {
+      dispatch({ type: "CLEAR" });
+    }
     setCurrentChild(null);
-    dispatch({ type: "CLEAR" });
   };
 
   const handleSelectCategory = (category) => {

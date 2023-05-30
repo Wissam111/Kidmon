@@ -27,7 +27,7 @@ const LimitSwitch = ({
     setPreviewValue(Math.round(currentValue));
   }, [limit]);
   return (
-    <View className={`w-80  h-28`} style={{ backgroundColor: primaryColor }}>
+    <View className={`w-full  h-28`} style={{ backgroundColor: primaryColor }}>
       <View className="flex-row justify-between p-4 z-50">
         <Text className="text-lg font-medium">{text}</Text>
         <Switch
@@ -43,7 +43,7 @@ const LimitSwitch = ({
         <Slider
           animateTransitions
           minimumTrackTintColor="#5FD5E5"
-          width="80%"
+          width="76%"
           minimumValue={minValue}
           value={previewValue}
           onSlidingComplete={handleSlider}

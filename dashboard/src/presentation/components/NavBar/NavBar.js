@@ -1,21 +1,16 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useLocation } from "react-router-dom";
 import "./NavBar.css";
 import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { BiLogOut } from "react-icons/bi";
-import {
-  IoBagRemoveOutline,
-  IoPersonAddOutline,
-  IoHomeOutline,
-} from "react-icons/io5";
+import { IoBagRemoveOutline, IoPersonAddOutline } from "react-icons/io5";
 import { MdOutlineDashboard } from "react-icons/md";
-import Spacer from "../Spacer";
 
 const NavBar = () => {
   const { dispatch } = useAuthContext();
   const location = useLocation();
+
   const handleLogout = () => {
     localStorage.removeItem("authData");
     dispatch({ type: "LOGOUT" });

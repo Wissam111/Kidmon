@@ -13,9 +13,8 @@ const RegisterParentViewModel = () => {
 
   const createParent = async () => {
     let isSuccess = false;
-    let messg = "";
+    let messg = "Successfully created parent";
     setLoading(true);
-
     try {
       const data = await parentRepository.createParent(
         firstName,

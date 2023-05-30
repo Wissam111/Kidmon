@@ -13,11 +13,23 @@ const topSoldProducts = [
 ];
 
 const recentSoldProducts = [
-  { title: "Pizza", amount: 500 },
-  { title: "Coffe", amount: 499 },
-  { title: "Green Doretos", amount: 300 },
-  { title: "Black Coffe", amount: 263 },
-  { title: "Ice Tee", amount: 242 },
+  {
+    title: "Bsli Flafel",
+    amount: 500,
+    img: require("../../../assets/imgs/bsli2.jpg"),
+  },
+  {
+    title: "Bsli Gril",
+    amount: 499,
+    img: require("../../../assets/imgs/bsli1.jpg"),
+  },
+  {
+    title: "Green Doretos",
+    amount: 300,
+    img: require("../../../assets/imgs/dor1.jpg"),
+  },
+  // { title: "Black Coffe", amount: 263,img:require("../../../assets/imgs/bsli2.bsli2") },
+  // { title: "Ice Tee", amount: 242 ,img:require("../../../assets/imgs/bsli2.bsli2")},
 ];
 
 const options = {
@@ -70,7 +82,7 @@ const Dashboard = () => {
             <DashboardCard
               text="Users"
               count="3,567"
-              image={require("../../../assets/imgs/man.png")}
+              image={require("../../../assets/icons/user.png")}
             />
             <DashboardCard
               text="Sold Products"
@@ -138,12 +150,14 @@ const Dashboard = () => {
                 <div style={{ display: "flex" }}>
                   <img
                     style={{ width: "40px", height: "40px" }}
-                    src={require("../../../assets/imgs/shopping-bag.png")}
+                    src={recent.img}
+                    // src={require("../../../assets/imgs/shopping-bag.png")}
                     alt=""
                   />
-                  <Spacer space={20} />
+                  <Spacer space={10} />
                   <p>
-                    {recent.title} was bought x{recent.amount}
+                    {recent.title}
+                    {/* {recent.title} was bought x{recent.amount} */}
                   </p>
                 </div>
               ))}

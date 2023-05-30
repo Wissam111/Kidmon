@@ -37,28 +37,33 @@ const HomeViewModel = () => {
       console.log(e);
     }
   };
-  const makePurchase = useCallback(async (noneAllegicProducts) => {
-    console.log(noneAllegicProducts);
-    const products = noneAllegicProducts.map(p => { return { id: p.id, amount: p.amount } })
-    console.log(products);
-    
-    let isSuccess = false;
-    let messg = "Purchase was successful";
-    setLoading(true);
-    try {
-      console.log('making purchase', currentChild.id, products);
-      const data = await userRepository.makePurchase(currentChild.id, products);
-      console.log(data);
-      isSuccess = true;
-    } catch (error) {
-      console.log(error);
-      messg = error?.error.message;
-    }
-    setLoading(false);
-    invokeAlert(isSuccess, messg);
-    handleCloseChildInfo();
+  const makePurchase = useCallback(
+    async (noneAllegicProducts) => {
+      const products = noneAllegicProducts.map((p) => {
+        return { id: p.id, amount: p.amount };
+      });
 
-  }, [currentChild, userRepository, invokeAlert, setLoading])
+      let isSuccess = false;
+      let messg = "Purchase was successful";
+      setLoading(true);
+      try {
+        console.log("making purchase", currentChild.id, products);
+        const data = await userRepository.makePurchase(
+          currentChild.id,
+          products
+        );
+        console.log(data);
+        isSuccess = true;
+      } catch (error) {
+        console.log(error);
+        messg = error?.error.message;
+      }
+      setLoading(false);
+      invokeAlert(isSuccess, messg);
+      handleCloseChildInfo();
+    },
+    [currentChild, userRepository, invokeAlert, setLoading]
+  );
 
   const scanChild = async (rfid) => {
     let isSuccess = null;
@@ -76,7 +81,6 @@ const HomeViewModel = () => {
     setLoading(false);
     invokeAlert(isSuccess, messg);
   };
-
 
   const handleShowScan = () => {
     setShowScan(!showScan);

@@ -26,7 +26,7 @@ export const AlertContextProvider = ({ children }) => {
     if (isSuccess) {
       dispatch({
         type: "SET_ALERT",
-        payload: { status: "success", text: `Success!` },
+        payload: { status: "success", text: messg },
       });
     } else {
       dispatch({

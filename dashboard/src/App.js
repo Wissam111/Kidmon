@@ -20,6 +20,7 @@ function App() {
   const { loading } = useLoadingContext();
   const { alertData } = useAlertContext();
   const { authData } = useAuthContext();
+
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -44,7 +45,11 @@ function App() {
               <Route exact path="/product-action" element={<ProductAction />} />
             </Route>
             <Route exact path="/register-parent" element={<ProtectedRoute />}>
-              <Route exact path="/register-parent" element={<RegisterParent />} />
+              <Route
+                exact
+                path="/register-parent"
+                element={<RegisterParent />}
+              />
             </Route>
             <Route path="/entry" element={<Entry />} />
           </Routes>

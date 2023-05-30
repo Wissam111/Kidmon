@@ -2,7 +2,7 @@ import { useApiContext } from "../hooks/useApiContext";
 import axios from "axios";
 import { BASE_URL } from "../context/ApiContext";
 const ProductRepository = () => {
-  const { apiCall } = useApiContext();
+  const { apiCall, axiosPost } = useApiContext();
 
   const getProducts = async (category, pageSize, page) => {
     let url;
@@ -21,18 +21,18 @@ const ProductRepository = () => {
     const data = apiCall(url);
     return data;
   };
-  //CRUD
 
+  //------CRUD------
   const createProduct = async (productFormData) => {
-    const data = await apiCall('products', 'POST', productFormData, "multipart/form-data")
+    const data = await axiosPost("products", productFormData);
     return data;
   };
   const deleteProdcut = async (productId) => {
     const data = apiCall(`products/${productId}`, "DELETE");
     return data;
   };
-  const updateProduct = async () => { };
-  const getProduct = async () => { };
+  const updateProduct = async () => {};
+  const getProduct = async () => {};
 
   return {
     getProducts,

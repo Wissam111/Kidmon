@@ -19,18 +19,9 @@ const ProductActionViewModel = () => {
     resetInputs
   ) => {
     let isSuccess = false;
-    let messg = "";
+    let messg = "Product published successfully";
     setLoading(true);
-    const formData = new FormData();
-    if (file) {
-      formData.append("image", file);
-    }
-    formData.append("title", title);
-    formData.append("price", price);
-    formData.append("category", category);
-    allergicList.forEach((allergic) => {
-      formData.append("allergicIngredients[]", allergic);
-    });
+    const formData = createFormData(title, price, category, allergicList);
     try {
       await productRepo.createProduct(formData);
       isSuccess = true;
@@ -43,6 +34,21 @@ const ProductActionViewModel = () => {
     resetInputs();
     setFile(null);
     invokeAlert(isSuccess, messg);
+  };
+
+  const createFormData = (title, price, category, allergicList) => {
+    const formData = new FormData();
+    if (file) {
+      formData.append("image", file);
+    }
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("category", category);
+    allergicList.forEach((allergic) => {
+      formData.append("allergicIngredients[]", allergic);
+    });
+
+    return formData;
   };
 
   return {

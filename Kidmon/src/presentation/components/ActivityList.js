@@ -20,7 +20,7 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
       snapPoints={snapPoints}
     >
       <BottomSheetView style={{ ...style }}>
-        <View style={{}}>
+        <View className="flex-row justify-between items-center" style={{}}>
           <View>
             <Text className="text-lg font-medium">Activity</Text>
             <Text className="text-xs color-[#00000075]">

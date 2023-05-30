@@ -28,7 +28,7 @@ const ProductsViewModel = () => {
       return;
     }
     let isSuccess = false;
-    let messg = "";
+    let messg = "Successfully deleted product";
     setLoading(true);
     try {
       await productRepo.deleteProdcut(product.id);
@@ -38,8 +38,8 @@ const ProductsViewModel = () => {
       console.log(error?.error?.message);
       messg = error?.error?.message;
     }
-    setLoading(false);
     invokeAlert(isSuccess, messg);
+    setLoading(false);
   };
 
   const handleChangePage = (event, newPage) => {

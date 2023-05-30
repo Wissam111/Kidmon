@@ -1,16 +1,21 @@
 .loading-screen-wrapper {
-  background-image: url("../../../assets/imgs/loader2.gif");
-  background-size: cover;
+  background: rgb(30, 30, 30);
   background-position: center;
   position: absolute;
   top: 0;
   left: 0;
-  /* width: 1217px; */
-  /* margin-left: 17px; */
-  /* height: 700px; */
   height: 100%;
   width: 100%;
-  /* border-radius: 8px; */
   z-index: 999999;
   opacity: 0.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading {
+  background-image: url("../../../assets/imgs/loader2.gif");
+  background-size: cover;
+  background-position: center;
+  width: 50%;
+  height: 50%;
 }

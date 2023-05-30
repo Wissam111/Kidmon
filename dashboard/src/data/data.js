@@ -60,3 +60,10 @@ export const tableMaincolumn = [
 ];
 
 export const fileTypes = ["JPEG", "PNG", "JPG"];
+export const pieChartOptions = {
+  colors: ["#60B9E6", "#9BD65F", "#E55F8B", "#E5A35F", "#B7E5F3", "#cccccc"],
+};
+export const chartOptions = {
+  legend: "none",
+  colors: ["#5FD5E5"],
+};

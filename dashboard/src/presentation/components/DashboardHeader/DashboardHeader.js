@@ -4,7 +4,7 @@ import moment from "moment/moment";
 import React, { useEffect, useState } from "react";
 import Clock from "react-clock";
 // import "react-clock/dist/Clock.css";
-function DashboardHeader() {
+function DashboardHeader({ firstName }) {
   const [value, setValue] = useState(new Date());
 
   useEffect(() => {
@@ -17,7 +17,7 @@ function DashboardHeader() {
   return (
     <div className="dashboard-main-bar-container">
       <div className="board-info">
-        <h3>Hello Wissam !</h3>
+        <h3>Hello {firstName} !</h3>
         <span>here is a centralized hub for kidmon data and information</span>
       </div>
 

@@ -46,18 +46,33 @@
   box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
 }
 
-.recent-sold-products {
+.recent-added-products {
   flex: 1;
   background: white;
   box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
   border-radius: 6px;
   padding: 8px;
 }
-.recent-sold-products div {
+
+.recent-added-products h3 {
+  font-size: 17px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.78);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  margin-top: 0;
+}
+
+.added-product-card-container {
   display: flex;
   align-items: center;
 }
-
+.added-product-card-container p {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.78);
+}
+.added-product-card-container img {
+  object-fit: cover;
+}
 .time-container {
   background: white;
   box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);

@@ -1,16 +1,10 @@
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import DashboardCard from "../../components/DashboardCard/DashboardCard";
 import Spacer from "../../components/Spacer";
-import { Chart } from "react-google-charts";
+import { pieChartOptions, chartOptions } from "../../../data/data";
 import "./Dashboard.css";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
-const topSoldProducts = [
-  { title: "Pizza", amount: 500 },
-  { title: "Coffe", amount: 499 },
-  { title: "Green Doretos", amount: 300 },
-  { title: "Black Coffe", amount: 263 },
-  { title: "Ice Tee", amount: 242 },
-];
+import ChartView from "../../components/ChartView/ChartView";
 
 const recentSoldProducts = [
   {
@@ -28,16 +22,7 @@ const recentSoldProducts = [
     amount: 300,
     img: require("../../../assets/imgs/dor1.jpg"),
   },
-  // { title: "Black Coffe", amount: 263,img:require("../../../assets/imgs/bsli2.bsli2") },
-  // { title: "Ice Tee", amount: 242 ,img:require("../../../assets/imgs/bsli2.bsli2")},
 ];
-
-const options = {
-  // hAxis: { title: "Day", viewWindow: { min: 0, max: 15 } },
-  // vAxis: { title: "Amount", viewWindow: { min: 0, max: 15 } },
-  legend: "none",
-  colors: ["#000"],
-};
 
 const data1 = [
   ["Day", "Amnount"],
@@ -50,24 +35,19 @@ const data1 = [
 
 const data2 = [
   ["Year", "Sales"],
-  ["2004", 1000],
-  ["2005", 1170],
-  ["2006", 660],
-  ["2007", 1030],
+  ["08:00", 1000],
+  ["10:00", 1170],
+  ["14:00", 660],
+  ["16:00", 1030],
 ];
 
 const data3 = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7],
+  ["All", "All"],
+  ["Snack", 11],
+  ["Cold", 2],
+  ["Hot", 3],
+  ["Food", 4],
 ];
-
-// top sold products
-// recent sold products
-// graph sold counter per day
 
 const Dashboard = () => {
   const { user } = useAuthContext().authData;
@@ -76,7 +56,7 @@ const Dashboard = () => {
     <div className="page-container">
       <div className="dashboard-container">
         <div className="inner-container">
-          <DashboardHeader />
+          <DashboardHeader firstName={user?.firstName} />
 
           <div className="counters">
             <DashboardCard
@@ -106,59 +86,51 @@ const Dashboard = () => {
             />
           </div>
 
-          {/* <Spacer space={20} /> */}
-
           <div className="stats">
             <div className="charts-container">
               <div className="counters-charts">
-                <div className="top-sold-products">
-                  {/* <h3>Top Sold Products</h3> */}
-                  <Chart
-                    chartType="ColumnChart"
-                    data={data1}
-                    options={options}
-                    width="400px"
-                    height={"260px"}
-                    legendToggle
-                  />
-                </div>
+                <ChartView
+                  chartType="ColumnChart"
+                  chartData={data1}
+                  options={chartOptions}
+                  title="Top Sold Products"
+                  width="400px"
+                  height={"260px"}
+                />
 
-                <div className="recent-sold-products">
-                  {/* <h3>Recent Sold Products</h3> */}
-                  <Chart
-                    chartType="PieChart"
-                    data={data3}
-                    width={"400px"}
-                    height={"260px"}
-                  />
-                </div>
-              </div>
-
-              <div className="recent-sold-products">
-                <Chart
-                  chartType="LineChart"
-                  width="100%"
-                  height="300px"
-                  data={data2}
+                <ChartView
+                  chartType="PieChart"
+                  chartData={data3}
+                  title="Product Category Distribution"
+                  width="400px"
+                  height={"260px"}
+                  options={pieChartOptions}
                 />
               </div>
+              <ChartView
+                chartType="LineChart"
+                chartData={data2}
+                title="Daily Purchase Trends"
+                width="100%"
+                height={"300px"}
+                options={chartOptions}
+              />
             </div>
 
-            <div className="recent-sold-products">
-              <h3>Recent Sold Products</h3>
+            <div className="recent-added-products">
+              <h3>Recently Added Products</h3>
               {recentSoldProducts.map((recent) => (
-                <div style={{ display: "flex" }}>
+                <div
+                  className="added-product-card-container"
+                  style={{ display: "flex" }}
+                >
                   <img
                     style={{ width: "40px", height: "40px" }}
                     src={recent.img}
-                    // src={require("../../../assets/imgs/shopping-bag.png")}
                     alt=""
                   />
-                  <Spacer space={10} />
-                  <p>
-                    {recent.title}
-                    {/* {recent.title} was bought x{recent.amount} */}
-                  </p>
+                  <Spacer space={8} />
+                  <p>{recent.title}</p>
                 </div>
               ))}
             </div>

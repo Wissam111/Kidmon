@@ -10,7 +10,6 @@ export const CartReducer = (state, action) => {
         ...state.cartItems
       }
 
-      console.log("Adding item")
       if (newCartItems[action.payload.id]) {
         newCartItems[action.payload.id] = {...newCartItems[action.payload.id] , amount: newCartItems[action.payload.id].amount + 1}
       }

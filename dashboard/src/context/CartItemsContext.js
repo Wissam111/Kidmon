@@ -6,7 +6,6 @@ export const CartReducer = (state, action) => {
   switch (action.type) {
 
     case "ADD_ITEM": {
-      console.log(state.cartItems)
       let newCartItems = {
         ...state.cartItems
       }

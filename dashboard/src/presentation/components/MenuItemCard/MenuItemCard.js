@@ -8,9 +8,10 @@ import Spacer from "../Spacer";
 const MenuItemCard = ({ product }) => {
   const { dispatch } = useCartItemsContext();
 
-  const handleAddtoCart = () => {
+  const handleAddtoCart = useCallback(() => {
     dispatch({ type: "ADD_ITEM", payload: product });
-  };
+  }, [])
+
   return (
     <div className="menuItemCard-container" onClick={handleAddtoCart}>
       <img

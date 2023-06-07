@@ -2,22 +2,26 @@ import { createContext, useReducer } from "react";
 export const CatItemsContext = createContext();
 
 export const CartReducer = (state, action) => {
+
   switch (action.type) {
 
     case "ADD_ITEM": {
-      let newCartItems
-      if (state.cartItems[action.payload.id]) {
-        state.cartItems[action.payload.id].amount++
+      console.log(state.cartItems)
+      let newCartItems = {
+        ...state.cartItems
+      }
+
+      console.log("Adding item")
+      if (newCartItems[action.payload.id]) {
+        newCartItems[action.payload.id] = {...newCartItems[action.payload.id] , amount: newCartItems[action.payload.id].amount + 1}
       }
       else {
-        state.cartItems[action.payload.id] = {
+        newCartItems[action.payload.id] = {
           ...action.payload,
           amount: 1
         }
       }
-      newCartItems = {
-        ...state.cartItems
-      }
+
       return { ...state, cartItems: newCartItems };
     }
     case "REMOVE_ITEM":
@@ -25,20 +29,19 @@ export const CartReducer = (state, action) => {
       return { ...state, cartItems: { ...state.cartItems } };
 
     case 'UPDATE_AMOUNT':
-      let newCartItems
-
+      let newCartItems = {
+        ...state.cartItems
+      }
       const changedItem = action.payload
 
       if (changedItem.amount === 0) {
-        delete state.cartItems[action.payload.id]
+        delete newCartItems[action.payload.id]
       }
       else {
-        state.cartItems[action.payload.id].amount = action.payload.amount
+        newCartItems[action.payload.id].amount = action.payload.amount
       }
 
-      newCartItems = {
-        ...state.cartItems
-      }
+
       return { ...state, cartItems: newCartItems }
 
     case "CLEAR":

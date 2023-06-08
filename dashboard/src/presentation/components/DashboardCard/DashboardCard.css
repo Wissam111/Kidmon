@@ -32,3 +32,11 @@
   width: 36px;
   height: 36px;
 }
+
+@media screen and (max-width: 1550px) {
+  .dashboardcard-container {
+    min-width: 270px;
+    height: 100px;
+    padding: 10px;
+  }
+}

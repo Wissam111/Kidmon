@@ -3,43 +3,40 @@ export const CatItemsContext = createContext();
 
 export const CartReducer = (state, action) => {
   switch (action.type) {
-
     case "ADD_ITEM": {
-      let newCartItems
+      let newCartItems;
       if (state.cartItems[action.payload.id]) {
-        state.cartItems[action.payload.id].amount++
-      }
-      else {
+        state.cartItems[action.payload.id].amount++;
+      } else {
         state.cartItems[action.payload.id] = {
           ...action.payload,
-          amount: 1
-        }
+          amount: 1,
+        };
       }
       newCartItems = {
-        ...state.cartItems
-      }
+        ...state.cartItems,
+      };
       return { ...state, cartItems: newCartItems };
     }
     case "REMOVE_ITEM":
-      delete state.cartItems[action.payload.id]
+      delete state.cartItems[action.payload.id];
       return { ...state, cartItems: { ...state.cartItems } };
 
-    case 'UPDATE_AMOUNT':
-      let newCartItems
+    case "UPDATE_AMOUNT":
+      let newCartItems;
 
-      const changedItem = action.payload
+      const changedItem = action.payload;
 
       if (changedItem.amount === 0) {
-        delete state.cartItems[action.payload.id]
-      }
-      else {
-        state.cartItems[action.payload.id].amount = action.payload.amount
+        delete state.cartItems[action.payload.id];
+      } else {
+        state.cartItems[action.payload.id].amount = action.payload.amount;
       }
 
       newCartItems = {
-        ...state.cartItems
-      }
-      return { ...state, cartItems: newCartItems }
+        ...state.cartItems,
+      };
+      return { ...state, cartItems: newCartItems };
 
     case "CLEAR":
       return { ...state, cartItems: {} };

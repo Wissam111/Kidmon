@@ -9,6 +9,7 @@ const MenuItemCard = ({ product }) => {
   const { dispatch } = useCartItemsContext();
 
   const handleAddtoCart = () => {
+    console.log("add");
     dispatch({ type: "ADD_ITEM", payload: product });
   };
   return (

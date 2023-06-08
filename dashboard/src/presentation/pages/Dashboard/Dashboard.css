@@ -73,9 +73,9 @@
 .added-product-card-container img {
   object-fit: cover;
 }
-.time-container {
-  background: white;
-  box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
-  padding: 0 8px;
-  border-radius: 8px;
+
+@media screen and (max-width: 1200px) {
+  .inner-container > .stats {
+    flex-direction: column;
+  }
 }

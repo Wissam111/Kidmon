@@ -17,14 +17,11 @@ const CartMenu = ({ handleShowScan }) => {
         Order <span>Menu</span>
       </h3>
 
-      {
-        Object.keys(cartItems).length > 0 && (
-          <button className="clear-cart-btn" onClick={onClearCart}>
-            Clear Cart
-          </button>
-        )
-        // <AiOutlinePlus size={22} color="#cf4444" style={{ rotate: '45deg', cursor: 'pointer', alignSelf: 'flex-end' }} onClick={onClearCart}></AiOutlinePlus>
-      }
+      {Object.keys(cartItems).length > 0 && (
+        <button className="clear-cart-btn" onClick={onClearCart}>
+          Clear Cart
+        </button>
+      )}
 
       <div className="orders-wrapper">
         {Object.values(cartItems).map((item) => (

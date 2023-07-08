@@ -10,7 +10,7 @@ const buildChargePointsUseCase = ({ userDb }) => {
         await transaction.startTransaction()
 
         try {
-            const user = await userDb.findById({ id: userId })
+            const user = await userDb.findById({ id: userId, populate: false })
             if (!user) {
                 throw new NotFoundError('User not found')
             }
@@ -19,13 +19,13 @@ const buildChargePointsUseCase = ({ userDb }) => {
             }
 
 
-            const updatedUser = await userDb.update({
-                ...makeParentUser({
+            const updatedUser = await userDb.update(
+                makeParentUser({
                     ...user,
                     credits: user.credits + points,
                     updatedAt: undefined
                 }), transaction
-            })
+            )
 
             return updatedUser
         }

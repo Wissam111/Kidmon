@@ -1,6 +1,6 @@
 {
   "env": {
     "DEBUG": "true",
-    "AUTHORIZATION": "false"
+    "AUTHORIZATION": "true"
   }
 }

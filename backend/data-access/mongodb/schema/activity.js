@@ -10,7 +10,7 @@ const activitySchema = new mongoose.Schema({
     amount: { type: Number },
 
     user: { type: String, ref: "user" },
-    items: { type: [{ _id: String, amount: Number }], ref: "prodcut", default: undefined },
+    items: { type: [{ _id: String, amount: Number, category: String }], ref: "prodcut", default: undefined },
     price: { type: Number },
 
     createdAt: { type: Date },

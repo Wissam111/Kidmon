@@ -34,8 +34,8 @@ const buildMakePurchaseActivity = (makeActivity) => {
         }
 
         items.forEach(item => {
-            if (!item['id'] || !item['amount']) {
-                throw new ValidationError('purchase activity items must have an id and amount attributes')
+            if (!item['id'] || !item['amount'] || !item['category']) {
+                throw new ValidationError('purchase activity items must have an id, amount, and category attributes')
             }
         })
 

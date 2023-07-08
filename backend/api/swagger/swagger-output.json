@@ -337,6 +337,44 @@
         }
       }
     },
+    "/users/pointsCharge": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "points": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
     "/products/{productId}": {
       "get": {
         "tags": [
@@ -807,9 +845,6 @@
             "schema": {
               "type": "object",
               "properties": {
-                "phone": {
-                  "example": "any"
-                },
                 "verifyId": {
                   "example": "any"
                 },

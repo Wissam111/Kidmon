@@ -133,6 +133,25 @@ const removeFamilyMember = async (req, res, next) => {
   }
 };
 
+
+const chargePoints = async (req, res, next) => {
+  // #swagger.tags = ['Users']
+  try {
+    const { userId, points } = req.body;
+    const user = await userService.chargePoints({ userId, points });
+    res.status(200).json({
+      message: "points charge was successfull",
+      user,
+    });
+  } catch (e) {
+    console.log(e);
+    next(e);
+  }
+};
+
+
+
+
 module.exports = {
   createFamilyMemberUser,
   createParentUser,
@@ -141,5 +160,6 @@ module.exports = {
   getUser,
   updateUser,
   getUsers,
-  removeFamilyMember
+  removeFamilyMember,
+  chargePoints
 };

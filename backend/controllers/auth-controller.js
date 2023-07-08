@@ -25,10 +25,10 @@ exports.sendAuthVerification = async (req, res, next) => {
 
 exports.verifyAndLogin = async (req, res, next) => {
     // #swagger.tags = ['Auth']
-    const { phone, verifyId, code } = req.body
+    const {verifyId, code } = req.body
 
     try {
-        const authData = await authService.verifyAndLogin({ phone, verifyId, code })
+        const authData = await authService.verifyAndLogin({  verifyId, code })
         res.status(200).json({
             message: 'login sucess',
             ...authData

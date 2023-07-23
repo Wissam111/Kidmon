@@ -28,6 +28,7 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
                 throw new NotFoundError('Item not found')
             }
             finalPrice += p.price * item.amount
+            item.category = p.category
         }
 
 

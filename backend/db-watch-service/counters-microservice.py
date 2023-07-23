@@ -27,6 +27,12 @@ def update_top_products_sold(doc):
         redisClient.zincrby('TOP_SOLD_PRODUCTS', item["amount"], item["_id"])
 
 
+# top products sold by category
+def update_top_products_sold_by_category(doc):
+    for item in doc["items"]:
+        redisClient.zincrby('TOP_SOLD_PRODUCTS_BY_CATEGORY', item["amount"], item["_id"])
+
+
 # recent products sold
 def recent_product_sold(doc):
     for item in doc["items"]:

@@ -113,7 +113,7 @@ router.patch(
     }),
   }),
   requireAuthentication,
-  makeFieldAuthorization({ reqData: { in: 'body', field: 'userId' }, userField: 'id' }),
+  makeParentAuthorization({ reqData: { in: 'body', field: 'userId' }, onlyParent: false }),
   userController.updateUser
 );
 
@@ -129,6 +129,9 @@ router.get(
   userController.getUser
 );
 
+
+
+// only admin
 router.get(
   "/",
   celebrate({
@@ -158,6 +161,8 @@ router.get(
 
 
 
+
+// only parent 
 router.delete("/familyMember/:familyMemberId",
   celebrate({
     [Segments.PARAMS]: Joi.object().keys({
@@ -168,6 +173,22 @@ router.delete("/familyMember/:familyMemberId",
   makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
   makeParentAuthorization({ reqData: { in: 'params', field: 'familyMemberId' } }),
   userController.removeFamilyMember
+);
+
+
+
+router.post(
+  "/pointsCharge",
+  celebrate({
+    [Segments.BODY]: Joi.object().keys({
+      userId: Joi.string().required(),
+      points: Joi.number().required(),
+    }),
+  }),
+  requireAuthentication,
+  makeRoleAuthorization({ userRoles: [USER_ROLES.parent] }),
+  makeFieldAuthorization({ reqData: { in: 'body', field: 'userId' }, userField: 'id' }),
+  userController.chargePoints
 );
 
 

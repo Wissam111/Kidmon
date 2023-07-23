@@ -1,4 +1,5 @@
 const { userDb } = require("../../data-access/mongodb")
+const { buildChargePointsUseCase } = require("./charge-points")
 const { buildCreateFamilyMemberUserUseCase } = require("./create-family-member-user")
 const { buildCreateParentUserUseCase } = require("./create-parent-user")
 const { buildCreateAdminUserUseCase } = require("./create-user-admin")
@@ -23,6 +24,9 @@ const getUserByBraceletIdUseCase = buildGetUserByBraceletIdUseCase(userDb)
 const editUserUseCase = buildEditUserUseCase({ userDb })
 const removeFamilyMember = buildRemoveFamilyMemberUseCase({ userDb })
 
+const chargePoints = buildChargePointsUseCase({ userDb })
+
+
 module.exports = Object.freeze({
     createAdminUserUseCase,
     createFamilyMemberUserUseCase,
@@ -31,5 +35,6 @@ module.exports = Object.freeze({
     getUserByBraceletIdUseCase,
     editUserUseCase,
     getUsersUseCase,
-    removeFamilyMember
+    removeFamilyMember,
+    chargePoints
 })

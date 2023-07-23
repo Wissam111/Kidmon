@@ -65,9 +65,12 @@ exports.makeParentAuthorization = ({ reqData, onlyParent = true }) => {
 
         // only parent is true and this is a family member
         if (onlyParent && USER_ROLES.familyMember === req.user.role) {
-            return res.status(403).json({ message: 'Unauthorized, Only parent allowed ' });
+            return res.status(403).json({ message: 'Unauthorized, Only parent allowed' });
         }
 
         next();
     }
 }
+
+
+

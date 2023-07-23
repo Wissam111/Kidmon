@@ -16,8 +16,7 @@ exports.requireAuthentication = async (req, res, next) => {
         if (!user) {
             return res.status(401).json({ message: 'user was not found, you might be blocked or deleted' })
         }
-
-
+ 
         req.user = user
         next()
     }

@@ -4,7 +4,7 @@ import { useSpring } from "react-spring";
 
 import { categories } from "../../../data/data";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
-import { useAlertContext } from "../../../hooks/useAlertContext";
+import { useAlertsContext } from "../../../hooks/useAlertsContext";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 
 import ProductRepository from "../../../repository/ProductRepository";
@@ -18,7 +18,7 @@ const HomeViewModel = () => {
   const [currentChild, setCurrentChild] = useState(null);
   const { dispatch } = useCartItemsContext();
 
-  const { invokeAlert } = useAlertContext();
+  const { showSuccess, showError } = useAlertsContext();
   const productRepos = ProductRepository();
   const userRepository = UserRepository();
   const [childViewAnimation, setChildViewAnimation] = useSpring(() => ({
@@ -43,8 +43,6 @@ const HomeViewModel = () => {
         return { id: p.id, amount: p.amount };
       });
 
-      let isSuccess = false;
-      let messg = "Purchase was successful";
       setLoading(true);
       try {
         console.log("making purchase", currentChild.id, products);
@@ -52,34 +50,29 @@ const HomeViewModel = () => {
           currentChild.id,
           products
         );
-        console.log(data);
-        isSuccess = true;
         handleCloseChildInfo(true);
+        showSuccess("Purchase was successful");
       } catch (error) {
         console.log(error);
-        messg = error?.error.message;
+        showError(error?.error.message);
       }
       setLoading(false);
-      invokeAlert(isSuccess, messg);
     },
-    [currentChild, userRepository, invokeAlert, setLoading]
+    [currentChild, userRepository, setLoading]
   );
 
   const scanChild = async (rfid) => {
-    let isSuccess = null;
-    let messg = "";
     setLoading(true);
     try {
       const data = await userRepository.getUserByRFID(rfid);
       setCurrentChild(data.user);
       handleShowScan();
+      showSuccess("Scan was successful");
     } catch (error) {
       console.log(error);
-      messg = error?.error.message;
-      isSuccess = false;
+      showError(error?.error.message);
     }
     setLoading(false);
-    invokeAlert(isSuccess, messg);
   };
 
   const handleShowScan = () => {

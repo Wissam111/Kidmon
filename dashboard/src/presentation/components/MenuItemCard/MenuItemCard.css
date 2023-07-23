@@ -9,11 +9,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: all .3s;
+  transition: transform 0.3s ease;
 }
 
-.menuItemCard-container:hover{
+.menuItemCard-container:hover {
   background: rgba(0, 0, 0, 0.04);
+  transform: translateY(-7px);
 }
 
 .menuItemCard-container img {

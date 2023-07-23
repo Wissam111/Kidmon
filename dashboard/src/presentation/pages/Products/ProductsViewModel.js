@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import ProductRepository from "../../../repository/ProductRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
-import { useAlertContext } from "../../../hooks/useAlertContext";
+import { useAlertsContext } from "../../../hooks/useAlertsContext";
 const ProductsViewModel = () => {
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
-  const { invokeAlert } = useAlertContext();
+  const { showSuccess, showError } = useAlertsContext();
   const [category, setCategory] = useState("All");
   const [refreshKey, setRefreshKey] = useState(0);
   const [numofPages, setNumOfPages] = useState(1);
@@ -27,18 +27,15 @@ const ProductsViewModel = () => {
     if (!window.confirm("Are you sure you want to delete this product?")) {
       return;
     }
-    let isSuccess = false;
-    let messg = "Successfully deleted product";
     setLoading(true);
     try {
       await productRepo.deleteProdcut(product.id);
       refresh();
-      isSuccess = true;
+      showSuccess("Successfully deleted product");
     } catch (error) {
       console.log(error?.error?.message);
-      messg = error?.error?.message;
+      showError(error?.error?.messag);
     }
-    invokeAlert(isSuccess, messg);
     setLoading(false);
   };
 

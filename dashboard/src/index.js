@@ -5,7 +5,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { ApiContextProvider } from "./context/ApiContext";
 import { LoadingContextProvider } from "./context/LoadingContext";
 import { CartItemsContextProvider } from "./context/CartItemsContext";
-import { AlertContextProvider } from "./context/AlertContext";
+import { AlertsContextProvider } from "./context/AlertsContext";
 import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,11 +14,11 @@ root.render(
       <AuthContextProvider>
         <ApiContextProvider>
           <CartItemsContextProvider>
-            <AlertContextProvider>
+            <AlertsContextProvider>
               <LoadingContextProvider>
                 <App />
               </LoadingContextProvider>
-            </AlertContextProvider>
+            </AlertsContextProvider>
           </CartItemsContextProvider>
         </ApiContextProvider>
       </AuthContextProvider>

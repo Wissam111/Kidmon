@@ -6,7 +6,10 @@ const REDIES_KEYS = {
     topSoldProducts: 'TOP_SOLD_PRODUCTS',
     recentSoldProducts: 'RECENT_SOLD_PRODUCTS',
     soldProductsCount: 'SOLD_PRODUCTS_COUNT',
-    categoriesCounters: 'CATEGORIES_COUNTERS'
+    categoriesCounters: 'CATEGORIES_COUNTERS',
+    purchasesCount: 'PURCHASES_COUNT',
+    usersCount: 'USERS:COUNT',
+    productsCount: 'PRODUCTS:COUNT'
 }
 
 
@@ -19,22 +22,26 @@ exports.makeDashboardDb = ({ makeDb }) => {
     async function find() {
         const redisClient = await makeDb()
 
-        const soldProductsCount = await redisClient.get(REDIES_KEYS.soldProductsCount)
         const recentSoldProducts = await redisClient.lRange(REDIES_KEYS.recentSoldProducts, 0, -1)
         const productsSoldCounters = await redisClient.hGetAll(REDIES_KEYS.productsSoldCounters)
         const topSoldProducts = await redisClient.zRange(REDIES_KEYS.topSoldProducts, 0, 5)
         const categoriesCounters = await redisClient.hGetAll(REDIES_KEYS.categoriesCounters)
-        // users count 
-        // avg purchases per day
-        // products count 
+
+        const soldProductsCount =+ await redisClient.get(REDIES_KEYS.soldProductsCount) || 0
+        const purchasesCount =+ await redisClient.get(REDIES_KEYS.purchasesCount) || 0
+        const usersCount =+ await redisClient.get(REDIES_KEYS.usersCount) || 0
+        const productsCount =+ await redisClient.get(REDIES_KEYS.productsCount) || 0
 
 
         return {
-            soldProductsCount,
             recentSoldProducts,
             productsSoldCounters,
             topSoldProducts,
-            categoriesCounters
+            categoriesCounters,
+            soldProductsCount,
+            purchasesCount,
+            usersCount,
+            productsCount
         }
     }
 

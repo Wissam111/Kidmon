@@ -1,15 +1,14 @@
 
 
 const REDIES_KEYS = {
-    // productsCount: 'PRDUCTS_COUNT',
     productsSoldCounters: 'PRODUCTS_SOLD_COUNTERS',
     topSoldProducts: 'TOP_SOLD_PRODUCTS',
     recentSoldProducts: 'RECENT_SOLD_PRODUCTS',
     soldProductsCount: 'SOLD_PRODUCTS_COUNT',
     categoriesCounters: 'CATEGORIES_COUNTERS',
     purchasesCount: 'PURCHASES_COUNT',
-    usersCount: 'USERS:COUNT',
-    productsCount: 'PRODUCTS:COUNT'
+    usersCount: 'USERS_COUNT',
+    productsCount: 'PRODUCTS_COUNT'
 }
 
 

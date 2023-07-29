@@ -107,7 +107,7 @@ def watch_users_collection():
     for change in users_stream:
         doc = change["fullDocument"]
         print('new user document', doc)
-        redisClient.incr('USERS:COUNT')
+        redisClient.incr('USERS_COUNT')
         redisClient.publish('dashboard:update',
                             'dashboard updated successfully')
 
@@ -123,7 +123,7 @@ def watch_products_collection():
     for change in products_stream:
         doc = change["fullDocument"]
         print('new product document', doc)
-        redisClient.incr('PRODUCTS:COUNT')
+        redisClient.incr('PRODUCTS_COUNT')
         redisClient.publish('dashboard:update',
                             'dashboard updated successfully')
 

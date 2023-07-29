@@ -1,17 +1,18 @@
-const { createClient } = require('redis')
+const { createClient } = require('redis');
+const { dashboardDb } = require('../data-access/redis');
 
 
 
 
 const sub = async (emitter) => {
 
-    const client = redis.createClient();
+    const client = createClient();
 
     const subscriber = client.duplicate();
 
     await subscriber.connect();
 
-    await subscriber.subscribe('dashboard', (message) => {
+    await subscriber.subscribe('dashboard:update', (message) => {
         console.log(message); // 'message'
         emitter(message)
     });

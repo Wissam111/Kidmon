@@ -1,4 +1,5 @@
 process.env.TZ = 'UTC'
+const http = require("http");
 const express = require('express')
 const loaders = require('./loaders')
 const configs = require('./configs')
@@ -30,12 +31,12 @@ const start = async () => {
     console.log('server is starting', `in ${mode()} mode`);
 
     const app = express()
-    await loaders({ expressApp: app })
+    const server = http.createServer(app);
+    await loaders({ expressApp: app, server: server })
 
-    app.listen(port, onListening)
-        .on('error', (e) => {
-            console.log(e)
-        })
+    server.on("error", err => console.log(err));
+    server.on("listening", onListening);
+    server.listen(port);
 }
 
 

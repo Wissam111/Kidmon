@@ -1,12 +1,12 @@
 import { useState } from "react";
 import ProductRepository from "../../../repository/ProductRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
-import { useAlertContext } from "../../../hooks/useAlertContext";
+import { useAlertsContext } from "../../../hooks/useAlertsContext";
 const ProductActionViewModel = () => {
   const [file, setFile] = useState(null);
   const { setLoading } = useLoadingContext();
   const productRepo = ProductRepository();
-  const { invokeAlert } = useAlertContext();
+  const { showSuccess, showError } = useAlertsContext();
   const handleChangeFile = (fileList) => {
     setFile(fileList[0]);
   };
@@ -18,22 +18,19 @@ const ProductActionViewModel = () => {
     allergicList,
     resetInputs
   ) => {
-    let isSuccess = false;
-    let messg = "Product published successfully";
     setLoading(true);
     const formData = createFormData(title, price, category, allergicList);
     try {
       await productRepo.createProduct(formData);
-      isSuccess = true;
+      showSuccess("Product created successfully");
     } catch (error) {
       console.log(error?.response.data);
-      messg = error?.response.data?.message;
+      showError(error?.response.data?.message);
     }
 
     setLoading(false);
     resetInputs();
     setFile(null);
-    invokeAlert(isSuccess, messg);
   };
 
   const createFormData = (title, price, category, allergicList) => {

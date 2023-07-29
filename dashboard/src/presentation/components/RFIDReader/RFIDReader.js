@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./RFIDReader.css";
 import { HiOutlineInformationCircle } from "react-icons/hi";
+import IconButton from "@mui/material/IconButton";
 import { IoClose } from "react-icons/io5";
 const RFIDReader = ({ handleCloseScan, scanChild }) => {
   const [rfid, setRfid] = useState("");
@@ -17,15 +18,15 @@ const RFIDReader = ({ handleCloseScan, scanChild }) => {
 
   return (
     <div className="scan-card-container">
-      <IoClose
-        size={25}
+      <IconButton
+        onClick={handleCloseScan}
         style={{
-          alignSelf:'flex-end',
+          alignSelf: "flex-end",
           cursor: "pointer",
         }}
-        onClick={handleCloseScan}
-        color="#00000070"
-      />
+      >
+        <IoClose size={25} color="#00000070" />
+      </IconButton>
       <div className="scan-card-info">
         <HiOutlineInformationCircle size={25} style={{ marginBottom: 10 }} />
         <p>

@@ -22,7 +22,7 @@ const Home = (props) => {
     makePurchase,
     childViewAnimation,
   } = HomeViewModel();
-  
+
   return (
     <div className="page-container">
       <div className="home-container">

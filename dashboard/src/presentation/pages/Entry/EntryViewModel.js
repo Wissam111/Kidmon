@@ -3,7 +3,7 @@ import AuthRepository from "../../../repository/AuthRepository";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
-import { useAlertContext } from "../../../hooks/useAlertContext";
+import { useAlertsContext } from "../../../hooks/useAlertsContext.js";
 
 const EntryViewModel = () => {
   const authRepository = AuthRepository();
@@ -11,42 +11,36 @@ const EntryViewModel = () => {
   const [verify, setVerify] = useState({});
   const { dispatch } = useAuthContext();
   const { setLoading } = useLoadingContext();
-  const { invokeAlert } = useAlertContext();
+  const { showSuccess, showError } = useAlertsContext();
   const [phone, setPhone] = useState("");
 
   const navigate = useNavigate();
 
   const handleLogin = async (phone) => {
-    let isSuccess = null;
-    let messg = "";
     setLoading(true);
     try {
       const data = await authRepository.login(phone);
       setVerify({ verifyId: data.verifyId, code: "" });
       setShowOTP(true);
       setPhone(phone);
+      showSuccess("phone verified, otp sent successfully");
     } catch (error) {
       console.log(error);
-      messg = error?.error.message;
-      isSuccess = false;
+      showError(error?.error.message);
     }
     setLoading(false);
-    invokeAlert(isSuccess, messg);
   };
   const handleVerfication = async (optCode) => {
-    let isSuccess = null;
-    let messg = "";
     setLoading(true);
     verify.code = optCode;
     try {
       const data = await authRepository.verifyLogin(verify);
       handleAuthData(data);
+      showSuccess("OTP verified, login successful");
     } catch (error) {
-      messg = error?.error.message;
-      isSuccess = false;
+      showError(error?.error.message);
     }
     setLoading(false);
-    invokeAlert(isSuccess, messg);
   };
 
   const handleAuthData = (data) => {

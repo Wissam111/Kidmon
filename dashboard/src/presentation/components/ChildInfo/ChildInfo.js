@@ -6,6 +6,7 @@ import Alert from "@mui/material/Alert";
 import { BASE_URL_1 } from "../../../context/ApiContext";
 import AlertTitle from "@mui/material/AlertTitle";
 import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
+import { IconButton } from "@mui/material";
 import "./ChildInfo.css";
 import Spacer from "../Spacer";
 
@@ -43,16 +44,15 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
 
   return (
     <div className="child-info-container">
-      <IoClose
-        size={25}
+      <IconButton
+        onClick={() => handleCloseChildInfo(false)}
         style={{
           alignSelf: "flex-end",
           cursor: "pointer",
         }}
-        onClick={() => handleCloseChildInfo(false)}
-        color="#00000070"
-      />
-
+      >
+        <IoClose size={25} color="#00000070" />
+      </IconButton>
       <div className="rows">
         <div className="child-info-col1">
           <div className="child-col1-row1">

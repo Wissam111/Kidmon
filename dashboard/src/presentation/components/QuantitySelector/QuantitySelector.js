@@ -26,7 +26,7 @@ const QuantitySelector = ({ value = 0, max, min, onChange }) => {
   return (
     <div className="container">
       <AiOutlineMinusCircle
-        size={13}
+        size={15}
         className="button"
         onClick={onDecrease}
         color="gray"
@@ -35,7 +35,7 @@ const QuantitySelector = ({ value = 0, max, min, onChange }) => {
       </AiOutlineMinusCircle>
       <p className="noselect">{quantity}</p>
       <AiOutlinePlusCircle
-        size={13}
+        size={15}
         className="button"
         onClick={onIncrease}
         color="gray"

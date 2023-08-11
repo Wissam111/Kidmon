@@ -5,6 +5,7 @@ import Select from "react-select";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { categoriesOptionsV2 } from "../../../data/data";
+import DefualtButton from "../DefaultButton/DefaultButton";
 const ProductBar = ({ handleSelectCategory }) => {
   const navigate = useNavigate();
 
@@ -21,13 +22,10 @@ const ProductBar = ({ handleSelectCategory }) => {
         />
       </div>
 
-      <button
-        className="add-product-btn"
+      <DefualtButton
         onClick={() => navigate("/product-action")}
-      >
-        <AiOutlinePlusCircle size={20} />
-        <span>Add Product</span>
-      </button>
+        text="Add Product"
+      />
     </div>
   );
 };

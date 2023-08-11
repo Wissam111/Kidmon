@@ -25,7 +25,11 @@ const ProductActionViewModel = () => {
       showSuccess("Product created successfully");
     } catch (error) {
       console.log(error?.response.data);
-      showError(error?.response.data?.message);
+      if (error?.response?.data?.error?.message) {
+        showError(error?.response?.data?.error?.message);
+      } else {
+        showError("Please fill all fields");
+      }
     }
 
     setLoading(false);

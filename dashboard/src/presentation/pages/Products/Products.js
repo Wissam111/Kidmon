@@ -10,22 +10,24 @@ import Spacer from "../../components/Spacer";
 const Products = () => {
   const {
     products,
+    searchedProducts,
     page,
     pageSize,
     numofPages,
     handleChangePage,
     handleSelectCategory,
     handleDeleteProduct,
+    handleSearch,
   } = ProductsViewModel();
   return (
     <div className="page-container">
       <div className="products-container">
-        <Search />
+        <Search onChange={handleSearch} />
         <Spacer space={14} />
         <ProductBar handleSelectCategory={handleSelectCategory} />
         <Spacer space={6} />
         <ProdcutsTable
-          products={products}
+          products={searchedProducts}
           page={page}
           pageSize={pageSize}
           numofPages={numofPages}

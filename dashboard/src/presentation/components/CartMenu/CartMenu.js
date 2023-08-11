@@ -3,7 +3,7 @@ import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 import OrderItemCard from "../OrderItemCard/OrderItemCard";
 import { useCallback } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
-
+import DefualtButton from "../DefaultButton/DefaultButton";
 const CartMenu = ({ handleShowScan }) => {
   const { cartItems, dispatch } = useCartItemsContext();
 
@@ -39,9 +39,14 @@ const CartMenu = ({ handleShowScan }) => {
       <div className="space"></div>
 
       {Object.keys(cartItems).length > 0 && (
-        <button className="confirm-btn" onClick={handleShowScan}>
-          Scan
-        </button>
+        <DefualtButton
+          text="Scan"
+          onClick={handleShowScan}
+          styles={{ width: "100%", fontSize: 18, padding: 20 }}
+        />
+        // <button className="confirm-btn" onClick={handleShowScan}>
+        //   Scan
+        // </button>
       )}
     </div>
   );

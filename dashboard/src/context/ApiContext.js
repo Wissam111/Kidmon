@@ -1,13 +1,14 @@
 import { createContext, useState } from "react";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate } from "react-router-dom";
 export const ApiContext = createContext();
 export const BASE_URL = "http://localhost:4000/api/v1/";
 export const BASE_URL_1 = "http://localhost:4000/api/";
 
 export const ApiContextProvider = ({ children }) => {
   const { authData } = useAuthContext();
-
+  const navigate = useNavigate();
   const apiCall = async (
     url,
     method = "GET",
@@ -38,7 +39,8 @@ export const ApiContextProvider = ({ children }) => {
 
     if (!result.ok) {
       if (result.status === 401) {
-        throw "you_are_not_authorized";
+        navigate("entry");
+        // throw "you_are_not_authorized";
       }
       throw {
         status: result.status,

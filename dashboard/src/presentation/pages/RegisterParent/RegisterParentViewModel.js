@@ -22,8 +22,11 @@ const RegisterParentViewModel = () => {
       resetInputs();
       showSuccess("Successfully created parent");
     } catch (error) {
-      console.log(error);
-      showError(error?.message);
+      if (error?.error?.message) {
+        showError(error?.error?.message);
+      } else {
+        showError(error?.message);
+      }
     }
     setLoading(false);
   };

@@ -78,10 +78,22 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
             if (limits[k].value < 0) {
                 throw new ValidationError(`A limit must be greater or equal than 0`)
             }
+
+            if(limits[k].current && limits[k].current  < 0){
+                throw new ValidationError(`current limit must be greater or equal than 0`)
+            }
+
+            if(limits[k].current && limits[k].value < limits[k].current){
+                throw new ValidationError(`A limit current must be lest or equal to the value`)
+            }
+            
+            if(!limits[k].current){
+                limits[k].current = 0
+            }
         }
 
-
-
+        limits.isActive = limits.isActive || false
+        
         return Object.freeze({
             ...user,
             braceletId,

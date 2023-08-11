@@ -46,15 +46,15 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
 
 
             // subject to credits limit
-            if (user.limits && user.limits.daily.isActivie && user.limits.daily.value < finalPrice) {
+            if (user.limits && user.limits.daily.isActivie && user.limits.daily.value -  user.limits.daily.current < finalPrice) {
                 throw new CreditsLimitError('Daily limit reached')
             }
 
-            if (user.limits && user.limits.weekly.isActive && user.limits.weekly.value < finalPrice) {
+            if (user.limits && user.limits.weekly.isActive && user.limits.weekly.value - user.limits.weekly.current < finalPrice) {
                 throw new CreditsLimitError('Weekly limit reached')
             }
 
-            if (user.limits && user.limits.monthly.isActive && user.limits.monthly.value < finalPrice) {
+            if (user.limits && user.limits.monthly.isActive &&  user.limits.monthly.value - user.limits.monthly.current < finalPrice) {
                 throw new CreditsLimitError('Monthly limit reached')
             }
 
@@ -62,15 +62,15 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
             const limits = user.limits ? {
                 daily: {
                     ...user.limits.daily,
-                    value: user.limits.daily.isActive ? user.limits.daily.value - finalPrice : user.limits.daily.value
+                    current: user.limits.daily.isActive ? user.limits.daily.current - finalPrice : user.limits.daily.current
                 },
                 weekly: {
                     ...user.limits.weekly,
-                    value: user.limits.weekly.isActive ? user.limits.weekly.value - finalPrice : user.limits.weekly.value
+                    current: user.limits.weekly.isActive ? user.limits.weekly.current - finalPrice : user.limits.weekly.current
                 },
                 monthly: {
                     ...user.limits.weekly,
-                    value: user.limits.monthly.isActive ? user.limits.monthly.value - finalPrice : user.limits.monthly.value
+                    current: user.limits.monthly.isActive ? user.limits.monthly.current - finalPrice : user.limits.monthly.current
                 }
             } : undefined
 

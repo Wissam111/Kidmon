@@ -12,6 +12,12 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
   const bottomSheetRef = useRef(null);
 
   const snapPoints = useMemo(() => [snap1, snap2], []);
+
+  const ActivityTitle = (item) => {
+    const _type = item?.type.charAt(0).toUpperCase() + item?.type.slice(1);
+    return item?.user?.firstName + "-" + _type;
+  };
+
   return (
     <BottomSheet
       style={styles.sheet}
@@ -38,7 +44,7 @@ const ActivityList = ({ activities, style, snap1, snap2 }) => {
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
             <ActivityCard
-              text={item.type}
+              text={ActivityTitle(item)}
               totalPrice={item.price}
               datetime={item.createdAt}
             />

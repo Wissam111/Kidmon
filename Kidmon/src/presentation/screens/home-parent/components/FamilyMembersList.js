@@ -8,7 +8,7 @@ const FamilyMembersList = ({ familyMembers }) => {
   const { setFamilyMember } = useFamilyMemberContext();
 
   const handleSelectChild = (user) => {
-    navigation.navigate("FamilyMemberHome");
+    navigation.navigate("ChildTabs");
     setFamilyMember(user);
   };
   const handleSelectAddButton = () => {
@@ -40,7 +40,7 @@ const FamilyMembersList = ({ familyMembers }) => {
         />
         <Spacer space={8} />
 
-        {familyMembers.map((user) => (
+        {familyMembers?.map((user) => (
           <View key={user.id} style={{ flexDirection: "row" }}>
             <FamilyMemberCard
               style={{ padding: 8 }}

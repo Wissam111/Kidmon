@@ -4,6 +4,7 @@ import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import { useAlertsContext } from "../../../hooks/useAlertsContext";
 const ProductsViewModel = () => {
   const [products, setProducts] = useState([]);
+  const [searchedProducts, setSearchedProducts] = useState([]);
   const [page, setPage] = useState(1);
   const { showSuccess, showError } = useAlertsContext();
   const [category, setCategory] = useState("All");
@@ -18,6 +19,7 @@ const ProductsViewModel = () => {
       const data = await productRepo.getProducts(category, PAGE_SIZE, page);
       setNumOfPages(Math.round(data.count / PAGE_SIZE));
       setProducts(data.products);
+      setSearchedProducts(data.products);
     } catch (error) {
       console.log(error);
     }
@@ -60,13 +62,23 @@ const ProductsViewModel = () => {
     ProudctsPageInit();
   }, [page, category, refreshKey]);
 
+  const handleSearch = (e) => {
+    const searchInput = e.target.value.toLowerCase();
+    const filterProducts = products.filter((product) =>
+      product.title.toLowerCase().includes(searchInput)
+    );
+    setSearchedProducts(filterProducts);
+  };
+
   return {
     products,
+    searchedProducts,
     page,
     numofPages,
     handleChangePage,
     handleSelectCategory,
     handleDeleteProduct,
+    handleSearch,
   };
 };
 

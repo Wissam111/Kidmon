@@ -10,7 +10,7 @@ import { Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useNavigation } from "@react-navigation/native";
-const Header = ({ firstName }) => {
+const Header = ({ firstName, showModal }) => {
   const { dispatch } = useAuthContext();
   const navigation = useNavigation();
   const handleLogout = () => {
@@ -32,7 +32,7 @@ const Header = ({ firstName }) => {
         <View className="m-4 mt-12">
           <Text className="text-xl font-medium">Good Morning,</Text>
           <Text className="text-base  font-medium color-[#0000005c]">
-            {firstName.charAt(0).toUpperCase() + firstName.slice(1)}
+            {firstName?.charAt(0).toUpperCase() + firstName?.slice(1)}
           </Text>
         </View>
 

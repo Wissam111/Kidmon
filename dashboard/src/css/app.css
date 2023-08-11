@@ -61,18 +61,6 @@ body {
 /* ::-webkit-scrollbar-thumb:hover {
   background: orange;
 } */
-.confirm-btn {
-  padding: 12px;
-  background: #5fd5e5;
-  border-radius: 14px;
-  font-weight: 500;
-  font-size: 18px;
-  color: white;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  border: 2px solid rgb(224, 219, 219);
-}
 
 .space {
   flex: 1;

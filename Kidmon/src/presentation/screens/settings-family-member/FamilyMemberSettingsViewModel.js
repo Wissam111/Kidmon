@@ -1,15 +1,17 @@
 import { useState, useCallback, useEffect } from "react";
 
 import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
-import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import UserRepository from "../../../repository/UserRepository";
+import { useAlertsContext } from "../../../hooks/useAlertsContext";
 const FamilyMemberSettingsViewModel = () => {
   const { familyMember } = useFamilyMemberContext();
   const [childLimits, setChildLimits] = useState({});
   const navigation = useNavigation();
   const userRepository = UserRepository();
   const [childAllergies, setChildAllergies] = useState(familyMember?.allergies);
+  const { showSuccess, showError } = useAlertsContext();
+
   const updateUser = async () => {
     try {
       const data = await userRepository.updateUser({
@@ -17,14 +19,11 @@ const FamilyMemberSettingsViewModel = () => {
         limits: childLimits,
         allergies: childAllergies,
       });
-      handleAlert("success", "allergies and limits updated successfully");
+      showSuccess("allergies and limits updated successfully");
       NavigateHome();
     } catch (error) {
       console.log(error);
-      handleAlert(
-        "error",
-        "error updating allergies and limits " + error.message
-      );
+      showError("error updating allergies and limits " + error.message);
     }
   };
 
@@ -61,11 +60,6 @@ const FamilyMemberSettingsViewModel = () => {
         isActive: isActive,
       },
     }));
-  };
-  const handleAlert = (type, message) => {
-    const alertTitle = type === "success" ? "Success" : "Error";
-    const alertButton = { text: "OK", onPress: () => {} };
-    Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
   };
 
   const handleSliderValueChange = (type, value) => {

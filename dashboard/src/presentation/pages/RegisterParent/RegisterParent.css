@@ -1,13 +1,14 @@
 .inner-page {
   display: flex;
   height: 100%;
+  flex: 1;
   justify-content: space-between;
 }
 
 .register-page-wrapper {
-  padding: 40px 30px 10px 50px;
+  padding: 40px 0px 10px 50px;
   position: relative;
-
+  flex: 1;
 }
 
 .inner-page {
@@ -28,13 +29,15 @@
 .register-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   margin-top: 50px;
   position: relative;
+  max-width: 400px;
+  min-width: 380;
   padding: 20px 20px 60px 0;
 }
 
-.register-wrapper button {
+/* .register-wrapper button {
   padding: 12px 40px;
   background: #8fa497;
   border: none;
@@ -45,4 +48,11 @@
   position: absolute;
   left: 130px;
   bottom: 0px;
+} */
+.register-parent-btn-wrapper {
+  display: flex;
+  width: "100%";
+}
+.register-parent-btn-wrapper button {
+  margin-left: auto;
 }

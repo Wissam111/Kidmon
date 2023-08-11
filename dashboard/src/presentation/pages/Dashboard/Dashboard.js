@@ -5,7 +5,7 @@ import { pieChartOptions, chartOptions } from "../../../data/data";
 import "./Dashboard.css";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import ChartView from "../../components/ChartView/ChartView";
-
+import ProductRow from "./components/ProductRow";
 const recentSoldProducts = [
   {
     title: "Bsli Flafel",
@@ -61,27 +61,27 @@ const Dashboard = () => {
           <div className="counters">
             <DashboardCard
               text="Users"
-              count="3,567"
+              count={3567}
               image={require("../../../assets/icons/user.png")}
             />
             <DashboardCard
               text="Sold Products"
-              count="4,999"
+              count={4999}
               image={require("../../../assets/icons/sold.png")}
             />
             <DashboardCard
               text="Products"
-              count="400"
+              count={400}
               image={require("../../../assets/icons/groceries.png")}
             />
             <DashboardCard
               text="Avg Purchases, Day"
-              count="31.43"
+              count={31.43}
               image={require("../../../assets/imgs/percentage.png")}
             />
             <DashboardCard
               text="Purchases"
-              count="560,564"
+              count={560564}
               image={require("../../../assets/icons/purchase.png")}
             />
           </div>
@@ -119,20 +119,11 @@ const Dashboard = () => {
 
             <div className="recent-added-products">
               <h3>Recently Added Products</h3>
-              {recentSoldProducts.map((recent) => (
-                <div
-                  className="added-product-card-container"
-                  style={{ display: "flex" }}
-                >
-                  <img
-                    style={{ width: "40px", height: "40px" }}
-                    src={recent.img}
-                    alt=""
-                  />
-                  <Spacer space={8} />
-                  <p>{recent.title}</p>
-                </div>
-              ))}
+              <div className="dashboard-recent-products">
+                {recentSoldProducts.map((recent) => (
+                  <ProductRow product={recent} />
+                ))}
+              </div>
             </div>
           </div>
         </div>

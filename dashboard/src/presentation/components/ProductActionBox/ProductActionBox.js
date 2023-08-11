@@ -4,6 +4,7 @@ import "./ProductActionBox.css";
 import Input from "../Input/Input";
 import IngerdientCard from "../IngerdientCard/IngerdientCard";
 import { allergicIngredients, categoriesOptions } from "../../../data/data";
+import DefualtButton from "../DefaultButton/DefaultButton";
 
 const ProductActionBox = ({ handlePublishProduct }) => {
   const [productName, setProductName] = useState("");
@@ -73,20 +74,21 @@ const ProductActionBox = ({ handlePublishProduct }) => {
           />
         ))}
       </div>
-      <button
-        className="publish-product-btn"
-        onClick={() =>
-          handlePublishProduct(
-            productName,
-            productPrice,
-            productCategory?.value,
-            allergiesList,
-            resetInputs
-          )
-        }
-      >
-        Publish Product
-      </button>
+
+      <div className="action-btn-wrapper">
+        <DefualtButton
+          text="Publish product"
+          onClick={() =>
+            handlePublishProduct(
+              productName,
+              productPrice,
+              productCategory?.value,
+              allergiesList,
+              resetInputs
+            )
+          }
+        />
+      </div>
     </div>
   );
 };

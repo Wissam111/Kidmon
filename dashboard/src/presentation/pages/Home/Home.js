@@ -31,7 +31,7 @@ const Home = (props) => {
             <h1>
               Menu <span>Category</span>{" "}
             </h1>
-            <Search />
+            {/* <Search /> */}
           </div>
           <div className="category-cards-container">
             {categories.map((category, index) => {

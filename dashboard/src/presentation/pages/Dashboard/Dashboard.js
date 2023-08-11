@@ -6,6 +6,7 @@ import "./Dashboard.css";
 import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import ChartView from "../../components/ChartView/ChartView";
 import ProductRow from "./components/ProductRow";
+import DashboardViewModal from "./DashboardViewModal";
 const recentSoldProducts = [
   {
     title: "Bsli Flafel",
@@ -50,6 +51,7 @@ const data3 = [
 ];
 
 const Dashboard = () => {
+  const {} = DashboardViewModal();
   const { user } = useAuthContext().authData;
 
   return (

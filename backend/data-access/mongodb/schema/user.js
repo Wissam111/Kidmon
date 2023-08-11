@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 
 const limitSchema = new mongoose.Schema({
     value: { type: Number },
+    current: { type: Number },
     isActive: { type: Boolean },
 }, { _id: false })
 

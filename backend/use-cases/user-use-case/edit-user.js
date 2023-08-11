@@ -37,6 +37,25 @@ exports.buildEditUserUseCase = ({ userDb }) => {
             })
         }
         else if (user.role === USER_ROLES.familyMember) {
+
+
+
+
+            // if(!onlyDefiendInfos.limits){
+
+                
+
+            //     for(const limit in user.limits){
+            //         // fuck wissam 
+            //         if(!user.limits  && user.limits[limit].isActive  ){
+                        
+            //         }
+    
+            //     }
+
+            // }
+
+
             updatedUser = makeFamilyMemberUser({
                 ...user,
                 ...onlyDefiendInfos,

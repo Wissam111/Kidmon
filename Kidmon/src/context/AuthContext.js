@@ -48,19 +48,38 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    // const fetchData = async () => {
+    //   const authData = await getData();
+    //   console.log(authData);
+    //   if (authData?.user && authData?.token) {
+    //     dispatch({ type: "LOGIN", payload: authData });
+    //     navigation.navigate("Splash", { isLoggedIn: true });
+    //     // navigation.navigate("Splash");
+    //   } else {
+    //     navigation.navigate("Splash", { isLoggedIn: false });
+    //   }
+    // };
+    // fetchData();
+    // UserInStorage();
+  }, []);
+
+  const CheckUserInStorage = async () => {
     const fetchData = async () => {
       const authData = await getData();
       console.log(authData);
       if (authData?.user && authData?.token) {
         dispatch({ type: "LOGIN", payload: authData });
-        navigation.navigate("HomeParent");
+        navigation.navigate("HomeParent", { isLoggedIn: true });
+        // navigation.navigate("Splash");
+      } else {
+        navigation.navigate("Entry", { isLoggedIn: false });
       }
     };
-    fetchData();
-  }, []);
+    await fetchData();
+  };
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch }}>
+    <AuthContext.Provider value={{ ...state, dispatch, CheckUserInStorage }}>
       {children}
     </AuthContext.Provider>
   );

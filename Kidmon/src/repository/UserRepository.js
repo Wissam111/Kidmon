@@ -30,7 +30,21 @@ const UserRepository = () => {
     return data;
   };
 
-  return { getUser, getUserByRFID, createFamilyMember, updateUser };
+  const chargeBalance = async ({ userId, points }) => {
+    const data = await apiCall("users/pointsCharge", "POST", {
+      userId,
+      points,
+    });
+    return data;
+  };
+
+  return {
+    getUser,
+    getUserByRFID,
+    createFamilyMember,
+    updateUser,
+    chargeBalance,
+  };
 };
 
 export default UserRepository;

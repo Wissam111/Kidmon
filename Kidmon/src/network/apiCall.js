@@ -1,7 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-export const BASE_URL = "http://192.168.1.46:4000/api/v1/"; //use you pc ip address
-export const IMG_URL = "http://192.168.1.46:4000/api/imgs/";
+export const BASE_URL = "http:/192.168.68.102:4000/api/v1/"; //use you pc ip address
+export const IMG_URL = "http://192.168.68.102:4000/api/imgs/";
 // export const BASE_URL = "http://192.168.68.117:4000/api/v1/"; //use you pc ip address
 // export const IMG_URL = "http://192.168.68.117:4000/api/imgs/";
 
@@ -61,7 +60,6 @@ export const apiCall = async (
   //   : BASE_URL_DEV + url;
 
   const customURL = BASE_URL + url;
-
   let bbody;
   if (body) {
     if (contentType === "multipart/form-data") {

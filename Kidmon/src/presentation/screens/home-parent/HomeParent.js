@@ -7,9 +7,10 @@ import HomeParentViewModel from "./HomeParentViewModel";
 import { View } from "react-native";
 import { white } from "../../styles";
 import { useEffect } from "react";
-
+import ChargeBalanceModal from "../../components/ChargeBalanceModal";
 const HomeParent = ({ navigation }) => {
-  const { user, activities } = HomeParentViewModel({ navigation });
+  const { user, activities, activeModal, setActiveModal, chargeBalance } =
+    HomeParentViewModel({ navigation });
 
   return (
     <View style={{ flex: 1, backgroundColor: white }}>
@@ -17,7 +18,10 @@ const HomeParent = ({ navigation }) => {
 
       <Spacer space={20} />
       <View className="w-full items-center">
-        <Balance amount={user?.credits} />
+        <Balance
+          amount={user?.credits}
+          showModal={() => setActiveModal(true)}
+        />
       </View>
 
       <Spacer space={13} />
@@ -28,6 +32,11 @@ const HomeParent = ({ navigation }) => {
         activities={activities}
         snap1={"37%"}
         snap2={"95%"}
+      />
+      <ChargeBalanceModal
+        visible={activeModal}
+        chargeBalance={chargeBalance}
+        setShowDialog={setActiveModal}
       />
     </View>
   );

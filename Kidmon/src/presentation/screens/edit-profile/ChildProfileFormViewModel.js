@@ -7,11 +7,13 @@ import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { useAlertsContext } from "../../../hooks/useAlertsContext";
 
 const ChildProfileFormViewModel = (isEditMode) => {
   const { familyMember } = useFamilyMemberContext();
   const { setLoading } = useLoadingContext();
   const { user } = useAuthContext();
+  const { showSuccess, showError } = useAlertsContext();
 
   const navigation = useNavigation();
   const [formData, setFormData] = useState({
@@ -36,10 +38,10 @@ const ChildProfileFormViewModel = (isEditMode) => {
         braceletId: formData.braceletId,
       });
       console.log(data);
-      handleAlert("success", "Child saved successfully");
+      showSuccess("Child saved successfully");
       NavigateHome();
     } catch (error) {
-      handleAlert("error", "Error saving" + error.message);
+      showError("Error saving" + error.message);
     }
     setLoading(false);
   };
@@ -49,10 +51,10 @@ const ChildProfileFormViewModel = (isEditMode) => {
     const childFormData = createChildFormData();
     try {
       const data = await userRepository.createFamilyMember(childFormData);
-      handleAlert("success", "Child created successfully");
+      showSuccess("Child created successfully");
       NavigateHome();
     } catch (error) {
-      handleAlert("error", "Error Creating Child " + error.message);
+      showError("Error Creating Child " + error.message);
     }
 
     setLoading(false);

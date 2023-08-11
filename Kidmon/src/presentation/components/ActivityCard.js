@@ -5,7 +5,6 @@ import Spacer from "./Spacer";
 import { white } from "../styles";
 
 const ActivityCard = ({ image, text, datetime, onPress, totalPrice }) => {
-
   return (
     <View
       style={{
@@ -20,7 +19,7 @@ const ActivityCard = ({ image, text, datetime, onPress, totalPrice }) => {
       <Spacer space={8} />
       <View style={{ flexGrow: 1 }}>
         <Text className="font-medium">
-          {text.charAt(0).toUpperCase() + text.slice(1)}
+          {text?.charAt(0).toUpperCase() + text?.slice(1)}
         </Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
           <Ionicons name="time-outline" size={14} color={"#00000075"} />

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { Alert } from "react-native";
 import AuthRepository from "../../../repository/AuthRepository";
 import { useNavigation } from "@react-navigation/native";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
+import { useAlertsContext } from "../../../hooks/useAlertsContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const EntryViewModel = () => {
@@ -11,8 +11,10 @@ const EntryViewModel = () => {
   const [verify, setVerify] = useState({});
   const authRepository = AuthRepository();
   const navigation = useNavigation();
+
   const { setLoading } = useLoadingContext();
 
+  const { showSuccess, showError } = useAlertsContext();
   const { dispatch } = useAuthContext();
 
   const handleLogin = async (phone) => {
@@ -21,10 +23,11 @@ const EntryViewModel = () => {
       const data = await authRepository.login(phone);
       setVerify({ verifyId: data.verifyId, code: "" });
       setShowOTP(false);
-      console.log(data);
+      showSuccess("OTP sent successfully");
     } catch (error) {
       console.log(error);
-      handleAlert("error", "Error in login: " + error.error.message);
+      console.log(showError);
+      showError(error?.error?.message);
     }
     setLoading(false);
   };
@@ -35,9 +38,11 @@ const EntryViewModel = () => {
     try {
       const data = await authRepository.verifyLogin(verify);
       handleAuthData(data);
+      showSuccess("Logged in successfully");
     } catch (error) {
       console.log(error);
-      handleAlert("error", "Error with OTP: " + error.error.message);
+      // handleAlert("error", "Error with OTP: " + error?.error?.message);
+      showError(error?.error?.message);
     }
     setLoading(false);
   };
@@ -56,11 +61,7 @@ const EntryViewModel = () => {
     storeData(data);
     setShowOTP(true);
   };
-  const handleAlert = (type, message) => {
-    const alertTitle = type === "success" ? "Success" : "Error";
-    const alertButton = { text: "OK", onPress: () => {} };
-    Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
-  };
+
   const storeData = async (authData) => {
     try {
       await AsyncStorage.setItem("user", JSON.stringify(authData.user));

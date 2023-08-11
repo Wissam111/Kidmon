@@ -47,17 +47,17 @@ const FamilyMemberHomeViewModel = () => {
       return data;
     } catch (error) {
       console.log(error);
-      handleAlert("error", "Error getting spendings: " + error.message);
+      handleAlert("error", "Error getting spendings: " + error?.message);
     }
   };
 
   const updateSpendings = async (startDate, endDate) => {
     const data = await getSpendings(startDate, endDate);
-    const filteredSpendings = data.spendings;
+    const filteredSpendings = data?.spendings ? data?.spendings : [];
     const currentDay = currentDate.getDate();
     const dailySpendings = filteredSpendings
-      .filter((spending) => spending.day === currentDay)
-      .reduce((total, spending) => total + spending.totalSpendings, 0);
+      .filter((spending) => spending?.day === currentDay)
+      .reduce((total, spending) => total + spending?.totalSpendings, 0);
 
     // Calculate the total spending of the current week
     const startOfWeekDate = new Date().getDay() === 0 ? 7 : new Date().getDay();
@@ -67,21 +67,21 @@ const FamilyMemberHomeViewModel = () => {
           spending.day >= currentDay - startOfWeekDate + 1 &&
           spending.day <= currentDay
       )
-      .reduce((total, spending) => total + spending.totalSpendings, 0);
+      .reduce((total, spending) => total + spending?.totalSpendings, 0);
 
     // Calculate the total spending of the current month
     const monthlySpendings = filteredSpendings.reduce(
-      (total, spending) => total + spending.totalSpendings,
+      (total, spending) => total + spending?.totalSpendings,
       0
     );
-    const dailyLimit = familyMember.limits?.daily;
-    const weeklyLimit = familyMember.limits?.weekly;
-    const monthlyLimit = familyMember.limits?.monthly;
+    const dailyLimit = familyMember?.limits?.daily;
+    const weeklyLimit = familyMember?.limits?.weekly;
+    const monthlyLimit = familyMember?.limits?.monthly;
     const spendingsLimits = {
       daily: {
         percentage: Math.round((dailySpendings / dailyLimit?.value) * 100),
         remainin: dailyLimit?.isActive
-          ? Math.round(dailyLimit.value - dailySpendings)
+          ? Math.round(dailyLimit?.value - dailySpendings)
           : null,
       },
 
@@ -103,7 +103,7 @@ const FamilyMemberHomeViewModel = () => {
 
   const UpdateChart = async (startDate, endDate) => {
     const data = await getSpendings(startDate, endDate);
-    setWeekSpendings(data.spendings);
+    setWeekSpendings(data?.spendings);
   };
 
   const handleAlert = (type, message) => {

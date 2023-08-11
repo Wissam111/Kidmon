@@ -2,7 +2,6 @@ import { apiCall } from "../network/apiCall";
 
 const AuthRepository = () => {
   const login = async (phone) => {
-    console.log(phone);
     const data = apiCall("auth/send-auth-verification", "POST", {
       phone,
     });

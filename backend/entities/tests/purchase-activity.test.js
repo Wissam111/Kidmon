@@ -1,12 +1,13 @@
 const { makePurchaseActivity } = require("..");
-const { createId } = require('@paralleldrive/cuid2')
+const { createId } = require('@paralleldrive/cuid2');
+const { PRODUCT_CATEGORIES } = require("../product");
 
 describe('purchase activity', () => {
 
     it('must successfuly create', () => {
         expect(() => {
             makePurchaseActivity({
-                items: [{ id: createId(), amount: 5 }],
+                items: [{ id: createId(), amount: 5 , category: PRODUCT_CATEGORIES.hot}],
                 price: 100,
                 user: createId()
             })

@@ -41,7 +41,6 @@ describe('', () => {
 
         expect(product).toBeDefined()
 
-        console.log(product);
         await deleteProduct({ productId: product.id })
 
         expect(async () => await getProduct({ productId: product.id })).rejects.toEqual(new NotFoundError('Product not found'))

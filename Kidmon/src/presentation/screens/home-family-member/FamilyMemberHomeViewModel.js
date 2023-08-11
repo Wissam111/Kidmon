@@ -115,7 +115,7 @@ const FamilyMemberHomeViewModel = () => {
     const FamilyMemberHomeInit = async () => {
       setLoading(true);
       await UpdateChart(startWeekDate, endOfWeekData);
-      await updateSpendings(startMonthDate, endMonthDate);
+      // await updateSpendings(startMonthDate, endMonthDate);
       setLoading(false);
     };
 

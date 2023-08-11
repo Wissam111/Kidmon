@@ -15,6 +15,7 @@ exports.makeUserDb = ({ makeDb }) => {
     makeTransaction,
     findByBraceletId,
     find,
+    updateLimitsValues
   });
 
   async function create({ id: _id, transaction, ...userInfo }) {
@@ -182,6 +183,18 @@ exports.makeUserDb = ({ makeDb }) => {
       count: count,
     };
   }
+
+
+  async function updateLimitsValues({limitName, limitValue}){
+    await makeDb();
+
+    const updateObj = {
+      [`limits.${limitName}.current`]: limitValue
+    }
+
+    await User.updateMany({}, updateObj)
+  }
+
 
   async function makeTransaction() {
     await makeDb();

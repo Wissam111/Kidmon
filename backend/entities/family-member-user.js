@@ -2,6 +2,12 @@ const { ValidationError } = require("../utils/errors");
 const { USER_ROLES } = require("./user");
 
 
+const Limits = {
+    daily: 'daily',
+    weekly: 'weekly',
+    monthly: 'monthly'
+}
+
 const Allergies = {
     milk: 'Milk',
     eggs: 'Eggs',
@@ -79,21 +85,30 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
                 throw new ValidationError(`A limit must be greater or equal than 0`)
             }
 
-            if(limits[k].current && limits[k].current  < 0){
+            if (limits[k].current && limits[k].current < 0) {
                 throw new ValidationError(`current limit must be greater or equal than 0`)
             }
 
-            if(limits[k].current && limits[k].value < limits[k].current){
+            if (limits[k].current && limits[k].value < limits[k].current) {
                 throw new ValidationError(`A limit current must be lest or equal to the value`)
             }
-            
-            if(!limits[k].current){
+
+            if (!limits[k].current) {
                 limits[k].current = 0
             }
         }
 
-        limits.isActive = limits.isActive || false
-        
+        if (!limits)
+            limits = {
+                isActive: false
+            }
+
+        limits.daily = limits.daily || { value: 0, current: 0, isActive: false }
+        limits.weekly = limits.weekly || { value: 0, current: 0, isActive: false }
+        limits.monthly = limits.monthly || { value: 0, current: 0, isActive: false }
+
+        limits.isActive = limits.isActive || false 
+
         return Object.freeze({
             ...user,
             braceletId,
@@ -110,7 +125,8 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
 module.exports = Object.freeze({
     buildMakeFamilyMemberUser,
     Allergies,
-    Allergies_ENUM
+    Allergies_ENUM,
+    Limits
 })
 
 

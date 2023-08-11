@@ -44,34 +44,39 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
                 throw new NotFoundError('User not found')
             }
 
+            if (user.limits && user.limits.isActive) {
+                // subject to credits limit
+                if (user.limits.daily.isActive && user.limits.daily.value - user.limits.daily.current < finalPrice) {
+                    throw new CreditsLimitError('Daily limit reached')
+                }
 
-            // subject to credits limit
-            if (user.limits && user.limits.daily.isActivie && user.limits.daily.value -  user.limits.daily.current < finalPrice) {
-                throw new CreditsLimitError('Daily limit reached')
-            }
+                if (user.limits.weekly.isActive && user.limits.weekly.value - user.limits.weekly.current < finalPrice) {
+                    throw new CreditsLimitError('Weekly limit reached')
+                }
 
-            if (user.limits && user.limits.weekly.isActive && user.limits.weekly.value - user.limits.weekly.current < finalPrice) {
-                throw new CreditsLimitError('Weekly limit reached')
-            }
-
-            if (user.limits && user.limits.monthly.isActive &&  user.limits.monthly.value - user.limits.monthly.current < finalPrice) {
-                throw new CreditsLimitError('Monthly limit reached')
+                if (user.limits.monthly.isActive && user.limits.monthly.value - user.limits.monthly.current < finalPrice) {
+                    throw new CreditsLimitError('Monthly limit reached')
+                }
             }
 
             // update limits
-            const limits = user.limits ? {
+            const limits = user.limits && user.limits.isActive ? {
                 daily: {
                     ...user.limits.daily,
-                    current: user.limits.daily.isActive ? user.limits.daily.current - finalPrice : user.limits.daily.current
+                    current: user.limits.daily.isActive ? user.limits.daily.current + finalPrice : user.limits.daily.current,
+                    isActive: true
                 },
                 weekly: {
                     ...user.limits.weekly,
-                    current: user.limits.weekly.isActive ? user.limits.weekly.current - finalPrice : user.limits.weekly.current
+                    current: user.limits.weekly.isActive ? user.limits.weekly.current + finalPrice : user.limits.weekly.current,
+                    isActive: true
                 },
                 monthly: {
-                    ...user.limits.weekly,
-                    current: user.limits.monthly.isActive ? user.limits.monthly.current - finalPrice : user.limits.monthly.current
-                }
+                    ...user.limits.monthly,
+                    current: user.limits.monthly.isActive ? user.limits.monthly.current + finalPrice : user.limits.monthly.current,
+                    isActive: true
+                },
+                isActive: true
             } : undefined
 
             // have sufficient credits
@@ -84,11 +89,11 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
             const updatedUser = makeFamilyMemberUser({
                 ...user,
                 credits: user.credits - finalPrice,
-                limits,
+                limits: limits || user.limits,
                 updatedAt: undefined
             })
 
-            
+
             await userDb.update({ ...updatedUser, transaction })
 
 

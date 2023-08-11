@@ -1,6 +1,6 @@
 const { makeUser, makeParentUser, makeFamilyMemberUser } = require("../../entities");
 const { USER_ROLES } = require("../../entities/user");
-const { NotFoundError } = require("../../utils/errors");
+const { NotFoundError, ValidationError } = require("../../utils/errors");
 
 
 exports.buildEditUserUseCase = ({ userDb }) => {
@@ -37,23 +37,19 @@ exports.buildEditUserUseCase = ({ userDb }) => {
             })
         }
         else if (user.role === USER_ROLES.familyMember) {
+            // if the limits were active and keeping them active the current doesn't change
+            // if the limits were not active 
 
+            if (user.limits.isActive && onlyDefiendInfos.limits) {
+                for (const limit in onlyDefiendInfos.limits) {
+                    const current = user.limits[limit].current
+                    onlyDefiendInfos.limits[limit].current = current
+                    
+                    if(limit.value < current)
+                        throw new ValidationError(`You can't make the value less than the already used limit`)
+                }
+            }
 
-
-
-            // if(!onlyDefiendInfos.limits){
-
-                
-
-            //     for(const limit in user.limits){
-            //         // fuck wissam 
-            //         if(!user.limits  && user.limits[limit].isActive  ){
-                        
-            //         }
-    
-            //     }
-
-            // }
 
 
             updatedUser = makeFamilyMemberUser({

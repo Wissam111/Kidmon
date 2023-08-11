@@ -67,6 +67,8 @@ exports.makeActivityDb = ({ makeDb }) => {
                 session: transaction?.getSession()
             })
             .populate('user', 'firstName lastName phone')
+            .populate('from' , 'firstName lastName phone')
+            .populate('to' , 'firstName lastName phone')
             .lean()
 
         return idsMap(activites)

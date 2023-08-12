@@ -86,7 +86,7 @@ const FamilyMemberHomeViewModel = () => {
 
   const UpdateChart = async (startDate, endDate) => {
     const data = await getSpendings(startDate, endDate);
-
+    console.log(data);
     console.log(startDate, endDate);
     setWeekSpendings(data?.spendings);
   };

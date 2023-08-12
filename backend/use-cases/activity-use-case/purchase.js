@@ -73,7 +73,7 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
                     ...user.limits.monthly,
                     current: user.limits.monthly.isActive ? user.limits.monthly.current + finalPrice : user.limits.monthly.current,
                 },
-                isActive: limits.isActive
+                isActive: user.limits.isActive
             } 
 
             // have sufficient credits

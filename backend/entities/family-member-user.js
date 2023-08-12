@@ -81,6 +81,8 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
          *  }
          */
         for (let k in limits) {
+            if (k == 'isActive') continue
+
             if (limits[k].value < 0) {
                 throw new ValidationError(`A limit must be greater or equal than 0`)
             }
@@ -89,7 +91,7 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
                 throw new ValidationError(`current limit must be greater or equal than 0`)
             }
 
-            if (limits.isActive && limits[k].isActive  && limits[k].value < limits[k].current) {
+            if (limits.isActive && limits[k].isActive && limits[k].value < limits[k].current) {
                 throw new ValidationError(`A limit current must be lest or equal to the value`)
             }
 
@@ -107,7 +109,7 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
         limits.weekly = limits.weekly || { value: 0, current: 0, isActive: false }
         limits.monthly = limits.monthly || { value: 0, current: 0, isActive: false }
 
-        limits.isActive = limits.isActive || false 
+        limits.isActive = limits.isActive || false
 
         return Object.freeze({
             ...user,

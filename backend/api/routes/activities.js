@@ -55,9 +55,9 @@ router.get('/user-activities',
     activityController.getUserActivities)
 
 
-router.get('/user-spendings',
+router.post('/user-spendings',
     celebrate({
-        [Segments.QUERY]: Joi.object().keys({
+        [Segments.BODY]: Joi.object().keys({
             userId: Joi.string().required(),
             startDate: Joi.string().required(),
             endDate: Joi.string().required()
@@ -70,9 +70,9 @@ router.get('/user-spendings',
 
 
 
-router.get('/user-spending',
+router.post('/user-spending',
     celebrate({
-        [Segments.QUERY]: Joi.object().keys({
+        [Segments.BODY]: Joi.object().keys({
             userId: Joi.string().required(),
             date: Joi.string().required()
         })

@@ -643,7 +643,7 @@
       }
     },
     "/activities/user-spendings": {
-      "get": {
+      "post": {
         "tags": [
           "Acitvities"
         ],
@@ -655,19 +655,22 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "startDate": {
+                  "example": "any"
+                },
+                "endDate": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -681,7 +684,7 @@
       }
     },
     "/activities/user-spending": {
-      "get": {
+      "post": {
         "tags": [
           "Acitvities"
         ],
@@ -693,19 +696,22 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "timezone",
-            "in": "query",
-            "type": "string"
-          },
-          {
-            "name": "date",
-            "in": "query",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "example": "any"
+                },
+                "timezone": {
+                  "example": "any"
+                },
+                "date": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

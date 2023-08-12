@@ -18,6 +18,19 @@ const SpendingLimits = ({
     setSwitchValue(limits?.isActive);
   }, [limits]);
 
+  const Current = useCallback(
+    (limit) => {
+      if (limit?.current) {
+        return Math.floor(limit.current);
+      }
+
+      return 0;
+    },
+    [currentSpendings]
+  );
+
+  console.log(Math.floor(currentSpendings?.daily?.current));
+
   return (
     <View
       className="bg-white shadow-md rounded-md flex-grow-0  relative"
@@ -43,8 +56,8 @@ const SpendingLimits = ({
       <View className="items-center p-4">
         <LimitSwitch
           text="Daily"
-          minValue={currentSpendings?.daily?.current}
-          maxValue={50}
+          minValue={Current(currentSpendings?.daily)}
+          maxValue={50 + Current(currentSpendings?.daily)}
           limit={limits?.daily}
           handleLimitSwitchChange={handleLimitSwitchChange}
           handleSliderValueChange={handleSliderValueChange}
@@ -52,8 +65,8 @@ const SpendingLimits = ({
         <Spacer space={6} />
         <LimitSwitch
           text="Weekly"
-          minValue={currentSpendings?.weekly?.current}
-          maxValue={300}
+          minValue={Current(currentSpendings?.weekly)}
+          maxValue={100 + Current(currentSpendings?.weekly)}
           limit={limits?.weekly}
           handleLimitSwitchChange={handleLimitSwitchChange}
           handleSliderValueChange={handleSliderValueChange}
@@ -61,8 +74,8 @@ const SpendingLimits = ({
         <Spacer space={6} />
         <LimitSwitch
           text="Monthly"
-          minValue={currentSpendings?.monthly?.current}
-          maxValue={1200}
+          minValue={Current(currentSpendings?.monthly)}
+          maxValue={800 + Current(currentSpendings?.weekly)}
           limit={limits?.monthly}
           handleLimitSwitchChange={handleLimitSwitchChange}
           handleSliderValueChange={handleSliderValueChange}

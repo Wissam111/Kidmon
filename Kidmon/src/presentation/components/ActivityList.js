@@ -8,14 +8,18 @@ import BottomSheet, {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 
-const ActivityList = ({ activities, style, snap1, snap2 }) => {
+const ActivityList = ({ activities, style, snap1, snap2, isParent = true }) => {
   const bottomSheetRef = useRef(null);
 
   const snapPoints = useMemo(() => [snap1, snap2], []);
 
   const ActivityTitle = (item) => {
     const _type = item?.type.charAt(0).toUpperCase() + item?.type.slice(1);
-    return item?.user?.firstName + "-" + _type;
+    if (item?.type === "purchase") {
+      return item?.user?.firstName + "-" + _type;
+    }
+    const name = isParent ? item?.to?.firstName : item?.from?.firstName;
+    return name + "-" + _type;
   };
 
   return (

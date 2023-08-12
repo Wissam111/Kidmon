@@ -7,7 +7,7 @@ const DashboardViewModal = () => {
   useEffect(() => {
     const socket = io("http://localhost:4000", { transports: ["websocket"] });
     socket.on("dashboard", (data) => {
-      console.log(data);
+      // console.log(data);
       setDashboardStats(data);
     });
     return () => {

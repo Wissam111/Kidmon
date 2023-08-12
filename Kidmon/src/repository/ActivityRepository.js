@@ -7,8 +7,8 @@ const ActivityRepository = () => {
     return data;
   };
   const getSpendings = async (userId, startDate, endDate) => {
-    let url = `activities/user-spendings?userId=${userId}&startDate=${startDate}&endDate=${endDate}`;
-    const data = await apiCall(url);
+    let url = `activities/user-spendings`;
+    const data = await apiCall(url , 'POST', {userId, startDate, endDate});
     return data;
   };
 

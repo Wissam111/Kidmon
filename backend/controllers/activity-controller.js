@@ -101,7 +101,7 @@ const getFamilyMembersActivities = async (req, res , next) => {
 const getUserSpendings = async (req, res, next) => {
     // #swagger.tags = ['Acitvities']
     try {
-        const { userId, startDate, endDate } = req.query
+        const { userId, startDate, endDate } = req.body
         const spendings = await activityService.listUserSpendings({ userId: userId, startDate, endDate })
         res.status(200).json({
             message: 'fetched user spendings successfull',
@@ -118,7 +118,7 @@ const getUserSpendingAtDate = async (req, res, next) => {
     // #swagger.tags = ['Acitvities']
 
     try {
-        const { userId, timezone, date } = req.query
+        const { userId, timezone, date } = req.body
         const data = await activityService.getUserSpendingAtDate({ userId: userId, timezone, date })
         res.status(200).json({
             message: 'fetched user spending successfull',

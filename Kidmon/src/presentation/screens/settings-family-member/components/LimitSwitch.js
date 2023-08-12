@@ -2,7 +2,6 @@ import { View, Text, Switch, StyleSheet } from "react-native";
 import { useState, memo, useEffect } from "react";
 import { primaryColor } from "../../../styles";
 import { Slider } from "@miblanchard/react-native-slider";
-import { useFamilyMemberContext } from "../../../../hooks/useFamilyMemberContext";
 
 const LimitSwitch = ({
   text,
@@ -14,7 +13,6 @@ const LimitSwitch = ({
 }) => {
   // const currentValue = limit?.value ? limit.value : 0;
   const [previewValue, setPreviewValue] = useState(0);
-  const { familyMember } = useFamilyMemberContext();
   const toggleSwitch = (isActive) => {
     handleLimitSwitchChange(text.toLowerCase(), isActive);
   };
@@ -23,8 +21,7 @@ const LimitSwitch = ({
     handleSliderValueChange(text.toLowerCase(), Math.round(value));
   };
   useEffect(() => {
-    const currentValue = limit?.value ? limit.value : 0;
-    setPreviewValue(Math.round(currentValue));
+    setPreviewValue(Math.round(limit?.value));
   }, [limit]);
   return (
     <View className={`w-full  h-28`} style={{ backgroundColor: primaryColor }}>

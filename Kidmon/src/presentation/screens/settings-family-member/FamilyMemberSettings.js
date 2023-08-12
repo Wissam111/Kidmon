@@ -13,6 +13,7 @@ const FamilyMemberSettings = () => {
     childAllergies,
     handleAllergies,
     childLimits,
+    currentSpendings,
     updateUser,
     handleLimitSwitchChange,
     handleSliderValueChange,
@@ -32,6 +33,7 @@ const FamilyMemberSettings = () => {
           limits={childLimits}
           handleLimitSwitchChange={handleLimitSwitchChange}
           handleSliderValueChange={handleSliderValueChange}
+          currentSpendings={currentSpendings}
         />
         <Spacer space={10} />
         <Allergens

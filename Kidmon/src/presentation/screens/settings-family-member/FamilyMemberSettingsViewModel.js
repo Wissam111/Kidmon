@@ -10,6 +10,7 @@ const FamilyMemberSettingsViewModel = () => {
   const navigation = useNavigation();
   const userRepository = UserRepository();
   const [childAllergies, setChildAllergies] = useState(familyMember?.allergies);
+  const [currentSpendings, setCurrentSpendings] = useState([]);
   const { showSuccess, showError } = useAlertsContext();
 
   const updateUser = async () => {
@@ -35,8 +36,7 @@ const FamilyMemberSettingsViewModel = () => {
   };
 
   useEffect(() => {
-    console.log("----------------", familyMember?.limits?.isActive);
-    let limits = {
+    const limits = {
       isActive: familyMember?.limits?.isActive,
       daily: {
         value: familyMember?.limits?.daily?.value,
@@ -52,7 +52,20 @@ const FamilyMemberSettingsViewModel = () => {
       },
     };
 
+    const currentSpendings = {
+      daily: {
+        current: familyMember?.limits?.daily?.current,
+      },
+      weekly: {
+        current: familyMember?.limits?.weekly?.current,
+      },
+      monthly: {
+        current: familyMember?.limits?.monthly?.current,
+      },
+    };
+
     setChildLimits(limits);
+    setCurrentSpendings(currentSpendings);
   }, [familyMember]);
 
   const handleLimitSwitchChange = (type, isActive) => {
@@ -91,6 +104,7 @@ const FamilyMemberSettingsViewModel = () => {
     childAllergies,
     handleAllergies,
     childLimits,
+    currentSpendings,
     updateUser,
     handleLimitSwitchChange,
     handleSliderValueChange,

@@ -106,11 +106,7 @@ const ChildProfileFormViewModel = (isEditMode) => {
       setImage(result.assets[0].uri);
     }
   };
-  const handleAlert = (type, message) => {
-    const alertTitle = type === "success" ? "Success" : "Error";
-    const alertButton = { text: "OK", onPress: () => {} };
-    Alert.alert(alertTitle, message, [alertButton], { cancelable: false });
-  };
+
   const NavigateHome = () => {
     navigation.navigate("HomeParent");
   };

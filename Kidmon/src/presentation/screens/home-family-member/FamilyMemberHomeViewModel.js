@@ -51,6 +51,8 @@ const FamilyMemberHomeViewModel = () => {
         remainin: dailyLimit?.isActive
           ? Math.round(dailyLimit?.value - dailyLimit?.current)
           : null,
+
+        current: dailyLimit?.current,
       },
 
       weekly: {
@@ -60,6 +62,7 @@ const FamilyMemberHomeViewModel = () => {
         remainin: weeklyLimit?.isActive
           ? Math.round(weeklyLimit?.value - weeklyLimit?.current)
           : null,
+        current: weeklyLimit?.current,
       },
       monthly: {
         percentage: Math.round(
@@ -68,6 +71,7 @@ const FamilyMemberHomeViewModel = () => {
         remainin: monthlyLimit?.isActive
           ? Math.round(monthlyLimit?.value - monthlyLimit?.current)
           : null,
+        current: monthlyLimit?.current,
       },
     };
     setSpendingsLimits(spendingsLimits);

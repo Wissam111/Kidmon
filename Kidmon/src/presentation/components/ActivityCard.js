@@ -29,9 +29,7 @@ const ActivityCard = ({ image, text, datetime, onPress, totalPrice }) => {
           </Text>
         </View>
       </View>
-      <Text className="font-medium pr-2">
-        - {parseFloat(totalPrice?.toFixed(2))} P
-      </Text>
+      <Text className="font-medium pr-2">{totalPrice} P</Text>
     </View>
   );
 };

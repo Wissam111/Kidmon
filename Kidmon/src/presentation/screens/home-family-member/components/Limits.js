@@ -9,20 +9,23 @@ const Limits = ({ spendingsLimits }) => {
       <Spacer space={10} />
       <LimitProgress
         text={"Daily"}
-        percentage={spendingsLimits.daily.percentage}
-        remainin={spendingsLimits.daily.remainin}
+        percentage={spendingsLimits?.daily?.percentage}
+        remainin={spendingsLimits?.daily?.remainin}
+        current={spendingsLimits?.daily?.current}
       />
       <Spacer space={10} />
       <LimitProgress
         text={"Weakly"}
-        percentage={spendingsLimits.weekly.percentage}
-        remainin={spendingsLimits.weekly.remainin}
+        percentage={spendingsLimits?.weekly?.percentage}
+        remainin={spendingsLimits?.weekly?.remainin}
+        current={spendingsLimits?.weekly?.current}
       />
       <Spacer space={10} />
       <LimitProgress
         text={"Monthly"}
-        percentage={spendingsLimits.monthly.percentage}
-        remainin={spendingsLimits.monthly.remainin}
+        percentage={spendingsLimits?.monthly?.percentage}
+        remainin={spendingsLimits?.monthly?.remainin}
+        current={spendingsLimits?.monthly?.current}
       />
     </View>
   );

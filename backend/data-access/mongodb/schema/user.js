@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 
 const limitSchema = new mongoose.Schema({
-    value: { type: Number, default: 0 },
-    current: { type: Number , default: 0},
-    isActive: { type: Boolean , default: false},
+    value: { type: Number },
+    current: { type: Number },
+    isActive: { type: Boolean },
 }, { _id: false })
 
 
@@ -12,7 +12,7 @@ const limitsSchema = new mongoose.Schema({
     daily: { type: limitSchema },
     weekly: { type: limitSchema },
     monthly: { type: limitSchema },
-    isActive: { type: Boolean , default: false},
+    isActive: { type: Boolean },
 }, { _id: false })
 
 

@@ -60,24 +60,21 @@ const buildPurchaseUseCase = ({ userDb, activityDb, productDb }) => {
             }
 
             // update limits
-            const limits = user.limits && user.limits.isActive ? {
+            const limits = {
                 daily: {
                     ...user.limits.daily,
                     current: user.limits.daily.isActive ? user.limits.daily.current + finalPrice : user.limits.daily.current,
-                    isActive: true
                 },
                 weekly: {
                     ...user.limits.weekly,
                     current: user.limits.weekly.isActive ? user.limits.weekly.current + finalPrice : user.limits.weekly.current,
-                    isActive: true
                 },
                 monthly: {
                     ...user.limits.monthly,
                     current: user.limits.monthly.isActive ? user.limits.monthly.current + finalPrice : user.limits.monthly.current,
-                    isActive: true
                 },
-                isActive: true
-            } : undefined
+                isActive: limits.isActive
+            } 
 
             // have sufficient credits
             if (user.credits < finalPrice) {

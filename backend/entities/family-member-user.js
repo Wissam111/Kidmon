@@ -89,7 +89,7 @@ const buildMakeFamilyMemberUser = (Id, makeUser) => {
                 throw new ValidationError(`current limit must be greater or equal than 0`)
             }
 
-            if (limits[k].current && limits[k].value < limits[k].current) {
+            if (limits.isActive && limits[k].isActive  && limits[k].value < limits[k].current) {
                 throw new ValidationError(`A limit current must be lest or equal to the value`)
             }
 

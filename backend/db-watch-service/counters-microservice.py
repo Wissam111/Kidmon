@@ -64,14 +64,6 @@ def update_purchases_count(doc):
         
 
 
-# update products overall count
-# def update_products_count():
-#     redisClient.incr('PRODUCTS_COUNT')
-
-
-# # update users count
-def update_user_counter(update):
-    redisClient.incr('USER_COUNT')
 
 
 
@@ -93,6 +85,7 @@ def watch_activities_collection():
             recent_product_sold(doc)
             update_products_sold_count(doc)
             update_categories_counters(doc)
+            update_purchases_count(doc)
             redisClient.publish('dashboard:update',
                                 'dashboard updated successfully')
 
@@ -128,6 +121,7 @@ def watch_products_collection():
                             'dashboard updated successfully')
 
     
+
 
 
 t1 = Thread(target= watch_activities_collection)

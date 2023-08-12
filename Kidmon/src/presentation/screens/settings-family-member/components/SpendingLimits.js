@@ -1,11 +1,12 @@
 import { View, Text, Switch, Image } from "react-native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Spacer from "../../../components/Spacer";
 import LimitSwitch from "./LimitSwitch";
 const SpendingLimits = ({
   limits,
   handleLimitSwitchChange,
   handleSliderValueChange,
+  currentSpendings,
 }) => {
   const [switchValue, setSwitchValue] = useState(null);
   const toggleSwitch = (value) => {
@@ -15,7 +16,7 @@ const SpendingLimits = ({
 
   useEffect(() => {
     setSwitchValue(limits?.isActive);
-  }, []);
+  }, [limits]);
 
   return (
     <View
@@ -43,6 +44,7 @@ const SpendingLimits = ({
         <LimitSwitch
           text="Daily"
           minValue={0}
+          minValues={currentSpendings?.daily?.current}
           maxValue={50}
           limit={limits?.daily}
           handleLimitSwitchChange={handleLimitSwitchChange}
@@ -51,7 +53,7 @@ const SpendingLimits = ({
         <Spacer space={6} />
         <LimitSwitch
           text="Weekly"
-          minValue={0}
+          minValue={currentSpendings?.weekly?.current}
           maxValue={300}
           limit={limits?.weekly}
           handleLimitSwitchChange={handleLimitSwitchChange}
@@ -60,7 +62,7 @@ const SpendingLimits = ({
         <Spacer space={6} />
         <LimitSwitch
           text="Monthly"
-          minValue={0}
+          minValue={currentSpendings?.monthly?.current}
           maxValue={1200}
           limit={limits?.monthly}
           handleLimitSwitchChange={handleLimitSwitchChange}

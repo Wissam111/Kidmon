@@ -51,7 +51,7 @@ const data3 = [
 ];
 
 const Dashboard = () => {
-  const {} = DashboardViewModal();
+  const { dashboardStats } = DashboardViewModal();
   const { user } = useAuthContext().authData;
 
   return (
@@ -63,7 +63,7 @@ const Dashboard = () => {
           <div className="counters">
             <DashboardCard
               text="Users"
-              count={3567}
+              count={dashboardStats?.usersCount}
               image={require("../../../assets/icons/user.png")}
             />
             <DashboardCard
@@ -73,7 +73,7 @@ const Dashboard = () => {
             />
             <DashboardCard
               text="Products"
-              count={400}
+              count={dashboardStats?.productsCount}
               image={require("../../../assets/icons/groceries.png")}
             />
             <DashboardCard

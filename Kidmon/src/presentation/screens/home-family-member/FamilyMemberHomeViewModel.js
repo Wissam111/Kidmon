@@ -9,6 +9,9 @@ const FamilyMemberHomeViewModel = () => {
   const { familyMember } = useFamilyMemberContext();
   const [weekSpendings, setWeekSpendings] = useState([]);
   const { setLoading } = useLoadingContext();
+  const currentDate = new Date();
+  const startWeekDate = format(startOfWeek(currentDate), "yyyy-MM-dd");
+  const endOfWeekData = format(endOfWeek(currentDate), "yyyy-MM-dd");
   const [spendingsLimits, setSpendingsLimits] = useState({
     daily: {
       percentage: 0,
@@ -24,19 +27,6 @@ const FamilyMemberHomeViewModel = () => {
     },
   });
 
-  const currentDate = new Date();
-  const startWeekDate = format(startOfWeek(currentDate), "yyyy-MM-dd");
-  const endOfWeekData = format(endOfWeek(currentDate), "yyyy-MM-dd");
-  const startMonthDate = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth(),
-    1
-  );
-  const endMonthDate = new Date(
-    currentDate.getFullYear(),
-    currentDate.getMonth() + 1,
-    0
-  );
   const getSpendings = async (startDate, endDate) => {
     try {
       const data = await activityRepository.getSpendings(
@@ -51,50 +41,32 @@ const FamilyMemberHomeViewModel = () => {
     }
   };
 
-  const updateSpendings = async (startDate, endDate) => {
-    const data = await getSpendings(startDate, endDate);
-    const filteredSpendings = data?.spendings ? data?.spendings : [];
-    const currentDay = currentDate.getDate();
-    const dailySpendings = filteredSpendings
-      .filter((spending) => spending?.day === currentDay)
-      .reduce((total, spending) => total + spending?.totalSpendings, 0);
-
-    // Calculate the total spending of the current week
-    const startOfWeekDate = new Date().getDay() === 0 ? 7 : new Date().getDay();
-    const weeklySpendings = filteredSpendings
-      .filter(
-        (spending) =>
-          spending.day >= currentDay - startOfWeekDate + 1 &&
-          spending.day <= currentDay
-      )
-      .reduce((total, spending) => total + spending?.totalSpendings, 0);
-
-    // Calculate the total spending of the current month
-    const monthlySpendings = filteredSpendings.reduce(
-      (total, spending) => total + spending?.totalSpendings,
-      0
-    );
+  const updateSpendings = () => {
     const dailyLimit = familyMember?.limits?.daily;
     const weeklyLimit = familyMember?.limits?.weekly;
     const monthlyLimit = familyMember?.limits?.monthly;
     const spendingsLimits = {
       daily: {
-        percentage: Math.round((dailySpendings / dailyLimit?.value) * 100),
+        percentage: Math.round((dailyLimit?.current / dailyLimit?.value) * 100),
         remainin: dailyLimit?.isActive
-          ? Math.round(dailyLimit?.value - dailySpendings)
+          ? Math.round(dailyLimit?.value - dailyLimit?.current)
           : null,
       },
 
       weekly: {
-        percentage: Math.round((weeklySpendings / weeklyLimit?.value) * 100),
+        percentage: Math.round(
+          (weeklyLimit?.current / weeklyLimit?.value) * 100
+        ),
         remainin: weeklyLimit?.isActive
-          ? Math.round(weeklyLimit?.value - weekSpendings)
+          ? Math.round(weeklyLimit?.value - weeklyLimit?.current)
           : null,
       },
       monthly: {
-        percentage: Math.round((monthlySpendings / monthlyLimit?.value) * 100),
+        percentage: Math.round(
+          (monthlyLimit?.current / monthlyLimit?.value) * 100
+        ),
         remainin: monthlyLimit?.isActive
-          ? Math.round(monthlyLimit?.value - monthlySpendings)
+          ? Math.round(monthlyLimit?.value - monthlyLimit?.current)
           : null,
       },
     };
@@ -115,7 +87,7 @@ const FamilyMemberHomeViewModel = () => {
     const FamilyMemberHomeInit = async () => {
       setLoading(true);
       await UpdateChart(startWeekDate, endOfWeekData);
-      // await updateSpendings(startMonthDate, endMonthDate);
+      updateSpendings();
       setLoading(false);
     };
 

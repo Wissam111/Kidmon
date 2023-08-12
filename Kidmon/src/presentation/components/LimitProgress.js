@@ -34,7 +34,7 @@ const LimitProgress = ({ text, percentage, remainin, current }) => {
         >
           <View
             className={`${getBackgroundColor(percentage)} h-5 rounded-xl`}
-            style={{ width: `${percentage}%` }}
+            style={{ width: `${remainin ? percentage : "20%"}%` }}
           >
             <Badge
               tintColor="white"

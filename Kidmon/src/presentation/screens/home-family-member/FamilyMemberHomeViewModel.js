@@ -3,6 +3,8 @@ import { useFamilyMemberContext } from "../../../hooks/useFamilyMemberContext";
 import { startOfWeek, endOfWeek, format } from "date-fns";
 import { useEffect, useState } from "react";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
+import moment from "moment";
+
 import { Alert } from "react-native";
 const FamilyMemberHomeViewModel = () => {
   const activityRepository = ActivityRepository();
@@ -10,8 +12,13 @@ const FamilyMemberHomeViewModel = () => {
   const [weekSpendings, setWeekSpendings] = useState([]);
   const { setLoading } = useLoadingContext();
   const currentDate = new Date();
-  const startWeekDate = format(startOfWeek(currentDate), "yyyy-MM-dd");
-  const endOfWeekData = format(endOfWeek(currentDate), "yyyy-MM-dd");
+  // const startWeekDate = format(startOfWeek(currentDate), "yyyy-MM-dd");
+  // const startWeekDate = startOfWeek(currentDate);
+  // const endOfWeekData = endOfWeek(currentDate);
+  const now = moment();
+  const startWeekDate = now.clone().startOf("week");
+  const endOfWeekData = now.clone().endOf("week");
+
   const [spendingsLimits, setSpendingsLimits] = useState({
     daily: {
       percentage: 0,
@@ -79,6 +86,8 @@ const FamilyMemberHomeViewModel = () => {
 
   const UpdateChart = async (startDate, endDate) => {
     const data = await getSpendings(startDate, endDate);
+
+    console.log(startDate, endDate);
     setWeekSpendings(data?.spendings);
   };
 

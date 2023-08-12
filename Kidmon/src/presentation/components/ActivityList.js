@@ -22,6 +22,14 @@ const ActivityList = ({ activities, style, snap1, snap2, isParent = true }) => {
     return name + "-" + _type;
   };
 
+  const ActivityAmount = (item) => {
+    if (item?.type === "purchase") {
+      return "-" + item?.price;
+    }
+    const amount = parseFloat(item?.amount?.toFixed(2));
+    return isParent ? "-" + amount : "+" + amount;
+  };
+
   return (
     <BottomSheet
       style={styles.sheet}
@@ -34,7 +42,7 @@ const ActivityList = ({ activities, style, snap1, snap2, isParent = true }) => {
           <View>
             <Text className="text-lg font-medium">Activity</Text>
             <Text className="text-xs color-[#00000075]">
-              All family Members
+              {isParent ? "All family Members" : "Child activities"}
             </Text>
           </View>
 
@@ -49,7 +57,7 @@ const ActivityList = ({ activities, style, snap1, snap2, isParent = true }) => {
           renderItem={({ item }) => (
             <ActivityCard
               text={ActivityTitle(item)}
-              totalPrice={item.price}
+              totalPrice={ActivityAmount(item)}
               datetime={item.createdAt}
             />
           )}

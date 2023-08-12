@@ -43,8 +43,7 @@ const SpendingLimits = ({
       <View className="items-center p-4">
         <LimitSwitch
           text="Daily"
-          minValue={0}
-          minValues={currentSpendings?.daily?.current}
+          minValue={currentSpendings?.daily?.current}
           maxValue={50}
           limit={limits?.daily}
           handleLimitSwitchChange={handleLimitSwitchChange}

@@ -40,6 +40,7 @@ const Profile = () => {
         activities={activities}
         snap1={"60%"}
         snap2={"95%"}
+        isParent={false}
       />
       <NavBar />
     </View>

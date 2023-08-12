@@ -35,24 +35,35 @@ const FamilyMemberSettingsViewModel = () => {
   };
 
   useEffect(() => {
+    console.log("----------------", familyMember?.limits?.isActive);
     let limits = {
+      isActive: familyMember?.limits?.isActive,
       daily: {
-        value: familyMember.limits?.daily?.value,
-        isActive: familyMember.limits?.daily?.isActive,
+        value: familyMember?.limits?.daily?.value,
+        isActive: familyMember?.limits?.daily?.isActive,
       },
       weekly: {
-        value: familyMember.limits?.weekly?.value,
-        isActive: familyMember.limits?.weekly?.isActive,
+        value: familyMember?.limits?.weekly?.value,
+        isActive: familyMember?.limits?.weekly?.isActive,
       },
       monthly: {
-        value: familyMember.limits?.monthly?.value,
-        isActive: familyMember.limits?.monthly?.isActive,
+        value: familyMember?.limits?.monthly?.value,
+        isActive: familyMember?.limits?.monthly?.isActive,
       },
     };
+
     setChildLimits(limits);
   }, [familyMember]);
 
   const handleLimitSwitchChange = (type, isActive) => {
+    if (type === "ALL") {
+      setChildLimits((prevLimits) => ({
+        ...prevLimits,
+        isActive: isActive,
+      }));
+      return;
+    }
+
     setChildLimits((prevLimits) => ({
       ...prevLimits,
       [type]: {

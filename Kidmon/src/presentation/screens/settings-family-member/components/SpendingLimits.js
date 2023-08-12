@@ -1,5 +1,5 @@
 import { View, Text, Switch, Image } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Spacer from "../../../components/Spacer";
 import LimitSwitch from "./LimitSwitch";
 const SpendingLimits = ({
@@ -7,10 +7,15 @@ const SpendingLimits = ({
   handleLimitSwitchChange,
   handleSliderValueChange,
 }) => {
-  const [switchValue, setSwitchValue] = useState(true);
+  const [switchValue, setSwitchValue] = useState(null);
   const toggleSwitch = (value) => {
     setSwitchValue(value);
+    handleLimitSwitchChange("ALL", value);
   };
+
+  useEffect(() => {
+    setSwitchValue(limits?.isActive);
+  }, []);
 
   return (
     <View

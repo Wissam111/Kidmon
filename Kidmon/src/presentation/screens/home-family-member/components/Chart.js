@@ -2,6 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { BarChart } from "react-native-gifted-charts";
 import { primaryColor } from "../../../styles";
+import moment from "moment";
 const Chart = ({ spendings }) => {
   const [chartData, setChartData] = useState([
     { value: 0, label: "Su" },
@@ -12,21 +13,24 @@ const Chart = ({ spendings }) => {
     { value: 0, label: "Fr" },
     { value: 0, label: "Sa" },
   ]);
+
   const today = new Date().getDay();
+
+
   useEffect(() => {
     const updateChart = () => {
       const tempData = [...chartData];
-      spendings.forEach((spending) => {
-        const day = spending.day;
-        if (day >= today) {
-          const index = day % 7; // Adding 1 and taking modulo 7 to match the chartData index
+      spendings.forEach((spending , i) => {
+          const dateStr = `${spending.year}-${spending.month}-${spending.day}`
+          const d = moment(dateStr,'yyyy-MM-DD')
+          const index = d.weekday() % 7; // Adding 1 and taking modulo 7 to match the chartData index
           tempData[index].value = spending.totalSpendings;
-        }
       });
       setChartData(tempData);
     };
     updateChart();
   }, [spendings]);
+
 
   return (
     <View style={styles.style}>

@@ -52,6 +52,9 @@
   box-shadow: 20px 6px 30px rgba(0, 0, 0, 0.17);
   border-radius: 6px;
   padding: 8px;
+  overflow-y: scroll;
+  height: 40.5em;
+  /* border: 2px solid red; */
 }
 
 .recent-added-products h3 {

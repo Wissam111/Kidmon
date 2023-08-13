@@ -7,31 +7,15 @@ import DashboardHeader from "../../components/DashboardHeader/DashboardHeader";
 import ChartView from "../../components/ChartView/ChartView";
 import ProductRow from "./components/ProductRow";
 import DashboardViewModal from "./DashboardViewModal";
-const recentSoldProducts = [
-  {
-    title: "Bsli Flafel",
-    amount: 500,
-    img: require("../../../assets/imgs/bsli2.jpg"),
-  },
-  {
-    title: "Bsli Gril",
-    amount: 499,
-    img: require("../../../assets/imgs/bsli1.jpg"),
-  },
-  {
-    title: "Green Doretos",
-    amount: 300,
-    img: require("../../../assets/imgs/dor1.jpg"),
-  },
-];
+import { useMemo } from "react";
 
 const data1 = [
-  ["Day", "Amnount"],
-  ["Pizza", 12],
-  ["Coffe", 54],
-  ["Black Coffe", 122],
-  ["Bamba", 155],
-  ["Doretos", 250],
+  ["Day", "amount"],
+  ["Pizza", 0],
+  ["Coffe", 0],
+  ["Black Coffe", 0],
+  ["Bamba", 0],
+  ["Doretos", 0],
 ];
 
 const data2 = [
@@ -54,6 +38,24 @@ const Dashboard = () => {
   const { dashboardStats } = DashboardViewModal();
   const { user } = useAuthContext().authData;
 
+  const TopSholdProducts = useMemo(() => {
+    const _data = dashboardStats?.topSoldProducts?.map((item) => [
+      item.key,
+      parseInt(item.value),
+    ]);
+    return [["Day", "amount"]].concat(_data);
+  }, [dashboardStats]);
+
+  const CategoryDistribution = useMemo(() => {
+    if (!dashboardStats?.categoriesCounters) return;
+    return [
+      ["All", "All"],
+      ...Object.entries(dashboardStats?.categoriesCounters).map(
+        ([category, value]) => [category, parseInt(value)]
+      ),
+    ];
+    // return data3;
+  }, [dashboardStats]);
   return (
     <div className="page-container">
       <div className="dashboard-container">
@@ -68,7 +70,7 @@ const Dashboard = () => {
             />
             <DashboardCard
               text="Sold Products"
-              count={4999}
+              count={dashboardStats?.soldProductsCount}
               image={require("../../../assets/icons/sold.png")}
             />
             <DashboardCard
@@ -83,7 +85,7 @@ const Dashboard = () => {
             />
             <DashboardCard
               text="Purchases"
-              count={560564}
+              count={dashboardStats?.purchasesCount}
               image={require("../../../assets/icons/purchase.png")}
             />
           </div>
@@ -93,7 +95,7 @@ const Dashboard = () => {
               <div className="counters-charts">
                 <ChartView
                   chartType="ColumnChart"
-                  chartData={data1}
+                  chartData={TopSholdProducts}
                   options={chartOptions}
                   title="Top Sold Products"
                   width="400px"
@@ -102,7 +104,7 @@ const Dashboard = () => {
 
                 <ChartView
                   chartType="PieChart"
-                  chartData={data3}
+                  chartData={CategoryDistribution}
                   title="Product Category Distribution"
                   width="400px"
                   height={"260px"}
@@ -120,11 +122,16 @@ const Dashboard = () => {
             </div>
 
             <div className="recent-added-products">
-              <h3>Recently Added Products</h3>
+              <h3>Recently Sold Proudcts</h3>
               <div className="dashboard-recent-products">
-                {recentSoldProducts.map((recent) => (
-                  <ProductRow product={recent} />
-                ))}
+                {[...new Set(dashboardStats?.recentSoldProducts)]?.map(
+                  (recent) => (
+                    <ProductRow
+                      product={JSON.parse(recent)}
+                      key={JSON.parse(recent)._id}
+                    />
+                  )
+                )}
               </div>
             </div>
           </div>

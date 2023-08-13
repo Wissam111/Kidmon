@@ -24,7 +24,7 @@ const ActivityList = ({ activities, style, snap1, snap2, isParent = true }) => {
 
   const ActivityAmount = (item) => {
     if (item?.type === "purchase") {
-      return "-" + item?.price;
+      return "-" + parseFloat(item?.price?.toFixed(2));
     }
     const amount = parseFloat(item?.amount?.toFixed(2));
     return isParent ? "-" + amount : "+" + amount;

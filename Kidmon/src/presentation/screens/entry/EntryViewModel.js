@@ -57,9 +57,9 @@ const EntryViewModel = () => {
       return;
     }
     dispatch({ type: "LOGIN", payload: data });
-    navigation.navigate("HomeParent");
-    storeData(data);
+    await storeData(data);
     setShowOTP(true);
+    navigation.navigate("HomeParent");
   };
 
   const storeData = async (authData) => {

@@ -52,8 +52,8 @@ exports.makeActivityDb = ({ makeDb }) => {
                 session: transaction?.getSession()
             })
             .populate('user', 'firstName lastName phone')
-            .populate('from' , 'firstName lastName phone')
-            .populate('to' , 'firstName lastName phone')
+            .populate('from', 'firstName lastName phone')
+            .populate('to', 'firstName lastName phone')
             .lean()
 
         return idsMap(activites)
@@ -70,8 +70,8 @@ exports.makeActivityDb = ({ makeDb }) => {
                 session: transaction?.getSession()
             })
             .populate('user', 'firstName lastName phone')
-            .populate('from' , 'firstName lastName phone')
-            .populate('to' , 'firstName lastName phone')
+            .populate('from', 'firstName lastName phone')
+            .populate('to', 'firstName lastName phone')
             .lean()
 
         return idsMap(activites)
@@ -163,6 +163,7 @@ exports.makeActivityDb = ({ makeDb }) => {
 
     async function findUserSpendings({ id: _id, start_date, end_date, timezone, transaction }) {
         await makeDb()
+
         const activites = await Activity
             .aggregate([
                 {
@@ -172,11 +173,6 @@ exports.makeActivityDb = ({ makeDb }) => {
                         createdAt: { $gte: new Date(start_date), $lte: new Date(end_date) },
                     }
                 },
-
-                {
-                    $sort: { createdAt: -1 }
-                },
-
                 {
                     $group: {
                         _id: {
@@ -202,6 +198,13 @@ exports.makeActivityDb = ({ makeDb }) => {
                         totalSpendings: { $sum: '$price' },
                         count: { $count: {} }
                     }
+                },
+
+                {
+                    $sort: { _id: 1 }
+                },
+                {
+                    $limit : 7
                 },
                 {
                     $project: {

@@ -26,14 +26,14 @@ def update_sold_product_counter(doc):
     for item in doc["items"]:
         product = get_product_by_id(item["_id"])
         redisClient.hincrby('PRODUCTS_SOLD_COUNTERS',
-                             f'{product["title"]}:{item["_id"]}', item["amount"])
+                             product["title"], item["amount"])
 
 
 # top products sold
 def update_top_products_sold(doc):
     for item in doc["items"]:
         product = get_product_by_id(item["_id"])
-        redisClient.zincrby('TOP_SOLD_PRODUCTS', item["amount"], f'{product["title"]}:{item["_id"]}')
+        redisClient.zincrby('TOP_SOLD_PRODUCTS', item["amount"], product["title"])
 
 
 #  sold product categories counter
@@ -49,7 +49,7 @@ def recent_product_sold(doc):
     for item in doc["items"]:
         product = get_product_by_id(item["_id"])
         redisClient.lpush('RECENT_SOLD_PRODUCTS', json.dumps(
-            {"title": product["title"], "_id": item["_id"]}))
+            {"title": product["title"], "_id": item["_id"]  , 'image': product["image"]}))
 
 
 # update products sold count

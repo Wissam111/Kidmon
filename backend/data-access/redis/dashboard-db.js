@@ -12,6 +12,15 @@ const REDIES_KEYS = {
 }
 
 
+const makePairsFromArray = (array) => {
+    arr = []
+    for (let i = 0; i < array.length - 1; i += 2) {
+        arr.push({ key: array[i], value: array[i + 1] })
+    }
+    return arr
+}
+
+
 exports.makeDashboardDb = ({ makeDb }) => {
 
     return Object.freeze({
@@ -23,7 +32,6 @@ exports.makeDashboardDb = ({ makeDb }) => {
 
         const recentSoldProducts = await redisClient.lRange(REDIES_KEYS.recentSoldProducts, 0, -1)
         const productsSoldCounters = await redisClient.hGetAll(REDIES_KEYS.productsSoldCounters)
-        const topSoldProducts = await redisClient.zRange(REDIES_KEYS.topSoldProducts, 0, 5)
         const categoriesCounters = await redisClient.hGetAll(REDIES_KEYS.categoriesCounters)
 
         const soldProductsCount =+ await redisClient.get(REDIES_KEYS.soldProductsCount) || 0
@@ -31,6 +39,7 @@ exports.makeDashboardDb = ({ makeDb }) => {
         const usersCount =+ await redisClient.get(REDIES_KEYS.usersCount) || 0
         const productsCount =+ await redisClient.get(REDIES_KEYS.productsCount) || 0
 
+        const topSoldProducts = makePairsFromArray(await redisClient.sendCommand(['ZRANGE', REDIES_KEYS.topSoldProducts, '0', '5', 'withscores']))
 
         return {
             recentSoldProducts,

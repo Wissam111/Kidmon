@@ -63,11 +63,9 @@ def update_products_sold_count(doc):
 # update purchases count
 def update_purchases_count(doc):
     redisClient.incr('PURCHASES_COUNT')
-
     date = doc['createdAt']
     date_time = datetime.strftime(date,"%d/%m/%Y, %H:%M")
     redisClient.zincrby(f"PURCHASES_BY_HOUR:{datetime.strftime(date,'%d/%m/%Y')}", 1, date_time)
-    print(date_time)
 
 
 def watch_activities_collection():

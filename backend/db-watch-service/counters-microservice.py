@@ -2,6 +2,7 @@ import redis
 import pymongo
 import json
 from threading import Thread
+from datetime import datetime
 
 
 # mongodb database
@@ -26,14 +27,15 @@ def update_sold_product_counter(doc):
     for item in doc["items"]:
         product = get_product_by_id(item["_id"])
         redisClient.hincrby('PRODUCTS_SOLD_COUNTERS',
-                             product["title"], item["amount"])
+                            product["title"], item["amount"])
 
 
 # top products sold
 def update_top_products_sold(doc):
     for item in doc["items"]:
         product = get_product_by_id(item["_id"])
-        redisClient.zincrby('TOP_SOLD_PRODUCTS', item["amount"], product["title"])
+        redisClient.zincrby('TOP_SOLD_PRODUCTS',
+                            item["amount"], product["title"])
 
 
 #  sold product categories counter
@@ -41,7 +43,7 @@ def update_categories_counters(doc):
     for item in doc["items"]:
         product = get_product_by_id(item["_id"])
         redisClient.hincrby('CATEGORIES_COUNTERS',
-                            product["category"],item["amount"], )
+                            product["category"], item["amount"], )
 
 
 # recent products sold
@@ -49,7 +51,7 @@ def recent_product_sold(doc):
     for item in doc["items"]:
         product = get_product_by_id(item["_id"])
         redisClient.lpush('RECENT_SOLD_PRODUCTS', json.dumps(
-            {"title": product["title"], "_id": item["_id"]  , 'image': product["image"]}))
+            {"title": product["title"], "_id": item["_id"], 'image': product["image"]}))
 
 
 # update products sold count
@@ -58,16 +60,12 @@ def update_products_sold_count(doc):
         redisClient.incrby('SOLD_PRODUCTS_COUNT', item["amount"])
 
 
-# update purchases count 
+# update purchases count
 def update_purchases_count(doc):
     redisClient.incr('PURCHASES_COUNT')
-        
-
-
-
-
-
-
+    date = doc['createdAt']
+    date_time = datetime.strftime(date,"%d/%m/%Y, %H:%M")
+    redisClient.zincrby(f"PURCHASES_BY_HOUR:{datetime.strftime(date,'%d/%m/%Y')}", 1, date_time)
 
 
 def watch_activities_collection():
@@ -89,7 +87,6 @@ def watch_activities_collection():
             redisClient.publish('dashboard:update',
                                 'dashboard updated successfully')
 
-    
 
 def watch_users_collection():
     # watch for changes
@@ -103,8 +100,6 @@ def watch_users_collection():
         redisClient.incr('USERS_COUNT')
         redisClient.publish('dashboard:update',
                             'dashboard updated successfully')
-
-    
 
 
 def watch_products_collection():
@@ -120,11 +115,8 @@ def watch_products_collection():
         redisClient.publish('dashboard:update',
                             'dashboard updated successfully')
 
-    
 
-
-
-t1 = Thread(target= watch_activities_collection)
+t1 = Thread(target=watch_activities_collection)
 t2 = Thread(target=watch_products_collection)
 t3 = Thread(target=watch_users_collection)
 

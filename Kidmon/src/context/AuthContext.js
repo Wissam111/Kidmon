@@ -1,29 +1,20 @@
 import { createContext, useReducer, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
   const authData = action.payload;
   switch (action.type) {
     case "LOGIN":
-      return { user: authData.user, token: authData.token };
+      return { user: authData.user, token: authData.token, isLoggedIn: true };
     case "SIGNUP":
-      return { user: authData.user, token: authData.token };
+      return { user: authData.user, token: authData.token, isLoggedIn: true };
     case "LOGOUT":
-      handleLogout();
-      return { user: null, token: null };
+      // handleLogout();
+      return { user: null, token: null, isLoggedIn: false };
     case "UPDATE_USER":
       return { user: authData };
-  }
-};
-
-const handleLogout = async () => {
-  try {
-    await AsyncStorage.removeItem("user");
-    await AsyncStorage.removeItem("token");
-  } catch (e) {
-    console.log("Error removing data:", e);
   }
 };
 
@@ -31,55 +22,11 @@ export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
     token: null,
+    isLoggedIn: false,
   });
-  const navigation = useNavigation();
-
-  const getData = async () => {
-    try {
-      const userJson = await AsyncStorage.getItem("user");
-      const tokenJson = await AsyncStorage.getItem("token");
-      return {
-        user: userJson ? JSON.parse(userJson) : null,
-        token: tokenJson ? JSON.parse(tokenJson) : null,
-      };
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    // const fetchData = async () => {
-    //   const authData = await getData();
-    //   console.log(authData);
-    //   if (authData?.user && authData?.token) {
-    //     dispatch({ type: "LOGIN", payload: authData });
-    //     navigation.navigate("Splash", { isLoggedIn: true });
-    //     // navigation.navigate("Splash");
-    //   } else {
-    //     navigation.navigate("Splash", { isLoggedIn: false });
-    //   }
-    // };
-    // fetchData();
-    // UserInStorage();
-  }, []);
-
-  const CheckUserInStorage = async () => {
-    const fetchData = async () => {
-      const authData = await getData();
-      console.log(authData);
-      if (authData?.user && authData?.token) {
-        dispatch({ type: "LOGIN", payload: authData });
-        navigation.navigate("HomeParent", { isLoggedIn: true });
-        // navigation.navigate("Splash");
-      } else {
-        navigation.navigate("Entry", { isLoggedIn: false });
-      }
-    };
-    await fetchData();
-  };
 
   return (
-    <AuthContext.Provider value={{ ...state, dispatch, CheckUserInStorage }}>
+    <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );

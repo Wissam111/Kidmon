@@ -4,19 +4,28 @@ import { LoadingContextProvider } from "./src/context/LoadingContext";
 import { StatusBar } from "expo-status-bar";
 import { I18nManager, View } from "react-native";
 import Navigation from "./src/presentation/Navigation";
-
-// I18nManager.allowRTL(true);
-// I18nManager.forceRTL();
+import { ToastProvider } from "react-native-toast-notifications";
+import { AuthContextProvider } from "./src/context/AuthContext";
+import { FamilyMemberContextProvider } from "./src/context/FamilyMemberContext";
+import { AlertsContextProvider } from "./src/context/AlertsContext";
 
 export default function App() {
   return (
     <TailwindProvider>
-      <LoadingContextProvider>
-        <View style={{ flex: 1, position: "relative" }}>
-          <StatusBar barStyle="light-content" />
-          <Navigation />
-        </View>
-      </LoadingContextProvider>
+      <ToastProvider offsetTop={30}>
+        <LoadingContextProvider>
+          <AlertsContextProvider>
+            <AuthContextProvider>
+              <FamilyMemberContextProvider>
+                <View style={{ flex: 1, position: "relative" }}>
+                  <StatusBar barStyle="light-content" />
+                  <Navigation />
+                </View>
+              </FamilyMemberContextProvider>
+            </AuthContextProvider>
+          </AlertsContextProvider>
+        </LoadingContextProvider>
+      </ToastProvider>
     </TailwindProvider>
   );
 }

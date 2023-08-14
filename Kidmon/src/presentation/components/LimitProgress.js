@@ -46,6 +46,7 @@ const LimitProgress = ({ text, percentage, remainin, current }) => {
                 fontSize: 5,
                 color: "white",
               }}
+              max={2000}
               label={Current}
             />
           </View>

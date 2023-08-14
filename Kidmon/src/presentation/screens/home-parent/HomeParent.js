@@ -9,12 +9,18 @@ import { white } from "../../styles";
 import { useEffect } from "react";
 import ChargeBalanceModal from "../../components/ChargeBalanceModal";
 const HomeParent = ({ navigation }) => {
-  const { user, activities, activeModal, setActiveModal, chargeBalance } =
-    HomeParentViewModel({ navigation });
+  const {
+    user,
+    activities,
+    activeModal,
+    setActiveModal,
+    chargeBalance,
+    handleLogout,
+  } = HomeParentViewModel({ navigation });
 
   return (
     <View style={{ flex: 1, backgroundColor: white }}>
-      <Header firstName={user?.firstName} />
+      <Header firstName={user?.firstName} handleLogout={handleLogout} />
 
       <Spacer space={20} />
       <View className="w-full items-center">

@@ -5,6 +5,7 @@ import UserRepository from "../../../repository/UserRepository";
 import { useLoadingContext } from "../../../hooks/useLoadingContext";
 import { Alert } from "react-native";
 import { useAlertsContext } from "../../../hooks/useAlertsContext";
+import { useFocusEffect } from "@react-navigation/native";
 const HomeParentViewModel = ({ navigation }) => {
   const { user, dispatch } = useAuthContext();
   const [activeModal, setActiveModal] = useState(false);
@@ -14,7 +15,6 @@ const HomeParentViewModel = ({ navigation }) => {
   const { setLoading } = useLoadingContext();
   const [refreshKey, setRefreshKey] = useState(0);
   const { showSuccess, showError } = useAlertsContext();
-
   const getUser = async (userId) => {
     try {
       const data = await userRepository.getUser(userId);
@@ -43,6 +43,7 @@ const HomeParentViewModel = ({ navigation }) => {
     if (!data?.user) {
       return;
     }
+    console.log("update user", data.user);
     dispatch({ type: "UPDATE_USER", payload: data.user });
   };
 
@@ -71,32 +72,38 @@ const HomeParentViewModel = ({ navigation }) => {
   const refresh = () => {
     setRefreshKey((oldKey) => oldKey + 1);
   };
+
+  const HomeParentInit = async () => {
+    setLoading(true);
+    await UpdateUser(user.id);
+    await getActivities();
+    setLoading(false);
+  };
   useEffect(() => {
-    const HomeParentInit = async () => {
-      setLoading(true);
-      await UpdateUser(user.id);
-      await getActivities();
-      setLoading(false);
-    };
-
-    const unsubscribe = navigation.addListener("focus", () => {
-      HomeParentInit();
-    });
-
-    return unsubscribe;
-  }, [navigation]);
-
-  useEffect(() => {
-    const HomeParentInit = async () => {
-      setLoading(true);
-      await UpdateUser(user.id);
-      await getActivities();
-      setLoading(false);
-    };
-
     HomeParentInit();
   }, [refreshKey]);
 
+  useEffect(() => {
+    if (user === undefined) return;
+    const unsubscribe = navigation.addListener("focus", () => {
+      HomeParentInit();
+    });
+    return unsubscribe;
+  }, [navigation, user?.id]);
+
+  const handleLogout = async () => {
+    dispatch({ type: "LOGOUT" });
+    await cleanData();
+    navigation.navigate("Entry");
+  };
+  const cleanData = async () => {
+    try {
+      await AsyncStorage.removeItem("user");
+      await AsyncStorage.removeItem("token");
+    } catch (e) {
+      console.log("Error removing data:", e);
+    }
+  };
   return {
     user,
     // getActivities,
@@ -104,6 +111,7 @@ const HomeParentViewModel = ({ navigation }) => {
     activeModal,
     setActiveModal,
     chargeBalance,
+    handleLogout,
   };
 };
 

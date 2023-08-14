@@ -10,13 +10,16 @@ import { Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useNavigation } from "@react-navigation/native";
-const Header = ({ firstName, showModal }) => {
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const Header = ({ firstName, showModal, handleLogout }) => {
   const { dispatch } = useAuthContext();
   const navigation = useNavigation();
-  const handleLogout = () => {
-    dispatch({ type: "LOGOUT" });
-    navigation.navigate("Entry");
-  };
+  // const handleLogout = () => {
+  //   dispatch({ type: "LOGOUT" });
+  //   navigation.navigate("Entry");
+  // };
+
   return (
     <View
       className="p-4  h-44 justify-between items-center flex-row relative"

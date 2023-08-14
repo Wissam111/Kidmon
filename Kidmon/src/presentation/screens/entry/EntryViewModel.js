@@ -37,14 +37,13 @@ const EntryViewModel = () => {
     verify.code = optCode;
     try {
       const data = await authRepository.verifyLogin(verify);
-      handleAuthData(data);
+      await handleAuthData(data);
       showSuccess("Logged in successfully");
     } catch (error) {
       console.log(error);
-      // handleAlert("error", "Error with OTP: " + error?.error?.message);
       showError(error?.error?.message);
     }
-    setLoading(false);
+    // setLoading(false);
   };
 
   const handleShowOTP = () => {
@@ -52,14 +51,18 @@ const EntryViewModel = () => {
   };
 
   const handleAuthData = async (data) => {
-    if (data.error) {
-      console.log(data.error);
+    if (data?.error) {
+      console.log(data?.error);
       return;
     }
     dispatch({ type: "LOGIN", payload: data });
     await storeData(data);
-    setShowOTP(true);
-    navigation.navigate("HomeParent");
+
+    setTimeout(() => {
+      navigation.navigate("HomeParent");
+      setShowOTP(true);
+      setLoading(false);
+    }, 1000);
   };
 
   const storeData = async (authData) => {

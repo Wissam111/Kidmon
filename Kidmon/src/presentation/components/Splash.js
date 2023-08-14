@@ -10,16 +10,45 @@ import {
 } from "react-native";
 import { useFocusEffect, useRoute } from "@react-navigation/native";
 import LottieView from "lottie-react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { useAuthContext } from "../../hooks/useAuthContext";
 const SplashScreen = ({ navigation }) => {
   const backgroundFade = useRef(new Animated.Value(0))?.current;
   const logoFade = useRef(new Animated.Value(0))?.current;
   const logoMovement = useRef(new Animated.Value(0))?.current;
-  const { CheckUserInStorage } = useAuthContext();
+  const { dispatch } = useAuthContext();
+  // const { CheckUserInStorage } = useAuthContext();
 
   // const isLoggedIn = route?.params?.isLoggedIn;
   // const { isLoggedIn } = navigation.state.params;
 
+  const getData = async () => {
+    try {
+      const userJson = await AsyncStorage.getItem("user");
+      const tokenJson = await AsyncStorage.getItem("token");
+      return {
+        user: userJson ? JSON.parse(userJson) : null,
+        token: tokenJson ? JSON.parse(tokenJson) : null,
+      };
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const CheckUserInStorage = async () => {
+    const fetchData = async () => {
+      const authData = await getData();
+      if (authData?.user && authData?.token) {
+        dispatch({ type: "LOGIN", payload: authData });
+        navigation.navigate("HomeParent", { isLoggedIn: true });
+        // navigation.navigate("Splash");
+      } else {
+        navigation.navigate("Entry", { isLoggedIn: false });
+      }
+    };
+    fetchData();
+  };
   useFocusEffect(
     useCallback(() => {
       Animated.timing(backgroundFade, {
@@ -41,7 +70,7 @@ const SplashScreen = ({ navigation }) => {
         }).start(() => {
           CheckUserInStorage();
         });
-      }, 1050);
+      }, 250);
     }, [])
   );
 

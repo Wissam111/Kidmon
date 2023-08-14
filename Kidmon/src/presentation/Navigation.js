@@ -1,10 +1,7 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { AuthContextProvider } from "../context/AuthContext";
-import { AlertsContextProvider } from "../context/AlertsContext";
-import { FamilyMemberContextProvider } from "../context/FamilyMemberContext";
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ToastProvider } from "react-native-toast-notifications";
 import HomeParent from "./screens/home-parent/HomeParent";
 import Profile from "./screens/profile/Profile";
 import Transfer from "./screens/transfer/Transfer";
@@ -15,7 +12,6 @@ import ChildProfileForm from "./screens/edit-profile/ChildProfileForm";
 import Loading from "./components/Loading";
 import SplashScreen from "./components/Splash";
 import { useLoadingContext } from "../hooks/useLoadingContext";
-
 const Stack = createNativeStackNavigator();
 const ChildTabs = createNativeStackNavigator();
 
@@ -70,16 +66,8 @@ const Navigation = () => {
 
   return (
     <NavigationContainer>
-      <ToastProvider offsetTop={30}>
-        <AlertsContextProvider>
-          <AuthContextProvider>
-            <FamilyMemberContextProvider>
-              {loading && <Loading />}
-              <AppNavigation />
-            </FamilyMemberContextProvider>
-          </AuthContextProvider>
-        </AlertsContextProvider>
-      </ToastProvider>
+      {loading && <Loading />}
+      <AppNavigation />
     </NavigationContainer>
   );
 };

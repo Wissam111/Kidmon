@@ -2,7 +2,8 @@ import redis
 import pymongo
 import json
 from threading import Thread
-from datetime import datetime
+from datetime import datetime , time
+import pytz
 
 
 # mongodb database
@@ -60,12 +61,18 @@ def update_products_sold_count(doc):
         redisClient.incrby('SOLD_PRODUCTS_COUNT', item["amount"])
 
 
+
 # update purchases count
 def update_purchases_count(doc):
     redisClient.incr('PURCHASES_COUNT')
     date = doc['createdAt']
-    date_time = datetime.strftime(date,"%d/%m/%Y, %H:%M")
-    redisClient.zincrby(f"PURCHASES_BY_HOUR:{datetime.strftime(date,'%d/%m/%Y')}", 1, date_time)
+
+    start_day = datetime.strftime(date, "%Y-%m-%d")
+    date_time = datetime.strftime(date, "%Y-%m-%d %H:00")
+    redisClient.zincrby(
+        f"PURCHASES_BY_HOUR:{start_day}", 1, date_time)
+    
+    print(start_day , date_time)
 
 
 def watch_activities_collection():

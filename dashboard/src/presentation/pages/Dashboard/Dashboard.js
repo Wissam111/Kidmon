@@ -9,29 +9,12 @@ import ProductRow from "./components/ProductRow";
 import DashboardViewModal from "./DashboardViewModal";
 import { useMemo } from "react";
 
-const data1 = [
-  ["Day", "amount"],
-  ["Pizza", 0],
-  ["Coffe", 0],
-  ["Black Coffe", 0],
-  ["Bamba", 0],
-  ["Doretos", 0],
-];
-
 const data2 = [
   ["Year", "Sales"],
   ["08:00", 1000],
   ["10:00", 1170],
   ["14:00", 660],
   ["16:00", 1030],
-];
-
-const data3 = [
-  ["All", "All"],
-  ["Snack", 11],
-  ["Cold", 2],
-  ["Hot", 3],
-  ["Food", 4],
 ];
 
 const Dashboard = () => {

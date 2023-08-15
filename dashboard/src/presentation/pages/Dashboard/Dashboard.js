@@ -8,14 +8,7 @@ import ChartView from "../../components/ChartView/ChartView";
 import ProductRow from "./components/ProductRow";
 import DashboardViewModal from "./DashboardViewModal";
 import { useMemo } from "react";
-
-const data2 = [
-  ["Year", "Sales"],
-  ["08:00", 1000],
-  ["10:00", 1170],
-  ["14:00", 660],
-  ["16:00", 1030],
-];
+import moment from "moment";
 
 const Dashboard = () => {
   const { dashboardStats } = DashboardViewModal();
@@ -37,8 +30,23 @@ const Dashboard = () => {
         ([category, value]) => [category, parseInt(value)]
       ),
     ];
-    // return data3;
   }, [dashboardStats]);
+
+  const purchasesByHourData = useMemo(() => {
+    const formattedData = [["Year", "Sales"]];
+
+    dashboardStats?.purchasesByHour?.forEach((item) => {
+      const momentDate = moment(new Date(item.key + ":00+0000"));
+      const date = momentDate.format("HH:mm");
+
+      const sales = parseInt(item.value, 10);
+
+      formattedData.push([date, sales]);
+    });
+
+    return formattedData;
+  }, [dashboardStats]);
+
   return (
     <div className="page-container">
       <div className="dashboard-container">
@@ -96,7 +104,7 @@ const Dashboard = () => {
               </div>
               <ChartView
                 chartType="LineChart"
-                chartData={data2}
+                chartData={purchasesByHourData}
                 title="Daily Purchase Trends"
                 width="100%"
                 height={"300px"}

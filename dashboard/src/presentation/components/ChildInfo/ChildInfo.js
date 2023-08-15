@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import IngerdientCard from "../IngerdientCard/IngerdientCard";
 import OrderItemCard from "../OrderItemCard/OrderItemCard";
 import { IoClose } from "react-icons/io5";
@@ -9,7 +9,8 @@ import { useCartItemsContext } from "../../../hooks/useCartItemsContext";
 import { IconButton } from "@mui/material";
 import "./ChildInfo.css";
 import Spacer from "../Spacer";
-
+import Chip from "@mui/material/Chip";
+import Avatar from "@mui/material/Avatar";
 const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
   const { cartItems, productsTotal } = useCartItemsContext();
 
@@ -42,6 +43,14 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
     setTotalPrice(parseFloat(productsTotal(noneAllergicProducts).toFixed(2)));
   }, [noneAllergicProducts]);
 
+  const remainingLimit = useCallback(
+    (limit) => {
+      const remaining = limit?.value - limit?.current;
+
+      return parseFloat(remaining.toFixed(2));
+    },
+    [child?.limits]
+  );
   return (
     <div className="child-info-container">
       <IconButton
@@ -58,6 +67,7 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
           <div className="child-col1-row1">
             <img
               alt="child"
+              className="child-col1-row1-user-img"
               src={
                 child.image
                   ? BASE_URL_1 + `imgs/${child.image}`
@@ -69,6 +79,25 @@ const ChildInfo = ({ handleCloseChildInfo, child, makePurchase }) => {
               <p>
                 Balance: <span>{parseFloat(child.credits.toFixed(2))}</span>
               </p>
+              <div className="child-info-limits-container">
+                <Chip
+                  icon={<img src={require("../../../assets/icons/day.png")} />}
+                  label={remainingLimit(child?.limits?.daily)}
+                  variant="outlined"
+                />
+                <Chip
+                  icon={<img src={require("../../../assets/icons/week.png")} />}
+                  label={remainingLimit(child?.limits?.weekly)}
+                  variant="outlined"
+                />
+                <Chip
+                  icon={
+                    <img src={require("../../../assets/icons/month.png")} />
+                  }
+                  label={remainingLimit(child?.limits?.monthly)}
+                  variant="outlined"
+                />
+              </div>
             </div>
           </div>
           <div className="child-col1-row2">

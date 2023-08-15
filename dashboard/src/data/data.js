@@ -66,4 +66,10 @@ export const pieChartOptions = {
 export const chartOptions = {
   legend: "none",
   colors: ["#5FD5E5"],
+  hAxis: { title: "Year", minValue: 0 },
+  vAxis: {
+    title: "Amount",
+    minValue: 0,
+    format: "0",
+  },
 };

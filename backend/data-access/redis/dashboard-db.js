@@ -65,7 +65,7 @@ exports.makeDashboardDb = ({ makeDb }) => {
         const dateOnly = moment(date).format('YYYY-MM-DD')
         const purchasesByHour = makePairsFromArray(
             await redisClient.sendCommand([
-                "ZRANGE",
+                "ZREVRANGE",
                 `${REDIES_KEYS.purchasesByHour}:${dateOnly}`,
                 "0",
                 "5",

@@ -13,9 +13,35 @@ This project aims to address the issue of school payments. Nowadays, children ar
 
 ## Cafeteria (Admin) Dashboard
 
-## Parent Mobile App
+![תמונה של WhatsApp‏ 2023-08-15 בשעה 23 10 58](https://github.com/Wissam111/Kidmon/assets/10331972/6179a47c-d46e-4c97-8216-5d4544d36495)
 
-## Family Member Mobile App
+![2](https://github.com/Wissam111/Kidmon/assets/10331972/1efffed0-99c5-4c3a-9b5a-52a1f83954af)
+
+![3](https://github.com/Wissam111/Kidmon/assets/10331972/aeb01ff1-461a-478f-b1f9-923638368b7a)
+
+![4](https://github.com/Wissam111/Kidmon/assets/10331972/b25008aa-33ec-4c05-8b7e-46f217c6a70d)
+
+## Mobile App
+
+<p float="left">
+
+<img src="https://github.com/Wissam111/Kidmon/assets/10331972/f7a2e7b4-15af-4e53-9a05-e87143a6cb86" width="200"/>
+
+
+<img src="https://github.com/Wissam111/Kidmon/assets/10331972/60c7ccb5-a03a-4316-8ac0-8c40fb5b5c79" width="200"/>
+
+
+<img src="https://github.com/Wissam111/Kidmon/assets/10331972/84073e28-c51d-4252-b089-97b3f1c7071d" width="200"/>
+
+
+<img src="https://github.com/Wissam111/Kidmon/assets/10331972/e1167bb4-4aff-40cb-ad0a-19ccfb4fa6f9" width="200"/>
+
+<img src="https://github.com/Wissam111/Kidmon/assets/10331972/4c976cb7-1b86-404e-a693-82f69445ea14" width="200"/>
+
+<img src="https://github.com/Wissam111/Kidmon/assets/10331972/601ae94a-d131-4296-ac40-8bb4f0a5e3c1" width="200"/>
+
+</p>
+
 
 ## Frameworks & Databases
 

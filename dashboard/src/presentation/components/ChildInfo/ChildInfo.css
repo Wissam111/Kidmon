@@ -24,12 +24,20 @@
   padding-bottom: 20px;
 }
 
-.child-info-col1 .child-col1-row1 img {
+.child-col1-row1-user-img {
   width: 121px;
   height: 121px;
   border-radius: 50%;
 }
 
+.child-info-limits-container img {
+  width: 25px;
+  height: 25px;
+}
+.child-info-limits-container {
+  display: flex;
+  gap: 5px;
+}
 .child-info-col1 .child-col1-row1 {
   display: flex;
   align-items: center;

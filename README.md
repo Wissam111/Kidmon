@@ -40,6 +40,8 @@ This project aims to address the issue of school payments. Nowadays, children ar
 
 <img src="https://github.com/Wissam111/Kidmon/assets/10331972/601ae94a-d131-4296-ac40-8bb4f0a5e3c1" width="200"/>
 
+
+<img src="https://github.com/Wissam111/Kidmon/assets/10331972/0d39b400-6a20-44c1-80e1-b7d0c4c387b8" width="200"/>
 </p>
 
 

@@ -63,16 +63,17 @@ exports.makeDashboardDb = ({ makeDb }) => {
         date.setMinutes(0)
         date.setMilliseconds(0)
         const dateOnly = moment(date).format('YYYY-MM-DD')
-        console.log(`${REDIES_KEYS.purchasesByHour}:${dateOnly}`)
         const purchasesByHour = makePairsFromArray(
             await redisClient.sendCommand([
-                "ZREVRANGE",
+                "ZRANGE",
                 `${REDIES_KEYS.purchasesByHour}:${dateOnly}`,
                 "0",
                 "5",
                 "withscores",
             ])
         );
+        purchasesByHour.sort((a, b) => a.key.localeCompare(b.key))
+
        
         return {
             recentSoldProducts,

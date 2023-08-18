@@ -71,7 +71,7 @@ This project aims to address the issue of school payments. Nowadays, children ar
 
 ## Our Software 
 
-### Baack-End
+### Back-End
 
 - Nodejs & Express
 - Jest for testing
